@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fahrgemeinschaft</title>
+    <script src="script.ts"></script>
+</head>
+<body>
+    <h1>Fahrgemeinschaft</h1>
+    <a href="./list.html">Übersicht</a>
+    <form>
+        <label for="vname">Vorname:</label><br>
+        <input type="text" id="vname" name="vname"><br>
+        <label for="nname">Nachname:</label><br>
+        <input type="text" id="nname" name="nname"><br>
+        <label for="abfzeit">Abfahrtszeit:</label><br>
+        <input type="time" id="abfzeit" name="abfzeit"><br>
+        <label for="abfort">Abfahrtsort:</label><br>
+        <input type="text" id="abfort" name="abfort"><br>
+        <label for="ankort">Ankunftsort:</label><br>
+        <input type="text" id="ankort" name="ankort"><br>
+        <label for="fplatz">freie Plätze:</label><br>
+        <input type="number" id="fplatz" name="fplatz"><br>
+        <input type="submit" id="submit" name="senden" onclick="showList()">
+      </form>
+      <div id="list">
+        <p>ok</p>
+      </div>
+</body>
+</html>
