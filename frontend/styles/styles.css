@@ -41,7 +41,7 @@ html{
 }
 
 #tabelle_head{
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #0000;
     background-color: var(--color);
 }
 
@@ -49,10 +49,5 @@ tr {
     margin-left: 3vw;
     margin-top: 3vh;
     margin-bottom: 3vh;
-    
 }
 
-th {
-    
-    
-}
