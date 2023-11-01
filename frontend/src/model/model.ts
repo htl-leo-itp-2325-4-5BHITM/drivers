@@ -67,6 +67,14 @@ const demoData: Drive[] = [
         deppPlace: "Linz",
         arrPlace: "Pettenbach",
         seetings: 4
+    },
+    {
+        firstname: "Marco",
+        lastname: "Leitner",
+        deppTime: "12:00",
+        deppPlace: "Ottensheim",
+        arrPlace: "Marchtrenk",
+        seetings: 3
     }
 
 ]
