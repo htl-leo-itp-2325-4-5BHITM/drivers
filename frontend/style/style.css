@@ -5,6 +5,8 @@
     --colorDark: #10161f;
     --colorBright: #d7e4e4;
     --andreisFont: 'Gabarito', sans-serif;
+    --colorInactive: #879790;
+    --colorBackground: #aca99a;
 }
 
 @font-face {
@@ -13,57 +15,22 @@
 }
 
 body {
-    font-size: 1.1rem;
+    font-family: var(--andreisFont);
     background-color: var(--backgroundColor);
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
     width: 100vw;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-html {
-    font-family: headline;
-}
-
-.link_Eintragen {
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    margin-bottom: 4vh;
-    color: var(--color);
-}
-
-.link_Eintragen:hover {
-    color: var(--colorHover);
-}
-
-.headline {
-    color: var(--color);
-    text-align: center;
-}
-
-#tabelle_ganz {
-    margin: 0 auto;
-}
-
-.tabelle_head {
-    /*border-bottom: 1px solid #0000;*/
-    background-color: var(--color);
-    font-weight: bold;
-}
-
-tbody {
-    padding-left: 3vw;
-}
-
-th {
-    margin-left: 10vw;
-    margin-top: 5vh;
-    margin-bottom: 3vh;
-    padding-left: 3vw;
-    padding-right: 3vw;
+hr {
+    height: 0.2vh;
+    width: 90vw;
+    position: absolute;
+    top: 210vh;
+    left: 5vw;
 }
 
 
@@ -82,18 +49,21 @@ th {
     flex-wrap: nowrap;
 }
 
-#home p {
+.title {
     font-size: 2.5rem;
-    padding: 0.5% 0 0 1.5%;
-    margin: 0;
+    padding-top: 1%;
+    margin: 0 8%;
     position: absolute;
     color: var(--colorBright);
-    font-family: var(--andreisFont);
 }
 
 .home-box1 {
     background-color: var(--colorDark);
     width: 33%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 8%;
 }
 
 .home-box2 {
@@ -103,9 +73,137 @@ th {
     width: 67%;
 }
 
-.fade {
+.linear-fade {
     height: 100%;
     width: 100%;
     position: absolute;
     background: -webkit-linear-gradient(left, rgba(16, 22, 31, 1) 0%, rgba(16, 22, 31, 0.1) 100%);
 }
+
+#info-box-headline {
+    color: var(--colorBright);
+    font-size: 1.8em;
+    line-height: 150%;
+}
+
+#usefull-buttons {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#usefull-buttons button {
+    border-radius: 50px;
+    padding: 3% 8%;
+    border: var(--colorInactive) 0.1em solid;
+    background-color: #151a24;
+}
+
+#usefull-buttons button a {
+    width: 100%;
+    height: 100%;
+    color: var(--colorInactive);
+    text-decoration: none;
+}
+
+#usefull-buttons button:hover {
+    border: var(--colorDark) 0.1em solid;
+    background-color: var(--colorBright);
+    cursor: pointer;
+    box-shadow: 10px 5px 5px #111;
+    transition: all 400ms ease-out;
+}
+
+#usefull-buttons button a:hover {
+    color: var(--colorDark);
+    transition: all 400ms ease-out;
+}
+
+#reason {
+    width: 100vw;
+    height: 100vh;
+    padding: 2% 0 2% 8%;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--colorBackground);
+}
+
+#reason-image {
+    width: 33%;
+    overflow: hidden;
+    background-image: url('../img/background_option2.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#reason-image img {
+    width: 100%;
+}
+
+#reason-content {
+    color: var(--colorDark);
+    font-size: 1.5em;
+    padding-top: 5%;
+    margin-right: 8%;
+    width: 40%;
+}
+
+#ride-finder-tab {
+    padding-top: 8%;
+    width: 100vw;
+    height: auto;
+    background-color: var(--colorBackground);
+    color: var(--colorBright);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#ride-finder-tab h1 {
+    padding-bottom: 2%;
+    color: var(--colorDark);
+}
+
+#table {
+    border-radius: 50px 50px 0 0;
+    overflow: hidden;
+    padding-bottom: 10vh;
+    width: 80vw;
+}
+
+.table-head {
+    border-bottom: 1px solid #0000;
+    background-color: var(--colorDark);
+    width: 10vw;
+    height: 10%;
+}
+
+th {
+    margin-left: 10vw;
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+    padding-left: 3vw;
+    padding-right: 3vw;
+}
+
+tbody {
+    color: var(--colorDark);
+    padding-left: 3vw;
+    background-color: var(--colorDark);
+}
+
+td {
+    padding: 2%;
+    background-color: var(--colorBright);
+}
+
+
+/*th {
+    margin-left: 10vw;
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+    padding-left: 3vw;
+    padding-right: 3vw;
+}*/
