@@ -203,6 +203,20 @@ td {
     text-align: center;
 }
 
+.input-data {
+    color: var(--colorDark);
+    width: 40%;
+
+    padding-top: 8%;
+    width: 100vw;
+    height: auto;
+    background-color: var(--colorBackground);
+    
+    
+    
+    
+}
+
 /*th {
     margin-left: 10vw;
     margin-top: 5vh;

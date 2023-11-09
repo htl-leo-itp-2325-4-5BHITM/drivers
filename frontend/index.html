@@ -24,7 +24,7 @@
                     <p id="info-box-headline">Help us save the world,<br> while we help you reach <br>your destination!</p>
                     <div id="usefull-buttons">
                         <a href="#ride-finder-tab"><button>Request a ride</button></a>
-                        <a href="#"><button>Register a ride</button></a>
+                        <a href="#ride-input-tab"><button>Register a ride</button></a>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
 
     <hr>
 
-    <div id="ride-finder-tab">
+    <div id="ride-input-tab" class="input-data">
         <h1>New Ride</h1>
         <form>
             <label for="nname">Datum:</label><br>
@@ -69,7 +69,7 @@
             <input type="text" id="ankort" name="ankort"><br>
             <label for="fplatz">freie Plätze:</label><br>
             <input type="number" min="0" id="fplatz" name="fplatz"><br>
-            <label for="nname">Fahrer:</label><br>
+            <label for="nname">Fahrer/in:</label><br>
             <input type="text" id="fahrer" name="fahrer"><br>
             <input type="submit" id="submit" name="senden" onclick="showList()">
         </form>
@@ -88,7 +88,7 @@
                     <th>Abfahrtsort</th>
                     <th>Ankunftsort</th>
                     <th>Freie Plätze</th>
-                    <th>Fahrer</th>
+                    <th>Fahrer/in</th>
                 </tr>
             </thead>
             <tbody>
