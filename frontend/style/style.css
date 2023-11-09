@@ -199,6 +199,9 @@ td {
     background-color: var(--colorBright);
 }
 
+#deppTime, #seetings {
+    text-align: center;
+}
 
 /*th {
     margin-left: 10vw;

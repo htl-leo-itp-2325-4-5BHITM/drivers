@@ -8,7 +8,7 @@ export function render() {
     model.drives.forEach(drive => {
         const tr = document.createElement("tr")
         tbody.appendChild(tr)
-        const tds = /*html */`<td>${drive.firstname}</td><td>${drive.lastname}</td><td>${drive.deppTime}</td><td>${drive.deppPlace}</td><td>${drive.arrPlace}</td><td>${drive.seetings}</td>`
+        const tds = /*html */`<td>${drive.firstname}</td><td>${drive.lastname}</td><td id="deppTime">${drive.deppTime}</td><td>${drive.deppPlace}</td><td>${drive.arrPlace}</td><td id="seetings">${drive.seetings}</td>`
         tr.innerHTML = tds
     })
 }
