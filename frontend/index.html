@@ -77,6 +77,26 @@
         </table>
     </div>
 
+
+    <div id="ride-finder-tab">
+        <h1>New Ride</h1>
+        <form>
+            <label for="vname">Vorname:</label><br>
+            <input type="text" id="vname" name="vname"><br>
+            <label for="nname">Nachname:</label><br>
+            <input type="text" id="nname" name="nname"><br>
+            <label for="abfzeit">Abfahrtszeit:</label><br>
+            <input type="time" id="abfzeit" name="abfzeit"><br>
+            <label for="abfort">Abfahrtsort:</label><br>
+            <input type="text" id="abfort" name="abfort"><br>
+            <label for="ankort">Ankunftsort:</label><br>
+            <input type="text" id="ankort" name="ankort"><br>
+            <label for="fplatz">freie Plätze:</label><br>
+            <input type="number" min="0" id="fplatz" name="fplatz"><br>
+            <input type="submit" id="submit" name="senden" onclick="showList()">
+        </form>
+    </div>
+
 </body>
 
 </html>
