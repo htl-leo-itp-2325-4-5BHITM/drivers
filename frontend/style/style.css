@@ -173,7 +173,7 @@ hr {
     border-radius: 20px;
     overflow: hidden;
     margin-bottom: 10vh;
-    width: 80vw;
+    width: 80%;
 }
 
 .table-head {
@@ -224,4 +224,9 @@ th {
     padding-top: 0.5vw;
     padding-bottom: 0.5vw;
     font-size: 1.1rem;
+}
+
+#table th:nth-child(1),
+#table td:nth-child(1) {
+    width: 150px; /* Ändere die Breite nach Bedarf */
 }
