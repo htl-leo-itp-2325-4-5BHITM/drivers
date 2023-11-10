@@ -59,18 +59,30 @@
     <div id="ride-input-tab" class="input-data">
         <h1>New Ride</h1>
         <form>
-            <label for="nname">Datum:</label><br>
-            <input type="date" id="datum" name="datum"><br>
-            <label for="abfzeit">Abfahrtszeit:</label><br>
-            <input type="time" id="abfzeit" name="abfzeit"><br>
-            <label for="abfort">Abfahrtsort:</label><br>
-            <input type="text" id="abfort" name="abfort"><br>
-            <label for="ankort">Ankunftsort:</label><br>
-            <input type="text" id="ankort" name="ankort"><br>
-            <label for="fplatz">freie Plätze:</label><br>
-            <input type="number" min="0" id="fplatz" name="fplatz"><br>
-            <label for="nname">Fahrer/in:</label><br>
-            <input type="text" id="fahrer" name="fahrer"><br>
+            <div class="table-input">
+                <label for="nname">Datum:</label><br>
+                <input type="date" id="datum" name="datum"><br>
+            </div>
+            <div class="table-input">
+                <label for="abfzeit">Abfahrtszeit:</label><br>
+                <input type="time" id="abfzeit" name="abfzeit"><br>
+            </div>
+            <div class="table-input">
+                <label for="abfort">Abfahrtsort:</label><br>
+                <input type="text" id="abfort" name="abfort"><br>
+            </div>
+            <div class="table-input">
+                <label for="ankort">Ankunftsort:</label><br>
+                <input type="text" id="ankort" name="ankort"><br>
+            </div>
+            <div class="table-input">
+                <label for="fplatz">freie Plätze:</label><br>
+                <input type="number" min="0" id="fplatz" name="fplatz"><br>
+            </div>
+            <div class="table-input">
+                <label for="nname">Fahrer/in:</label><br>
+                <input type="text" id="fahrer" name="fahrer"><br>
+            </div>
             <input type="submit" id="submit" name="senden" onclick="showList()">
         </form>
     </div>

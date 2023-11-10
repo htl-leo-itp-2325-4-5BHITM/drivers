@@ -150,7 +150,7 @@ hr {
 }
 
 #ride-finder-tab {
-    padding-top: 8%;
+    padding-top: 2%;
     width: 100vw;
     height: auto;
     background-color: var(--colorBackground);
@@ -205,17 +205,20 @@ td {
 
 .input-data {
     color: var(--colorDark);
-    width: 40%;
-
-    padding-top: 8%;
+    padding-top: 10%;
+    padding-bottom: 15%;
+    padding-left: 45vw;
     width: 100vw;
-    height: auto;
+    height: 70vh;
     background-color: var(--colorBackground);
     
-    
-    
-    
+
 }
+
+.table-input{
+    padding-top: 2vh;
+}
+
 
 /*th {
     margin-left: 10vw;
