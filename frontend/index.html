@@ -44,13 +44,11 @@
         </div>
 
         <div id="reason-content">
-            <h3>Our goal</h3>
-            <p>Mit DrivUs wollen wir jedem einzelnen egal ob Eltern, Jugendliche oder Senioren, helfen bequem und einfach an ihr Ziel zu kommen.<br>
-                Unsere App baut auf unsere User, welche Fahrten für andere anbieten, auf und will somit ein ausgeglichenes Geben und Nehmen erzielen.<br>
-                Durch Drivus kann man Geld sparen (fährt weniger -> weniger Sprit), neue Freunde finden 
-                und trägt zusätzlich einen Teil zum Klimaschutz bei.<br>
-                Diese Vorteile wollen wir Ihnen ermöglichen und eine große Menge an DrivUs User gewinnen, daher arbeiten wir an der bestmöglichen Umsetzung unserer App.
-            </p>
+            <h3>What is DrivUs?</h3>
+            <p>With DrivUs, we want to help everyone, whether parents, young people or senior citizens, to get to their destination comfortably and easily.<br>
+                Our app is based on our users who offer rides for others and thus aims to achieve a balanced give and take.<br>
+                With Drivus you can save money, make new friends and also contribute to climate protection.<br>
+                We want to offer you these benefits and attract a large number of DrivUsers, which is why we are working on the best possible implementation of our app.
         </div>
     </div>
 
@@ -60,27 +58,27 @@
         <h1>New Ride</h1>
         <form>
             <div class="table-input">
-                <label for="nname">Datum:</label><br>
+                <label for="nname">Date:</label><br>
                 <input type="date" id="datum" name="datum"><br>
             </div>
             <div class="table-input">
-                <label for="abfzeit">Abfahrtszeit:</label><br>
+                <label for="abfzeit">Departure Time:</label><br>
                 <input type="time" id="abfzeit" name="abfzeit"><br>
             </div>
             <div class="table-input">
-                <label for="abfort">Abfahrtsort:</label><br>
+                <label for="abfort">Place of Departure:</label><br>
                 <input type="text" id="abfort" name="abfort"><br>
             </div>
             <div class="table-input">
-                <label for="ankort">Ankunftsort:</label><br>
+                <label for="ankort">Place of Arrival:</label><br>
                 <input type="text" id="ankort" name="ankort"><br>
             </div>
             <div class="table-input">
-                <label for="fplatz">freie Plätze:</label><br>
-                <input type="number" min="0" id="fplatz" name="fplatz"><br>
+                <label for="fplatz">Available seats:</label><br>
+                <input type="number" min="1" id="fplatz" name="fplatz"><br>
             </div>
             <div class="table-input">
-                <label for="nname">Fahrer/in:</label><br>
+                <label for="nname">Driver:</label><br>
                 <input type="text" id="fahrer" name="fahrer"><br>
             </div>
             <input type="submit" id="submit" name="senden" onclick="showList()">
@@ -95,12 +93,12 @@
         <table id="table">
             <thead class="table-head">
                 <tr>
-                    <th>Datum</th>
-                    <th>Abfahrtszeit</th>
-                    <th>Abfahrtsort</th>
-                    <th>Ankunftsort</th>
-                    <th>Freie Plätze</th>
-                    <th>Fahrer/in</th>
+                    <th>Date</th>
+                    <th>Departure Time</th>
+                    <th>Place of Departure</th>
+                    <th>Place of Arrival</th>
+                    <th>Available seats</th>
+                    <th>Driver</th>
                 </tr>
             </thead>
             <tbody>
