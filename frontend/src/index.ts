@@ -1,6 +1,6 @@
-import { render } from "./drive-table"
+/*import { render } from "./drive-table"
 window.addEventListener("DOMContentLoaded", () => loaded())
 
 function loaded() {
     render()
-}
+}*/

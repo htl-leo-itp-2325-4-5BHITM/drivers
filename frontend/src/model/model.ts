@@ -1,3 +1,5 @@
+import {BehaviorSubject} from "rxjs"
+
 interface Drive {
     firstname: string
     lastname: string
@@ -7,10 +9,23 @@ interface Drive {
     seetings: number
 }
 
-interface Model {
+interface DriveResponse {
+    data: Drive[]
+}
+
+export interface Model {
     drives: Drive[]
 }
 
+const initialState: Model = {
+    drives: []
+}
+
+const store = new BehaviorSubject<Model>(initialState)
+
+export { Drive, DriveResponse, store }
+
+/*
 const demoData: Drive[] = [
     {
         firstname: "Andrei",
@@ -78,7 +93,6 @@ const demoData: Drive[] = [
     }
 
 ]
-const model: Model = {
-    drives: demoData
-}
-export { model }
+// const model: Model = {
+//     drives: demoData
+// }*/
