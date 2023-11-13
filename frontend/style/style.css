@@ -230,3 +230,15 @@ th {
 #table td:nth-child(1) {
     width: 150px; /* Ändere die Breite nach Bedarf */
 }
+
+.hyperlinkButton{
+    color: var(--colorBright);
+    width: 10vw;
+    height: 4vh;
+}
+
+
+.hyperlinkButton:hover {
+    color: var(--colorDark);
+    
+}
