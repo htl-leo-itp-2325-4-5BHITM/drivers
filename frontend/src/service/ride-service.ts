@@ -1,14 +1,15 @@
-/*import { Drive, Model } from "Model/model"      //-> woher??
+import { Ride, Model } from "Model/model"      //-> woher??
 import {store} from "../model/model"
 
-const EVENTS_URL = "http://localhost:8080/rides"
+const RIDES_URL = "/api/rides"
 
 async function loadRides() {
-    const response = await fetch(EVENTS_URL)
-    const drives: Drive[] = await response.json()
+    const response = await fetch(RIDES_URL)
+    const rides: Ride[] = await response.json()
     const model: Model = {
-        drives
+        drives: rides
     }
-    store.next(model);
+    console.log("rides loaded", rides)
+    store.next(model)
 }
-export {loadRides}*/
+export {loadRides}

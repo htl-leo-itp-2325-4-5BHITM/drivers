@@ -1,6 +1,8 @@
-/*import { render } from "./drive-table"
+import { loadRides } from "./service/ride-service"
+import "./components/ride-table-component"
+//import { render } from "./drive-table"
 window.addEventListener("DOMContentLoaded", () => loaded())
 
-function loaded() {
-    render()
-}*/
+async function loaded() {
+    loadRides()
+}

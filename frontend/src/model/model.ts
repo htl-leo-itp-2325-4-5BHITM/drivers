@@ -1,20 +1,17 @@
 import {BehaviorSubject} from "rxjs"
 
-interface Drive {
-    firstname: string
-    lastname: string
-    deppTime: string
-    deppPlace: string
-    arrPlace: string
-    seetings: number
+interface Ride {
+    driver: string
+    departureTime: string
+    placeOfDeparture: string
 }
 
-interface DriveResponse {
-    data: Drive[]
+interface RideResponse {
+    data: Ride[]
 }
 
 export interface Model {
-    drives: Drive[]
+    drives: Ride[]
 }
 
 const initialState: Model = {
@@ -23,7 +20,7 @@ const initialState: Model = {
 
 const store = new BehaviorSubject<Model>(initialState)
 
-export { Drive, DriveResponse, store }
+export { Ride, RideResponse as DriveResponse, store }
 
 /*
 const demoData: Drive[] = [
