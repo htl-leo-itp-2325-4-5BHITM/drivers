@@ -1,5 +1,6 @@
 package at.htl.drive.ride;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
@@ -9,14 +10,13 @@ import java.time.LocalDateTime;
 
 @Path("/rides")
 public class DriversResource {
+    @Inject
+    DriveRepository repository;
+    @Inject RideMapper rideMapper;
     @GET
     public Response all() {
-        var ride = new Ride();
-        ride.driver = "Joe Sixpack";
-        ride.departureTime = new Timestamp(System.currentTimeMillis());
-        ride.placeOfDeparture = "Loop Street 1";
-        ride.id = 17L;
-        return Response.ok(ride).build();
+        var rides = repository.all();
+        var dtos = rides.stream().map(rideMapper::toResource);
+        return Response.ok(dtos).build();
     }
-
 }
