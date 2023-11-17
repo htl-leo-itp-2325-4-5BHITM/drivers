@@ -23,6 +23,7 @@ body {
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    background-color: var(--colorBackground);
 }
 
 hr {
@@ -87,26 +88,24 @@ hr {
 }
 
 #usefull-buttons {
-    width: 80%;
+    width: 85%;
     display: flex;
     justify-content: space-between;
 }
 
-#usefull-buttons button {
+#usefull-buttons a {
     border-radius: 50px;
-    padding: 3% 8%;
+    padding: 2.5% 7%;
     border: var(--colorInactive) 0.1em solid;
     background-color: #151a24;
 }
 
-#usefull-buttons button a {
-    width: 100%;
-    height: 100%;
+#usefull-buttons a {
     color: var(--colorInactive);
     text-decoration: none;
 }
 
-#usefull-buttons button:hover {
+#usefull-buttons a:hover {
     border: var(--colorDark) 0.1em solid;
     background-color: var(--colorBright);
     cursor: pointer;
@@ -114,18 +113,25 @@ hr {
     transition: all 400ms ease-out;
 }
 
-#usefull-buttons button a:hover {
+#usefull-buttons a:hover {
     color: var(--colorDark);
     transition: all 400ms ease-out;
 }
 
+
+/*
+*
+*
+*
+*
+*/
+
 #reason {
     width: 100vw;
     height: 100vh;
-    padding: 2% 0 2% 8%;
+    padding: 2% 8%;
     display: flex;
     justify-content: space-between;
-    background-color: var(--colorBackground);
 }
 
 #reason-image {
@@ -140,16 +146,20 @@ hr {
     margin-bottom: 0;
 }
 
-#reason-image img {
-    width: 100%;
-}
-
 #reason-content {
     color: var(--colorDark);
     font-size: 1.5em;
-    padding-top: 8%;
     margin-right: 15%;
     width: 40%;
+    height: 90vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#reason-content h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 3em;
 }
 
 #ride-finder-tab {
@@ -183,7 +193,6 @@ hr {
     height: 10%;
 }
 
-
 tbody {
     color: var(--colorDark);
     padding-left: 3vw;
@@ -195,7 +204,8 @@ td {
     background-color: var(--colorBright);
 }
 
-#deppTime, #seetings {
+#deppTime,
+#seetings {
     text-align: center;
 }
 
@@ -207,18 +217,15 @@ td {
     width: 100vw;
     height: 70vh;
     background-color: var(--colorBackground);
-    
-
 }
 
-.table-input{
+.table-input {
     padding-top: 2vh;
 }
 
-#headline-table{
+#headline-table {
     font-size: 2rem;
 }
-
 
 th {
     padding-top: 0.5vw;
@@ -228,6 +235,7 @@ th {
 
 #table th:nth-child(1),
 #table td:nth-child(1) {
+<<<<<<< Updated upstream
     width: 150px; /* Ändere die Breite nach Bedarf */
 }
 
@@ -241,4 +249,8 @@ th {
 .hyperlinkButton:hover {
     color: var(--colorDark);
     
+=======
+    width: 150px;
+    /* Ändere die Breite nach Bedarf */
+>>>>>>> Stashed changes
 }
