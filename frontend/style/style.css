@@ -213,7 +213,7 @@ td {
     color: var(--colorDark);
     padding-top: 10%;
     padding-bottom: 15%;
-    padding-left: 45vw;
+    padding-left: 200px;
     width: 100vw;
     height: 70vh;
     background-color: var(--colorBackground);
@@ -221,6 +221,30 @@ td {
 
 .table-input {
     padding-top: 2vh;
+
+    flex: 1;
+    margin-right: 20px; /* Optionaler Abstand zwischen den Inputfeldern */
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-input {
+    display: flex;
+    align-items: center;
+}
+
+.form-row {
+    display: flex;
+}
+
+label{
+    margin: 3vw;
+}
+
+input{
+    margin: 3vw;
 }
 
 #headline-table {

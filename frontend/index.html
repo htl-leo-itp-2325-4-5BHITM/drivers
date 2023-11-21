@@ -51,7 +51,7 @@
 
     <hr>
 
-    <div id="ride-input-tab" class="input-data">
+    <!--<div id="ride-input-tab" class="input-data">
         <h1>New Ride</h1>
         <form>
             <div class="table-input">
@@ -80,7 +80,70 @@
             </div>
             <input type="submit" id="submit" name="senden" onclick="showList()">
         </form>
+    </div>-->
+
+        <div id="ride-input-tab" class="input-data">
+        <h1>New Ride</h1>
+        <form>
+            <div class="table-input">
+                <label for="datum">Date:</label>
+                <label for="abfzeit">Departure Time:</label>
+                <label for="abfort">Place of Departure:</label>
+                <label for="ankort">Place of Arrival:</label>
+                <label for="fplatz">Available seats:</label>
+                <label for="fahrer">Driver:</label>
+            </div>
+            <div class="table-input">
+                <input type="date" id="datum" name="datum">
+                <input type="time" id="abfzeit" name="abfzeit">
+                <input type="text" id="abfort" name="abfort">
+                <input type="text" id="ankort" name="ankort">
+                <input type="number" min="1" id="fplatz" name="fplatz">
+                <input type="text" id="fahrer" name="fahrer">
+            </div>
+            <input type="submit" id="submit" name="senden" onclick="showList()">
+        </form>
     </div>
+
+    <!--
+    <div id="ride-input-tab" class="input-data">
+        <h1>New Ride</h1>
+        <form class="form-container">
+            <div class="form-row">
+                <div class="table-input">
+                    <label for="datum">Date:</label>
+                    <input type="date" id="datum" name="datum">
+                </div>
+                <div class="table-input">
+                    <label for="abfzeit">Departure Time:</label>
+                    <input type="time" id="abfzeit" name="abfzeit">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="table-input">
+                    <label for="abfort">Place of Departure:</label>
+                    <input type="text" id="abfort" name="abfort">
+                </div>
+                <div class="table-input">
+                    <label for="ankort">Place of Arrival:</label>
+                    <input type="text" id="ankort" name="ankort">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="table-input">
+                    <label for="fplatz">Available seats:</label>
+                    <input type="number" min="1" id="fplatz" name="fplatz">
+                </div>
+                <div class="table-input">
+                    <label for="fahrer">Driver:</label>
+                    <input type="text" id="fahrer" name="fahrer">
+                </div>
+            </div>
+            <input type="submit" id="submit" name="senden" onclick="showList()">
+        </form>
+    </div>-->
+    
+    
 
     <hr>
 
