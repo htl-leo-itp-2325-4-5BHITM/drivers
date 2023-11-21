@@ -6,9 +6,12 @@ import java.sql.Timestamp;
 
 public record RideDto(
     Long id,
-    String driver,
     Timestamp departureTime,
-    String placeOfDeparture
+    String placeOfDeparture,
+    String placeOfArrival,
+    int availableSeats,
+    String driver
+
 )
 {
 }
