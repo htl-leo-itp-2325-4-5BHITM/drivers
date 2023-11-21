@@ -4,6 +4,8 @@ interface Ride {
     driver: string
     departureTime: string
     placeOfDeparture: string
+    placeOfArrival: string
+    availableSeats: number
 }
 
 interface RideResponse {

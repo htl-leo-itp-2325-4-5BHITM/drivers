@@ -3,8 +3,12 @@ import {html, render} from "lit-html"
 
 const rowTemplate = (ride: Ride) => html`
 <tr>
-    <td>${ride.driver}</td>
     <td>${ride.departureTime}</td>
+    <td>${ride.placeOfDeparture}</td>
+    <td>${ride.placeOfArrival}</td>
+    <td>${ride.availableSeats}</td>
+    <td>${ride.driver}</td>
+    
 </tr>
 `
 
