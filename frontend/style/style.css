@@ -235,7 +235,6 @@ th {
 
 #table th:nth-child(1),
 #table td:nth-child(1) {
-<<<<<<< Updated upstream
     width: 150px; /* Ändere die Breite nach Bedarf */
 }
 
@@ -249,8 +248,4 @@ th {
 .hyperlinkButton:hover {
     color: var(--colorDark);
     
-=======
-    width: 150px;
-    /* Ändere die Breite nach Bedarf */
->>>>>>> Stashed changes
 }
