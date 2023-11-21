@@ -213,21 +213,33 @@ td {
     color: var(--colorDark);
     padding-top: 10%;
     padding-bottom: 15%;
-    padding-left: 200px;
     width: 100vw;
     height: 70vh;
     background-color: var(--colorBackground);
 }
 
+#form_head{
+    padding-left: 100px;
+}
+
 .table-input {
     padding-top: 2vh;
 
-    flex: 1;
-    margin-right: 20px; /* Optionaler Abstand zwischen den Inputfeldern */
+    
+    grid-column-start: 1;
+    grid-column-end: 3;
+    
+    margin-left: 4vw;
+    margin-right: 20px; 
 }
+
 .form-container {
     display: flex;
     flex-direction: column;
+}
+
+#form_headline{
+    text-align: center;
 }
 
 .label-input {
@@ -240,12 +252,31 @@ td {
 }
 
 label{
-    margin: 3vw;
+    margin-right: 120px;
+    width: 150px;
 }
 
-input{
-    margin: 3vw;
+#submit{
+    margin-left: 42vw;   
+    margin-top: 5vh;
 }
+
+#abfzeit{
+    margin-left: 2vw;
+}
+#abfort{
+    margin-left: 10.5vw;
+}
+#ankort{
+    margin-left: 7.5vw;
+}
+#fplatz{
+    margin-left: 5.5vw;
+}
+#fahrer{
+    margin-left: 5vw;
+}
+
 
 #headline-table {
     font-size: 2rem;
