@@ -26,6 +26,8 @@ public class Ride {
 
     @Column(length = 100,nullable = false)
     public String driver;
+
+
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
@@ -79,4 +81,15 @@ public class Ride {
 
     //</editor-fold>
 
+    public Ride() {
+
+    }
+
+    public Ride(Timestamp departureTime, String placeOfDeparture, String placeOfArrival, int availableSeats, String driver) {
+        this.departureTime = departureTime;
+        this.placeOfDeparture = placeOfDeparture;
+        this.placeOfArrival = placeOfArrival;
+        this.availableSeats = availableSeats;
+        this.driver = driver;
+    }
 }

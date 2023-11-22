@@ -1,8 +1,10 @@
 import {BehaviorSubject} from "rxjs"
+import { DateTime } from 'luxon';
+
 
 interface Ride {
     driver: string
-    departureTime: string
+    departureTime: DateTime
     placeOfDeparture: string
     placeOfArrival: string
     availableSeats: number

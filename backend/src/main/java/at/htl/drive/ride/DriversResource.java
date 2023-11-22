@@ -26,4 +26,11 @@ public class DriversResource {
         repository.changeRide(id);
         return Response.ok().build();
     }
+
+    @POST
+    @Path("/postRide")
+    public Response postRide(RideDto rideDto) {
+        repository.postRide(rideDto);
+        return Response.ok().build();
+    }
 }
