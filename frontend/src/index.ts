@@ -99,10 +99,15 @@ document.getElementById('form_head').addEventListener('submit', function(event) 
     console.log("bin im form")
 
     // Daten aus dem Formular erfassen
-    var dateInputValue = (document.getElementById('datum') as HTMLInputElement).value;
+    var dateInputValue = ((document.getElementById('datum') as HTMLInputElement).value);
     var timeInputValue = (document.getElementById('abfzeit') as HTMLInputElement).value;
 
-    const combinedDateTime = DateTime.fromFormat(`${dateInputValue}T${timeInputValue}`, 'yyyy-MM-ddTHH:mm');
+    const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy-MM-dd:HH:mm');
+
+    console.log("date",dateInputValue); // Überprüfe das Datumformat
+    console.log("time",timeInputValue); // Überprüfe das Zeitformat
+    console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
+
     const formData: Ride = {
         driver: (document.getElementById('fahrer') as HTMLInputElement).value,
         departureTime: combinedDateTime,
@@ -113,9 +118,10 @@ document.getElementById('form_head').addEventListener('submit', function(event) 
     console.log("form Data: "+formData)
     // Daten in JSON umwandeln
     const jsonData = JSON.stringify(formData);
+    console.log("form Data JSON: "+jsonData)
 
     // Hier kannst du die JSON-Daten an deinen Pfad senden, z. B. mit fetch()
-    fetch('http://localhost:4200/rides/postRide', {
+    fetch('http://localhost:4200/api/rides/postRide', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

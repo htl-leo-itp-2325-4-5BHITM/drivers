@@ -1,6 +1,7 @@
 package at.htl.drive.ride;
 
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -16,6 +17,7 @@ public class DriversResource {
     @Inject RideMapper rideMapper;
     @GET
     public Response all() {
+        System.out.println("bin im all");
         var rides = repository.all();
         var dtos = rides.stream().map(rideMapper::toResource);
         return Response.ok(dtos).build();
@@ -28,8 +30,10 @@ public class DriversResource {
     }
 
     @POST
+    @Transactional
     @Path("/postRide")
     public Response postRide(RideDto rideDto) {
+        System.out.println("bin im Ressource");
         repository.postRide(rideDto);
         return Response.ok().build();
     }
