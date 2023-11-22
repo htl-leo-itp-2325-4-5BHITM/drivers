@@ -14,8 +14,8 @@ const rowTemplate = (ride: Ride) => {
 
     return html`
     <tr>
-        <td>${formattedTime}</td>
         <td>${formattedDate}</td>
+        <td>${formattedTime}</td>
         <td>${ride.placeOfDeparture}</td>
         <td>${ride.placeOfArrival}</td>
         <td>${ride.availableSeats}</td>
