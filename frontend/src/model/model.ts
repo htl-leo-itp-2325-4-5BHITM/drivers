@@ -22,6 +22,7 @@ const initialState: Model = {
     drives: []
 }
 
+
 const store = new BehaviorSubject<Model>(initialState)
 
 export { Ride, RideResponse as DriveResponse, store }
