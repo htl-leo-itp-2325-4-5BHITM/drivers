@@ -219,7 +219,8 @@ td {
 }
 
 #form_head{
-    padding-left: 100px;
+    padding-left: 30px;
+    color: var(--colorDark);
 }
 
 .table-input {
@@ -233,23 +234,11 @@ td {
     margin-right: 20px; 
 }
 
-.form-container {
-    display: flex;
-    flex-direction: column;
-}
 
 #form_headline{
     text-align: center;
 }
 
-.label-input {
-    display: flex;
-    align-items: center;
-}
-
-.form-row {
-    display: flex;
-}
 
 label{
     margin-right: 120px;
@@ -303,4 +292,38 @@ th {
 .hyperlinkButton:hover {
     color: var(--colorDark);
     
+}
+
+/************************Change Ride form********************************/
+
+
+#form_head_change_ride{
+    padding-left: 30px;
+    color: var(--colorDark);
+}
+
+.table-input-change-ride {
+    padding-top: 2vh;
+
+    
+    grid-column-start: 1;
+    grid-column-end: 3;
+    
+    margin-left: 4vw;
+    margin-right: 20px; 
+}
+
+
+#form_headline_change_ride{
+    text-align: center;
+}
+
+
+.label_change_ride{
+    margin-right: 120px;
+    width: 150px;
+}
+
+#backToTableBtn{
+    margin: 15px;
 }

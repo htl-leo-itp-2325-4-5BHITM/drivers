@@ -20,34 +20,27 @@ class AdminTS {
     changeData(){
        // button click handler
        document.getElementById("ride-finder-tab").innerHTML = `
-       <h1>Change Ride</h1>
-        <form>
-            <div class="table-input">
-                <label for="datum">Date:</label><br>
-                <input type="date" id="datum" name="datum"><br>
-            </div>
-            <div class="table-input">
-                <label for="abfzeit">Departure Time:</label><br>
-                <input type="time" id="abfzeit" name="abfzeit"><br>
-            </div>
-            <div class="table-input">
-                <label for="abfort">Place of Departure:</label><br>
-                <input type="text" id="abfort" name="abfort"><br>
-            </div>
-            <div class="table-input">
-                <label for="ankort">Place of Arrival:</label><br>
-                <input type="text" id="ankort" name="ankort"><br>
-            </div>
-            <div class="table-input">
-                <label for="fplatz">Available seats:</label><br>
-                <input type="number" min="1" id="fplatz" name="fplatz"><br>
-            </div>
-            <div class="table-input">
-                <label for="fahrer">Driver:</label><br>
-                <input type="text" id="fahrer" name="fahrer"><br>
-            </div>
-            <input type="submit" id="submit" name="senden" <!--onclick="showList()"-->>
-        </form>
+ 
+       <h1 id="form_headline_change_ride">Change Ride</h1>
+       <form id="form_head_change_ride">
+           <div class="table-input-change-ride">
+               <label for="datum" class="label_change_ride">Date:</label>
+               <label for="abfzeit" class="label_change_ride">Departure Time:</label>
+               <label for="abfort" class="label_change_ride">Place of Departure:</label>
+               <label for="ankort" class="label_change_ride">Place of Arrival:</label>
+               <label for="fplatz" class="label_change_ride">Available seats:</label>
+               <label for="fahrer" class="label_change_ride">Driver:</label>
+           </div>
+           <div class="table-input-change-ride">
+               <input type="date" id="datum" name="datum">
+               <input type="time" id="abfzeit" name="abfzeit">
+               <input type="text" id="abfort" name="abfort">
+               <input type="text" id="ankort" name="ankort">
+               <input type="number" min="1" id="fplatz" name="fplatz">
+               <input type="text" id="fahrer" name="fahrer">
+           </div>
+           <input type="submit" id="submit" name="senden" <!--onclick="showList()"-->>
+       </form>
         <button id="backToTableBtn">back to rides</button>`;
         new backToTable();
     }
