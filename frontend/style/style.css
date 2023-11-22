@@ -30,12 +30,12 @@ hr {
     height: 0.2vh;
     width: 90vw;
     position: absolute;
-    top: 210vh;
+    top: 205vh;
     left: 5vw;
 }
 
 
-/***********************/
+/*************************************************************************************************************/
 
 #img-box {
     width: 100vw;
@@ -119,17 +119,12 @@ hr {
 }
 
 
-/*
-*
-*
-*
-*
-*/
+/*************************************************************************************************************/
 
 #reason {
     width: 100vw;
     height: 100vh;
-    padding: 2% 8%;
+    padding: 5% 8% 0 8%;
     display: flex;
     justify-content: space-between;
 }
@@ -148,11 +143,12 @@ hr {
 
 #reason-content {
     color: var(--colorDark);
-    font-size: 1.5em;
+    font-size: 1.8em;
     margin-right: 15%;
     width: 40%;
     height: 90vh;
     display: flex;
+    align-items: flex-end;
     flex-wrap: wrap;
 }
 
@@ -161,6 +157,165 @@ hr {
     margin: 0;
     font-size: 3em;
 }
+
+
+/*************************************************************************************************************/
+
+
+/*bitte code schena schreim jungs...dawei soid des nur funktionieren*/
+
+#ride-input-tab {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    color: var(--colorDark);
+}
+
+#ride-input-tab div {
+    width: 50%;
+}
+
+#register-ride-content {
+    padding: 0% 10%;
+}
+
+#register-ride-forum {
+    font-size: 0.8em;
+    padding-top: 2%;
+}
+
+#form_head input {
+    border: solid 2px var(--colorDark);
+    border-radius: 5px;
+    width: 70%;
+    height: 5vh;
+    background-color: var(--colorBright);
+    padding: 1%;
+}
+
+#form_head input:last-child {
+    margin-top: 5vw;
+    width: auto;
+}
+
+
+/*
+#deppTime,
+#seetings {
+    text-align: center;
+}
+
+.input-data {
+    color: var(--colorDark);
+    padding-top: 10%;
+    padding-bottom: 15%;
+    width: 100vw;
+    height: 70vh;
+    background-color: var(--colorBackground);
+}
+
+
+#form_head {
+    padding-left: 30px;
+    color: var(--colorDark);
+}
+
+.table-input {
+    padding-top: 2vh;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin-left: 4vw;
+    margin-right: 20px;
+}
+
+#form_headline {
+    text-align: center;
+}
+
+label {
+    margin-right: 120px;
+    width: 150px;
+}
+
+#submit {
+    margin-left: 42vw;
+    margin-top: 5vh;
+}
+
+#abfzeit {
+    margin-left: 2vw;
+}
+
+#abfort {
+    margin-left: 10.5vw;
+}
+
+#ankort {
+    margin-left: 7.5vw;
+}
+
+#fplatz {
+    margin-left: 5.5vw;
+}
+
+#fahrer {
+    margin-left: 5vw;
+}
+
+#headline-table {
+    font-size: 2rem;
+}
+
+th {
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    font-size: 1.1rem;
+}
+
+#table th:nth-child(1),
+#table td:nth-child(1) {
+    width: 150px;
+    /* Ändere die Breite nach Bedarf 
+}
+*/
+
+.hyperlinkButton {
+    color: var(--colorBright);
+    width: 10vw;
+    height: 4vh;
+}
+
+.hyperlinkButton:hover {
+    color: var(--colorDark);
+}
+
+
+/************************Change Ride form********************************/
+
+#form_head_change_ride {
+    padding-left: 30px;
+    color: var(--colorDark);
+}
+
+.table-input-change-ride {
+    padding-top: 2vh;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin-left: 4vw;
+    margin-right: 20px;
+}
+
+#form_headline_change_ride {
+    text-align: center;
+}
+
+.label_change_ride {
+    margin-right: 120px;
+    width: 150px;
+}
+
+
+/*************************************************************************************************************/
 
 #ride-finder-tab {
     padding-top: 2%;
@@ -204,126 +359,6 @@ td {
     background-color: var(--colorBright);
 }
 
-#deppTime,
-#seetings {
-    text-align: center;
-}
-
-.input-data {
-    color: var(--colorDark);
-    padding-top: 10%;
-    padding-bottom: 15%;
-    width: 100vw;
-    height: 70vh;
-    background-color: var(--colorBackground);
-}
-
-#form_head{
-    padding-left: 30px;
-    color: var(--colorDark);
-}
-
-.table-input {
-    padding-top: 2vh;
-
-    
-    grid-column-start: 1;
-    grid-column-end: 3;
-    
-    margin-left: 4vw;
-    margin-right: 20px; 
-}
-
-
-#form_headline{
-    text-align: center;
-}
-
-
-label{
-    margin-right: 120px;
-    width: 150px;
-}
-
-#submit{
-    margin-left: 42vw;   
-    margin-top: 5vh;
-}
-
-#abfzeit{
-    margin-left: 2vw;
-}
-#abfort{
-    margin-left: 10.5vw;
-}
-#ankort{
-    margin-left: 7.5vw;
-}
-#fplatz{
-    margin-left: 5.5vw;
-}
-#fahrer{
-    margin-left: 5vw;
-}
-
-
-#headline-table {
-    font-size: 2rem;
-}
-
-th {
-    padding-top: 0.5vw;
-    padding-bottom: 0.5vw;
-    font-size: 1.1rem;
-}
-
-#table th:nth-child(1),
-#table td:nth-child(1) {
-    width: 150px; /* Ändere die Breite nach Bedarf */
-}
-
-.hyperlinkButton{
-    color: var(--colorBright);
-    width: 10vw;
-    height: 4vh;
-}
-
-
-.hyperlinkButton:hover {
-    color: var(--colorDark);
-    
-}
-
-/************************Change Ride form********************************/
-
-
-#form_head_change_ride{
-    padding-left: 30px;
-    color: var(--colorDark);
-}
-
-.table-input-change-ride {
-    padding-top: 2vh;
-
-    
-    grid-column-start: 1;
-    grid-column-end: 3;
-    
-    margin-left: 4vw;
-    margin-right: 20px; 
-}
-
-
-#form_headline_change_ride{
-    text-align: center;
-}
-
-
-.label_change_ride{
-    margin-right: 120px;
-    width: 150px;
-}
-
-#backToTableBtn{
+#backToTableBtn {
     margin: 15px;
 }

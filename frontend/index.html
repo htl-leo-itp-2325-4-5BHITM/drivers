@@ -12,6 +12,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500&display=swap" rel="stylesheet">
 
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script>
+        ScrollReveal({
+            reset: true
+        });
+    </script>
+
 </head>
 
 <body>
@@ -42,36 +50,49 @@
         </div>
 
         <div id="reason-content">
-            <h3>What is DrivUs?</h3>
-            <p>With DrivUs, we want to help everyone, whether parents, young people or senior citizens, to get to their destination comfortably and easily.<br> Our app is based on our users who offer rides for others and thus aims to achieve a balanced give
-                and take.<br> With Drivus you can save money, make new friends and also contribute to climate protection.<br> We want to offer you these benefits and attract a large number of DrivUsers, which is why we are working on the best possible
-                implementation of our app.
+            <h3>Why<br> DrivUs?</h3>
+            <p>We want to help everyone get to their destination comfortably and easily.<br>With Drivus you can save money, make new friends and also contribute to climate protection!<br></p>
         </div>
     </div>
 
     <hr>
 
     <div id="ride-input-tab" class="input-data">
-        <h1 id="form_headline">New Ride</h1>
-        <form id="form_head">
-            <div class="table-input" id="form_label">
-                <label for="datum">Date:</label>
-                <label for="abfzeit">Departure Time:</label>
-                <label for="abfort">Place of Departure:</label>
-                <label for="ankort">Place of Arrival:</label>
-                <label for="fplatz">Available seats:</label>
-                <label for="fahrer">Driver:</label>
-            </div>
-            <div class="table-input">
-                <input type="date" id="datum" name="datum">
-                <input type="time" id="abfzeit" name="abfzeit">
-                <input type="text" id="abfort" name="abfort">
-                <input type="text" id="ankort" name="ankort">
-                <input type="number" min="1" id="fplatz" name="fplatz">
-                <input type="text" id="fahrer" name="fahrer">
-            </div>
-            <input type="submit" id="submit" name="senden" >
-        </form>
+        <!--Is die Klasse do nd sinnlos? und ID name Aendern pls-->
+        <div id="register-ride-content">
+            <h1 id="form_headline">Register a Ride now!</h1>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+                no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        </div>
+        <div id="register-ride-forum">
+            <form id="form_head">
+                <div class="table-input" id="form_label">
+                    <label for="fahrer">Driver</label><br>
+                    <input type="text" id="fahrer" name="fahrer"><br><br>
+
+                    <label for="abfort">From</label><br>
+                    <input type="text" id="abfort" name="abfort"><br><br>
+
+
+                    <label for="ankort">To</label><br>
+                    <input type="text" id="ankort" name="ankort"><br><br>
+
+                    <label for="datum">Date</label><br>
+                    <input type="date" id="datum" name="datum"><br><br>
+
+                    <label for="abfzeit">Departure Time:</label><br>
+                    <input type="time" id="abfzeit" name="abfzeit"><br><br>
+
+                    <label for="fplatz">Available seats:</label><br>
+                    <input type="number" min="1" id="fplatz" name="fplatz"><br><br>
+
+                </div>
+                <div class="table-input">
+                    <!--Probs Löschen aber kp-->
+                </div>
+                <input type="submit" id="submit" name="senden">
+            </form>
+        </div>
     </div>
 
     <hr>
