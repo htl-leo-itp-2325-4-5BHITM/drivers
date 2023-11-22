@@ -27,11 +27,24 @@ const rowTemplate = (ride: Ride) => {
 const tableTemplate = (rides: Ride[]) => {
     const rows = rides.map(rowTemplate)
     return html`
-    <table>
-    <tbody>
-        ${rows}
-    </tbody>
-    </table
+    <div id="ride-finder-tab">
+        
+        <table id="table">
+        <thead class="table-head">
+                <tr>
+                    <th>Date</th>
+                    <th>Departure Time</th>
+                    <th>Place of Departure</th>
+                    <th>Place of Arrival</th>
+                    <th>Available seats</th>
+                    <th>Driver</th>
+                </tr>
+            </thead>
+        <tbody>
+            ${rows}
+        </tbody>
+        </table
+    </div>
 `
 }
 
