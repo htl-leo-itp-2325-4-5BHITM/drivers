@@ -46,6 +46,7 @@ class AdminTS {
             <input type="submit" id="submit" name="senden" onclick="showList()">
         </form>
         <button id="backToTableBtn">back to rides</button>`;
+        new backToTable();
     }
   }
   // start the app
@@ -84,6 +85,7 @@ class AdminTS {
            </tbody>
        </table>
        <button id="backToTableBtn">back to rides</button>`;
+       new AdminTS();
     }
   }
   // start the app

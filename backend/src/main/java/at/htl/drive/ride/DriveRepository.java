@@ -14,4 +14,8 @@ public class DriveRepository {
     List<Ride> all() {
         return em.createQuery("select r from Ride r", Ride.class).getResultList();
     }
+
+    void changeRide(Long id) {
+        Ride ride = em.find(Ride.class, id);
+    }
 }

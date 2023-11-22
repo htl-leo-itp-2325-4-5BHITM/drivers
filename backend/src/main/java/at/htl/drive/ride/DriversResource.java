@@ -2,6 +2,7 @@ package at.htl.drive.ride;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 
@@ -18,5 +19,11 @@ public class DriversResource {
         var rides = repository.all();
         var dtos = rides.stream().map(rideMapper::toResource);
         return Response.ok(dtos).build();
+    }
+
+    @POST
+    public Response changeRide(Long id) {
+        repository.changeRide(id);
+        return Response.ok().build();
     }
 }
