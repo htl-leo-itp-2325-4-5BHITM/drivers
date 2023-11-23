@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
 
 import java.sql.Timestamp;
@@ -23,9 +24,19 @@ public class DriversResource {
         return Response.ok(dtos).build();
     }
 
+    @GET
+    @Path("/getRide/{id}")
+    public Ride getRide(@PathParam("id") Long id) {
+        System.out.println("bin im getRide");
+        var ride = repository.getRide(id);
+        return ride;
+    }
+
     @POST
-    public Response changeRide(Long id) {
-        repository.changeRide(id);
+    @Transactional
+    @Path("/changeRide")
+    public Response changeRide(RideDto rideDto) {
+        repository.changeRide(rideDto);
         return Response.ok().build();
     }
 

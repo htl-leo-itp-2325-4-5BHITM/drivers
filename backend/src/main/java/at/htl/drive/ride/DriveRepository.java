@@ -15,12 +15,24 @@ public class DriveRepository {
         return em.createQuery("select r from Ride r", Ride.class).getResultList();
     }
 
-    void changeRide(Long id) {
-        Ride ride = em.find(Ride.class, id);
+    public void changeRide(RideDto rideDto) {
+        Ride ride = em.find(Ride.class, rideDto.id());
+        //ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(),rideDto.driver());
+        ride.setDepartureTime(rideDto.departureTime());
+        ride.setPlaceOfDeparture(rideDto.placeOfDeparture());
+        ride.setPlaceOfArrival(rideDto.placeOfArrival());
+        ride.setAvailableSeats(rideDto.availableSeats());
+        ride.setDriver(rideDto.driver());
+        em.merge(ride);
     }
 
     public void postRide(RideDto rideDto) {
         Ride ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(),rideDto.driver());
         em.persist(ride);
+    }
+
+    public Ride getRide(Long id) {
+        Ride ride = em.find(Ride.class, id);
+        return ride;
     }
 }
