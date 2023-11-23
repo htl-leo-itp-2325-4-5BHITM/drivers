@@ -3,7 +3,6 @@ import {html, render} from "lit-html"
 import { DateTime } from 'luxon';
 
 
-
 const rowTemplate = (ride: Ride) => {
     // Departure Time in DateTime-Objekt umwandeln
     const departureTime = DateTime.fromISO(ride.departureTime);
@@ -13,7 +12,7 @@ const rowTemplate = (ride: Ride) => {
     const formattedDate = departureTime.toFormat('yyyy-MM-dd'); // Datum formatieren (z.B. 2023-11-22)
 
     return html`
-    <tr>
+    <tr title="${ride.driver}">
         <td>${formattedDate}</td>
         <td>${formattedTime}</td>
         <td>${ride.placeOfDeparture}</td>
@@ -23,6 +22,7 @@ const rowTemplate = (ride: Ride) => {
     </tr>
     `;
 };
+
 
 const tableTemplate = (rides: Ride[]) => {
     const rows = rides.map(rowTemplate)

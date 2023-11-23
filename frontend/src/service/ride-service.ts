@@ -1,4 +1,4 @@
-import { Ride, Model } from "Model/model"      //-> woher??
+import { Ride, Model } from "Model/model"     
 import {store} from "../model/model"
 
 const RIDES_URL = "/api/rides"
