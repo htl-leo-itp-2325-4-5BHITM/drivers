@@ -2,6 +2,7 @@ import {Ride, store} from "../model/model"
 import {html, render} from "lit-html"
 import { DateTime } from 'luxon';
 import { loadRide } from "src/service/getRide-service";
+//import { Ride, Model2 } from "Model/model"   
 
 
 const inputTemplate = (ride: Ride) => {
@@ -12,16 +13,7 @@ const inputTemplate = (ride: Ride) => {
     const formattedTime = departureTime.toFormat('HH:mm'); // Zeit formatieren (z.B. 10:30)
     const formattedDate = departureTime.toFormat('yyyy-MM-dd'); // Datum formatieren (z.B. 2023-11-22)
 
-    /*return html`
-    <tr title="${ride.driver}">
-        <td>${formattedDate}</td>
-        <td>${formattedTime}</td>
-        <td>${ride.placeOfDeparture}</td>
-        <td>${ride.placeOfArrival}</td>
-        <td>${ride.availableSeats}</td>
-        <td>${ride.driver}</td>
-    </tr>
-    `;*/
+   
 
     return html`<div class="table-input-change-ride">
         <input type="date" id="datum" name="datum" value="${formattedDate}">

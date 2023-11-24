@@ -158,6 +158,7 @@ function createEventListenerForChanging() {
     if (element) {
         console.log("eventlistener")
         // Event-Handler für das Abfragen der Fahrt die man ändern möchte
+        var element = document.getElementById('form_head_select_ride')
         element.addEventListener('submit', function(event) {
             event.preventDefault(); // Verhindert das Standardverhalten des Formulars (Seitenneuladen)
             console.log("bin im form")
