@@ -172,11 +172,13 @@ hr {
 }
 
 #ride-input-tab div {
+    padding-top: 10%;
     width: 50%;
 }
 
 #register-ride-content {
     padding: 0% 10%;
+    
 }
 
 #register-ride-forum {
@@ -278,16 +280,6 @@ th {
     /* Ändere die Breite nach Bedarf 
 }
 */
-
-.hyperlinkButton {
-    color: var(--colorBright);
-    width: 10vw;
-    height: 4vh;
-}
-
-.hyperlinkButton:hover {
-    color: var(--colorDark);
-}
 
 
 /************************Change Ride form********************************/
