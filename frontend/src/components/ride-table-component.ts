@@ -48,12 +48,12 @@ class RideTableComponent extends HTMLElement {
             <table id="table">
             <thead class="table-head">
                     <tr>
-                        <th>Date</th>
-                        <th>Departure Time</th>
-                        <th>Place of Departure</th>
-                        <th>Place of Arrival</th>
-                        <th>Available seats</th>
-                        <th>Driver</th>
+                        <th  @click=${()=>this.sortRides("date")}>Date</th>
+                        <th  @click=${()=>this.sortRides("departureTime")}>Departure Time</th>
+                        <th  @click=${()=>this.sortRides("departurePlace")}>Place of Departure</th>
+                        <th  @click=${()=>this.sortRides("arrivalPlace")}>Place of Arrival</th>
+                        <th  @click=${()=>this.sortRides("availableSeats")}>Available seats</th>
+                        <th @click=${()=>this.sortRides("driver")}>Driver</th>
                     </tr>
                 </thead>
             <tbody>
@@ -67,5 +67,10 @@ class RideTableComponent extends HTMLElement {
         alert(`Ride selected ${ride.driver}`)
         console.log("in rowclick")
     }
+    private sortRides(column: String) {
+        alert(`Column ${column} for sort selected`)
+        console.log("in sortRides")
+    }
 }
+
 customElements.define("ride-table", RideTableComponent)
