@@ -1,4 +1,4 @@
-import {Ride, store} from "../model/model"
+/*import {Ride, store} from "../model/model"
 import {html, render} from "lit-html"
 import { DateTime } from 'luxon';
 import { loadRide } from "src/service/getRide-service";
@@ -58,4 +58,4 @@ class RideTableComponent extends HTMLElement {
         render(labelTemplate(drives), this)
     }
 }
-customElements.define("change-ride", RideTableComponent)
+customElements.define("change-ride", RideTableComponent)*/

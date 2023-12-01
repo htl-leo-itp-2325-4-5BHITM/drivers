@@ -1,4 +1,4 @@
-import { Ride, Model2 } from "Model/model"     
+/*import { Ride, Model2 } from "Model/model"     
 import {store} from "../model/model"
 
 const RIDES_URL = "/api/getRide/2"
@@ -12,4 +12,4 @@ async function loadRide() {
     console.log("rides loaded", ride)
     //store.next(model)
 }
-export {loadRide}
+export {loadRide}*/

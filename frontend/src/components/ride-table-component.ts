@@ -43,6 +43,9 @@ class RideTableComponent extends HTMLElement {
     }
     tableTemplate(rides: Ride[], currentRide?: Ride) {
         const rows = rides.map(ride=>this.rowTemplate(ride))
+        //const rideTime = new Date(currentRide.departureTime);
+        //let departureTime = currentRide.departureTime;
+        //console.log(departureTime);
         return html`
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <div id="ride-finder-tab">
@@ -69,9 +72,29 @@ class RideTableComponent extends HTMLElement {
             <div class="w3-container">
             <span id="close-button" @click=${()=> this.closeDialog()}
                 class="w3-button w3-display-topright">&times;</span>
-            <div>${currentRide?.driver}</div>
-            <p>Some text in the Modal..</p>
-            <p>Some text in the Modal..</p>
+                <h2>Change data</h2>
+                <form id="form_head">
+                    <div class="table-input" id="form_label">
+                        <label for="fahrer">Driver</label><br>
+                        <input type="text" id="fahrer" name="fahrer" value='${currentRide?.driver}'><br><br>
+
+                        <label for="abfort">From</label><br>
+                        <input type="text" id="abfort" name="abfort" value='${currentRide?.placeOfDeparture}'><br><br>
+
+                        <label for="ankort">To</label><br>
+                        <input type="text" id="ankort" name="ankort" value='${currentRide?.placeOfArrival}'><br><br>
+
+                        <label for="datum">Date</label><br>
+                        <input type="date" id="datum" name="datum"><br><br>
+
+                        <label for="abfzeit">Departure Time:</label><br>
+                        <input type="time" id="abfzeit" name="abfzeit"><br><br>
+
+                        <label for="fplatz">Available seats:</label><br>
+                        <input type="number" min="1" id="fplatz" name="fplatz" value='${currentRide?.availableSeats}'><br><br>
+                    </div>
+                    <input type="submit" id="submit" name="save">
+                </form>
             </div>
         </div>
         </div>
