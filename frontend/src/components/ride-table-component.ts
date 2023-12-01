@@ -37,8 +37,8 @@ class RideTableComponent extends HTMLElement {
             <td>${ride.placeOfArrival}</td>
             <td>${ride.availableSeats}</td>
             <td>${ride.driver}</td>
-            <td @click=${()=> this.getSeat("getSeat")}><button >get your Seat</button></td>
         </tr>
+        <button @click=${()=> this.getSeat("getSeat")}>get your Seat</button></td>
         `
     }
     tableTemplate(rides: Ride[]) {
@@ -55,7 +55,6 @@ class RideTableComponent extends HTMLElement {
                         <th  @click=${()=>this.sortRides("arrivalPlace")}>Place of Arrival</th>
                         <th  @click=${()=>this.sortRides("availableSeats")}>Available seats</th>
                         <th @click=${()=>this.sortRides("driver")}>Driver</th>
-                        <th @click=${()=> this.getSeat("getSeat")}>Get  your seat</th>
                     </tr>
                 </thead>
             <tbody>
