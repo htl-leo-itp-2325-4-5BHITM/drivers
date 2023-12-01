@@ -9,16 +9,16 @@ class RideTableComponent extends HTMLElement {
         console.log("RideTable loaded")
         store.subscribe(model => {
             console.log("data changed", model)
-            this.render(model.drives)
+            this.render(model.drives, model.currentRide)
         })
     }
     constructor() {
         super()
         this.attachShadow({mode: "open"})
     }
-    render(drives: Ride[]) {
+    render(drives: Ride[], currentRide?: Ride) {
         //console.log("rides to render", drives)
-        render(this.tableTemplate(drives), this.shadowRoot)
+        render(this.tableTemplate(drives, currentRide), this.shadowRoot)
     }
     rowTemplate(ride: Ride) {
         // Departure Time in DateTime-Objekt umwandeln
@@ -41,13 +41,14 @@ class RideTableComponent extends HTMLElement {
         <button @click=${()=> this.getSeat("getSeat")}>get your Seat</button></td>
         `
     }
-    tableTemplate(rides: Ride[]) {
+    tableTemplate(rides: Ride[], currentRide?: Ride) {
         const rows = rides.map(ride=>this.rowTemplate(ride))
         return html`
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <div id="ride-finder-tab">
             
-            <table id="table">
-            <thead class="table-head">
+            <table class="w3-table-all">
+            <thead class="">
                     <tr>
                         <th  @click=${()=>this.sortRides("date")}>Date</th>
                         <th  @click=${()=>this.sortRides("departureTime")}>Departure Time</th>
@@ -60,12 +61,32 @@ class RideTableComponent extends HTMLElement {
             <tbody>
                 ${rows}
             </tbody>
-            </table
+            </table>
+        </div>
+        <!-- The Modal -->
+        <div id="ride-dialog" class="w3-modal">
+        <div class="w3-modal-content">
+            <div class="w3-container">
+            <span id="close-button" @click=${()=> this.closeDialog()}
+                class="w3-button w3-display-topright">&times;</span>
+            <div>${currentRide?.driver}</div>
+            <p>Some text in the Modal..</p>
+            <p>Some text in the Modal..</p>
+            </div>
+        </div>
         </div>
     `
     }
+    closeDialog(){
+        const dialog = this.shadowRoot.getElementById('ride-dialog')
+        dialog.style.display = 'none' 
+    }
     private rowClick(ride: Ride) {
-        alert(`Ride selected ${ride.driver}`)
+        const model = Object.assign({}, store.getValue())
+        model.currentRide = ride
+        store.next(model)
+        const dialog = this.shadowRoot.getElementById('ride-dialog')
+        dialog.style.display = 'block' 
         console.log("in rowclick")
     }
     private sortRides(column: String) {

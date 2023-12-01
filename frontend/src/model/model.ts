@@ -16,6 +16,7 @@ interface RideResponse {
 
 export interface Model {
     drives: Ride[]
+    currentRide?: Ride 
 }
 
 const initialState: Model = {
