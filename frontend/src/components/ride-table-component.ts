@@ -37,6 +37,7 @@ class RideTableComponent extends HTMLElement {
             <td>${ride.placeOfArrival}</td>
             <td>${ride.availableSeats}</td>
             <td>${ride.driver}</td>
+            <td @click=${()=> this.getSeat("getSeat")}><button >get your Seat</button></td>
         </tr>
         `
     }
@@ -54,6 +55,7 @@ class RideTableComponent extends HTMLElement {
                         <th  @click=${()=>this.sortRides("arrivalPlace")}>Place of Arrival</th>
                         <th  @click=${()=>this.sortRides("availableSeats")}>Available seats</th>
                         <th @click=${()=>this.sortRides("driver")}>Driver</th>
+                        <th @click=${()=> this.getSeat("getSeat")}>Get  your seat</th>
                     </tr>
                 </thead>
             <tbody>
@@ -70,6 +72,10 @@ class RideTableComponent extends HTMLElement {
     private sortRides(column: String) {
         alert(`Column ${column} for sort selected`)
         console.log("in sortRides")
+    }
+    private getSeat(column: String) {
+        alert(`Column ${column} for sort selected`)
+        console.log("you took a seat")
     }
 }
 
