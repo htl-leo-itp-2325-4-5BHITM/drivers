@@ -196,7 +196,7 @@ hr {
 }
 
 #form_head input:last-child {
-    margin-top: 5vw;
+    
     width: auto;
 }
 
@@ -354,3 +354,4 @@ td {
 #backToTableBtn {
     margin: 15px;
 }
+
