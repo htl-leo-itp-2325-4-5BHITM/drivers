@@ -166,9 +166,12 @@ hr {
 
 #ride-input-tab {
     width: 100vw;
-    height: 100vh;
+    height: 120vh;
     display: flex;
     color: var(--colorDark);
+    /*background-color: var(--colorDark);
+    color: var(--colorBright);
+    margin-top: -2vw;*/
 }
 
 #ride-input-tab div {
@@ -178,7 +181,6 @@ hr {
 
 #register-ride-content {
     padding: 0% 10%;
-    
 }
 
 #register-ride-forum {
@@ -187,99 +189,17 @@ hr {
 }
 
 #form_head input {
-    border: solid 2px var(--colorDark);
+    border: solid 1.5px var(--colorDark);
     border-radius: 5px;
     width: 70%;
-    height: 5vh;
+    height: 4.5vh;
     background-color: var(--colorBright);
     padding: 1%;
 }
 
 #form_head input:last-child {
-    
     width: auto;
 }
-
-
-/*
-#deppTime,
-#seetings {
-    text-align: center;
-}
-
-.input-data {
-    color: var(--colorDark);
-    padding-top: 10%;
-    padding-bottom: 15%;
-    width: 100vw;
-    height: 70vh;
-    background-color: var(--colorBackground);
-}
-
-
-#form_head {
-    padding-left: 30px;
-    color: var(--colorDark);
-}
-
-.table-input {
-    padding-top: 2vh;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    margin-left: 4vw;
-    margin-right: 20px;
-}
-
-#form_headline {
-    text-align: center;
-}
-
-label {
-    margin-right: 120px;
-    width: 150px;
-}
-
-#submit {
-    margin-left: 42vw;
-    margin-top: 5vh;
-}
-
-#abfzeit {
-    margin-left: 2vw;
-}
-
-#abfort {
-    margin-left: 10.5vw;
-}
-
-#ankort {
-    margin-left: 7.5vw;
-}
-
-#fplatz {
-    margin-left: 5.5vw;
-}
-
-#fahrer {
-    margin-left: 5vw;
-}
-
-#headline-table {
-    font-size: 2rem;
-}
-
-th {
-    padding-top: 0.5vw;
-    padding-bottom: 0.5vw;
-    font-size: 1.1rem;
-}
-
-#table th:nth-child(1),
-#table td:nth-child(1) {
-    width: 150px;
-    /* Ändere die Breite nach Bedarf 
-}
-*/
 
 
 /************************Change Ride form********************************/
@@ -354,4 +274,3 @@ td {
 #backToTableBtn {
     margin: 15px;
 }
-
