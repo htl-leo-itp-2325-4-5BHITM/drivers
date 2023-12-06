@@ -41,6 +41,15 @@ public class DriversResource {
 
     @POST
     @Transactional
+    //@Consumes(MediaType.APPLICATION_JSON)
+    @Path("/registerForRide")
+    public Response registerForRide(Long id) {
+        repository.registerForRide(id);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Transactional
     @Path("/postRide")
     public Response postRide(RideDto rideDto) {
         System.out.println("bin im Ressource");

@@ -27,6 +27,12 @@ public class DriveRepository {
         em.persist(ride);
     }
 
+    public void registerForRide(Long id) {
+        Ride ride = em.find(Ride.class, id);
+        ride.setAvailableSeats(ride.availableSeats -1);
+        em.persist(ride);
+    }
+
     public void removeRide(Long id) {
         Ride ride = em.find(Ride.class, id);
         em.remove(ride);
