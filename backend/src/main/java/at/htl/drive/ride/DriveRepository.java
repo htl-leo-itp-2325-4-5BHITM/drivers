@@ -12,20 +12,19 @@ public class DriveRepository {
     EntityManager em;
 
     List<Ride> all() {
-        return em.createQuery("select r from Ride r", Ride.class).getResultList();
+        return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
     }
 
     public void changeRide(RideDto rideDto) {
-        Long id = 2L;
+        Long id = rideDto.id();
         Ride ride = em.find(Ride.class, id);
-        //ride.setId(2L);
-        //ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(),rideDto.driver());
+        //ride.setId(id);
         ride.setDepartureTime(rideDto.departureTime());
         ride.setPlaceOfDeparture(rideDto.placeOfDeparture());
         ride.setPlaceOfArrival(rideDto.placeOfArrival());
         ride.setAvailableSeats(rideDto.availableSeats());
         ride.setDriver(rideDto.driver());
-        //em.p(ride);
+        em.persist(ride);
     }
 
     public void removeRide(Long id) {

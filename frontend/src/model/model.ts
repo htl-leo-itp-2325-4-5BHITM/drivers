@@ -3,6 +3,15 @@ import { DateTime } from 'luxon';
 
 
 interface Ride {
+    id: number
+    driver: string
+    departureTime: DateTime
+    placeOfDeparture: string
+    placeOfArrival: string
+    availableSeats: number
+}
+
+interface RidePost {
     driver: string
     departureTime: DateTime
     placeOfDeparture: string
@@ -32,4 +41,4 @@ export interface Model2 {
 
 const store = new BehaviorSubject<Model>(initialState)
 
-export { Ride, RideResponse as DriveResponse, store }
+export { Ride, RidePost, RideResponse as DriveResponse, store }
