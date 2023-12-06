@@ -110,6 +110,14 @@ class RideTableComponent extends HTMLElement {
         dialog.style.display = 'none' 
     }
     private rowClick(ride: Ride) {
+        const dateAndTime = ride.departureTime;
+        console.log(dateAndTime)
+        const words = dateAndTime.split(/[T.]/);
+        console.log(words[0]);
+        console.log(words[1]);
+        const date = words[0];
+        const time = words[1];
+
         const model = Object.assign({}, store.getValue())
         model.currentRide = ride
         store.next(model)
@@ -145,25 +153,28 @@ class RideTableComponent extends HTMLElement {
         var id = ride.id
         console.log(id)
 
-        // Daten in JSON umwandeln
-        const jsonData = JSON.stringify(id);
+        if(ride.availableSeats > 0) {
+            // Daten in JSON umwandeln
+            const jsonData = JSON.stringify(id);
 
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: jsonData,
-        })
-            .then(response => {
-                // Handle die Antwort hier
-                loadRides()
-                console.log("gehd")
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: jsonData,
             })
-            .catch(error => {
-                // Handle Fehler hier
-                console.log("Hat nd funktioniert zum Ändern")
-            });
+                .then(response => {
+                    // Handle die Antwort hier
+                    loadRides()
+                    console.log("gehd")
+                })
+                .catch(error => {
+                    // Handle Fehler hier
+                    console.log("Hat nd funktioniert zum Ändern")
+                });
+        }
+        
     }
     private saveChanges(id: number) {
         
