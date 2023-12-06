@@ -96,6 +96,9 @@ class RideTableComponent extends HTMLElement {
                         <input type="number" min="1" id="fplatz" name="fplatz" value='${currentRide?.availableSeats}'><br><br>
                     </div>
                     <input @click=${()=> this.saveChanges(currentRide?.id)} type="button" id="submit" value="save">
+
+                    <input @click=${()=> this.removeRide(currentRide?.id)} type="button" id="remove" value="remove">
+
                     <p @click=${()=>{
                         //@ts-ignore
                         console.log(document.querySelector("#change_fahrer").value)
@@ -190,7 +193,32 @@ class RideTableComponent extends HTMLElement {
         //element.innerHTML = "Hopefully the information is right this time!";
         
         //
-    }
+    } 
+    private removeRide(id: number) {
+            
+      var url = "http://localhost:4200/api/rides/removeRide"
+
+      // Daten in JSON umwandeln
+      const jsonData = JSON.stringify(id);
+
+      fetch(url, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: jsonData,
+      })
+          .then(response => {
+              // Handle die Antwort hier
+              loadRides()
+              this.closeDialog()
+              console.log("gehd")
+          })
+          .catch(error => {
+              // Handle Fehler hier
+              console.log("Hat nd funktioniert zum Ändern")
+          }); 
+    } 
     
 }
 
