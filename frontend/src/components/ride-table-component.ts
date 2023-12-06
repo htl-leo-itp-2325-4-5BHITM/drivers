@@ -1,7 +1,8 @@
 import {Ride, store} from "../model/model"
 import {html, render} from "lit-html"
 import { DateTime } from 'luxon'
-import {saveChanges, sortData} from "../index"
+import {sortData} from "../index"
+import { loadRides } from "../service/ride-service"
 // für Sortierung
 let lastSortedColumn: String | null = null;
 let isAscendingOrder = true;
@@ -41,14 +42,12 @@ class RideTableComponent extends HTMLElement {
             <td>${ride.availableSeats}</td>
             <td>${ride.driver}</td>
         </tr>
-        <button @click=${()=> this.getSeat("getSeat")}>get your Seat</button></td>
+        <button @click=${()=> this.getSeat(ride)}>get your Seat</button></td>
         `
     }
     tableTemplate(rides: Ride[], currentRide?: Ride) {
         const rows = rides.map(ride=>this.rowTemplate(ride))
-        //const rideTime = new Date(currentRide.departureTime);
-        //let departureTime = currentRide.departureTime;
-        //console.log(departureTime);
+        
         return html`
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <div id="ride-finder-tab">
@@ -96,8 +95,10 @@ class RideTableComponent extends HTMLElement {
                         <label for="fplatz">Available seats:</label><br>
                         <input type="number" min="1" id="fplatz" name="fplatz" value='${currentRide?.availableSeats}'><br><br>
                     </div>
-                    
-                    <input type="submit" id="submit" name="save">
+                    <input @click=${()=> this.saveChanges(currentRide?.id)} type="button" id="submit" value="save">
+
+                    <input @click=${()=> this.removeRide(currentRide?.id)} type="button" id="remove" value="remove">
+                
                 </form>
             </div>
         </div>
@@ -137,20 +138,53 @@ class RideTableComponent extends HTMLElement {
         sortData(isAscendingOrder,lastSortedColumn)
         console.log("in sortRides")
     }
-    private getSeat(column: String) {
-        alert(`Column ${column} for sort selected`)
-        console.log("you took a seat")
+    private getSeat(ride: Ride) {
+        //alert(`Column ${column} for sort selected`)
+        console.log(ride)
+        var url = "http://localhost:4200/api/rides/registerForRide"
+        var id = ride.id
+        console.log(id)
+
+        // Daten in JSON umwandeln
+        const jsonData = JSON.stringify(id);
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: jsonData,
+        })
+            .then(response => {
+                // Handle die Antwort hier
+                loadRides()
+                console.log("gehd")
+            })
+            .catch(error => {
+                // Handle Fehler hier
+                console.log("Hat nd funktioniert zum Ändern")
+            });
     }
-    /*private saveChanges() {
+    private saveChanges(id: number) {
         
         //event.preventDefault(); // Verhindert das Standardverhalten des Formulars (Seitenneuladen)
             
         var url = "http://localhost:4200/api/rides/changeRide"
-        console.log(url)
-    
+        //console.log(url)
+        
+        var driv = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement);
+        console.log(driv);
+        console.log(driv.value);
+
+        /*let dings = document.querySelector("#change_fahrer") as HTMLInputElement;
+        console.log(dings, dings.value);*/
+        
+        
+
         // Daten aus dem Formular erfassen
-        var dateInputValue = ((document.getElementById('datum') as HTMLInputElement).value);
-        var timeInputValue = (document.getElementById('abfzeit') as HTMLInputElement).value;
+        var dateInputValue = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
+        var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
+        console.log(dateInputValue)
     
         const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy-MM-dd:HH:mm');
     
@@ -159,11 +193,12 @@ class RideTableComponent extends HTMLElement {
         console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
     
         const formData: Ride = {
-            driver: (document.getElementById('fahrer') as HTMLInputElement).value,
+            id: id,
+            driver: (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value,
             departureTime: combinedDateTime,
-            placeOfDeparture: (document.getElementById('abfort') as HTMLInputElement).value,
-            placeOfArrival: (document.getElementById('ankort') as HTMLInputElement).value,
-            availableSeats: parseInt((document.getElementById('fplatz') as HTMLInputElement).value)
+            placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
+            placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
+            availableSeats: parseInt((this.shadowRoot.getElementById('fplatz') as HTMLInputElement).value)
         };
         console.log("form Data: "+formData)
         // Daten in JSON umwandeln
@@ -179,6 +214,8 @@ class RideTableComponent extends HTMLElement {
         })
             .then(response => {
                 // Handle die Antwort hier
+                loadRides()
+                this.closeDialog()
                 console.log("gehd")
             })
             .catch(error => {
@@ -186,8 +223,34 @@ class RideTableComponent extends HTMLElement {
                 console.log("Hat nd funktioniert zum Ändern")
             });
         //element.innerHTML = "Hopefully the information is right this time!";
-    
-    }*/
+        
+        //
+    } 
+    private removeRide(id: number) {
+            
+        var url = "http://localhost:4200/api/rides/removeRide"
+  
+        // Daten in JSON umwandeln
+        const jsonData = JSON.stringify(id);
+  
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: jsonData,
+        })
+            .then(response => {
+                // Handle die Antwort hier
+                loadRides()
+                this.closeDialog()
+                console.log("gehd")
+            })
+            .catch(error => {
+                // Handle Fehler hier
+                console.log("Hat nd funktioniert zum Ändern")
+            }); 
+      } 
     
 }
 
