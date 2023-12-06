@@ -2,10 +2,8 @@ package at.htl.drive.ride;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.sql.Timestamp;
@@ -34,6 +32,7 @@ public class DriversResource {
 
     @POST
     @Transactional
+    //@Consumes(MediaType.APPLICATION_JSON)
     @Path("/changeRide")
     public Response changeRide(RideDto rideDto) {
         repository.changeRide(rideDto);

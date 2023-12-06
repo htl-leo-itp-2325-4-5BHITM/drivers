@@ -1,6 +1,7 @@
 import {Ride, store} from "../model/model"
 import {html, render} from "lit-html"
 import { DateTime } from 'luxon'
+import {saveChanges} from "../index"
 
 
 
@@ -73,7 +74,7 @@ class RideTableComponent extends HTMLElement {
             <span id="close-button" @click=${()=> this.closeDialog()}
                 class="w3-button w3-display-topright">&times;</span>
                 <h2>Change data</h2>
-                <form id="form_head">
+                <form id="form_head_change">
                     <div class="table-input" id="form_label">
                         <label for="fahrer">Driver</label><br>
                         <input type="text" id="fahrer" name="fahrer" value='${currentRide?.driver}'><br><br>
@@ -93,12 +94,13 @@ class RideTableComponent extends HTMLElement {
                         <label for="fplatz">Available seats:</label><br>
                         <input type="number" min="1" id="fplatz" name="fplatz" value='${currentRide?.availableSeats}'><br><br>
                     </div>
+                    
                     <input type="submit" id="submit" name="save">
                 </form>
             </div>
         </div>
         </div>
-    `
+    ` //<button @click=${()=> saveChanges()}>save</button>
     }
     closeDialog(){
         const dialog = this.shadowRoot.getElementById('ride-dialog')
@@ -111,6 +113,8 @@ class RideTableComponent extends HTMLElement {
         const dialog = this.shadowRoot.getElementById('ride-dialog')
         dialog.style.display = 'block' 
         console.log("in rowclick")
+    
+        
     }
     private sortRides(column: String) {
         alert(`Column ${column} for sort selected`)
@@ -120,6 +124,54 @@ class RideTableComponent extends HTMLElement {
         alert(`Column ${column} for sort selected`)
         console.log("you took a seat")
     }
+    /*private saveChanges() {
+        
+        //event.preventDefault(); // Verhindert das Standardverhalten des Formulars (Seitenneuladen)
+            
+        var url = "http://localhost:4200/api/rides/changeRide"
+        console.log(url)
+    
+        // Daten aus dem Formular erfassen
+        var dateInputValue = ((document.getElementById('datum') as HTMLInputElement).value);
+        var timeInputValue = (document.getElementById('abfzeit') as HTMLInputElement).value;
+    
+        const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy-MM-dd:HH:mm');
+    
+        console.log("date",dateInputValue); // Überprüfe das Datumformat
+        console.log("time",timeInputValue); // Überprüfe das Zeitformat
+        console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
+    
+        const formData: Ride = {
+            driver: (document.getElementById('fahrer') as HTMLInputElement).value,
+            departureTime: combinedDateTime,
+            placeOfDeparture: (document.getElementById('abfort') as HTMLInputElement).value,
+            placeOfArrival: (document.getElementById('ankort') as HTMLInputElement).value,
+            availableSeats: parseInt((document.getElementById('fplatz') as HTMLInputElement).value)
+        };
+        console.log("form Data: "+formData)
+        // Daten in JSON umwandeln
+        const jsonData = JSON.stringify(formData);
+    
+    
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: jsonData,
+        })
+            .then(response => {
+                // Handle die Antwort hier
+                console.log("gehd")
+            })
+            .catch(error => {
+                // Handle Fehler hier
+                console.log("Hat nd funktioniert zum Ändern")
+            });
+        //element.innerHTML = "Hopefully the information is right this time!";
+    
+    }*/
+    
 }
 
 customElements.define("ride-table", RideTableComponent)
