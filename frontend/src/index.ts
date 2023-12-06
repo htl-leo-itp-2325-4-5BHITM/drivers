@@ -73,6 +73,7 @@ document.getElementById('form_head').addEventListener('submit', function(event) 
     })
         .then(response => {
             // Handle die Antwort hier
+            loadRides()
             console.log("gehd")
         })
         .catch(error => {
