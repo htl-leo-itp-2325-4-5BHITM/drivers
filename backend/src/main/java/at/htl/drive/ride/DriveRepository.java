@@ -28,6 +28,11 @@ public class DriveRepository {
         //em.p(ride);
     }
 
+    public void removeRide(Long id) {
+        Ride ride = em.find(Ride.class, id);
+        em.remove(ride);
+    }
+
     public void postRide(RideDto rideDto) {
         Ride ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(),rideDto.driver());
         em.persist(ride);
