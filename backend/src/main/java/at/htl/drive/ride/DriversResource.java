@@ -47,4 +47,12 @@ public class DriversResource {
         repository.postRide(rideDto);
         return Response.ok().build();
     }
+
+    @POST
+    @Transactional
+    @Path("/removeRide")
+    public Response removeRide(Long id) {
+        repository.removeRide(id);
+        return Response.ok().build();
+    }
 }
