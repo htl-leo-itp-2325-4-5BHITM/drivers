@@ -16,15 +16,12 @@ public class DriveRepository {
     }
 
     public void changeRide(RideDto rideDto) {
-        Long id = 2L;
+        Long id = rideDto.id();
         Ride ride = em.find(Ride.class, id);
-        //ride = new Ride(rideDto.departureTime(), rideDto.placeOfDeparture(), rideDto.placeOfArrival(), rideDto.availableSeats(), rideDto.driver());
-        ride.setId(2L);
-        //ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(),rideDto.driver());
-        /*ride.setDepartureTime(rideDto.departureTime());
+        //ride.setId(id);
+        ride.setDepartureTime(rideDto.departureTime());
         ride.setPlaceOfDeparture(rideDto.placeOfDeparture());
         ride.setPlaceOfArrival(rideDto.placeOfArrival());
-        */
         ride.setAvailableSeats(rideDto.availableSeats());
         ride.setDriver(rideDto.driver());
         em.persist(ride);

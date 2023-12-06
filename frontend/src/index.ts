@@ -1,7 +1,7 @@
 import { loadRides } from "./service/ride-service"
 import "./components/ride-table-component"
 import "./components/change-ride-component"
-import {Ride,store} from "./model/model"
+import {Ride,RidePost,store} from "./model/model"
 import { DateTime } from 'luxon';
 
 window.addEventListener("DOMContentLoaded", () => loaded())
@@ -51,7 +51,7 @@ document.getElementById('form_head').addEventListener('submit', function(event) 
     console.log("time",timeInputValue); // Überprüfe das Zeitformat
     console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
 
-    const formData: Ride = {
+    const formData: RidePost = {
         driver: (document.getElementById('fahrer') as HTMLInputElement).value,
         departureTime: combinedDateTime,
         placeOfDeparture: (document.getElementById('abfort') as HTMLInputElement).value,
@@ -84,7 +84,7 @@ document.getElementById('form_head').addEventListener('submit', function(event) 
 
 
 
-
+/*
 function createEventListenerForChanging() {
     var element = document.getElementById('form_head_select_ride')
     if (element) {
@@ -171,7 +171,7 @@ function createEventListenerForChanging() {
     }
 }
 
-
+/*
 export function saveChanges() {
     console.log("change data")
 }
@@ -216,7 +216,7 @@ export function saveChanges() {
             .catch(error => {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum speichan")
-            });*/
+            });
     });
     //event.preventDefault(); // Verhindert das Standardverhalten des Formulars (Seitenneuladen)
         
