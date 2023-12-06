@@ -7,6 +7,7 @@ import { DateTime } from 'luxon';
 window.addEventListener("DOMContentLoaded", () => loaded())
 
 
+
 async function loaded() {
     loadRides()
 }
@@ -34,6 +35,23 @@ class Update {
   }
  
 new Update();*/
+
+//sortieren
+export function sortData(sorted: Boolean, column: String) {
+    console.log("sortData fetch")
+    fetch('http://localhost:4200/api/rides/getSortedRide/'+sorted+'/'+column, {
+        method: 'GET',
+    })
+        .then(response => {
+            // Handle die Antwort hier
+            console.log("gehd")
+        })
+        .catch(error => {
+            // Handle Fehler hier
+            console.log("Hat nd funktioniert zum speichan")
+        });
+}
+
 
 
 // Event-Handler für das Absenden des Formulars

@@ -39,4 +39,12 @@ public class DriveRepository {
         Ride ride = em.find(Ride.class, id);
         return ride;
     }
+
+    public List<Ride> getSortedRide(Boolean sortedWay, String column) {
+        if (sortedWay) {
+            return em.createQuery("from Ride order by " + column + " asc", Ride.class).getResultList();
+        } else {
+            return em.createQuery("from Ride order by " + column + " desc", Ride.class).getResultList();
+        }
+    }
 }

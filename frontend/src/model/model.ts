@@ -10,6 +10,7 @@ interface Ride {
     availableSeats: number
 }
 
+
 interface RideResponse {
     data: Ride[]
 }

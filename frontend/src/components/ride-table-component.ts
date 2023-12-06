@@ -1,8 +1,10 @@
 import {Ride, store} from "../model/model"
 import {html, render} from "lit-html"
 import { DateTime } from 'luxon'
-import {saveChanges} from "../index"
-
+import {saveChanges, sortData} from "../index"
+// für Sortierung
+let lastSortedColumn: String | null = null;
+let isAscendingOrder = true;
 
 
 class RideTableComponent extends HTMLElement {
@@ -56,8 +58,8 @@ class RideTableComponent extends HTMLElement {
                     <tr>
                         <th  @click=${()=>this.sortRides("date")}>Date</th>
                         <th  @click=${()=>this.sortRides("departureTime")}>Departure Time</th>
-                        <th  @click=${()=>this.sortRides("departurePlace")}>Place of Departure</th>
-                        <th  @click=${()=>this.sortRides("arrivalPlace")}>Place of Arrival</th>
+                        <th  @click=${()=>this.sortRides("placeOfDeparture")}>Place of Departure</th>
+                        <th  @click=${()=>this.sortRides("placeOfArrival")}>Place of Arrival</th>
                         <th  @click=${()=>this.sortRides("availableSeats")}>Available seats</th>
                         <th @click=${()=>this.sortRides("driver")}>Driver</th>
                     </tr>
@@ -117,7 +119,22 @@ class RideTableComponent extends HTMLElement {
         
     }
     private sortRides(column: String) {
-        alert(`Column ${column} for sort selected`)
+        //alert(`Column ${column} for sort selected`)
+        console.log(column)
+
+        if (lastSortedColumn === column) {
+            // Wenn zweimal hintereinander auf dieselbe Spalte geklickt wird,
+            // ändere die Sortierreihenfolge
+            isAscendingOrder = !isAscendingOrder;
+        } else {
+            // Wenn auf eine andere Spalte geklickt wird, setze die vorherige Sortierung zurück
+            isAscendingOrder = true;
+        }
+        lastSortedColumn = column;
+
+
+        //wie sortiert und Spalte an Server
+        sortData(isAscendingOrder,lastSortedColumn)
         console.log("in sortRides")
     }
     private getSeat(column: String) {

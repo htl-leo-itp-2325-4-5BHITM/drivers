@@ -30,6 +30,15 @@ public class DriversResource {
         return ride;
     }
 
+    @GET
+    @Path("/getSortedRide/{sortedWay}/{column}")
+    public Response getSortedRide(@PathParam("sortedWay") Boolean sortedWay, @PathParam("column") String column) {
+        System.out.println("bin im getSortedRide");
+        var rides = repository.getSortedRide(sortedWay,column);
+        var dtos = rides.stream().map(rideMapper::toResource);
+        return Response.ok(dtos).build();
+    }
+
     @POST
     @Transactional
     //@Consumes(MediaType.APPLICATION_JSON)
