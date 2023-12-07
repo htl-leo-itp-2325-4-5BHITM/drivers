@@ -1,6 +1,5 @@
 import { loadRides } from "./service/ride-service"
 import "./components/ride-table-component"
-import "./components/change-ride-component"
 import {Ride,RidePost,store} from "./model/model"
 import { DateTime } from 'luxon';
 
