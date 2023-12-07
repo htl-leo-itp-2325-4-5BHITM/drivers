@@ -41,7 +41,6 @@ public class DriversResource {
 
     @POST
     @Transactional
-    //@Consumes(MediaType.APPLICATION_JSON)
     @Path("/changeRide")
     public Response changeRide(RideDto rideDto) {
         repository.changeRide(rideDto);
@@ -50,7 +49,6 @@ public class DriversResource {
 
     @POST
     @Transactional
-    //@Consumes(MediaType.APPLICATION_JSON)
     @Path("/registerForRide")
     public Response registerForRide(Long id) {
         repository.registerForRide(id);

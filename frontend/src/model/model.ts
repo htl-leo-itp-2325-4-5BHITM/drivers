@@ -19,7 +19,6 @@ interface RidePost {
     availableSeats: number
 }
 
-
 interface RideResponse {
     data: Ride[]
 }
@@ -36,9 +35,6 @@ const initialState: Model = {
 export interface Model2 {
     drive: Ride
 }
-
-
-
 
 const store = new BehaviorSubject<Model>(initialState)
 

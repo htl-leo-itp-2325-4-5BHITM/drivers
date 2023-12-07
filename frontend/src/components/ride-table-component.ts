@@ -21,13 +21,11 @@ class RideTableComponent extends HTMLElement {
         this.attachShadow({mode: "open"})
     }
     render(drives: Ride[], currentRide?: Ride) {
-        //console.log("rides to render", drives)
         render(this.tableTemplate(drives, currentRide), this.shadowRoot)
     }
     rowTemplate(ride: Ride) {
         // Departure Time in DateTime-Objekt umwandeln
         const departureTime = DateTime.fromISO(ride.departureTime);
-    
         // Zeit und Datum separat formatieren
         const formattedTime = departureTime.toFormat('HH:mm'); // Zeit formatieren (z.B. 10:30)
         const formattedDate = departureTime.toFormat('yyyy-MM-dd'); // Datum formatieren (z.B. 2023-11-22)
@@ -96,14 +94,11 @@ class RideTableComponent extends HTMLElement {
                         <input type="number" min="1" id="fplatz" name="fplatz" value='${currentRide?.availableSeats}'><br><br>
                     </div>
                     <input @click=${()=> this.saveChanges(currentRide?.id)} type="button" id="submit" value="save">
-
                     <input @click=${()=> this.removeRide(currentRide?.id)} type="button" id="remove" value="remove">
-                
                 </form>
             </div>
         </div>
-        </div>
-    ` //<button @click=${()=> saveChanges()}>save</button>
+        </div>`
     }
     closeDialog(){
         const dialog = this.shadowRoot.getElementById('ride-dialog')
@@ -124,11 +119,8 @@ class RideTableComponent extends HTMLElement {
         const dialog = this.shadowRoot.getElementById('ride-dialog')
         dialog.style.display = 'block' 
         console.log("in rowclick")
-    
-        
     }
     private sortRides(column: String) {
-        //alert(`Column ${column} for sort selected`)
         console.log(column)
 
         if (lastSortedColumn === column) {
@@ -141,13 +133,11 @@ class RideTableComponent extends HTMLElement {
         }
         lastSortedColumn = column;
 
-
-        //wie sortiert und Spalte an Server
+        //wird sortiert und Spalte an Server
         sortData(isAscendingOrder,lastSortedColumn)
         console.log("in sortRides")
     }
     private getSeat(ride: Ride) {
-        //alert(`Column ${column} for sort selected`)
         console.log(ride)
         var url = "http://localhost:4200/api/rides/registerForRide"
         var id = ride.id
@@ -177,20 +167,11 @@ class RideTableComponent extends HTMLElement {
         
     }
     private saveChanges(id: number) {
-        
-        //event.preventDefault(); // Verhindert das Standardverhalten des Formulars (Seitenneuladen)
-            
         var url = "http://localhost:4200/api/rides/changeRide"
-        //console.log(url)
         
         var driv = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement);
         console.log(driv);
         console.log(driv.value);
-
-        /*let dings = document.querySelector("#change_fahrer") as HTMLInputElement;
-        console.log(dings, dings.value);*/
-        
-        
 
         // Daten aus dem Formular erfassen
         var dateInputValue = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
@@ -215,7 +196,6 @@ class RideTableComponent extends HTMLElement {
         // Daten in JSON umwandeln
         const jsonData = JSON.stringify(formData);
     
-    
         fetch(url, {
             method: 'POST',
             headers: {
@@ -233,12 +213,8 @@ class RideTableComponent extends HTMLElement {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
             });
-        //element.innerHTML = "Hopefully the information is right this time!";
-        
-        //
     } 
     private removeRide(id: number) {
-            
         var url = "http://localhost:4200/api/rides/removeRide"
   
         // Daten in JSON umwandeln
@@ -262,7 +238,6 @@ class RideTableComponent extends HTMLElement {
                 console.log("Hat nd funktioniert zum Ändern")
             }); 
       } 
-    
 }
 
 customElements.define("ride-table", RideTableComponent)

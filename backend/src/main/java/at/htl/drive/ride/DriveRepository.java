@@ -18,7 +18,6 @@ public class DriveRepository {
     public void changeRide(RideDto rideDto) {
         Long id = rideDto.id();
         Ride ride = em.find(Ride.class, id);
-        //ride.setId(id);
         ride.setDepartureTime(rideDto.departureTime());
         ride.setPlaceOfDeparture(rideDto.placeOfDeparture());
         ride.setPlaceOfArrival(rideDto.placeOfArrival());

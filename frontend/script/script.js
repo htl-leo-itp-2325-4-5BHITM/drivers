@@ -7,8 +7,6 @@ ScrollReveal().reveal('#reason-content', { delay: 400 });
 ScrollReveal().reveal('#reason-image', { delay: 100 });
 
 //Register ride section
-
 ScrollReveal().reveal('#register-ride-content', { delay: 100 });
 ScrollReveal().reveal('#register-ride-forum input', { delay: 300, interval: 100 });
 ScrollReveal().reveal('#register-ride-forum label', { delay: 300, interval: 100 });
-//i werd eh mehr hinzufügen und anpassen...wollte nur was ausprobieren
