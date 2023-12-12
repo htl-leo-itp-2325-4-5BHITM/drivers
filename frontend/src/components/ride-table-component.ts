@@ -2,7 +2,7 @@ import {Ride, store} from "../model/model"
 import {html, render} from "lit-html"
 import { DateTime } from 'luxon'
 import {sortData} from "../index"
-import { loadRides } from "../service/ride-service"
+import { loadRides, getSeat } from "../service/ride-service"
 // für Sortierung
 let lastSortedColumn: String | null = null;
 let isAscendingOrder = true;
@@ -40,7 +40,7 @@ class RideTableComponent extends HTMLElement {
             <td>${ride.availableSeats}</td>
             <td>${ride.driver}</td>
         </tr>
-        <button @click=${()=> this.getSeat(ride)}>get your Seat</button></td>
+        <button @click=${()=> getSeat(ride)}>get your Seat</button></td>
         `
     }
     tableTemplate(rides: Ride[], currentRide?: Ride) {
@@ -137,35 +137,6 @@ class RideTableComponent extends HTMLElement {
         sortData(isAscendingOrder,lastSortedColumn)
         console.log("in sortRides")
     }
-    private getSeat(ride: Ride) {
-        console.log(ride)
-        var url = "http://localhost:4200/api/rides/registerForRide"
-        var id = ride.id
-        console.log(id)
-
-        if(ride.availableSeats > 0) {
-            // Daten in JSON umwandeln
-            const jsonData = JSON.stringify(id);
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: jsonData,
-            })
-                .then(response => {
-                    // Handle die Antwort hier
-                    loadRides()
-                    console.log("gehd")
-                })
-                .catch(error => {
-                    // Handle Fehler hier
-                    console.log("Hat nd funktioniert zum Ändern")
-                });
-        }
-        
-    }
     private saveChanges(id: number) {
         var url = "http://localhost:4200/api/rides/changeRide"
         
@@ -213,7 +184,7 @@ class RideTableComponent extends HTMLElement {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
             });
-    } 
+    }
     private removeRide(id: number) {
         var url = "http://localhost:4200/api/rides/removeRide"
   
