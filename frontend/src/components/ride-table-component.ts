@@ -96,6 +96,7 @@ class RideTableComponent extends HTMLElement {
                     <input @click=${()=> this.saveChanges(currentRide?.id)} type="button" id="submit" value="save">
                     <input @click=${()=> this.removeRide(currentRide?.id)} type="button" id="remove" value="remove">
                 </form>
+                <div id="errorWrongInput"></div>
             </div>
         </div>
         </div>`
@@ -151,6 +152,16 @@ class RideTableComponent extends HTMLElement {
     
         const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy-MM-dd:HH:mm');
     
+        //Prüfen ob vergangenes Datum
+        /*const selectedDate = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
+        const currentDate = new Date().toISOString().split('T')[0]; // Heutiges Datum
+
+        if (selectedDate < currentDate) {
+            alert('Selected date cannot be in the past.');
+            return;
+        }*/
+        this.checkData();
+
         console.log("date",dateInputValue); // Überprüfe das Datumformat
         console.log("time",timeInputValue); // Überprüfe das Zeitformat
         console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
@@ -209,6 +220,20 @@ class RideTableComponent extends HTMLElement {
                 console.log("Hat nd funktioniert zum Ändern")
             }); 
       } 
+      //Daten überprüfen
+      private checkData(){
+
+        //nach vergangenem Datum überprüfen
+        const selectedDate = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
+        const currentDate = new Date().toISOString().split('T')[0]; // Heutiges Datum
+
+        if (selectedDate < currentDate) {
+            (this.shadowRoot.getElementById('errorWrongInput') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
+            //alert('Selected date cannot be in the past.');
+            return;
+        }
+      }
 }
+
 
 customElements.define("ride-table", RideTableComponent)
