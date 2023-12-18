@@ -152,14 +152,6 @@ class RideTableComponent extends HTMLElement {
     
         const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy-MM-dd:HH:mm');
     
-        //Prüfen ob vergangenes Datum
-        /*const selectedDate = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
-        const currentDate = new Date().toISOString().split('T')[0]; // Heutiges Datum
-
-        if (selectedDate < currentDate) {
-            alert('Selected date cannot be in the past.');
-            return;
-        }*/
         this.checkData();
 
         console.log("date",dateInputValue); // Überprüfe das Datumformat
@@ -220,18 +212,56 @@ class RideTableComponent extends HTMLElement {
                 console.log("Hat nd funktioniert zum Ändern")
             }); 
       } 
-      //Daten überprüfen
-      private checkData(){
+    
+    //Input überprüfen
+    private checkData(){
+        
+        // Überprüfe, ob der Name nicht null oder leer ist
+        var driverInput = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value;
+    
+        if (!driverInput.trim() || driverInput.length <= 2) {
+            alert("no name enterd");
+            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid driver name.';
+            return;
+        }else{
+            
+        }
 
-        //nach vergangenem Datum überprüfen
-        const selectedDate = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
-        const currentDate = new Date().toISOString().split('T')[0]; // Heutiges Datum
+        // Überprüfe, ob der Abfahrtsort nicht null oder leer ist
+        var departureInput = (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value;
 
-        if (selectedDate < currentDate) {
-            (this.shadowRoot.getElementById('errorWrongInput') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
-            //alert('Selected date cannot be in the past.');
+        if (!departureInput.trim() || driverInput.length <= 2) {
+            alert("Invalid departure location");
+            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid departure location.';
             return;
         }
+
+        // Überprüfe, ob der Ankunftsort nicht null oder leer ist
+        var arrivalInput = (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value;
+
+        if (!arrivalInput.trim() || arrivalInput.length <= 2) {
+            alert("Invalid arrival location");
+            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid arrival location.';
+            return;
+        }
+
+        //nach vergangenem Datum überprüfen, Datum und die Zeit überprüfen auf null
+        const selectedDate = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
+        const currentDate = new Date().toISOString().split('T')[0]; // Heutiges Datum
+        var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
+
+        if (selectedDate < currentDate || !selectedDate || !timeInputValue) {
+            (this.shadowRoot.getElementById('errorWrongInput') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
+            alert('Selected date cannot be in the past or null.');
+            return;
+        }
+
+        
+
+    
+
+        
+
       }
 }
 
