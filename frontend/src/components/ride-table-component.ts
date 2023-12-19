@@ -256,12 +256,6 @@ class RideTableComponent extends HTMLElement {
             return;
         }
 
-        
-
-    
-
-        
-
       }
 }
 
