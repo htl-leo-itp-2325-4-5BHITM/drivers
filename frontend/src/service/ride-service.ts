@@ -4,7 +4,8 @@ import { DateTime } from 'luxon'
 
 const RIDES_URL = "/api/rides"
 
-async function loadRides() {
+async function loadRides(/*sortedWay:boolean=true,column:number=0*/) {
+    //const url = `${RIDES_URL}/${sortedWay}/${column}`
     const response = await fetch(RIDES_URL)
     const rides: Ride[] = await response.json()
     const model: Model = {
