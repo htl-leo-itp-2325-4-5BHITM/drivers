@@ -217,6 +217,7 @@ class RideTableComponent extends HTMLElement {
     //Input überprüfen
     private checkData(){
         let isValid: Boolean = true;
+        
         // Überprüfe, ob der Name nicht null oder leer ist
         var driverInput = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value;
     
