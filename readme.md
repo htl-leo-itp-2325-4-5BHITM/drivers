@@ -26,7 +26,7 @@ minikube start --driver=podman
 And:
 (use from 'get pods' name instead "pos&lt;tab&gt;-&lt;tab&gt;")
 ```bash
-cd ../k8s
+cd ./k8s
 kubectl get pods
-kubectl port-forward pos&lt;tab&gt;-&lt;tab&gt; 5432:5432
+kubectl port-forward pos&lt;tab&gt;-&lt;tab&gt; 5433:5432
 ```

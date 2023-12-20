@@ -83,29 +83,24 @@ function checkData(){
     var driverInput = (document.getElementById('fahrer') as HTMLInputElement).value;
 
     if (!driverInput.trim() || driverInput.length <= 2) {
-        alert("no name enterd");
-        //(document.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid driver name.';
-        return;
-    }else{
-        
+        //alert("no name enterd");
+        (document.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid driver name.';
     }
 
     // Überprüfe, ob der Abfahrtsort nicht null oder leer ist
     var departureInput = (document.getElementById('abfort') as HTMLInputElement).value;
 
     if (!departureInput.trim() || driverInput.length <= 2) {
-        alert("Invalid departure location");
-        //(document.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid departure location.';
-        return;
+        //alert("Invalid departure location");
+        (document.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid departure location.';
     }
 
     // Überprüfe, ob der Ankunftsort nicht null oder leer ist
     var arrivalInput = (document.getElementById('ankort') as HTMLInputElement).value;
 
     if (!arrivalInput.trim() || arrivalInput.length <= 2) {
-        alert("Invalid arrival location");
-        //(document.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid arrival location.';
-        return;
+        //alert("Invalid arrival location");
+        (document.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid arrival location.';
     }
 
     //nach vergangenem Datum überprüfen, Datum und die Zeit überprüfen auf null
@@ -114,9 +109,8 @@ function checkData(){
     var timeInputValue = (document.getElementById('abfzeit') as HTMLInputElement).value;
 
     if (selectedDate < currentDate || !selectedDate || !timeInputValue) {
-        //(document.getElementById('errorWrongInput') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
-        alert('Selected date cannot be in the past or null.');
-        return;
+        (document.getElementById('errorWrongInput') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
+        //alert('Selected date cannot be in the past or null.');
     }
 
 }
