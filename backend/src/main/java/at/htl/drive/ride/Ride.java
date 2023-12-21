@@ -4,6 +4,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 public class Ride {
@@ -27,6 +28,8 @@ public class Ride {
     @Column(length = 100,nullable = false)
     public String driver;
 
+    @OneToMany(mappedBy = "ride")
+    public List<RideUserAssociation> associationList;
 
     //</editor-fold>
 
