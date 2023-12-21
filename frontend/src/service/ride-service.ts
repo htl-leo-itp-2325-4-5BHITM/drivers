@@ -4,7 +4,8 @@ import { DateTime } from 'luxon'
 
 const RIDES_URL = "/api/rides"
 
-async function loadRides() {
+async function loadRides(/*sortedWay:boolean=true,column:number=0*/) {
+    //const url = `${RIDES_URL}/${sortedWay}/${column}`
     const response = await fetch(RIDES_URL)
     const rides: Ride[] = await response.json()
     const model: Model = {
@@ -45,53 +46,3 @@ export function getSeat(ride: Ride) {
             });
     }
 }
-
-/*
-export function saveChanges(id: number) {
-    var url = "http://localhost:4200/api/rides/changeRide"
-    
-    var driv = (document.getElementById('fahrer') as HTMLInputElement);
-    console.log(driv);
-    console.log(driv.value);
-
-    // Daten aus dem Formular erfassen
-    var dateInputValue = (document.getElementById('datum') as HTMLInputElement).value;
-    var timeInputValue = (document.getElementById('abfzeit') as HTMLInputElement).value;
-    console.log(dateInputValue)
-
-    const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy-MM-dd:HH:mm');
-
-    console.log("date",dateInputValue); // Überprüfe das Datumformat
-    console.log("time",timeInputValue); // Überprüfe das Zeitformat
-    console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
-
-    const formData: Ride = {
-        id: id,
-        driver: (document.getElementById('fahrer') as HTMLInputElement).value,
-        departureTime: combinedDateTime,
-        placeOfDeparture: (document.getElementById('abfort') as HTMLInputElement).value,
-        placeOfArrival: (document.getElementById('ankort') as HTMLInputElement).value,
-        availableSeats: parseInt((document.getElementById('fplatz') as HTMLInputElement).value)
-    };
-    console.log("form Data: "+formData)
-    // Daten in JSON umwandeln
-    const jsonData = JSON.stringify(formData);
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: jsonData,
-    })
-        .then(response => {
-            // Handle die Antwort hier
-            loadRides()
-            this.closeDialog()
-            console.log("gehd")
-        })
-        .catch(error => {
-            // Handle Fehler hier
-            console.log("Hat nd funktioniert zum Ändern")
-        });
-} */
