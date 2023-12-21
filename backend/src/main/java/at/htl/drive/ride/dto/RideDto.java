@@ -1,4 +1,4 @@
-package at.htl.drive.ride;
+package at.htl.drive.ride.dto;
 
 import jakarta.persistence.Column;
 

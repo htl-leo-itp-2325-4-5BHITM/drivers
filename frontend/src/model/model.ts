@@ -36,6 +36,26 @@ export interface Model2 {
     drive: Ride
 }
 
-const store = new BehaviorSubject<Model>(initialState)
 
-export { Ride, RidePost, RideResponse as DriveResponse, store }
+// Users
+interface DrivUser {
+    id: number,
+    firstName: string,
+    lastName: string,
+    phoneNr: string,
+    emailAddress: string
+}
+
+export interface ModelUser {
+    drivUsers: DrivUser[]
+}
+const initialStateUser: ModelUser = {
+    drivUsers: []
+}
+
+
+
+const store = new BehaviorSubject<Model>(initialState)
+const storeUsers = new BehaviorSubject<ModelUser>(initialStateUser)
+
+export { Ride, RidePost, DrivUser, RideResponse as DriveResponse, store, storeUsers}
