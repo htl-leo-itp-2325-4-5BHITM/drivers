@@ -28,8 +28,8 @@ public class Ride {
     @Column(length = 100,nullable = false)
     public String driver;
 
-    @OneToMany(mappedBy = "ride")
-    public List<RideUserAssociation> associationList;
+    /*@OneToMany(mappedBy = "ride")
+    public List<RideUserAssociation> associationList;*/
 
     //</editor-fold>
 

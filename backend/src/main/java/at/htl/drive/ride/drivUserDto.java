@@ -1,6 +1,6 @@
 package at.htl.drive.ride;
 
-public record UserDto(
+public record drivUserDto(
         Long id,
         String firstName,
         String lastName,

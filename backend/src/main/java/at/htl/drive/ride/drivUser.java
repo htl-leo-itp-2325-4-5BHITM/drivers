@@ -2,10 +2,8 @@ package at.htl.drive.ride;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
-public class User {
+public class drivUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
@@ -18,13 +16,13 @@ public class User {
     @Column(length = 100,nullable = false)
     public String emailAddress;
 
-    @OneToMany(mappedBy = "user")
-    public List<RideUserAssociation> associationList;
+    /*@OneToMany(mappedBy = "user")
+    public List<RideUserAssociation> associationList;*/
 
-    public User() {
+    public drivUser() {
     }
 
-    public User(Long id, String firstName, String lastName, String phoneNr, String emailAddress) {
+    public drivUser(Long id, String firstName, String lastName, String phoneNr, String emailAddress) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

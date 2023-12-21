@@ -2,9 +2,7 @@ package at.htl.drive.ride;
 
 public record RideUserAssociationDto(
         RideUserAssociationId id,
-        Boolean isDriver,
-        Ride ride,
-        User user
+        Boolean isDriver
 )
 {
 }

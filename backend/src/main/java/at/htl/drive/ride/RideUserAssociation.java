@@ -11,11 +11,11 @@ public class RideUserAssociation {
     RideUserAssociationId id;
     public boolean isDriver;
 
-    @ManyToOne
+    /*@ManyToOne
     Ride ride;
 
     @ManyToOne
-    User user;
+    User user;*/
 
     public RideUserAssociationId getId() {
         return id;
