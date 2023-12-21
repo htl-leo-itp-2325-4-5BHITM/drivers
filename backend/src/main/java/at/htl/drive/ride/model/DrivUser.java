@@ -1,9 +1,9 @@
-package at.htl.drive.ride;
+package at.htl.drive.ride.model;
 
 import jakarta.persistence.*;
 
 @Entity
-public class drivUser {
+public class DrivUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
@@ -19,10 +19,10 @@ public class drivUser {
     /*@OneToMany(mappedBy = "user")
     public List<RideUserAssociation> associationList;*/
 
-    public drivUser() {
+    public DrivUser() {
     }
 
-    public drivUser(Long id, String firstName, String lastName, String phoneNr, String emailAddress) {
+    public DrivUser(Long id, String firstName, String lastName, String phoneNr, String emailAddress) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

@@ -1,6 +1,6 @@
-package at.htl.drive.ride;
+package at.htl.drive.ride.dto;
 
-public record drivUserDto(
+public record DrivUserDto(
         Long id,
         String firstName,
         String lastName,

@@ -1,5 +1,7 @@
-package at.htl.drive.ride;
+package at.htl.drive.ride.repository;
 
+import at.htl.drive.ride.model.Ride;
+import at.htl.drive.ride.dto.RideDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -11,7 +13,7 @@ public class DriveRepository {
     @Inject
     EntityManager em;
 
-    List<Ride> all() {
+    public List<Ride> all() {
         return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
     }
 

@@ -1,5 +1,7 @@
 import { loadRides } from "./service/ride-service"
+import { loadUsers } from "./service/user-service"
 import "./components/ride-table-component"
+import "./components/users-option-component"
 import {Ride,RidePost,store} from "./model/model"
 import { DateTime } from 'luxon';
 
@@ -8,6 +10,7 @@ window.addEventListener("DOMContentLoaded", () => loaded())
 
 async function loaded() {
     loadRides()
+    loadUsers()
 }
 
 //sortieren
@@ -27,7 +30,7 @@ export function sortData(sorted: Boolean, column: String) {
 }
 
 // Event-Handler für das Absenden des Formulars
-document.getElementById('form_head').addEventListener('submit', function(event) {
+/*document.getElementById('form_head').addEventListener('submit', function(event) {
     event.preventDefault(); // Verhindert das Standardverhalten des Formulars (Seitenneuladen)
     console.log("bin im form")
 
@@ -83,16 +86,16 @@ function checkData(){
     let isValid: Boolean = true;
 
     // Überprüfe, ob der Name nicht null oder leer ist
-    var driverInput = (document.getElementById('fahrer') as HTMLInputElement).value;
+    /*var driverInput = (document.getElementById('fahrer') as HTMLInputElement).value;
 
     if (!driverInput.trim() || driverInput.length <= 2) {
         //alert("no name enterd");
         (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid driver name.';
         isValid = false;
-    }
+    }*/
 
     // Überprüfe, ob der Abfahrtsort nicht null oder leer ist
-    var departureInput = (document.getElementById('abfort') as HTMLInputElement).value;
+    /*var departureInput = (document.getElementById('abfort') as HTMLInputElement).value;
 
     if (!departureInput.trim() || departureInput.length <= 2) {
         //alert("Invalid departure location");
@@ -129,4 +132,4 @@ function checkData(){
     }
     return isValid;
 
-}
+}*/
