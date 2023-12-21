@@ -230,15 +230,7 @@ hr {
 /*************************************************************************************************************/
 
 #ride-finder-tab {
-    padding-top: 2%;
-    width: 100vw;
-    height: auto;
-    background-color: var(--colorBackground);
-    color: var(--colorBright);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    background-color: firebrick;
 }
 
 #ride-finder-tab h1 {
@@ -246,11 +238,15 @@ hr {
     color: var(--colorDark);
 }
 
+
+/*
+
 #table {
     border-radius: 20px;
     overflow: hidden;
     margin-bottom: 10vh;
     width: 80%;
+    background: purple;
 }
 
 .table-head {
@@ -273,4 +269,4 @@ td {
 
 #backToTableBtn {
     margin: 15px;
-}
+}*/

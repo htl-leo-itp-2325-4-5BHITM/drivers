@@ -29,36 +29,39 @@ class RideTableComponent extends HTMLElement {
         // Zeit und Datum separat formatieren
         const formattedTime = departureTime.toFormat('HH:mm'); // Zeit formatieren (z.B. 10:30)
         const formattedDate = departureTime.toFormat('yyyy-MM-dd'); // Datum formatieren (z.B. 2023-11-22)
-    
+        //<td><button @click=${()=> removeSeat(ride)}>-</button></td>
         console.log("render ride", ride)
         return html`
-        <tr @click=${()=>this.rowClick(ride)}>
+        <tr>
+            <td>${ride.driver}</td>
+             <td>${ride.availableSeats}</td>
             <td>${formattedDate}</td>
             <td>${formattedTime}</td>
             <td>${ride.placeOfDeparture}</td>
             <td>${ride.placeOfArrival}</td>
-            <td>${ride.availableSeats}</td>
-            <td>${ride.driver}</td>
+            <td><button @click=${()=> getSeat(ride)}>+</button></td>
+            <td><button @click=${()=>this.rowClick(ride)}>edit</button></td>
         </tr>
-        <button @click=${()=> getSeat(ride)}>get your Seat</button></td>
+        </td>
         `
     }
     tableTemplate(rides: Ride[], currentRide?: Ride) {
         const rows = rides.map(ride=>this.rowTemplate(ride))
-        
+        //w3-table-all
         return html`
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <div id="ride-finder-tab">
             
-            <table class="w3-table-all">
-            <thead class="">
+            <table class="w3-responsive">
+                <thead class="">
                     <tr>
+                        <th @click=${()=>this.sortRides("driver")}>Driver</th>
                         <th  @click=${()=>this.sortRides("date")}>Date</th>
                         <th  @click=${()=>this.sortRides("departureTime")}>Departure Time</th>
                         <th  @click=${()=>this.sortRides("placeOfDeparture")}>Place of Departure</th>
                         <th  @click=${()=>this.sortRides("placeOfArrival")}>Place of Arrival</th>
                         <th  @click=${()=>this.sortRides("availableSeats")}>Available seats</th>
-                        <th @click=${()=>this.sortRides("driver")}>Driver</th>
+                        
                     </tr>
                 </thead>
             <tbody>
@@ -152,42 +155,41 @@ class RideTableComponent extends HTMLElement {
     
         const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy-MM-dd:HH:mm');
     
-        if(this.checkData()){
+        this.checkData();
 
-            console.log("date",dateInputValue); // Überprüfe das Datumformat
-            console.log("time",timeInputValue); // Überprüfe das Zeitformat
-            console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
-        
-            const formData: Ride = {
-                id: id,
-                driver: (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value,
-                departureTime: combinedDateTime,
-                placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
-                placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
-                availableSeats: parseInt((this.shadowRoot.getElementById('fplatz') as HTMLInputElement).value)
-            };
-            console.log("form Data: "+formData)
-            // Daten in JSON umwandeln
-            const jsonData = JSON.stringify(formData);
-        
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: jsonData,
+        console.log("date",dateInputValue); // Überprüfe das Datumformat
+        console.log("time",timeInputValue); // Überprüfe das Zeitformat
+        console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
+    
+        const formData: Ride = {
+            id: id,
+            driver: (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value,
+            departureTime: combinedDateTime,
+            placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
+            placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
+            availableSeats: parseInt((this.shadowRoot.getElementById('fplatz') as HTMLInputElement).value)
+        };
+        console.log("form Data: "+formData)
+        // Daten in JSON umwandeln
+        const jsonData = JSON.stringify(formData);
+    
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: jsonData,
+        })
+            .then(response => {
+                // Handle die Antwort hier
+                loadRides()
+                this.closeDialog()
+                console.log("gehd")
             })
-                .then(response => {
-                    // Handle die Antwort hier
-                    loadRides()
-                    this.closeDialog()
-                    console.log("gehd")
-                })
-                .catch(error => {
-                    // Handle Fehler hier
-                    console.log("Hat nd funktioniert zum Ändern")
-                });
-        }
+            .catch(error => {
+                // Handle Fehler hier
+                console.log("Hat nd funktioniert zum Ändern")
+            });
     }
     private removeRide(id: number) {
         var url = "http://localhost:4200/api/rides/removeRide"
@@ -216,36 +218,34 @@ class RideTableComponent extends HTMLElement {
     
     //Input überprüfen
     private checkData(){
-        let isValid: Boolean = true;
         
         // Überprüfe, ob der Name nicht null oder leer ist
         var driverInput = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value;
     
         if (!driverInput.trim() || driverInput.length <= 2) {
-            //alert("no name enterd");
+            alert("no name enterd");
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid driver name.';
-            isValid = false;
+            return;
+        }else{
             
         }
 
         // Überprüfe, ob der Abfahrtsort nicht null oder leer ist
         var departureInput = (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value;
 
-        if (!departureInput.trim() || departureInput.length <= 2) {
-            //alert("Invalid departure location");
+        if (!departureInput.trim() || driverInput.length <= 2) {
+            alert("Invalid departure location");
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid departure location.';
-            isValid = false;
-            
+            return;
         }
 
         // Überprüfe, ob der Ankunftsort nicht null oder leer ist
         var arrivalInput = (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value;
 
         if (!arrivalInput.trim() || arrivalInput.length <= 2) {
-            //alert("Invalid arrival location");
+            alert("Invalid arrival location");
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid arrival location.';
-            isValid = false;
-           
+            return;
         }
 
         //nach vergangenem Datum überprüfen, Datum und die Zeit überprüfen auf null
@@ -255,14 +255,10 @@ class RideTableComponent extends HTMLElement {
 
         if (selectedDate < currentDate || !selectedDate || !timeInputValue) {
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
-            //alert('Selected date cannot be in the past or null.');
-            isValid = false;
-            
+            alert('Selected date cannot be in the past or null.');
+            return;
         }
 
-        console.log(isValid)
-
-        return isValid;
       }
 }
 
