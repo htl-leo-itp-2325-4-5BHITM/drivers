@@ -5,3 +5,8 @@ INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableS
     ('2023-11-17 11:30:00', nextval('ride_id_seq'::regclass), 'Janine Wenninger', 'Vöcklabruck',1,'Traun'),
     ('2023-11-17 14:30:00', nextval('ride_id_seq'::regclass), 'Romana Schned', 'Walding',3,'Ottensheim');
 
+INSERT INTO public.drivuser (id, firstname, lastname, phonenr, emailaddress) VALUES
+    (nextval('drivuser_id_seq'::regclass), 'Natalie', 'Schmitzberger', '068181735181', 'n.schmitzberger@students.htl-leonding.ac.at'),
+    (nextval('drivuser_id_seq'::regclass), 'Romana', 'Schned', '068181735182', 'r.schned@students.htl-leonding.ac.at'),
+    (nextval('drivuser_id_seq'::regclass), 'Andrei', 'Brehar', '068181735183', 'a.brehar@students.htl-leonding.ac.at'),
+    (nextval('drivuser_id_seq'::regclass), 'Janine', 'Wenninger', '068181735180', 'j.wenninger@students.htl-leonding.ac.at');
