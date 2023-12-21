@@ -83,7 +83,7 @@ hr {
 
 #info-box-headline {
     color: var(--colorBright);
-    font-size: 1.8em;
+    font-size: 1.8rem;
     line-height: 150%;
 }
 
@@ -96,7 +96,7 @@ hr {
 #usefull-buttons a {
     border-radius: 50px;
     padding: 2.5% 7%;
-    border: var(--colorInactive) 0.1em solid;
+    border: var(--colorInactive) 0.1rem solid;
     background-color: #151a24;
 }
 
@@ -106,7 +106,7 @@ hr {
 }
 
 #usefull-buttons a:hover {
-    border: var(--colorDark) 0.1em solid;
+    border: var(--colorDark) 0.1rem solid;
     background-color: var(--colorBright);
     cursor: pointer;
     box-shadow: 10px 5px 5px #111;
@@ -143,7 +143,7 @@ hr {
 
 #reason-content {
     color: var(--colorDark);
-    font-size: 1.8em;
+    font-size: 1.8rem;
     margin-right: 15%;
     width: 40%;
     height: 90vh;
@@ -155,7 +155,7 @@ hr {
 #reason-content h3 {
     padding: 0;
     margin: 0;
-    font-size: 3em;
+    font-size: 4.5rem;
 }
 
 
@@ -184,7 +184,7 @@ hr {
 }
 
 #register-ride-forum {
-    font-size: 0.8em;
+    font-size: 0.8rem;
     padding-top: 2%;
 }
 
@@ -230,47 +230,84 @@ hr {
 /*************************************************************************************************************/
 
 #ride-finder-tab {
-    padding-top: 2%;
     width: 100vw;
-    height: auto;
-    background-color: var(--colorBackground);
+    height: 120vh;
+    position: relative;
+    background-color: var(--colorDark);
+}
+
+#ride-finder-tab #headline-table {
+    position: relative;
+    left: 5%;
+    margin: 5%;
+    font-size: 4rem;
+}
+
+#ride-finder-tab img {
+    position: absolute;
+    width: 110%;
+    z-index: 1;
+}
+
+.ride-finder-tab-content {
     color: var(--colorBright);
+    position: absolute;
+    z-index: 2;
+}
+
+
+/*TABELLE********************************************************************/
+
+#ride-finder-table {
+    border-collapse: collapse;
+    color: var(--colorBright);
+    margin: 0 5%;
+    font-size: 0.95rem;
+    min-width: 400px;
+    width: 70vw;
+}
+
+#ride-finder-table thead tr {
+    text-align: left;
+    background-color: var(--colorDark);
+    padding: 2% 0;
+}
+
+#ride-finder-table th,
+#ride-finder-table td {
+    padding: 0 2%;
+}
+
+#ride-finder-table tbody tr {
+    border-bottom: 1px solid var(--colorInactive);
+    background-color: rgba(16, 22, 31, 0.5);
+}
+
+#ride-finder-table tbody tr:nth-of-type(even) {
+    background-color: rgba(16, 22, 31, 0.8);
+}
+
+#ride-finder-table tbody tr:last-of-type {
+    border-bottom: 5px solid var(--colorDark);
+}
+
+#ride-finder-table tbody tr td:last-of-type {
+    margin-left: -20%;
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
     align-items: center;
-    flex-direction: column;
 }
 
-#ride-finder-tab h1 {
-    padding-bottom: 2%;
-    color: var(--colorDark);
+.table-setting {
+    background: none;
+    border: none;
+    font: inherit;
+    outline: inherit;
 }
 
-#table {
-    border-radius: 20px;
-    overflow: hidden;
-    margin-bottom: 10vh;
-    width: 80%;
-}
-
-.table-head {
-    border-bottom: 1px solid #0000;
-    background-color: var(--colorDark);
-    width: 10vw;
-    height: 10%;
-}
-
-tbody {
-    color: var(--colorDark);
-    padding-left: 3vw;
-    background-color: var(--colorDark);
-}
-
-td {
-    padding: 2%;
-    background-color: var(--colorBright);
-}
-
-#backToTableBtn {
-    margin: 15px;
+.table-setting:hover {
+    cursor: pointer;
 }

@@ -46,6 +46,7 @@ export function getSeat(ride: Ride) {
     }
 }
 
+
 /*
 export function saveChanges(id: number) {
     var url = "http://localhost:4200/api/rides/changeRide"
