@@ -1,4 +1,4 @@
-package at.htl.drive.ride;
+package at.htl.drive.ride.model;
 
 import jakarta.persistence.Embeddable;
 

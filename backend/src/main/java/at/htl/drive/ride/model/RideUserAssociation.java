@@ -1,14 +1,13 @@
-package at.htl.drive.ride;
+package at.htl.drive.ride.model;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class RideUserAssociation {
 
     @EmbeddedId
-    RideUserAssociationId id;
+    public RideUserAssociationId id;
     public boolean isDriver;
 
     /*@ManyToOne

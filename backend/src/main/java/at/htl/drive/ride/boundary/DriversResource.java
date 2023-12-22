@@ -1,19 +1,20 @@
-package at.htl.drive.ride;
+package at.htl.drive.ride.boundary;
 
+import at.htl.drive.ride.model.Ride;
+import at.htl.drive.ride.dto.RideDto;
+import at.htl.drive.ride.RideMapper;
+import at.htl.drive.ride.repository.DriveRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Path("/rides")
 public class DriversResource {
     @Inject
     DriveRepository repository;
-    @Inject RideMapper rideMapper;
+    @Inject
+    RideMapper rideMapper;
     @GET
     public Response all() {
         System.out.println("bin im all");

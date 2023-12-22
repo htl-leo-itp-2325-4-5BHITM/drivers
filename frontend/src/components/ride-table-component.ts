@@ -1,7 +1,7 @@
-import {Ride, store} from "../model/model"
-import {html, render} from "lit-html"
+import { Ride, store } from "../model/model"
+import { html, render } from "lit-html"
 import { DateTime } from 'luxon'
-import {sortData} from "../index"
+import { sortData } from "../index"
 import { loadRides, getSeat } from "../service/ride-service"
 // für Sortierung
 let lastSortedColumn: String | null = null;
@@ -20,7 +20,7 @@ class RideTableComponent extends HTMLElement {
     }
     constructor() {
         super()
-        this.attachShadow({mode: "open"})
+        this.attachShadow({ mode: "open" })
     }
     render(drives: Ride[], currentRide?: Ride) {
         render(this.tableTemplate(drives, currentRide), this.shadowRoot)
@@ -34,21 +34,23 @@ class RideTableComponent extends HTMLElement {
         //<td><button @click=${()=> removeSeat(ride)}>-</button></td>
         console.log("render ride", ride)
         return html`
-        <tr>
-            <td>${ride.driver}</td>
-             <td>${ride.availableSeats}</td>
-            <td>${formattedDate}</td>
+        <link rel="stylesheet" href="./style/style.css">
+        <tr class="ride-finder-entry-row">
+        
+            <td >${formattedDate}</td>
             <td>${formattedTime}</td>
             <td>${ride.placeOfDeparture}</td>
             <td>${ride.placeOfArrival}</td>
-            <td><button @click=${()=> getSeat(ride)}>+</button></td>
-            <td><button @click=${()=>this.rowClick(ride)}>edit</button></td>
+            <td>${ride.driver}</td>
+            <td>${ride.availableSeats}</td>
+            <td><button class="table-setting" @click=${() => getSeat(ride)}><img src="./img/plus_inactive.png" width="15vw"></button>
+            <button class="table-setting" ><img src="./img/minus_inactive.png" width="15vw"></button>
+            <button class="table-setting"  @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button></td>
         </tr>
-        </td>
         `
     }
     tableTemplate(rides: Ride[], currentRide?: Ride) {
-        const rows = rides.map(ride=>this.rowTemplate(ride))
+        const rows = rides.map(ride => this.rowTemplate(ride))
         // Überprüfen, ob currentRide definiert ist und departureTime hat
        if (currentRide != null && 'departureTime' in currentRide) {
            // Umwandeln des Zeitstempels in ein DateTime-Objekt
@@ -62,17 +64,20 @@ class RideTableComponent extends HTMLElement {
         //w3-table-all
         return html`
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <div id="ride-finder-tab">
+        <link rel="stylesheet" href="./style/style.css">
+        
+        <div id="ride-finder-table">
             
-            <table class="w3-responsive">
-                <thead class="">
+            <table id="ride-finder-table" cellpadding="0">
+                <thead class="ride-finder-tablehead">
                     <tr>
-                        <th @click=${()=>this.sortRides("driver")}>Driver</th>
-                        <th  @click=${()=>this.sortRides("date")}>Date</th>
-                        <th  @click=${()=>this.sortRides("departureTime")}>Departure Time</th>
-                        <th  @click=${()=>this.sortRides("placeOfDeparture")}>Place of Departure</th>
-                        <th  @click=${()=>this.sortRides("placeOfArrival")}>Place of Arrival</th>
-                        <th  @click=${()=>this.sortRides("availableSeats")}>Available seats</th>
+                        <th  @click=${() => this.sortRides("date")}>Date</th>
+                        <th  @click=${() => this.sortRides("departureTime")}>Time</th>
+                        <th  @click=${() => this.sortRides("placeOfDeparture")}>From</th>
+                        <th  @click=${() => this.sortRides("placeOfArrival")}>To</th>
+                        <th @click=${() => this.sortRides("driver")}>Driver</th>
+                        <th  @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
+                        <th > </th>
                         
                     </tr>
                 </thead>
@@ -85,12 +90,12 @@ class RideTableComponent extends HTMLElement {
         <div id="ride-dialog" class="w3-modal">
         <div class="w3-modal-content">
             <div class="w3-container">
-            <span id="close-button" @click=${()=> this.closeDialog()}
+            <span id="close-button" @click=${() => this.closeDialog()}
                 class="w3-button w3-display-topright">&times;</span>
                 <h2>Change data</h2>
                 <form id="form_head_change">
                     <div class="table-input" id="form_label">
-                        <label for="fahrer">Driver</label><br>
+                    <label for="fahrer">Driver</label><br>
                         <input type="text" id="fahrer" name="fahrer" value='${currentRide?.driver}'><br><br>
 
                         <label for="abfort">From</label><br>
@@ -109,17 +114,17 @@ class RideTableComponent extends HTMLElement {
                         <label for="fplatz">Available seats:</label><br>
                         <input type="number" min="1" id="fplatz" name="fplatz" value='${currentRide?.availableSeats}'><br><br>
                     </div>
-                    <input @click=${()=> this.saveChanges(currentRide?.id)} type="button" id="submit" value="save">
-                    <input @click=${()=> this.removeRide(currentRide?.id)} type="button" id="remove" value="remove">
+                    <input @click=${() => this.saveChanges(currentRide?.id)} type="button" id="submit" value="save">
+                    <input @click=${() => this.removeRide(currentRide?.id)} type="button" id="remove" value="remove">
                 </form>
                 <div id="errorWrongInput"></div>
             </div>
         </div>
         </div>`
     }
-    closeDialog(){
+    closeDialog() {
         const dialog = this.shadowRoot.getElementById('ride-dialog')
-        dialog.style.display = 'none' 
+        dialog.style.display = 'none'
     }
     private rowClick(ride: Ride) {
         const dateAndTime = ride.departureTime;
@@ -134,7 +139,7 @@ class RideTableComponent extends HTMLElement {
         model.currentRide = ride
         store.next(model)
         const dialog = this.shadowRoot.getElementById('ride-dialog')
-        dialog.style.display = 'block' 
+        dialog.style.display = 'block'
         console.log("in rowclick")
     }
     private sortRides(column: String) {
@@ -151,12 +156,12 @@ class RideTableComponent extends HTMLElement {
         lastSortedColumn = column;
 
         //wird sortiert und Spalte an Server
-        sortData(isAscendingOrder,lastSortedColumn)
+        sortData(isAscendingOrder, lastSortedColumn)
         console.log("in sortRides")
     }
     private saveChanges(id: number) {
         var url = "http://localhost:4200/api/rides/changeRide"
-        
+
         var driv = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement);
         console.log(driv);
         console.log(driv.value);
@@ -165,27 +170,53 @@ class RideTableComponent extends HTMLElement {
         var dateInputValue = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
         var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
         console.log(dateInputValue)
-    
+
         const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy-MM-dd:HH:mm');
     
-        this.checkData();
+        //this.checkData();
+        if(this.checkData()){
 
-        console.log("date",dateInputValue); // Überprüfe das Datumformat
-        console.log("time",timeInputValue); // Überprüfe das Zeitformat
-        console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
-    
-        const formData: Ride = {
-            id: id,
-            driver: (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value,
-            departureTime: combinedDateTime,
-            placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
-            placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
-            availableSeats: parseInt((this.shadowRoot.getElementById('fplatz') as HTMLInputElement).value)
-        };
-        console.log("form Data: "+formData)
+            console.log("date",dateInputValue); // Überprüfe das Datumformat
+            console.log("time",timeInputValue); // Überprüfe das Zeitformat
+            console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
+        
+            const formData: Ride = {
+                id: id,
+                driver: (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value,
+                departureTime: combinedDateTime,
+                placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
+                placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
+                availableSeats: parseInt((this.shadowRoot.getElementById('fplatz') as HTMLInputElement).value)
+            };
+            console.log("form Data: "+formData)
+            // Daten in JSON umwandeln
+            const jsonData = JSON.stringify(formData);
+        
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: jsonData,
+            })
+                .then(response => {
+                    // Handle die Antwort hier
+                    loadRides()
+                    this.closeDialog()
+                    console.log("gehd")
+                })
+                .catch(error => {
+                    // Handle Fehler hier
+                    console.log("Hat nd funktioniert zum Ändern")
+                });
+        }
+    }
+    private removeRide(id: number) {
+        var url = "http://localhost:4200/api/rides/removeRide"
+
         // Daten in JSON umwandeln
-        const jsonData = JSON.stringify(formData);
-    
+        const jsonData = JSON.stringify(id);
+
         fetch(url, {
             method: 'POST',
             headers: {
@@ -204,74 +235,61 @@ class RideTableComponent extends HTMLElement {
                 console.log("Hat nd funktioniert zum Ändern")
             });
     }
-    private removeRide(id: number) {
-        var url = "http://localhost:4200/api/rides/removeRide"
-  
-        // Daten in JSON umwandeln
-        const jsonData = JSON.stringify(id);
-  
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: jsonData,
-        })
-            .then(response => {
-                // Handle die Antwort hier
-                loadRides()
-                this.closeDialog()
-                console.log("gehd")
-            })
-            .catch(error => {
-                // Handle Fehler hier
-                console.log("Hat nd funktioniert zum Ändern")
-            }); 
-      } 
-    
+
     //Input überprüfen
     private checkData(){
-        
+
+        let isValid: Boolean = true;
+
         // Überprüfe, ob der Name nicht null oder leer ist
         var driverInput = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value;
-    
+
         if (!driverInput.trim() || driverInput.length <= 2) {
-            alert("no name enterd");
+            //alert("no name enterd");
+            //alert("no name enterd");
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid driver name.';
-            return;
-        }else{
-            
+            isValid = false;
         }
 
         // Überprüfe, ob der Abfahrtsort nicht null oder leer ist
         var departureInput = (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value;
 
-        if (!departureInput.trim() || driverInput.length <= 2) {
-            alert("Invalid departure location");
+        if (!departureInput.trim() || departureInput.length <= 2) {
+            //alert("Invalid departure location");
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid departure location.';
-            return;
+            isValid = false;
         }
 
         // Überprüfe, ob der Ankunftsort nicht null oder leer ist
         var arrivalInput = (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value;
 
         if (!arrivalInput.trim() || arrivalInput.length <= 2) {
-            alert("Invalid arrival location");
+            //alert("Invalid arrival location");
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid arrival location.';
-            return;
+            isValid = false;
         }
 
-        //nach vergangenem Datum überprüfen, Datum und die Zeit überprüfen auf null
+   
+        //nach vergangenem Datum überprüfen und Datum auf null
         const selectedDate = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
         const currentDate = new Date().toISOString().split('T')[0]; // Heutiges Datum
-        var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
 
-        if (selectedDate < currentDate || !selectedDate || !timeInputValue) {
-            (this.shadowRoot.getElementById('errorWrongInput') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
-            alert('Selected date cannot be in the past or null.');
-            return;
+        if (selectedDate < currentDate || !selectedDate) {
+            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a date that is not in the past.';
+            isValid = false;
+            //alert('Selected date cannot be in the past or null.');
         }
 
+        //Überprüfe, ob die Zeit nicht null oder leer ist
+        var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
+
+        if (!timeInputValue) {
+            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a time.';
+            isValid = false;
+            //alert('Selected date cannot be in the past or null.');
+        }
+    
+        return isValid;
       }
 }
 
