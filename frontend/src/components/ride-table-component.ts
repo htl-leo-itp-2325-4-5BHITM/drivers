@@ -6,6 +6,8 @@ import { loadRides, getSeat } from "../service/ride-service"
 // für Sortierung
 let lastSortedColumn: String | null = null;
 let isAscendingOrder = true;
+let dateValue = ''; // Standardwerte für Datum und Zeit
+let timeValue = '';
 
 
 class RideTableComponent extends HTMLElement {
@@ -47,6 +49,16 @@ class RideTableComponent extends HTMLElement {
     }
     tableTemplate(rides: Ride[], currentRide?: Ride) {
         const rows = rides.map(ride=>this.rowTemplate(ride))
+        // Überprüfen, ob currentRide definiert ist und departureTime hat
+       if (currentRide != null && 'departureTime' in currentRide) {
+           // Umwandeln des Zeitstempels in ein DateTime-Objekt
+            const departureTime = DateTime.fromISO(currentRide.departureTime);
+
+            // Extrahieren von Datum und Zeit aus dem DateTime-Objekt
+            dateValue = departureTime.toFormat('yyyy-MM-dd');
+            timeValue = departureTime.toFormat('HH:mm');
+       }
+
         //w3-table-all
         return html`
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -88,10 +100,11 @@ class RideTableComponent extends HTMLElement {
                         <input type="text" id="ankort" name="ankort" value='${currentRide?.placeOfArrival}'><br><br>
 
                         <label for="datum">Date</label><br>
-                        <input type="date" id="datum" name="datum"><br><br>
+                        <input type="date" id="datum" name="datum" value='${dateValue}'><br><br>
 
                         <label for="abfzeit">Departure Time:</label><br>
-                        <input type="time" id="abfzeit" name="abfzeit"><br><br>
+                        
+                        <input type="time" id="abfzeit" name="abfzeit" value='${timeValue}'><br><br>
 
                         <label for="fplatz">Available seats:</label><br>
                         <input type="number" min="1" id="fplatz" name="fplatz" value='${currentRide?.availableSeats}'><br><br>
