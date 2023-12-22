@@ -262,9 +262,9 @@ hr {
     border-collapse: collapse;
     color: var(--colorBright);
     margin: 0 5%;
-    font-size: 0.95rem;
+    font-size: 1rem;
     min-width: 400px;
-    width: 70vw;
+    width: 80vw;
 }
 
 #ride-finder-table thead tr {
@@ -275,7 +275,7 @@ hr {
 
 #ride-finder-table th,
 #ride-finder-table td {
-    padding: 0 2%;
+    padding: 1.5% 2%;
 }
 
 #ride-finder-table tbody tr {
@@ -310,4 +310,9 @@ hr {
 
 .table-setting:hover {
     cursor: pointer;
+}
+
+/*****/
+.temp{
+    color:black
 }

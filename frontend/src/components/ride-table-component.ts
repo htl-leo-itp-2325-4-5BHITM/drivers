@@ -89,11 +89,11 @@ class RideTableComponent extends HTMLElement {
         <!-- The Modal -->
         <div id="ride-dialog" class="w3-modal">
         <div class="w3-modal-content">
-            <div class="w3-container">
+            <div class="w3-container" >
             <span id="close-button" @click=${() => this.closeDialog()}
                 class="w3-button w3-display-topright">&times;</span>
-                <h2>Change data</h2>
-                <form id="form_head_change">
+                <h2 class="w3-text-black">Change data</h2>
+                <form id="form_head_change" class="w3-text-black">
                     <div class="table-input" id="form_label">
                     <label for="fahrer">Driver</label><br>
                         <input type="text" id="fahrer" name="fahrer" value='${currentRide?.driver}'><br><br>

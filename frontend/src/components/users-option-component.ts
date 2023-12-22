@@ -71,7 +71,7 @@ class UsersOptionComponent extends HTMLElement {
         //Funktionaufruf von Daten überprüfen
         //checkData();
         if (this.checkData()) {
-
+            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Added ride.';
             console.log("date", dateInputValue); // Überprüfe das Datumformat
             console.log("time", timeInputValue); // Überprüfe das Zeitformat
             console.log("combine", combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
@@ -124,7 +124,7 @@ class UsersOptionComponent extends HTMLElement {
 
         if (!departureInput.trim() || departureInput.length <= 2) {
             //alert("Invalid departure location");
-            (this.shadowRoot.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid departure location.';
+            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid departure location.';
             isValid = false;
         }
 
@@ -133,7 +133,7 @@ class UsersOptionComponent extends HTMLElement {
 
         if (!arrivalInput.trim() || arrivalInput.length <= 2) {
             //alert("Invalid arrival location");
-            (this.shadowRoot.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid arrival location.';
+            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid arrival location.';
             isValid = false;
         }
 
@@ -142,7 +142,7 @@ class UsersOptionComponent extends HTMLElement {
         const currentDate = new Date().toISOString().split('T')[0]; // Heutiges Datum
 
         if (selectedDate < currentDate || !selectedDate) {
-            (this.shadowRoot.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
+            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
             isValid = false;
             //alert('Selected date cannot be in the past or null.');
         }
@@ -151,7 +151,7 @@ class UsersOptionComponent extends HTMLElement {
         var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
 
         if (!timeInputValue) {
-            (this.shadowRoot.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a time.';
+            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a time.';
             isValid = false;
             //alert('Selected date cannot be in the past or null.');
         }
