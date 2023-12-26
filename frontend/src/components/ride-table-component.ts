@@ -107,7 +107,7 @@ class RideTableComponent extends HTMLElement {
                         <label for="datum">Date</label><br>
                         <input type="date" id="datum" name="datum" value='${dateValue}'><br><br>
 
-                        <label for="abfzeit">Departure Time:</label><br>
+                        <label for="abfzeit">Time:</label><br>
                         
                         <input type="time" id="abfzeit" name="abfzeit" value='${timeValue}'><br><br>
 

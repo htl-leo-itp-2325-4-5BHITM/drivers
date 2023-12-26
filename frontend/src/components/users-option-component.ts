@@ -42,7 +42,7 @@ class UsersOptionComponent extends HTMLElement {
                     <label for="datum">Date</label><br>
                     <input type="date" id="datum" name="datum"><br><br>
 
-                    <label for="abfzeit">Departure Time:</label><br>
+                    <label for="abfzeit">Time:</label><br>
                     <input type="time" id="abfzeit" name="abfzeit"><br><br>
 
                     <label for="fplatz">Available seats:</label><br>
