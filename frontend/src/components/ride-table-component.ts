@@ -34,7 +34,6 @@ class RideTableComponent extends HTMLElement {
         //<td><button @click=${()=> removeSeat(ride)}>-</button></td>
         console.log("render ride", ride)
         return html`
-        <link rel="stylesheet" href="./style/style.css">
         <tr class="ride-finder-entry-row">
         
             <td >${formattedDate}</td>
@@ -43,9 +42,9 @@ class RideTableComponent extends HTMLElement {
             <td>${ride.placeOfArrival}</td>
             <td>${ride.driver}</td>
             <td>${ride.availableSeats}</td>
-            <td><button class="table-setting" @click=${() => getSeat(ride)}><img src="./img/plus_inactive.png" width="15vw"></button>
-            <button class="table-setting" ><img src="./img/minus_inactive.png" width="15vw"></button>
-            <button class="table-setting"  @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button></td>
+            <td><div class="table-settings"><button class="table-setting-button" @click=${() => getSeat(ride)}><img src="./img/plus_inactive.png" width="15vw"></button>
+            <button class="table-setting-button" class="setting-minus"><img src="./img/minus_inactive.png" width="15vw"></button>
+            <button class="table-setting-button"  class="setting-setting" @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button></div></td>
         </tr>
         `
     }
