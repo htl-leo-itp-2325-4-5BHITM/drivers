@@ -1,0 +1,35 @@
+#reason {
+    width: 100vw;
+    height: 120vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#reason-image {
+    width: 33%;
+    height: 90vh;
+    overflow: hidden;
+    background-image: url('../img/background_option2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 20px;
+}
+
+#reason-content {
+    color: var(--colorDark);
+    font-size: 1.8rem;
+    width: 33%;
+    height: 90vh;
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-left: var(--contentMargin);
+}
+
+#reason-content h3 {
+    padding: 0;
+    margin: 0;
+    font-size: var(--sectionTitleSize);
+}

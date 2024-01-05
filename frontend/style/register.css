@@ -1,0 +1,36 @@
+#ride-input-tab {
+    width: 100vw;
+    height: 120vh;
+    display: flex;
+    color: var(--colorDark);
+    /*background-color: var(--colorDark);
+    color: var(--colorBright);
+    margin-top: -2vw;*/
+}
+
+#ride-input-tab div {
+    padding-top: 10%;
+    width: 50%;
+}
+
+#register-ride-content {
+    padding: 0% 10%;
+}
+
+#register-ride-forum {
+    font-size: 0.8rem;
+    padding-top: 2%;
+}
+
+#form_head input {
+    border: solid 1.5px var(--colorDark);
+    border-radius: 5px;
+    width: 70%;
+    height: 4.5vh;
+    background-color: var(--colorBright);
+    padding: 1%;
+}
+
+#form_head input:last-child {
+    width: auto;
+}
