@@ -1,39 +1,12 @@
-#ride-finder-tab {
-    width: 100vw;
-    height: 120vh;
-    position: relative;
-    background-color: var(--colorDark);
-}
-
-#ride-finder-tab #headline-table {
-    position: relative;
-    left: 5%;
-    margin: 5%;
-    font-size: 4rem;
-}
-
-#ride-finder-tab img {
-    position: absolute;
-    width: 110%;
-    z-index: 1;
-}
-
-.ride-finder-tab-content {
-    color: var(--colorBright);
-    position: absolute;
-    z-index: 2;
-}
-
-
 /*TABELLE********************************************************************/
 
 #ride-finder-table {
+    margin-top: 5%;
     border-collapse: collapse;
     color: var(--colorBright);
-    margin: 0 5%;
     font-size: 1rem;
     min-width: 400px;
-    width: 85vw;
+    width: 83.5vw;
 }
 
 table {

@@ -1,3 +1,26 @@
+function showRides() {
+    document.getElementById("register-ride").style.display = 'none';
+    document.getElementById("animatedTable").style.display = 'block';
+
+}
+
+function showRegister() {
+    document.getElementById("register-ride").style.display = 'block';
+    document.getElementById("animatedTable").style.display = 'none';
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 //Home section
 ScrollReveal().reveal('#info-box-headline', { delay: 100 });
 ScrollReveal().reveal('#usefull-buttons', { delay: 300 });

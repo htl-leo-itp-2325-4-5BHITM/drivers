@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="./style/default.css">
     <link rel="stylesheet" href="./style/home.css">
     <link rel="stylesheet" href="./style/reason.css">
-    <link rel="stylesheet" href="./style/rideTable.css">
-    <link rel="stylesheet" href="./style/register.css">
+    <link rel="stylesheet" href="./style/rides.css">
     <script src="script/script.js" defer></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,6 +26,7 @@
 </head>
 
 <body>
+
     <div id="home">
         <h3 class="title">DrivUs</h3>
         <div class="home-box1">
@@ -56,17 +56,41 @@
     </div>
 
 
-    <div id="ride-finder-tab">
-        <img src="img/background_option6.jpg">
-        <div class="ride-finder-tab-content">
-            <h1 id="headline-table">Available Rides</h1>
-            <h1 id="form_headline">Register a Ride now!</h1>
-            <ride-table id="animatedTable"></ride-table>
 
+    <div id="rides-tabs">
+        <ul>
+            <li>
+                <div class="tab" onclick="showRides()">Available Rides</div>
+            </li>
+            <li>
+                <div class="tab" onclick="showRegister()">Register a ride</div>
+            </li>
+        </ul>
+    </div>
+
+    <div id="rides">
+
+        <div id="rides-content">
+            <ride-table id="animatedTable"></ride-table>
+            <users-option id="register-ride"></users-option>
+            <div id="errorWrongInputNewRide"></div>
         </div>
 
 
     </div>
+
+
+    <!--
+
+<img src="img/background_option6.jpg">
+        <div class="ride-finder-tab-content">
+            <div id="ride-options">
+                <h3 id="headline-table">Available Rides</h3>
+                <h3 id="form-headline">Register a Ride</h3>
+            </div>
+            
+
+        </div>
 
     <div id="ride-input-tab" class="input-data">
         <div id="register-ride-content">
@@ -75,11 +99,11 @@
                 no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
         </div>
         <div id="register-ride-forum">
-            <users-option></users-option>
-            <div id="errorWrongInputNewRide"></div>
+            
         </div>
     </div>
 
+    -->
 </body>
 
 </html>

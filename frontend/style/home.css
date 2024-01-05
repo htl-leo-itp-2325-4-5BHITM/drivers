@@ -8,8 +8,7 @@
 
 .title {
     font-size: var(--sectionTitleSize);
-    padding-top: 1.5%;
-    margin-left: var(--contentMargin);
+    margin: calc(var(--contentMargin) / 4) var(--contentMargin);
     position: absolute;
     color: var(--colorBright);
 }

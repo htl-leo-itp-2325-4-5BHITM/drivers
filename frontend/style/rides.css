@@ -1,0 +1,45 @@
+#rides {
+    width: 100vw;
+    height: 120vh;
+    background-image: url("../img/background_option6.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+
+#rides img {
+    position: absolute;
+    width: 110%;
+}
+
+#rides-tabs {
+    width: 100%;
+    height: 20%;
+    background-color: var(--colorDark);
+}
+
+#rides-tabs ul {
+    list-style-type: none;
+    padding: 2% 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.tab {
+    cursor: pointer;
+    color: var(--colorInactive);
+}
+
+#rides-content {
+    width: 90vw;
+    margin: 0 var(--contentMargin);
+    position: relative;
+    display: flex;
+}
+
+#register-ride {
+    display: none;
+}

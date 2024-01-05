@@ -1,6 +1,5 @@
 :root {
     --backgroundColor: rgb(172, 169, 154, 0.5);
-    --color: #879790;
     --colorHover: #4e5854;
     --colorDark: #10161f;
     --colorBright: #d7e4e4;
@@ -21,4 +20,18 @@ body {
     display: flex;
     flex-direction: column;
     background-color: var(--colorBackground);
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+#border {
+    position: absolute;
+    width: 2px;
+    height: 500vh;
+    background-color: yellow;
+    left: 8vw;
+    z-index: 50;
 }

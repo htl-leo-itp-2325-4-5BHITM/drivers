@@ -63,7 +63,7 @@ class RideTableComponent extends HTMLElement {
         //w3-table-all
         return html`
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="./style/style.css">
+        <link rel="stylesheet" href="./style/rideTable.css">
         
         <div id="ride-finder-table">
             

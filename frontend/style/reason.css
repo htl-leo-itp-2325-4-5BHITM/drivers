@@ -25,7 +25,6 @@
     display: flex;
     align-items: flex-end;
     flex-wrap: wrap;
-    margin-left: var(--contentMargin);
 }
 
 #reason-content h3 {
