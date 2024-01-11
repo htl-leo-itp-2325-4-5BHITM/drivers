@@ -2,6 +2,8 @@ package at.htl.drive.ride.repository;
 
 import at.htl.drive.ride.model.Ride;
 import at.htl.drive.ride.dto.RideDto;
+import at.htl.drive.ride.model.RideUserAssociation;
+import at.htl.drive.ride.model.RideUserAssociationId;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -42,6 +44,9 @@ public class DriveRepository {
     public void postRide(RideDto rideDto) {
         Ride ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(),rideDto.driver());
         em.persist(ride);
+        RideUserAssociationId id = new RideUserAssociationId(ride.id, 1L);
+        RideUserAssociation rua = new RideUserAssociation(id, true);
+        em.persist(rua);
     }
 
     public Ride getRide(Long id) {
