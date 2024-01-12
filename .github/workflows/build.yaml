@@ -8,10 +8,10 @@ jobs:
       - uses: action/checkout@v4
       - run: ls -l backend
       - uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin' # See 'Supported distributions' for available options
-        java-version: '21'
-        cache: 'maven'
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '21'
+          cache: 'maven'
       - run: java -version
       - name: build backend
         working-directory: ./backend
