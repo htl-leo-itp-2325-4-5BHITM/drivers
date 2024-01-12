@@ -11,7 +11,10 @@ jobs:
       with:
         distribution: 'temurin' # See 'Supported distributions' for available options
         java-version: '21'
+        cache: 'maven'
       - run: java -version
-      - run: |
+      - name: build backend
+        working-directory: ./backend
+        run: |
           mvn -B package
       
