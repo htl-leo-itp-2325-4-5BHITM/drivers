@@ -1,17 +1,19 @@
 function showRides() {
     document.getElementById("register-ride").style.display = 'none';
     document.getElementById("animatedTable").style.display = 'block';
+    document.getElementById("available-rides-title").style.color = 'var(--colorBright)';
+    document.getElementById("register-rides-title").style.color = '';
 
 }
 
 function showRegister() {
     document.getElementById("register-ride").style.display = 'block';
     document.getElementById("animatedTable").style.display = 'none';
+    document.getElementById("register-rides-title").style.color = 'var(--colorBright)';
+    document.getElementById("available-rides-title").style.color = '';
+
 
 }
-
-
-
 
 
 

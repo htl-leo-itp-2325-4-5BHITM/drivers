@@ -31,6 +31,11 @@
 .tab {
     cursor: pointer;
     color: var(--colorInactive);
+    transition: color 400ms ease-out;
+}
+
+.tab:hover {
+    color: var(--colorBright);
 }
 
 #rides-content {
