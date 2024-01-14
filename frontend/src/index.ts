@@ -29,6 +29,12 @@ export function sortData(sorted: Boolean, column: String) {
         });
 }
 
+function saveDataInput() {
+    //var username = (this.shadowRoot.getElementById('log-in-name') as HTMLInputElement).value;
+    console.log("fffff");
+
+}   
+
 // Event-Handler für das Absenden des Formulars
 /*document.getElementById('form_head').addEventListener('submit', function(event) {
     event.preventDefault(); // Verhindert das Standardverhalten des Formulars (Seitenneuladen)
