@@ -2,6 +2,7 @@ import { loadRides } from "./service/ride-service"
 import { loadUsers } from "./service/user-service"
 import "./components/ride-table-component"
 import "./components/users-option-component"
+import "./components/login-field-component"
 import {Ride,RidePost,store} from "./model/model"
 import { DateTime } from 'luxon';
 

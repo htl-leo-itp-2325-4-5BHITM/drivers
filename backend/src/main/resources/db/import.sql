@@ -9,4 +9,13 @@ INSERT INTO public.drivuser (id, firstname, lastname, phonenr, emailaddress) VAL
     (nextval('drivuser_id_seq'::regclass), 'Natalie', 'Schmitzberger', '068181735181', 'n.schmitzberger@students.htl-leonding.ac.at'),
     (nextval('drivuser_id_seq'::regclass), 'Romana', 'Schned', '068181735182', 'r.schned@students.htl-leonding.ac.at'),
     (nextval('drivuser_id_seq'::regclass), 'Andrei', 'Brehar', '068181735183', 'a.brehar@students.htl-leonding.ac.at'),
-    (nextval('drivuser_id_seq'::regclass), 'Janine', 'Wenninger', '068181735180', 'j.wenninger@students.htl-leonding.ac.at');
+    (nextval('drivuser_id_seq'::regclass), 'Janine', 'Wenninger', '068181735180', 'j.wenninger@students.htl-leonding.ac.at'),
+    (nextval('drivuser_id_seq'::regclass), 'Robert', 'Schmitzberger', '068181735184', 'rober.schmitzberger@gmx.at');
+
+INSERT INTO public.rideuserassociation (isdriver, rideid, userid) VALUES
+    (true, 1, 1),
+    
+    (true, 2, 5),
+    (true, 3, 3),
+    (true, 4, 4),
+    (true, 5, 2);
