@@ -1,8 +1,11 @@
 #rides {
     width: 100vw;
-    height: 120vh;
-    background-image: url("../img/background_option6.jpg");
+    max-height: 150vh;
+    height: 80vh;
+    padding-bottom: 20vh;
+    background-image: url("../img/background_option8.jpg");
     background-size: cover;
+    background-position: top;
     display: flex;
     justify-content: center;
 }
@@ -43,8 +46,11 @@
     margin: 0 var(--contentMargin);
     position: relative;
     display: flex;
+    justify-content: center;
 }
 
 #register-ride {
     display: none;
+    margin-top: 2%;
+    width: 60vw;
 }

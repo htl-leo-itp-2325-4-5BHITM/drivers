@@ -1,8 +1,8 @@
-import {DrivUser, storeUsers} from "../model/model"
-import {html, render} from "lit-html"
+import { DrivUser, storeUsers } from "../model/model"
+import { html, render } from "lit-html"
 import { loadUsers } from "../service/user-service"
 import { DateTime } from 'luxon';
-import {RidePost} from "../model/model"
+import { RidePost } from "../model/model"
 import { loadRides } from "../service/ride-service"
 
 
@@ -16,43 +16,56 @@ class UsersOptionComponent extends HTMLElement {
     }
     constructor() {
         super()
-        this.attachShadow({mode: "open"})
+        this.attachShadow({ mode: "open" })
     }
     render(users: DrivUser[]) {
         render(this.formTemplate(users), this.shadowRoot)
     }
     formTemplate(users: DrivUser[]) {
-        const output = users.map(drivUser=>this.optionTemplate(drivUser))
+        const output = users.map(drivUser => this.optionTemplate(drivUser))
         //w3-table-all
         return html`
         <link rel="stylesheet" href="../../style/register.css">
         <form id="form_head">
-                <div class="table-input" id="form_label">
-                    
-                    <label for="change_fahrer">Driver</label><br>
-                    <select id="fahrer" name="fahrer">
-                        ${output}
-                    </select><br><br>
+            
+            <div id="register-image"></div>
+            <div id="register-content">
 
-                    <label for="abfort">From</label><br>
-                    <input type="text" id="abfort" name="abfort" placeholder="Linz"><br><br>
-
-                    <label for="ankort">To</label><br>
-                    <input type="text" id="ankort" name="ankort" placeholder="Leonding"><br><br>
-
-                    <label for="datum">Date</label><br>
-                    <input type="date" id="datum" name="datum"><br><br>
-
-                    <label for="abfzeit">Time:</label><br>
-                    <input type="time" id="abfzeit" name="abfzeit"><br><br>
-
-                    <label for="fplatz">Available seats:</label><br>
-                    <input type="number" min="1" id="fplatz" name="fplatz" value="1"><br><br>
-
+            <div class="table-input" id="register-grid">
+                <h2>Registration Info</h2>
+                
+                <div class="grid-item">
+                    <input type="text" id="abfort" name="abfort" placeholder="From">
                 </div>
-                <div class="table-input"></div>
-                <input @click=${()=> this.submit()} type="button" id="submit" value="submit">
-            </form>`
+                <div class="grid-item">
+                    <input type="text" id="ankort" name="ankort" placeholder="To">
+                </div>
+                <div class="grid-item">
+                    
+                    <input placeholder="Date"
+                    onfocus="(this.type='date')"
+                    onblur="(this.type='text')"  
+                    id="datum" name="datum">
+                </div>
+                <div class="grid-item">
+                    <input placeholder="Time"
+                    onfocus="(this.type='time')"
+                    onblur="(this.type='text')" id="abfzeit" name="abfzeit">
+                </div>
+                <div class="grid-item">
+                    <input placeholder="Available Seats"
+                    onfocus="(this.type='number')"
+                    onblur="(this.type='text')" min="1" id="fplatz" name="fplatz">
+                </div>
+            </div>
+
+            
+            <div class="table-input"></div>
+            <input @click=${() => this.submit()} type="button" id="submit" value="Submit">
+            </div>
+            </form>
+            
+            `
     }
     optionTemplate(drivUser: DrivUser) {
         console.log("render user", drivUser)
@@ -107,7 +120,7 @@ class UsersOptionComponent extends HTMLElement {
                     console.log("Hat nd funktioniert zum speichan")
                 });
         }
-    } 
+    }
     private checkData() {
         let isValid: Boolean = true;
 
@@ -157,7 +170,7 @@ class UsersOptionComponent extends HTMLElement {
             //alert('Selected date cannot be in the past or null.');
         }
         return isValid;
-    }   
+    }
 }
 
 customElements.define("users-option", UsersOptionComponent)
