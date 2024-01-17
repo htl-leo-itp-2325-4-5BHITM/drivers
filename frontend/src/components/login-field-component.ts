@@ -23,7 +23,7 @@ class LoginComponent extends HTMLElement {
         const output = users.map(drivUser=>this.optionTemplate(drivUser))
         //w3-table-all
         return html`
-        <!--<link rel="stylesheet" href="../../style/register.css">-->
+        <link rel="stylesheet" href="./style/home.css">
         <form id="form_head">
                 <div class="table-input" id="form_label">
                     
