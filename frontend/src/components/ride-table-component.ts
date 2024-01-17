@@ -12,13 +12,13 @@ let timeValue = '';
 export class RideTableComponent extends HTMLElement {
     connectedCallback() {
         console.log("RideTable loaded")
-        store.subscribe(model => {
+        /*store.subscribe(model => {
             console.log("data changed", model)
             //NUR AUSPROBIER DINGSI
             if (sessionStorage.getItem("isLogedIn") == "true") {
                 this.render(model.drives, model.currentRide);
             }
-        })
+        })*/
     }
     defaulting(){
         store.subscribe(model => {
@@ -83,7 +83,7 @@ export class RideTableComponent extends HTMLElement {
             timeValue = departureTime.toFormat('HH:mm');
        }
 
-        //w3-table-all
+        //w3-table-all/*
         return html`
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="./style/rideTable.css">

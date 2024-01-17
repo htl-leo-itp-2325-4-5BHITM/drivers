@@ -57,14 +57,14 @@ class LoginComponent extends HTMLElement {
             sessionStorage.setItem("username", name);
             sessionStorage.setItem("isLogedIn", "true");
             //NUR AUSPROBIER DINGSI -> FÜR TASKBAR WEG
-            if (sessionStorage.getItem("isLogedIn") === "true") {
+            if (sessionStorage.getItem("isLogedIn") === "true" ) {//todo:überprüfen dass keine 3 anzeigen
                 // Create an instance of RideTableComponent
                 const rideTable = new RideTableComponent();
                 // Append the instance to the document body (or another desired location)
                 document.body.appendChild(rideTable);
 
                 // Subscribe to the store in RideTableComponent
-                store.subscribe(model => {
+               store.subscribe(model => {
                     console.log("data changed", model);
                     rideTable.render(model.drives, model.currentRide);
                 });
