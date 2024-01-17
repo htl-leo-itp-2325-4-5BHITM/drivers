@@ -24,7 +24,18 @@ class UsersOptionComponent extends HTMLElement {
     formTemplate(users: DrivUser[]) {
         const output = users.map(drivUser => this.optionTemplate(drivUser))
         //w3-table-all
-        return html`
+        //sessionStorage.setItem("username", "hallo");
+////////////////////////////////////////////////////
+        
+        const isLogedIn = sessionStorage.getItem("isLogedIn");
+        console.log(isLogedIn);
+
+        if (isLogedIn == "true") {
+            console.log("no user");
+            return html`<div>User is not selected</div>`;
+        } else {
+            console.log("user is inserted")
+            return html`
         <link rel="stylesheet" href="../../style/register.css">
         <form id="form_head">
             
@@ -57,15 +68,10 @@ class UsersOptionComponent extends HTMLElement {
                     onfocus="(this.type='number')"
                     onblur="(this.type='text')" min="1" id="fplatz" name="fplatz">
                 </div>
-            </div>
-
-            
-            <div class="table-input"></div>
-            <input @click=${() => this.submit()} type="button" id="submit" value="Submit">
-            </div>
-            </form>
-            
-            `
+                <div class="table-input"></div>
+                <input @click=${()=> this.submit()} type="button" id="submit" value="submit">
+            </form>`
+        }
     }
     optionTemplate(drivUser: DrivUser) {
         console.log("render user", drivUser)
@@ -91,7 +97,7 @@ class UsersOptionComponent extends HTMLElement {
             console.log("combine", combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
 
             const formData: RidePost = {
-                driver: (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value,
+                driver: sessionStorage.getItem("username"),
                 departureTime: combinedDateTime,
                 placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
                 placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
@@ -103,7 +109,7 @@ class UsersOptionComponent extends HTMLElement {
             console.log("form Data JSON: " + jsonData)
 
             // Hier kannst du die JSON-Daten an deinen Pfad senden, z. B. mit fetch()
-            fetch('http://localhost:4200/api/rides/postRide', {
+            fetch('http://localhost:4200/api/drivus/rides/postRide', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -173,4 +179,10 @@ class UsersOptionComponent extends HTMLElement {
     }
 }
 
+/*const username = sessionStorage.getItem("username");
+if (username && username.length === 0) {
+    //console.log("Username is present but has a length of 0.");
+    
+}else {
 customElements.define("users-option", UsersOptionComponent)
+}*/

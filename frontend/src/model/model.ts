@@ -19,6 +19,11 @@ interface RidePost {
     availableSeats: number
 }
 
+interface RegisterData {
+    rideId: number
+    username: string
+}
+
 interface RideResponse {
     data: Ride[]
 }
@@ -58,4 +63,4 @@ const initialStateUser: ModelUser = {
 const store = new BehaviorSubject<Model>(initialState)
 const storeUsers = new BehaviorSubject<ModelUser>(initialStateUser)
 
-export { Ride, RidePost, DrivUser, RideResponse as DriveResponse, store, storeUsers}
+export { Ride, RidePost, DrivUser, RegisterData, RideResponse as DriveResponse, store, storeUsers}

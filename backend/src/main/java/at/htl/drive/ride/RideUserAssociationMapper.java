@@ -1,5 +1,6 @@
 package at.htl.drive.ride;
 
+import at.htl.drive.ride.dto.RegisterRideDto;
 import at.htl.drive.ride.dto.RideUserAssociationDto;
 import at.htl.drive.ride.model.RideUserAssociation;
 import jakarta.enterprise.context.ApplicationScoped;
