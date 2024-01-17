@@ -7,6 +7,7 @@
     font-size: 1rem;
     min-width: 400px;
     width: 83.5vw;
+    box-shadow: 10px 10px 20px #111;
 }
 
 table {
