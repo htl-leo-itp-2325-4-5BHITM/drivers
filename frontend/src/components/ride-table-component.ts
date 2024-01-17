@@ -2,7 +2,7 @@ import { Ride, store } from "../model/model"
 import { html, render } from "lit-html"
 import { DateTime } from 'luxon'
 import { sortData } from "../index"
-import { loadRides, getSeat } from "../service/ride-service"
+import { loadRides, getSeat, removeSeat } from "../service/ride-service"
 // für Sortierung
 let lastSortedColumn: String | null = null;
 let isAscendingOrder = true;
@@ -56,7 +56,7 @@ class RideTableComponent extends HTMLElement {
             <td>${ride.driver}</td>
             <td>${ride.availableSeats}</td>
             <td><div class="table-settings"><button class="table-setting-button" @click=${() => getSeat(ride)}><img src="./img/plus_inactive.png" width="15vw"></button>
-            <button class="table-setting-button" class="setting-minus"><img src="./img/minus_inactive.png" width="15vw"></button>
+            <button class="table-setting-button" class="setting-minus" @click=${() => removeSeat(ride)}><img src="./img/minus_inactive.png" width="15vw"></button>
            </div></td>
         </tr>
         `

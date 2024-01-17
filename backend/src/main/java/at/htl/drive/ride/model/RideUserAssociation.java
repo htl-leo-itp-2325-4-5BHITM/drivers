@@ -16,7 +16,7 @@ public class RideUserAssociation {
     Ride ride;
 
     @ManyToOne
-    @JoinColumn(name = "USERID", referencedColumnName = "ID", nullable = false)
+    //@JoinColumn(name = "USERID", referencedColumnName = "ID")
     DrivUser user;
 
     public RideUserAssociationId getId() {

@@ -1,6 +1,8 @@
 package at.htl.drive.ride.boundary;
 
 import at.htl.drive.ride.DrivUserMapper;
+import at.htl.drive.ride.dto.RegisterRideDto;
+import at.htl.drive.ride.dto.UsernameDto;
 import at.htl.drive.ride.model.DrivUser;
 import at.htl.drive.ride.model.Ride;
 import at.htl.drive.ride.dto.RideDto;
@@ -59,8 +61,16 @@ public class DrivUsResource {
     @POST
     @Transactional
     @Path("rides/registerForRide")
-    public Response registerForRide(Long id, String username) {
-        repository.registerForRide(id, username);
+    public Response registerForRide(RegisterRideDto ruaDto) {
+        repository.registerForRide(ruaDto);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Transactional
+    @Path("rides/unregisterForRide")
+    public Response unregisterForRide(RegisterRideDto ruaDto) {
+        repository.unregisterForRide(ruaDto);
         return Response.ok().build();
     }
 
@@ -94,6 +104,12 @@ public class DrivUsResource {
     @GET
     public List<DrivUser> getDriverOfNew() {
         return repository.getDriverofNew();
+    }
+
+    @Path("/getUser")
+    @POST
+    public DrivUser getUser(UsernameDto username) {
+        return repository.getUser(username);
     }
 
 }

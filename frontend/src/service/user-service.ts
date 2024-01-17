@@ -12,4 +12,33 @@ async function loadUsers() {
     console.log("users loaded", users)
     storeUsers.next(model)
 }
+
+
+export function getUserData() {
+    var url = "http://localhost:4200/api/drivus/getUser"
+    var user = sessionStorage.getItem("username")
+
+    const jsonData = JSON.stringify(user);
+    console.log(jsonData)
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: jsonData,
+        })
+            .then(response => {
+                // Handle die Antwort hier
+                //loadRides()
+                console.log("gehd")
+            })
+            .catch(error => {
+                // Handle Fehler hier
+                console.log("Hat nd funktioniert zum Ändern")
+            });
+    
+}
+
+
 export { loadUsers }
