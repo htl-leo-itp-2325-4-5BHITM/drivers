@@ -2,6 +2,8 @@ package at.htl.drive.ride.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class DrivUser {
     @Id
@@ -16,8 +18,8 @@ public class DrivUser {
     @Column(length = 100,nullable = false)
     public String emailAddress;
 
-    /*@OneToMany(mappedBy = "user")
-    public List<RideUserAssociation> associationList;*/
+    @OneToMany(mappedBy = "user")
+    public List<RideUserAssociation> associationList;
 
     public DrivUser() {
     }

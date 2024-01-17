@@ -1,6 +1,7 @@
 import {DrivUser, storeUsers} from "../model/model"
 import {html, render} from "lit-html"
-import { loadUsers } from "../service/user-service"
+import { loadUsers, getUserData } from "../service/user-service"
+import { loadRides } from "../service/ride-service"
 
 
 class LoginComponent extends HTMLElement {

@@ -5,6 +5,5 @@ import at.htl.drive.ride.model.RideUserAssociationId;
 public record RideUserAssociationDto(
         RideUserAssociationId id,
         Boolean isDriver
-)
-{
+) {
 }
