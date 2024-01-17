@@ -30,3 +30,13 @@ cd ./k8s
 kubectl get pods
 kubectl port-forward pos&lt;tab&gt;-&lt;tab&gt; 5433:5432
 ```
+
+### Fehlerbehebeungen 
+
+password/user/ (Quarkus) Fehler kann sicht nicht verbinden / connection refused:
+```bash
+podman / minikube löschen und nochmal installieren
+muss dann auch kubectl installieren
+```
+
+
