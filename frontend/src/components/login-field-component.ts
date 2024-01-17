@@ -1,8 +1,9 @@
-import {DrivUser, storeUsers} from "../model/model"
+import {DrivUser, Model, store, storeUsers} from "../model/model"
 import {html, render} from "lit-html"
 import { loadUsers, getUserData } from "../service/user-service"
 import { loadRides } from "../service/ride-service"
-
+import {RideTableComponent} from "./ride-table-component"
+import {BehaviorSubject} from "rxjs"
 
 class LoginComponent extends HTMLElement {
     connectedCallback() {
@@ -55,8 +56,24 @@ class LoginComponent extends HTMLElement {
             //let name = "";
             sessionStorage.setItem("username", name);
             sessionStorage.setItem("isLogedIn", "true");
-            
-             console.log(sessionStorage.getItem("username"))
+            //NUR AUSPROBIER DINGSI -> FÜR TASKBAR WEG
+            if (sessionStorage.getItem("isLogedIn") === "true") {
+                // Create an instance of RideTableComponent
+                const rideTable = new RideTableComponent();
+                // Append the instance to the document body (or another desired location)
+                document.body.appendChild(rideTable);
+
+                // Subscribe to the store in RideTableComponent
+                store.subscribe(model => {
+                    console.log("data changed", model);
+                    rideTable.render(model.drives, model.currentRide);
+                });
+                //DAMIT WORKTS
+                loadRides();
+            }
+
+
+            console.log(sessionStorage.getItem("username"))
         }
         
     } 
@@ -67,7 +84,8 @@ class LoginComponent extends HTMLElement {
         var driverInput = (this.shadowRoot.getElementById('password') as HTMLInputElement).value;
 
         // Überprüfen, ob user angemeldet ist
-        if (sessionStorage.getItem("username").length == 0) {
+
+        if (sessionStorage.getItem("username").length == 0||sessionStorage.length==0) {
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a username!';
             
         }

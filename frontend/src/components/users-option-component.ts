@@ -30,7 +30,7 @@ class UsersOptionComponent extends HTMLElement {
         const isLogedIn = sessionStorage.getItem("isLogedIn");
         console.log(isLogedIn);
 
-        if (isLogedIn == "true") {
+        if (isLogedIn === "true") {
             console.log("no user");
             return html`<div>User is not selected</div>`;
         } else {

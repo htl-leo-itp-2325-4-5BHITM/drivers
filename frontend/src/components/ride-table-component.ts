@@ -9,13 +9,23 @@ let isAscendingOrder = true;
 let dateValue = ''; // Standardwerte für Datum und Zeit
 let timeValue = '';
 
-
-class RideTableComponent extends HTMLElement {
+export class RideTableComponent extends HTMLElement {
     connectedCallback() {
         console.log("RideTable loaded")
         store.subscribe(model => {
             console.log("data changed", model)
-            this.render(model.drives, model.currentRide)
+            //NUR AUSPROBIER DINGSI
+            if (sessionStorage.getItem("isLogedIn") == "true") {
+                this.render(model.drives, model.currentRide);
+            }
+        })
+    }
+    defaulting(){
+        store.subscribe(model => {
+            console.log("data changed", model)
+            if (sessionStorage.getItem("isLogedIn") != "true") {
+                this.render(model.drives, model.currentRide);
+            }
         })
     }
     constructor() {
