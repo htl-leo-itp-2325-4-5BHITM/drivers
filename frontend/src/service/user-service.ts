@@ -1,7 +1,7 @@
 import { DrivUser, ModelUser } from "Model/model"
 import { storeUsers } from "../model/model"
 
-const USER_URL = "/api/users"
+const USER_URL = "/api/drivus/users"
 
 async function loadUsers() {
     const response = await fetch(USER_URL)

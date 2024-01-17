@@ -29,10 +29,10 @@ class UsersOptionComponent extends HTMLElement {
         <form id="form_head">
                 <div class="table-input" id="form_label">
                     
-                    <label for="change_fahrer">Driver</label><br>
+                    <!--<label for="change_fahrer">Driver</label><br>
                     <select id="fahrer" name="fahrer">
                         ${output}
-                    </select><br><br>
+                    </select><br><br>-->
 
                     <label for="abfort">From</label><br>
                     <input type="text" id="abfort" name="abfort" placeholder="Linz"><br><br>
@@ -78,7 +78,7 @@ class UsersOptionComponent extends HTMLElement {
             console.log("combine", combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
 
             const formData: RidePost = {
-                driver: (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value,
+                driver: sessionStorage.getItem("username"),
                 departureTime: combinedDateTime,
                 placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
                 placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
@@ -90,7 +90,7 @@ class UsersOptionComponent extends HTMLElement {
             console.log("form Data JSON: " + jsonData)
 
             // Hier kannst du die JSON-Daten an deinen Pfad senden, z. B. mit fetch()
-            fetch('http://localhost:4200/api/rides/postRide', {
+            fetch('http://localhost:4200/api/drivus/rides/postRide', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

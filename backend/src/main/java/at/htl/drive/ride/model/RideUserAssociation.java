@@ -2,6 +2,8 @@ package at.htl.drive.ride.model;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class RideUserAssociation {
@@ -10,11 +12,12 @@ public class RideUserAssociation {
     public RideUserAssociationId id;
     public boolean isDriver;
 
-    /*@ManyToOne
+    @ManyToOne
     Ride ride;
 
     @ManyToOne
-    User user;*/
+    @JoinColumn(name = "USERID", referencedColumnName = "ID", nullable = false)
+    DrivUser user;
 
     public RideUserAssociationId getId() {
         return id;

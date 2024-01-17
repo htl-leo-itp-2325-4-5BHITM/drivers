@@ -33,10 +33,23 @@ class RideTableComponent extends HTMLElement {
         const formattedDate = departureTime.toFormat('yyyy-MM-dd'); // Datum formatieren (z.B. 2023-11-22)
         //<td><button @click=${()=> removeSeat(ride)}>-</button></td>
         console.log("render ride", ride)
+        if(ride.driver == sessionStorage.getItem("username")) {
+            return html`
+        <tr class="ride-finder-entry-row">
+            <td>${formattedDate}</td>
+            <td>${formattedTime}</td>
+            <td>${ride.placeOfDeparture}</td>
+            <td>${ride.placeOfArrival}</td>
+            <td>${ride.driver}</td>
+            <td>${ride.availableSeats}</td>
+            <td><div class="table-settings">
+            <button class="table-setting-button"  class="setting-setting" @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button></div></td>
+        </tr>
+        `
+        }
         return html`
         <tr class="ride-finder-entry-row">
-        
-            <td >${formattedDate}</td>
+            <td>${formattedDate}</td>
             <td>${formattedTime}</td>
             <td>${ride.placeOfDeparture}</td>
             <td>${ride.placeOfArrival}</td>
@@ -44,7 +57,7 @@ class RideTableComponent extends HTMLElement {
             <td>${ride.availableSeats}</td>
             <td><div class="table-settings"><button class="table-setting-button" @click=${() => getSeat(ride)}><img src="./img/plus_inactive.png" width="15vw"></button>
             <button class="table-setting-button" class="setting-minus"><img src="./img/minus_inactive.png" width="15vw"></button>
-            <button class="table-setting-button"  class="setting-setting" @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button></div></td>
+           </div></td>
         </tr>
         `
     }
@@ -159,7 +172,7 @@ class RideTableComponent extends HTMLElement {
         console.log("in sortRides")
     }
     private saveChanges(id: number) {
-        var url = "http://localhost:4200/api/rides/changeRide"
+        var url = "http://localhost:4200/api/drivus/rides/changeRide"
 
         var driv = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement);
         console.log(driv);

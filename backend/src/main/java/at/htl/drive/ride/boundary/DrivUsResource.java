@@ -1,20 +1,28 @@
 package at.htl.drive.ride.boundary;
 
+import at.htl.drive.ride.DrivUserMapper;
+import at.htl.drive.ride.model.DrivUser;
 import at.htl.drive.ride.model.Ride;
 import at.htl.drive.ride.dto.RideDto;
 import at.htl.drive.ride.RideMapper;
-import at.htl.drive.ride.repository.DriveRepository;
+import at.htl.drive.ride.repository.DrivUsRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 
-@Path("/rides")
-public class DriversResource {
+import java.util.List;
+
+@Path("/drivus")
+public class DrivUsResource {
     @Inject
-    DriveRepository repository;
+    DrivUsRepository repository;
     @Inject
     RideMapper rideMapper;
+    @Inject
+    DrivUserMapper userMapper;
+
+    @Path("/rides")
     @GET
     public Response all() {
         System.out.println("bin im all");
@@ -24,7 +32,7 @@ public class DriversResource {
     }
 
     @GET
-    @Path("/getRide/{id}")
+    @Path("rides/getRide/{id}")
     public Ride getRide(@PathParam("id") Long id) {
         System.out.println("bin im getRide");
         var ride = repository.getRide(id);
@@ -32,7 +40,7 @@ public class DriversResource {
     }
 
     @GET
-    @Path("/getSortedRide/{sortedWay}/{column}")
+    @Path("rides/getSortedRide/{sortedWay}/{column}")
     public Response getSortedRide(@PathParam("sortedWay") Boolean sortedWay, @PathParam("column") String column) {
         System.out.println("bin im getSortedRide");
         var rides = repository.getSortedRide(sortedWay,column);
@@ -42,7 +50,7 @@ public class DriversResource {
 
     @POST
     @Transactional
-    @Path("/changeRide")
+    @Path("rides/changeRide")
     public Response changeRide(RideDto rideDto) {
         repository.changeRide(rideDto);
         return Response.ok().build();
@@ -50,15 +58,15 @@ public class DriversResource {
 
     @POST
     @Transactional
-    @Path("/registerForRide")
-    public Response registerForRide(Long id) {
-        repository.registerForRide(id);
+    @Path("rides/registerForRide")
+    public Response registerForRide(Long id, String username) {
+        repository.registerForRide(id, username);
         return Response.ok().build();
     }
 
     @POST
     @Transactional
-    @Path("/postRide")
+    @Path("rides/postRide")
     public Response postRide(RideDto rideDto) {
         System.out.println("bin im Ressource");
         repository.postRide(rideDto);
@@ -67,9 +75,25 @@ public class DriversResource {
 
     @POST
     @Transactional
-    @Path("/removeRide")
+    @Path("rides/removeRide")
     public Response removeRide(Long id) {
         repository.removeRide(id);
         return Response.ok().build();
     }
+
+    @Path("/users")
+    @GET
+    public Response allUsers() {
+        System.out.println("bin im all");
+        var users = repository.allUsers();
+        var dtos = users.stream().map(userMapper::toResource);
+        return Response.ok(dtos).build();
+    }
+
+    @Path("/getDriverOfNew")
+    @GET
+    public List<DrivUser> getDriverOfNew() {
+        return repository.getDriverofNew();
+    }
+
 }

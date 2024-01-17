@@ -2,7 +2,7 @@ import { Ride, Model } from "Model/model"
 import { store } from "../model/model"
 import { DateTime } from 'luxon'
 
-const RIDES_URL = "/api/rides"
+const RIDES_URL = "/api/drivus/rides"
 
 async function loadRides() {
     const response = await fetch(RIDES_URL)
@@ -19,13 +19,17 @@ export { loadRides }
 
 export function getSeat(ride: Ride) {
     console.log(ride)
-    var url = "http://localhost:4200/api/rides/registerForRide"
+    var url = "http://localhost:4200/api/drivus/rides/registerForRide"
     var id = ride.id
     console.log(id)
 
     if (ride.availableSeats > 0) {
         // Daten in JSON umwandeln
-        const jsonData = JSON.stringify(id);
+        let data = {
+            rideId: id,
+            username: sessionStorage.getItem("username")
+        };
+        const jsonData = JSON.stringify(data);
 
         fetch(url, {
             method: 'POST',
