@@ -37,7 +37,8 @@ class LoginComponent extends HTMLElement {
                 </div>
                 <div class="table-input"></div>
                 <input @click=${()=> this.submit()} type="button" id="submit" value="submit">
-            </form>`
+            </form>
+            <div id="errorWrongInput"></div>`
     }
     optionTemplate(drivUser: DrivUser) {
         console.log("render user", drivUser)
@@ -47,10 +48,44 @@ class LoginComponent extends HTMLElement {
     }
     private submit() {
         console.log("bin im submit");
-        let name = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value;
-        sessionStorage.setItem("username", name);
-        console.log(sessionStorage.getItem("username"))
+
+        if(this.checkData()){
+            let name = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value;
+            //let name = "";
+            sessionStorage.setItem("username", name);
+            sessionStorage.setItem("isLogedIn", "true");
+            
+             console.log(sessionStorage.getItem("username"))
+        }
+        
     } 
+    private checkData(){
+
+        let isValid: Boolean = true;
+        //passwort
+        var driverInput = (this.shadowRoot.getElementById('password') as HTMLInputElement).value;
+
+        // Überprüfen, ob user angemeldet ist
+        if (sessionStorage.getItem("username").length == 0) {
+            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a username!';
+            
+        }
+        // Überprüfe, ob der Passwort nicht null oder leer ist
+        if (!driverInput.trim() || driverInput.length <= 2) {
+            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid password!';
+            isValid = false;
+        }else{
+            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Log In worked';
+        }
+        
+
+        
+   
+        
+    
+        return isValid;
+      }
+
 }
 
 customElements.define("login-field", LoginComponent)
