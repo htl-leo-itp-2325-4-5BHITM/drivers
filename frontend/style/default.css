@@ -35,3 +35,9 @@ h3 {
     left: 8vw;
     z-index: 50;
 }
+
+footer {
+    height: 5vh;
+    width: 100vw;
+    background-color: var(--colorDark);
+}

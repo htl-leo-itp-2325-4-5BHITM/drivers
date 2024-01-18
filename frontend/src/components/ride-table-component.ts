@@ -9,13 +9,23 @@ let isAscendingOrder = true;
 let dateValue = ''; // Standardwerte für Datum und Zeit
 let timeValue = '';
 
-
-class RideTableComponent extends HTMLElement {
+export class RideTableComponent extends HTMLElement {
     connectedCallback() {
         console.log("RideTable loaded")
+        /*store.subscribe(model => {
+            console.log("data changed", model)
+            //NUR AUSPROBIER DINGSI
+            if (sessionStorage.getItem("isLogedIn") == "true") {
+                this.render(model.drives, model.currentRide);
+            }
+        })*/
+    }
+    defaulting(){
         store.subscribe(model => {
             console.log("data changed", model)
-            this.render(model.drives, model.currentRide)
+            if (sessionStorage.getItem("isLogedIn") != "true") {
+                this.render(model.drives, model.currentRide);
+            }
         })
     }
     constructor() {
@@ -73,13 +83,13 @@ class RideTableComponent extends HTMLElement {
             timeValue = departureTime.toFormat('HH:mm');
        }
 
-        //w3-table-all
+        //w3-table-all/*
         return html`
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="./style/rideTable.css">
         
-        <div id="ride-finder-table">
-            
+        <div id="ride-finder-table-tab">
+        
             <table id="ride-finder-table" cellpadding="0">
                 <thead class="ride-finder-tablehead">
                     <tr>
@@ -89,7 +99,9 @@ class RideTableComponent extends HTMLElement {
                         <th  @click=${() => this.sortRides("placeOfArrival")}>To</th>
                         <th @click=${() => this.sortRides("driver")}>Driver</th>
                         <th  @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
-                        <th > </th>
+                        <th > <div id="ride-search">
+                        <input type="text" placeholder="Search"><button><img src=""./img/magnifying_glass.png></button>
+                    </div></th>
                         
                     </tr>
                 </thead>
@@ -98,7 +110,9 @@ class RideTableComponent extends HTMLElement {
             </tbody>
             </table>
         </div>
+
         <!-- The Modal -->
+
         <div id="ride-dialog" class="w3-modal">
         <div class="w3-modal-content">
             <div class="w3-container" >
@@ -125,6 +139,7 @@ class RideTableComponent extends HTMLElement {
                     </div>
                     <input @click=${() => this.saveChanges(currentRide?.id)} type="button" id="submit" value="save">
                     <input @click=${() => this.removeRide(currentRide?.id)} type="button" id="remove" value="remove">
+
                 </form>
                 <div id="errorWrongInput"></div>
             </div>
