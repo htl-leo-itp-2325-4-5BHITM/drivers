@@ -85,7 +85,9 @@ class LoginComponent extends HTMLElement {
 
         // Überprüfen, ob user angemeldet ist
 
-        if (sessionStorage.getItem("username").length == 0||sessionStorage.length==0) {
+        console.log(sessionStorage.getItem("username"));
+        
+        if (sessionStorage.length == 0 || sessionStorage.getItem("username").length == 0) {
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a username!';
             
         }
