@@ -107,9 +107,6 @@ class RideTableComponent extends HTMLElement {
                 <h2 class="w3-text-black">Change data</h2>
                 <form id="form_head_change" class="w3-text-black">
                     <div class="table-input" id="form_label">
-                    <label for="fahrer">Driver</label><br>
-                        <input type="text" id="fahrer" name="fahrer" value='${currentRide?.driver}'><br><br>
-
                         <label for="abfort">From</label><br>
                         <input type="text" id="abfort" name="abfort" value='${currentRide?.placeOfDeparture}'><br><br>
 
