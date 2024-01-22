@@ -43,7 +43,7 @@ export class RideTableComponent extends HTMLElement {
         const formattedDate = departureTime.toFormat('yyyy-MM-dd'); // Datum formatieren (z.B. 2023-11-22)
         //<td><button @click=${()=> removeSeat(ride)}>-</button></td>
         console.log("render ride", ride)
-        if(ride.driver == sessionStorage.getItem("username")) {
+        //if(ride.driver == sessionStorage.getItem("username")) {
             return html`
         <tr class="ride-finder-entry-row">
             <td>${formattedDate}</td>
@@ -56,7 +56,7 @@ export class RideTableComponent extends HTMLElement {
             <button class="table-setting-button"  class="setting-setting" @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button></div></td>
         </tr>
         `
-        }
+        //}
         return html`
         <tr class="ride-finder-entry-row">
             <td>${formattedDate}</td>
