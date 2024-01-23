@@ -41,7 +41,9 @@ class LoginComponent extends HTMLElement {
                 <input @click=${()=> this.submit()} type="button" id="submit" value="submit">
                 <input @click=${()=> this.logout()} type="button" id="logout" value="logout">
             </form>
-            <div id="errorWrongInput"></div>`
+            <div id="errorWrongInput"></div>
+            <div id="logedInWorked"></div>
+            <div id="logedOutWorked"></div>`
     }
     optionTemplate(drivUser: DrivUser) {
         console.log("render user", drivUser)
@@ -51,8 +53,10 @@ class LoginComponent extends HTMLElement {
     }
     private logout() {
         localStorage.removeItem("username");
-        console.log(localStorage.getItem("username"))
-        //hier: Rommi
+        localStorage.setItem("isLogedIn", "false");
+        console.log(localStorage.getItem("username"));
+        (this.shadowRoot.getElementById('logedOutWorked') as HTMLElement).innerHTML = 'Log out worked';
+        window.location.reload();
     }
     private submit() {
         console.log("bin im submit");
@@ -82,8 +86,10 @@ class LoginComponent extends HTMLElement {
 
 
             console.log(localStorage.getItem("username"))
+        }else{
+            
         }
-        
+        window.location.reload();
     } 
     private checkData(){
 
@@ -104,7 +110,7 @@ class LoginComponent extends HTMLElement {
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid password!';
             isValid = false;
         }else{
-            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Log In worked';
+            (this.shadowRoot.getElementById('logedInWorked') as HTMLElement).innerHTML = 'Log In worked';
         }
         
 

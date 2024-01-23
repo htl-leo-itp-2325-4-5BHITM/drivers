@@ -27,14 +27,16 @@ class UsersOptionComponent extends HTMLElement {
         //localStorage.setItem("username", "hallo");
 ////////////////////////////////////////////////////
         
-        /*const isLogedIn = localStorage.getItem("isLogedIn");
+        const isLogedIn = localStorage.getItem("isLogedIn");
         console.log(isLogedIn);
 
-        if (isLogedIn === "true") {
+        if (isLogedIn === "false") {
+           
             console.log("no user");
-            return html`<div>User is not selected</div>`;
+            return html`<div>Please log in to regist a new ride!</div>`;
+            
         } else {
-            console.log("user is inserted")*/
+            console.log("user is inserted")
             return html`
         <link rel="stylesheet" href="../../style/register.css">
         <form id="form_head">
@@ -71,7 +73,7 @@ class UsersOptionComponent extends HTMLElement {
                 <div class="table-input"></div>
                 <input @click=${()=> this.submit()} type="button" id="submit" value="submit">
             </form>`
-        //}
+        }
     }
     optionTemplate(drivUser: DrivUser) {
         console.log("render user", drivUser)
@@ -126,6 +128,7 @@ class UsersOptionComponent extends HTMLElement {
                     console.log("Hat nd funktioniert zum speichan")
                 });
         }
+        
     }
     private checkData() {
         let isValid: Boolean = true;
