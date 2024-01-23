@@ -16,7 +16,7 @@ async function loadUsers() {
 
 export function getUserData() {
     var url = "http://localhost:4200/api/drivus/getUser"
-    var user = sessionStorage.getItem("username")
+    var user = localStorage.getItem("username")
 
     const jsonData = JSON.stringify(user);
     console.log(jsonData)

@@ -28,7 +28,7 @@ export function getSeat(ride: Ride) {
         // Daten in JSON umwandeln
         let data: RegisterData = {
             rideId: id,
-            username: sessionStorage.getItem("username")
+            username: localStorage.getItem("username")
         };
         const jsonData = JSON.stringify(data);
         console.log(jsonData)
@@ -62,7 +62,7 @@ export function removeSeat(ride: Ride) {
         // Daten in JSON umwandeln
         let data: RegisterData = {
             rideId: id,
-            username: sessionStorage.getItem("username")
+            username: localStorage.getItem("username")
         };
         const jsonData = JSON.stringify(data);
         console.log(jsonData)

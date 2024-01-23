@@ -24,10 +24,10 @@ class UsersOptionComponent extends HTMLElement {
     formTemplate(users: DrivUser[]) {
         const output = users.map(drivUser => this.optionTemplate(drivUser))
         //w3-table-all
-        //sessionStorage.setItem("username", "hallo");
+        //localStorage.setItem("username", "hallo");
 ////////////////////////////////////////////////////
         
-        /*const isLogedIn = sessionStorage.getItem("isLogedIn");
+        /*const isLogedIn = localStorage.getItem("isLogedIn");
         console.log(isLogedIn);
 
         if (isLogedIn === "true") {
@@ -97,7 +97,7 @@ class UsersOptionComponent extends HTMLElement {
             console.log("combine", combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
 
             const formData: RidePost = {
-                driver: sessionStorage.getItem("username"),
+                driver: localStorage.getItem("username"),
                 departureTime: combinedDateTime,
                 placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
                 placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
@@ -179,7 +179,7 @@ class UsersOptionComponent extends HTMLElement {
     }
 }
 
-/*const username = sessionStorage.getItem("isLogedIn");
+/*const username = localStorage.getItem("isLogedIn");
 if (username === "false") {
     console.log("Username is present but has a length of 0.");
     

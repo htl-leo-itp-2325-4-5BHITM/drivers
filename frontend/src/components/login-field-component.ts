@@ -39,6 +39,7 @@ class LoginComponent extends HTMLElement {
                 </div>
                 <div class="table-input"></div>
                 <input @click=${()=> this.submit()} type="button" id="submit" value="submit">
+                <input @click=${()=> this.logout()} type="button" id="logout" value="logout">
             </form>
             <div id="errorWrongInput"></div>`
     }
@@ -48,16 +49,23 @@ class LoginComponent extends HTMLElement {
         <option value="${drivUser.firstName} ${drivUser.lastName}">${drivUser.firstName} ${drivUser.lastName}</option>
         `
     }
+    private logout() {
+        localStorage.removeItem("username");
+        console.log(localStorage.getItem("username"))
+        //hier: Rommi
+    }
     private submit() {
         console.log("bin im submit");
 
+        let name = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value;
+        localStorage.setItem("username", name);
         if(this.checkData()){
             let name = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value;
             //let name = "";
-            sessionStorage.setItem("username", name);
-            sessionStorage.setItem("isLogedIn", "true");
+            localStorage.setItem("username", name);
+            localStorage.setItem("isLogedIn", "true");
             //NUR AUSPROBIER DINGSI -> FÜR TASKBAR WEG
-            if (sessionStorage.getItem("isLogedIn") === "true" ) {//todo:überprüfen dass keine 3 anzeigen
+            if (localStorage.getItem("isLogedIn") === "true" ) {//todo:überprüfen dass keine 3 anzeigen
                 // Create an instance of RideTableComponent
                 const rideTable = new RideTableComponent();
                 // Append the instance to the document body (or another desired location)
@@ -73,7 +81,7 @@ class LoginComponent extends HTMLElement {
             }
 
 
-            console.log(sessionStorage.getItem("username"))
+            console.log(localStorage.getItem("username"))
         }
         
     } 
@@ -85,9 +93,9 @@ class LoginComponent extends HTMLElement {
 
         // Überprüfen, ob user angemeldet ist
 
-        console.log(sessionStorage.getItem("username"));
+        console.log(localStorage.getItem("username"));
         
-        if (sessionStorage.length == 0 || sessionStorage.getItem("username").length == 0) {
+        if (localStorage.length == 0 || localStorage.getItem("username").length == 0) {
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a username!';
             
         }
