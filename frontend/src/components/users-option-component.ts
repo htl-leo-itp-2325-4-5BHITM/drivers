@@ -179,9 +179,9 @@ class UsersOptionComponent extends HTMLElement {
     }
 }
 
-/*const username = sessionStorage.getItem("username");
-if (username && username.length === 0) {
-    //console.log("Username is present but has a length of 0.");
+/*const username = sessionStorage.getItem("isLogedIn");
+if (username === "false") {
+    console.log("Username is present but has a length of 0.");
     
 }else {
 customElements.define("users-option", UsersOptionComponent)
