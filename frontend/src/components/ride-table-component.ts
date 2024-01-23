@@ -12,13 +12,12 @@ let timeValue = '';
 export class RideTableComponent extends HTMLElement {
     connectedCallback() {
         console.log("RideTable loaded")
-        /*store.subscribe(model => {
+        store.subscribe(model => {
             console.log("data changed", model)
             //NUR AUSPROBIER DINGSI
-            if (localStorage.getItem("isLogedIn") == "true") {
-                this.render(model.drives, model.currentRide);
-            }
-        })*/
+            this.render(model.drives, model.currentRide);
+            loadRides();
+        })
     }
     defaulting(){
         store.subscribe(model => {
@@ -84,6 +83,14 @@ export class RideTableComponent extends HTMLElement {
             timeValue = departureTime.toFormat('HH:mm');
        }
 
+        const isLogedIn = localStorage.getItem("isLogedIn");
+        console.log(isLogedIn);
+        if (isLogedIn === "false") {
+
+            console.log("no user");
+            return html`<div>Please log in to see the rides!</div>`;
+
+        } else {
         //w3-table-all/*
         return html`
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -145,7 +152,8 @@ export class RideTableComponent extends HTMLElement {
                 <div id="errorWrongInput"></div>
             </div>
         </div>
-        </div>`
+        </div>`}
+        loadRides();
     }
     closeDialog() {
         const dialog = this.shadowRoot.getElementById('ride-dialog')

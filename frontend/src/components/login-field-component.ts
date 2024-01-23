@@ -69,7 +69,7 @@ class LoginComponent extends HTMLElement {
             localStorage.setItem("username", name);
             localStorage.setItem("isLogedIn", "true");
             //NUR AUSPROBIER DINGSI -> FÜR TASKBAR WEG
-            if (localStorage.getItem("isLogedIn") === "true" ) {//todo:überprüfen dass keine 3 anzeigen
+            /*if (localStorage.getItem("isLogedIn") === "true" ) {//todo:überprüfen dass keine 3 anzeigen
                 // Create an instance of RideTableComponent
                 const rideTable = new RideTableComponent();
                 // Append the instance to the document body (or another desired location)
@@ -82,12 +82,10 @@ class LoginComponent extends HTMLElement {
                 });
                 //DAMIT WORKTS
                 loadRides();
-            }
+            }*/
 
 
             console.log(localStorage.getItem("username"))
-        }else{
-            
         }
         window.location.reload();
     } 
