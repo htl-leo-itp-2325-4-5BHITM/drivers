@@ -38,6 +38,7 @@ podman / minikube löschen und nochmal installieren
 muss dann auch kubectl installieren
 
 
+### 1. Delete Setup
 cd. backend
 ```bash
 minikube delete
