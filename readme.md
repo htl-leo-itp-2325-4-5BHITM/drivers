@@ -31,12 +31,33 @@ kubectl get pods
 kubectl port-forward pos&lt;tab&gt;-&lt;tab&gt; 5433:5432
 ```
 
-### Fehlerbehebeungen 
+## Fehlerbehebeungen 
 
-password/user/ (Quarkus) Fehler kann sicht nicht verbinden / connection refused:
-```bash
+###password/user/ (Quarkus) Fehler kann sicht nicht verbinden / connection refused:
 podman / minikube löschen und nochmal installieren
 muss dann auch kubectl installieren
-```
 
+
+cd. backend
+```bash
+minikube delete
+podman machine stop
+podman machine rm podman-machine-default
+```
+### 2. setup your environment (once)
+```bash
+podman machine init --cpus 2
+podman machine set --rootful
+podman machine start
+minikube start
+```
+### on OSX:
+
+```bash
+minikube --driver=podman start
+minikube addons enable dashboard
+minikube addons enable metrics-server
+minikube stop
+podman machine stop
+```
 
