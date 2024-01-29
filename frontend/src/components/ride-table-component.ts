@@ -55,8 +55,7 @@ export class RideTableComponent extends HTMLElement {
                 <button class="table-setting-button"  class="setting-setting" @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button></div></td>
             </tr>
             `
-        } 
-        else if(localStorage.getItem("isLogedIn") === "true"){
+        } else {
         return html`
             <tr class="ride-finder-entry-row">
                 <td>${formattedDate}</td>
@@ -68,18 +67,8 @@ export class RideTableComponent extends HTMLElement {
                 <td><div class="table-settings"><button class="table-setting-button" @click=${() => getSeat(ride)}><img src="./img/plus_inactive.png" width="15vw"></button>
                 <button class="table-setting-button" class="setting-minus" @click=${() => removeSeat(ride)}><img src="./img/minus_inactive.png" width="15vw"></button>
             </div></td>
-            </tr>`
-        }else{
-            return html`
-            <tr class="ride-finder-entry-row">
-                <td>${formattedDate}</td>
-                <td>${formattedTime}</td>
-                <td>${ride.placeOfDeparture}</td>
-                <td>${ride.placeOfArrival}</td>
-                <td>${ride.driver}</td>
-                <td>${ride.availableSeats}</td>
-                <td></td>
-            </tr>`
+            </tr>
+            `
         }
     }
     tableTemplate(rides: Ride[], currentRide?: Ride) {
@@ -99,134 +88,71 @@ export class RideTableComponent extends HTMLElement {
         if (isLogedIn === "false") {
 
             console.log("no user");
-            //return html`<div>Please log in to see the rides!</div>`;
-            return html`
-            <div><p>Please log in to get a seat!</p></div>
-            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-            <link rel="stylesheet" href="./style/rideTable.css">
-            
-            <div id="ride-finder-table-tab">
-            
-                <table id="ride-finder-table" cellpadding="0">
-                    <thead class="ride-finder-tablehead">
-                        <tr>
-                            <th  @click=${() => this.sortRides("date")}>Date</th>
-                            <th  @click=${() => this.sortRides("departureTime")}>Time</th>
-                            <th  @click=${() => this.sortRides("placeOfDeparture")}>From</th>
-                            <th  @click=${() => this.sortRides("placeOfArrival")}>To</th>
-                            <th @click=${() => this.sortRides("driver")}>Driver</th>
-                            <th  @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
-                            <th > <div id="ride-search">
-                            <input type="text" placeholder="Search"><button><img src=""./img/magnifying_glass.png></button>
-                        </div></th>
-                            
-                        </tr>
-                    </thead>
-                <tbody>
-                    ${rows}
-                </tbody>
-                </table>
-            </div>
+            return html`<div>Please log in to see the rides!</div>`;
 
-            <!-- The Modal -->
-
-            <div id="ride-dialog" class="w3-modal">
-            <div class="w3-modal-content">
-                <div class="w3-container" >
-                <span id="close-button" @click=${() => this.closeDialog()}
-                    class="w3-button w3-display-topright">&times;</span>
-                    <h2 class="w3-text-black">Change data</h2>
-                    <form id="form_head_change" class="w3-text-black">
-                        <div class="table-input" id="form_label">
-                            <label for="abfort">From</label><br>
-                            <input type="text" id="abfort" name="abfort" value='${currentRide?.placeOfDeparture}'><br><br>
-
-                            <label for="ankort">To</label><br>
-                            <input type="text" id="ankort" name="ankort" value='${currentRide?.placeOfArrival}'><br><br>
-
-                            <label for="datum">Date</label><br>
-                            <input type="date" id="datum" name="datum" value='${dateValue}'><br><br>
-
-                            <label for="abfzeit">Time:</label><br>
-                            
-                            <input type="time" id="abfzeit" name="abfzeit" value='${timeValue}'><br><br>
-
-                            <label for="fplatz">Available seats:</label><br>
-                            <input type="number" min="1" id="fplatz" name="fplatz" value='${currentRide?.availableSeats}'><br><br>
-                        </div>
-                        
-
-                    </form>
-                    <div id="errorWrongInput"></div>
-                </div>
-            </div>
-            </div>`
-
-            
         } else {
         //w3-table-all/*
-            return html`
-                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-                <link rel="stylesheet" href="./style/rideTable.css">
-                
-                <div id="ride-finder-table-tab">
-                
-                    <table id="ride-finder-table" cellpadding="0">
-                        <thead class="ride-finder-tablehead">
-                            <tr>
-                                <th  @click=${() => this.sortRides("date")}>Date</th>
-                                <th  @click=${() => this.sortRides("departureTime")}>Time</th>
-                                <th  @click=${() => this.sortRides("placeOfDeparture")}>From</th>
-                                <th  @click=${() => this.sortRides("placeOfArrival")}>To</th>
-                                <th @click=${() => this.sortRides("driver")}>Driver</th>
-                                <th  @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
-                                <th > <div id="ride-search">
-                                <input type="text" placeholder="Search"><button><img src=""./img/magnifying_glass.png></button>
-                            </div></th>
-                                
-                            </tr>
-                        </thead>
-                    <tbody>
-                        ${rows}
-                    </tbody>
-                    </table>
-                </div>
+        return html`
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="./style/rideTable.css">
+        
+        <div id="ride-finder-table-tab">
+        
+            <table id="ride-finder-table" cellpadding="0">
+                <thead class="ride-finder-tablehead">
+                    <tr>
+                        <th  @click=${() => this.sortRides("date")}>Date</th>
+                        <th  @click=${() => this.sortRides("departureTime")}>Time</th>
+                        <th  @click=${() => this.sortRides("placeOfDeparture")}>From</th>
+                        <th  @click=${() => this.sortRides("placeOfArrival")}>To</th>
+                        <th @click=${() => this.sortRides("driver")}>Driver</th>
+                        <th  @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
+                        <th > <div id="ride-search">
+                        <input type="text" placeholder="Search"><button><img src=""./img/magnifying_glass.png></button>
+                    </div></th>
+                        
+                    </tr>
+                </thead>
+            <tbody>
+                ${rows}
+            </tbody>
+            </table>
+        </div>
 
-                <!-- The Modal -->
+        <!-- The Modal -->
 
-                <div id="ride-dialog" class="w3-modal">
-                <div class="w3-modal-content">
-                    <div class="w3-container" >
-                    <span id="close-button" @click=${() => this.closeDialog()}
-                        class="w3-button w3-display-topright">&times;</span>
-                        <h2 class="w3-text-black">Change data</h2>
-                        <form id="form_head_change" class="w3-text-black">
-                            <div class="table-input" id="form_label">
-                                <label for="abfort">From</label><br>
-                                <input type="text" id="abfort" name="abfort" value='${currentRide?.placeOfDeparture}'><br><br>
+        <div id="ride-dialog" class="w3-modal">
+        <div class="w3-modal-content">
+            <div class="w3-container" >
+            <span id="close-button" @click=${() => this.closeDialog()}
+                class="w3-button w3-display-topright">&times;</span>
+                <h2 class="w3-text-black">Change data</h2>
+                <form id="form_head_change" class="w3-text-black">
+                    <div class="table-input" id="form_label">
+                        <label for="abfort">From</label><br>
+                        <input type="text" id="abfort" name="abfort" value='${currentRide?.placeOfDeparture}'><br><br>
 
-                                <label for="ankort">To</label><br>
-                                <input type="text" id="ankort" name="ankort" value='${currentRide?.placeOfArrival}'><br><br>
+                        <label for="ankort">To</label><br>
+                        <input type="text" id="ankort" name="ankort" value='${currentRide?.placeOfArrival}'><br><br>
 
-                                <label for="datum">Date</label><br>
-                                <input type="date" id="datum" name="datum" value='${dateValue}'><br><br>
+                        <label for="datum">Date</label><br>
+                        <input type="date" id="datum" name="datum" value='${dateValue}'><br><br>
 
-                                <label for="abfzeit">Time:</label><br>
-                                
-                                <input type="time" id="abfzeit" name="abfzeit" value='${timeValue}'><br><br>
+                        <label for="abfzeit">Time:</label><br>
+                        
+                        <input type="time" id="abfzeit" name="abfzeit" value='${timeValue}'><br><br>
 
-                                <label for="fplatz">Available seats:</label><br>
-                                <input type="number" min="1" id="fplatz" name="fplatz" value='${currentRide?.availableSeats}'><br><br>
-                            </div>
-                            <input @click=${() => this.saveChanges(currentRide?.id)} type="button" id="submit" value="save">
-                            <input @click=${() => this.removeRide(currentRide?.id)} type="button" id="remove" value="remove">
-
-                        </form>
-                        <div id="errorWrongInput"></div>
+                        <label for="fplatz">Available seats:</label><br>
+                        <input type="number" min="1" id="fplatz" name="fplatz" value='${currentRide?.availableSeats}'><br><br>
                     </div>
-                </div>
-                </div>`
-        }
+                    <input @click=${() => this.saveChanges(currentRide?.id)} type="button" id="submit" value="save">
+                    <input @click=${() => this.removeRide(currentRide?.id)} type="button" id="remove" value="remove">
+
+                </form>
+                <div id="errorWrongInput"></div>
+            </div>
+        </div>
+        </div>`}
         loadRides();
     }
     closeDialog() {
