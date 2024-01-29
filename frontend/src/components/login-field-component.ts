@@ -86,6 +86,8 @@ class LoginComponent extends HTMLElement {
 
 
             console.log(localStorage.getItem("username"))
+        } else{
+            alert("invalid data")
         }
         window.location.reload();
     } 
@@ -101,7 +103,7 @@ class LoginComponent extends HTMLElement {
         
         if (localStorage.length == 0 || localStorage.getItem("username").length == 0) {
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a username!';
-            
+            isValid = false;
         }
         // Überprüfe, ob der Passwort nicht null oder leer ist
         if (!driverInput.trim() || driverInput.length <= 2) {
@@ -110,9 +112,6 @@ class LoginComponent extends HTMLElement {
         }else{
             (this.shadowRoot.getElementById('logedInWorked') as HTMLElement).innerHTML = 'Log In worked';
         }
-        
-
-        
    
         
     

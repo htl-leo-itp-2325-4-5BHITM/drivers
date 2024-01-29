@@ -127,6 +127,8 @@ class UsersOptionComponent extends HTMLElement {
                     // Handle Fehler hier
                     console.log("Hat nd funktioniert zum speichan")
                 });
+        } else{
+            alert("invalid data!")
         }
         
     }
@@ -147,7 +149,7 @@ class UsersOptionComponent extends HTMLElement {
 
         if (!departureInput.trim() || departureInput.length <= 2) {
             //alert("Invalid departure location");
-            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid departure location.';
+            //(document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid departure location.';
             isValid = false;
         }
 
@@ -156,7 +158,7 @@ class UsersOptionComponent extends HTMLElement {
 
         if (!arrivalInput.trim() || arrivalInput.length <= 2) {
             //alert("Invalid arrival location");
-            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid arrival location.';
+            //(document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid arrival location.';
             isValid = false;
         }
 
@@ -165,7 +167,7 @@ class UsersOptionComponent extends HTMLElement {
         const currentDate = new Date().toISOString().split('T')[0]; // Heutiges Datum
 
         if (selectedDate < currentDate || !selectedDate) {
-            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
+            //(document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
             isValid = false;
             //alert('Selected date cannot be in the past or null.');
         }
@@ -174,7 +176,7 @@ class UsersOptionComponent extends HTMLElement {
         var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
 
         if (!timeInputValue) {
-            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a time.';
+            //(document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a time.';
             isValid = false;
             //alert('Selected date cannot be in the past or null.');
         }

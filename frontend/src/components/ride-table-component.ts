@@ -244,6 +244,8 @@ export class RideTableComponent extends HTMLElement {
                     // Handle Fehler hier
                     console.log("Hat nd funktioniert zum Ändern")
                 });
+        } else{
+            alert("invalid data")
         }
     }
     private removeRide(id: number) {
@@ -291,7 +293,7 @@ export class RideTableComponent extends HTMLElement {
 
         if (!departureInput.trim() || departureInput.length <= 2) {
             //alert("Invalid departure location");
-            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid departure location.';
+            //(this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid departure location.';
             isValid = false;
         }
 
@@ -300,17 +302,16 @@ export class RideTableComponent extends HTMLElement {
 
         if (!arrivalInput.trim() || arrivalInput.length <= 2) {
             //alert("Invalid arrival location");
-            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid arrival location.';
+            //(this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid arrival location.';
             isValid = false;
         }
 
-   
         //nach vergangenem Datum überprüfen und Datum auf null
         const selectedDate = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
         const currentDate = new Date().toISOString().split('T')[0]; // Heutiges Datum
 
         if (selectedDate < currentDate || !selectedDate) {
-            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a date that is not in the past.';
+            //(this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a date that is not in the past.';
             isValid = false;
             //alert('Selected date cannot be in the past or null.');
         }
@@ -319,7 +320,7 @@ export class RideTableComponent extends HTMLElement {
         var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
 
         if (!timeInputValue) {
-            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a time.';
+            //(this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a time.';
             isValid = false;
             //alert('Selected date cannot be in the past or null.');
         }
