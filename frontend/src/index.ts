@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", () => loaded())
 
 
 async function loaded() {
-    //loadRides()
+    loadRides()
     loadUsers()
 }
 

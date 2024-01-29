@@ -16,16 +16,18 @@ export class RideTableComponent extends HTMLElement {
             console.log("data changed", model)
             //NUR AUSPROBIER DINGSI
             this.render(model.drives, model.currentRide);
-            loadRides();
+            // lodt mid dem ois endlos
+            //loadRides();
         })
     }
     defaulting(){
-        store.subscribe(model => {
+        /*store.subscribe(model => {
             console.log("data changed", model)
-            if (localStorage.getItem("isLogedIn") != "true") {
+            //if (localStorage.getItem("isLogedIn") != "true") {
                 this.render(model.drives, model.currentRide);
-            }
-        })
+                //loadRides();
+            //}
+        })*/
     }
     constructor() {
         super()
@@ -153,7 +155,7 @@ export class RideTableComponent extends HTMLElement {
             </div>
         </div>
         </div>`}
-        loadRides();
+        //loadRides();
     }
     closeDialog() {
         const dialog = this.shadowRoot.getElementById('ride-dialog')
