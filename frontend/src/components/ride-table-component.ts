@@ -57,7 +57,22 @@ export class RideTableComponent extends HTMLElement {
                 <button class="table-setting-button"  class="setting-setting" @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button></div></td>
             </tr>
             `
-        } else {
+        }else if(localStorage.getItem("isLogedIn") == "false"){
+            return html` 
+            <tr class="ride-finder-entry-row">
+                <td>${formattedDate}</td>
+                <td>${formattedTime}</td>
+                <td>${ride.placeOfDeparture}</td>
+                <td>${ride.placeOfArrival}</td>
+                <td>${ride.driver}</td>
+                <td>${ride.availableSeats}</td>
+                <td>
+                    <div class="table-settings"><button class="table-setting-button" @click=${() => alert("Please log in to get a seat!")}><img src="./img/plus_inactive.png" width="15vw"></button>
+                    <button class="table-setting-button" class="setting-minus" @click=${() => alert("Please log in to get a seat!")}><img src="./img/minus_inactive.png" width="15vw"></button>
+                    </div>
+                </td>
+            </tr>`
+        }else {
         return html`
             <tr class="ride-finder-entry-row">
                 <td>${formattedDate}</td>
@@ -88,10 +103,32 @@ export class RideTableComponent extends HTMLElement {
         const isLogedIn = localStorage.getItem("isLogedIn");
         console.log(isLogedIn);
         if (isLogedIn === "false") {
-
-            console.log("no user");
-            return html`<div>Please log in to see the rides!</div>`;
-
+           return html`
+            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+            <link rel="stylesheet" href="./style/rideTable.css">
+            
+            <div id="ride-finder-table-tab">
+            
+                <table id="ride-finder-table" cellpadding="0">
+                    <thead class="ride-finder-tablehead">
+                        <tr>
+                            <th  @click=${() => this.sortRides("date")}>Date</th>
+                            <th  @click=${() => this.sortRides("departureTime")}>Time</th>
+                            <th  @click=${() => this.sortRides("placeOfDeparture")}>From</th>
+                            <th  @click=${() => this.sortRides("placeOfArrival")}>To</th>
+                            <th @click=${() => this.sortRides("driver")}>Driver</th>
+                            <th  @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
+                            <th > <div id="ride-search">
+                            <input type="text" placeholder="Search"><button><img src=""./img/magnifying_glass.png></button>
+                        </div></th>
+                            
+                        </tr>
+                    </thead>
+                <tbody>
+                    ${rows}
+                </tbody>
+                </table>
+            </div>`
         } else {
         //w3-table-all/*
         return html`
