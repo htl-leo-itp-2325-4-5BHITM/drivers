@@ -1,7 +1,7 @@
 import { Ride, Model } from "Model/model"
 import { store } from "../model/model"
 import { DateTime } from 'luxon'
-import { RegisterData } from "Model/model"
+import { RegisterData,FilterData } from "Model/model"
 
 const RIDES_URL = "/api/drivus/rides"
 
@@ -16,7 +16,28 @@ async function loadRides() {
 }
 export { loadRides }
 
+export function getFiltered(filterText: String) {
+    console.log("toFilterText: " + filterText);
+    const url = `http://localhost:4200/api/drivus/rides/getFilteredRide/${filterText}`;
 
+    fetch(url)
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle die Antwort hier
+            console.log(data);
+            loadRides();
+        })
+        .catch(error => {
+            // Handle Fehler hier
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
 
 export function getSeat(ride: Ride) {
     console.log(ride)

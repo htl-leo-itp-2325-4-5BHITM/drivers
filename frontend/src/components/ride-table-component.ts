@@ -2,7 +2,7 @@ import { Ride, store } from "../model/model"
 import { html, render } from "lit-html"
 import { DateTime } from 'luxon'
 import { sortData } from "../index"
-import { loadRides, getSeat, removeSeat } from "../service/ride-service"
+import {loadRides, getSeat, removeSeat, getFiltered} from "../service/ride-service"
 // für Sortierung
 let lastSortedColumn: String | null = null;
 let isAscendingOrder = true;
@@ -88,6 +88,7 @@ export class RideTableComponent extends HTMLElement {
             `
         }
     }
+
     tableTemplate(rides: Ride[], currentRide?: Ride) {
         const rows = rides.map(ride => this.rowTemplate(ride))
         // Überprüfen, ob currentRide definiert ist und departureTime hat
@@ -119,7 +120,7 @@ export class RideTableComponent extends HTMLElement {
                             <th @click=${() => this.sortRides("driver")}>Driver</th>
                             <th  @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
                             <th > <div id="ride-search">
-                            <input type="text" placeholder="Search"><button><img src=""./img/magnifying_glass.png></button>
+                            <input type="text" placeholder="Search" id="filterText"><button @click=${() => getFiltered((this.shadowRoot.getElementById('filterText') as HTMLInputElement).value)}><img src=""./img/magnifying_glass.png></button>
                         </div></th>
                             
                         </tr>
@@ -364,6 +365,11 @@ export class RideTableComponent extends HTMLElement {
     
         return isValid;
       }
+
+    private getFilteredList() {
+        var filterString = (this.shadowRoot.getElementById('filterText') as HTMLInputElement).value;
+
+    }
 }
 
 

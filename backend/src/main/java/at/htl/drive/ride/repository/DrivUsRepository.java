@@ -141,4 +141,15 @@ public class DrivUsRepository {
         DrivUser drivUser = em.find(DrivUser.class, userId);
         return drivUser;
     }
+
+    public List<Ride> getFilteredRides(String filterText) {
+        String sql = "SELECT r FROM Ride r " +
+                "WHERE r.placeOfDeparture LIKE :filterText " +
+                "OR r.placeOfArrival LIKE :filterText " +
+                "OR r.driver LIKE :filterText";
+        TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
+        query.setParameter("filterText", "%" + filterText + "%");
+
+        return query.getResultList();
+    }
 }
