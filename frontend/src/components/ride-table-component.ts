@@ -157,7 +157,7 @@ export class RideTableComponent extends HTMLElement {
                         <th @click=${() => this.sortRides("driver")}>Driver</th>
                         <th  @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
                         <th > <div id="ride-search">
-                        <input type="text" placeholder="Search" name="search" class="grid-item"><button><img src=""./img/magnifying_glass.png></button>
+                        <input type="text" placeholder="Search" id="filterText"><button @click=${() => getFiltered((this.shadowRoot.getElementById('filterText') as HTMLInputElement).value)}><img src=""./img/magnifying_glass.png></button>
                     </div></th>
                         
                     </tr>

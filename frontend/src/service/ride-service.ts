@@ -27,11 +27,19 @@ export async function getPage(page: number) {
 }
 
 
-export function getFiltered(filterText: String) {
+export async function getFiltered(filterText: String) {
     console.log("toFilterText: " + filterText);
     const url = `http://localhost:4200/api/drivus/rides/getFilteredRide/${filterText}`;
 
-    fetch(url)
+    const response = await fetch(url)
+    const rides: Ride[] = await response.json()
+    const model: Model = {
+        drives: rides
+    }
+    console.log("rides loaded", rides)
+    store.next(model)
+
+    /*fetch(url)
         .then(response => {
 
             if (!response.ok) {
@@ -47,7 +55,7 @@ export function getFiltered(filterText: String) {
         .catch(error => {
             // Handle Fehler hier
             console.error('There was a problem with the fetch operation:', error);
-        });
+        });*/
 }
 
 export function getSeat(ride: Ride) {
