@@ -2,7 +2,7 @@ import { Ride, store } from "../model/model"
 import { html, render } from "lit-html"
 import { DateTime } from 'luxon'
 import { sortData } from "../index"
-import { loadRides, getSeat, removeSeat } from "../service/ride-service"
+import {loadRides, getSeat, removeSeat, getFiltered} from "../service/ride-service"
 // für Sortierung
 let lastSortedColumn: String | null = null;
 let isAscendingOrder = true;
@@ -57,7 +57,22 @@ export class RideTableComponent extends HTMLElement {
                 <button class="table-setting-button"  class="setting-setting" @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button></div></td>
             </tr>
             `
-        } else {
+        }else if(localStorage.getItem("isLogedIn") == "false"){
+            return html` 
+            <tr class="ride-finder-entry-row">
+                <td>${formattedDate}</td>
+                <td>${formattedTime}</td>
+                <td>${ride.placeOfDeparture}</td>
+                <td>${ride.placeOfArrival}</td>
+                <td>${ride.driver}</td>
+                <td>${ride.availableSeats}</td>
+                <td>
+                    <div class="table-settings"><button class="table-setting-button" @click=${() => alert("Please log in to get a seat!")}><img src="./img/plus_inactive.png" width="15vw"></button>
+                    <button class="table-setting-button" class="setting-minus" @click=${() => alert("Please log in to get a seat!")}><img src="./img/minus_inactive.png" width="15vw"></button>
+                    </div>
+                </td>
+            </tr>`
+        }else {
         return html`
             <tr class="ride-finder-entry-row">
                 <td>${formattedDate}</td>
@@ -73,6 +88,7 @@ export class RideTableComponent extends HTMLElement {
             `
         }
     }
+
     tableTemplate(rides: Ride[], currentRide?: Ride) {
         const rows = rides.map(ride => this.rowTemplate(ride))
         // Überprüfen, ob currentRide definiert ist und departureTime hat
@@ -88,10 +104,32 @@ export class RideTableComponent extends HTMLElement {
         const isLogedIn = localStorage.getItem("isLogedIn");
         console.log(isLogedIn);
         if (isLogedIn === "false") {
-
-            console.log("no user");
-            return html`<div>Please log in to see the rides!</div>`;
-
+           return html`
+            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+            <link rel="stylesheet" href="./style/rideTable.css">
+            
+            <div id="ride-finder-table-tab">
+            
+                <table id="ride-finder-table" cellpadding="0">
+                    <thead class="ride-finder-tablehead">
+                        <tr>
+                            <th  @click=${() => this.sortRides("date")}>Date</th>
+                            <th  @click=${() => this.sortRides("departureTime")}>Time</th>
+                            <th  @click=${() => this.sortRides("placeOfDeparture")}>From</th>
+                            <th  @click=${() => this.sortRides("placeOfArrival")}>To</th>
+                            <th @click=${() => this.sortRides("driver")}>Driver</th>
+                            <th  @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
+                            <th > <div id="ride-search">
+                            <input type="text" placeholder="Search" id="filterText"><button @click=${() => getFiltered((this.shadowRoot.getElementById('filterText') as HTMLInputElement).value)}><img src=""./img/magnifying_glass.png></button>
+                        </div></th>
+                            
+                        </tr>
+                    </thead>
+                <tbody>
+                    ${rows}
+                </tbody>
+                </table>
+            </div>`
         } else {
         //w3-table-all/*
         return html`
@@ -110,7 +148,7 @@ export class RideTableComponent extends HTMLElement {
                         <th @click=${() => this.sortRides("driver")}>Driver</th>
                         <th  @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
                         <th > <div id="ride-search">
-                        <input type="text" placeholder="Search"><button><img src=""./img/magnifying_glass.png></button>
+                        <input type="text" placeholder="Search" name="search" class="grid-item"><button><img src=""./img/magnifying_glass.png></button>
                     </div></th>
                         
                     </tr>
@@ -244,6 +282,8 @@ export class RideTableComponent extends HTMLElement {
                     // Handle Fehler hier
                     console.log("Hat nd funktioniert zum Ändern")
                 });
+        } else{
+            alert("invalid data")
         }
     }
     private removeRide(id: number) {
@@ -291,7 +331,7 @@ export class RideTableComponent extends HTMLElement {
 
         if (!departureInput.trim() || departureInput.length <= 2) {
             //alert("Invalid departure location");
-            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid departure location.';
+            //(this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid departure location.';
             isValid = false;
         }
 
@@ -300,17 +340,16 @@ export class RideTableComponent extends HTMLElement {
 
         if (!arrivalInput.trim() || arrivalInput.length <= 2) {
             //alert("Invalid arrival location");
-            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid arrival location.';
+            //(this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid arrival location.';
             isValid = false;
         }
 
-   
         //nach vergangenem Datum überprüfen und Datum auf null
         const selectedDate = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
         const currentDate = new Date().toISOString().split('T')[0]; // Heutiges Datum
 
         if (selectedDate < currentDate || !selectedDate) {
-            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a date that is not in the past.';
+            //(this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a date that is not in the past.';
             isValid = false;
             //alert('Selected date cannot be in the past or null.');
         }
@@ -319,13 +358,18 @@ export class RideTableComponent extends HTMLElement {
         var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
 
         if (!timeInputValue) {
-            (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a time.';
+            //(this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a time.';
             isValid = false;
             //alert('Selected date cannot be in the past or null.');
         }
     
         return isValid;
       }
+
+    private getFilteredList() {
+        var filterString = (this.shadowRoot.getElementById('filterText') as HTMLInputElement).value;
+
+    }
 }
 
 

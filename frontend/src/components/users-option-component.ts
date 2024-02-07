@@ -32,47 +32,81 @@ class UsersOptionComponent extends HTMLElement {
 
         if (isLogedIn === "false") {
            
-            console.log("no user");
-            return html`<div>Please log in to regist a new ride!</div>`;
+            return html`
+            <link rel="stylesheet" href="../../style/register.css">
+                <form id="form_head">
+                
+                    <div id="register-image"></div>
+                    <div id="register-content">
+
+                    <div class="table-input" id="register-grid">
+                        <h2>Registration Info</h2>
+                        
+                        <div class="grid-item">
+                            <input type="text" id="abfort" name="abfort" placeholder="From">
+                        </div>
+                        <div class="grid-item">
+                            <input type="text" id="ankort" name="ankort" placeholder="To">
+                        </div>
+                        <div class="grid-item">
+                            
+                            <input placeholder="Date"
+                            onfocus="(this.type='date')"
+                            onblur="(this.type='text')"  
+                            id="datum" name="datum">
+                        </div>
+                        <div class="grid-item">
+                            <input placeholder="Time"
+                            onfocus="(this.type='time')"
+                            onblur="(this.type='text')" id="abfzeit" name="abfzeit">
+                        </div>
+                        <div class="grid-item">
+                            <input placeholder="Available Seats"
+                            onfocus="(this.type='number')"
+                            onblur="(this.type='text')" min="1" id="fplatz" name="fplatz">
+                        </div>
+                        <div class="table-input"></div>
+                        <input @click=${()=> alert("Plwase log in to regist a new ride!")} type="button" id="submit" value="submit">
+                </form>`
             
         } else {
             console.log("user is inserted")
-            return html`
-        <link rel="stylesheet" href="../../style/register.css">
-        <form id="form_head">
-            
-            <div id="register-image"></div>
-            <div id="register-content">
-
-            <div class="table-input" id="register-grid">
-                <h2>Registration Info</h2>
+        return html`
+            <link rel="stylesheet" href="../../style/register.css">
+                <form id="form_head">
                 
-                <div class="grid-item">
-                    <input type="text" id="abfort" name="abfort" placeholder="From">
-                </div>
-                <div class="grid-item">
-                    <input type="text" id="ankort" name="ankort" placeholder="To">
-                </div>
-                <div class="grid-item">
-                    
-                    <input placeholder="Date"
-                    onfocus="(this.type='date')"
-                    onblur="(this.type='text')"  
-                    id="datum" name="datum">
-                </div>
-                <div class="grid-item">
-                    <input placeholder="Time"
-                    onfocus="(this.type='time')"
-                    onblur="(this.type='text')" id="abfzeit" name="abfzeit">
-                </div>
-                <div class="grid-item">
-                    <input placeholder="Available Seats"
-                    onfocus="(this.type='number')"
-                    onblur="(this.type='text')" min="1" id="fplatz" name="fplatz">
-                </div>
-                <div class="table-input"></div>
-                <input @click=${()=> this.submit()} type="button" id="submit" value="submit">
-            </form>`
+                    <div id="register-image"></div>
+                    <div id="register-content">
+
+                    <div class="table-input" id="register-grid">
+                        <h2>Registration Info</h2>
+                        
+                        <div class="grid-item">
+                            <input type="text" id="abfort" name="abfort" placeholder="From">
+                        </div>
+                        <div class="grid-item">
+                            <input type="text" id="ankort" name="ankort" placeholder="To">
+                        </div>
+                        <div class="grid-item">
+                            
+                            <input placeholder="Date"
+                            onfocus="(this.type='date')"
+                            onblur="(this.type='text')"  
+                            id="datum" name="datum">
+                        </div>
+                        <div class="grid-item">
+                            <input placeholder="Time"
+                            onfocus="(this.type='time')"
+                            onblur="(this.type='text')" id="abfzeit" name="abfzeit">
+                        </div>
+                        <div class="grid-item">
+                            <input placeholder="Available Seats"
+                            onfocus="(this.type='number')"
+                            onblur="(this.type='text')" min="1" id="fplatz" name="fplatz">
+                        </div>
+                        <div class="table-input"></div>
+                        <input @click=${()=> this.submit()} type="button" id="submit" value="submit">
+                </form>`
         }
     }
     optionTemplate(drivUser: DrivUser) {
@@ -127,6 +161,8 @@ class UsersOptionComponent extends HTMLElement {
                     // Handle Fehler hier
                     console.log("Hat nd funktioniert zum speichan")
                 });
+        } else{
+            alert("invalid data!")
         }
         
     }
@@ -147,7 +183,7 @@ class UsersOptionComponent extends HTMLElement {
 
         if (!departureInput.trim() || departureInput.length <= 2) {
             //alert("Invalid departure location");
-            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid departure location.';
+            //(document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid departure location.';
             isValid = false;
         }
 
@@ -156,7 +192,7 @@ class UsersOptionComponent extends HTMLElement {
 
         if (!arrivalInput.trim() || arrivalInput.length <= 2) {
             //alert("Invalid arrival location");
-            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid arrival location.';
+            //(document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid arrival location.';
             isValid = false;
         }
 
@@ -165,7 +201,7 @@ class UsersOptionComponent extends HTMLElement {
         const currentDate = new Date().toISOString().split('T')[0]; // Heutiges Datum
 
         if (selectedDate < currentDate || !selectedDate) {
-            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
+            //(document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a date that is not in the past.';
             isValid = false;
             //alert('Selected date cannot be in the past or null.');
         }
@@ -174,7 +210,7 @@ class UsersOptionComponent extends HTMLElement {
         var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
 
         if (!timeInputValue) {
-            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a time.';
+            //(document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a time.';
             isValid = false;
             //alert('Selected date cannot be in the past or null.');
         }

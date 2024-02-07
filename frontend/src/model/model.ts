@@ -23,6 +23,9 @@ interface RegisterData {
     rideId: number
     username: string
 }
+export interface FilterData {
+    filterText: String
+}
 
 interface RideResponse {
     data: Ride[]

@@ -50,6 +50,15 @@ public class DrivUsResource {
         return Response.ok(dtos).build();
     }
 
+    @GET
+    @Path("rides/getFilteredRide/{filterText}")
+    public Response getFilteredRide(@PathParam("filterText") String filterText) {
+        System.out.println("bin im getFilteredRide");
+        var rides = repository.getFilteredRides(filterText);
+        var dtos = rides.stream().map(rideMapper::toResource);
+        return Response.ok(dtos).build();
+    }
+
     @POST
     @Transactional
     @Path("rides/changeRide")

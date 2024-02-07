@@ -1,9 +1,9 @@
-import {DrivUser, Model, store, storeUsers} from "../model/model"
-import {html, render} from "lit-html"
+import { DrivUser, Model, store, storeUsers } from "../model/model"
+import { html, render } from "lit-html"
 import { loadUsers, getUserData } from "../service/user-service"
 import { loadRides } from "../service/ride-service"
-import {RideTableComponent} from "./ride-table-component"
-import {BehaviorSubject} from "rxjs"
+import { RideTableComponent } from "./ride-table-component"
+import { BehaviorSubject } from "rxjs"
 
 class LoginComponent extends HTMLElement {
     connectedCallback() {
@@ -15,35 +15,33 @@ class LoginComponent extends HTMLElement {
     }
     constructor() {
         super()
-        this.attachShadow({mode: "open"})
+        this.attachShadow({ mode: "open" })
     }
     render(users: DrivUser[]) {
         render(this.formTemplate(users), this.shadowRoot)
     }
     formTemplate(users: DrivUser[]) {
-        const output = users.map(drivUser=>this.optionTemplate(drivUser))
+        const output = users.map(drivUser => this.optionTemplate(drivUser))
         //w3-table-all
         return html`
         <link rel="stylesheet" href="./style/home.css">
-        <form id="form_head">
-                <div class="table-input" id="form_label">
+        <div>
                     
-                    <label for="select_user">User</label><br>
-                    <select id="fahrer" name="fahrer">
-                        ${output}
-                    </select><br><br>
+            <select id="fahrer" name="fahrer">
+                ${output}
+            </select><br><br>
 
-                    <label for="password">Password</label><br>
-                    <input type="password" id="password" name="password"><br><br>
+            <input type="password" id="password" name="password"><br><br>
 
-                </div>
+        </div>
+                
                 <div class="table-input"></div>
-                <input @click=${()=> this.submit()} type="button" id="submit" value="submit">
-                <input @click=${()=> this.logout()} type="button" id="logout" value="logout">
-            </form>
-            <div id="errorWrongInput"></div>
-            <div id="logedInWorked"></div>
-            <div id="logedOutWorked"></div>`
+                <input @click=${() => this.submit()} type="button" id="submit" value="submit">
+                <input @click=${() => this.logout()} type="button" id="logout" value="logout">
+                
+        <div id="errorWrongInput"></div>
+        <div id="logedInWorked"></div>
+        <div id="logedOutWorked"></div>`
     }
     optionTemplate(drivUser: DrivUser) {
         console.log("render user", drivUser)
@@ -63,7 +61,7 @@ class LoginComponent extends HTMLElement {
 
         let name = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value;
         localStorage.setItem("username", name);
-        if(this.checkData()){
+        if (this.checkData()) {
             let name = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value;
             //let name = "";
             localStorage.setItem("username", name);
@@ -86,10 +84,12 @@ class LoginComponent extends HTMLElement {
 
 
             console.log(localStorage.getItem("username"))
+        } else {
+            alert("invalid data")
         }
         window.location.reload();
-    } 
-    private checkData(){
+    }
+    private checkData() {
 
         let isValid: Boolean = true;
         //passwort
@@ -98,26 +98,23 @@ class LoginComponent extends HTMLElement {
         // Überprüfen, ob user angemeldet ist
 
         console.log(localStorage.getItem("username"));
-        
+
         if (localStorage.length == 0 || localStorage.getItem("username").length == 0) {
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a username!';
-            
+            isValid = false;
         }
         // Überprüfe, ob der Passwort nicht null oder leer ist
         if (!driverInput.trim() || driverInput.length <= 2) {
             (this.shadowRoot.getElementById('errorWrongInput') as HTMLElement).innerHTML = 'Please enter a valid password!';
             isValid = false;
-        }else{
+        } else {
             (this.shadowRoot.getElementById('logedInWorked') as HTMLElement).innerHTML = 'Log In worked';
         }
-        
 
-        
-   
-        
-    
+
+
         return isValid;
-      }
+    }
 
 }
 
