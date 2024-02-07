@@ -3,6 +3,7 @@ import { html, render } from "lit-html"
 import { DateTime } from 'luxon'
 import { sortData } from "../index"
 import {loadRides, getSeat, removeSeat, getFiltered, getPage} from "../service/ride-service"
+
 // für Sortierung
 let lastSortedColumn: String | null = null;
 let isAscendingOrder = true;
@@ -130,6 +131,7 @@ export class RideTableComponent extends HTMLElement {
                     ${rows}
                 </tbody>
                 </table>
+                <!--<pagination-nav></pagination-nav>-->
                 <div class="pagination">
                     <p>&laquo;</p>
                     <p @click=${() => getPage(1)}>1</p>
