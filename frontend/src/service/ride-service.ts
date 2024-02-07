@@ -16,6 +16,17 @@ async function loadRides() {
 }
 export { loadRides }
 
+export async function getPage(page: number) {
+    const response = await fetch(`/api/drivus/pagination/${page}`)
+    const rides: Ride[] = await response.json()
+    const model: Model = {
+        drives: rides
+    }
+    console.log("rides loaded", rides)
+    store.next(model)
+}
+
+
 export function getFiltered(filterText: String) {
     console.log("toFilterText: " + filterText);
     const url = `http://localhost:4200/api/drivus/rides/getFilteredRide/${filterText}`;
@@ -31,7 +42,7 @@ export function getFiltered(filterText: String) {
         .then(data => {
             // Handle die Antwort hier
             console.log(data);
-            loadRides();
+            getPage(1);
         })
         .catch(error => {
             // Handle Fehler hier
@@ -63,7 +74,7 @@ export function getSeat(ride: Ride) {
         })
             .then(response => {
                 // Handle die Antwort hier
-                loadRides()
+                getPage(1)
                 console.log("gehd")
             })
             .catch(error => {
@@ -97,7 +108,7 @@ export function removeSeat(ride: Ride) {
         })
             .then(response => {
                 // Handle die Antwort hier
-                loadRides()
+                getPage(1)
                 console.log("gehd")
             })
             .catch(error => {

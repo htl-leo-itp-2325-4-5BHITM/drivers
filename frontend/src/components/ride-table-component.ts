@@ -2,7 +2,7 @@ import { Ride, store } from "../model/model"
 import { html, render } from "lit-html"
 import { DateTime } from 'luxon'
 import { sortData } from "../index"
-import {loadRides, getSeat, removeSeat, getFiltered} from "../service/ride-service"
+import {loadRides, getSeat, removeSeat, getFiltered, getPage} from "../service/ride-service"
 // für Sortierung
 let lastSortedColumn: String | null = null;
 let isAscendingOrder = true;
@@ -44,16 +44,18 @@ export class RideTableComponent extends HTMLElement {
         const formattedDate = departureTime.toFormat('yyyy-MM-dd'); // Datum formatieren (z.B. 2023-11-22)
         //<td><button @click=${()=> removeSeat(ride)}>-</button></td>
         console.log("render ride", ride)
+        
         if(ride.driver == localStorage.getItem("username")) {
             return html`
             <tr class="ride-finder-entry-row">
-                <td>${formattedDate}</td>
-                <td>${formattedTime}</td>
-                <td>${ride.placeOfDeparture}</td>
-                <td>${ride.placeOfArrival}</td>
-                <td>${ride.driver}</td>
-                <td>${ride.availableSeats}</td>
-                <td><div class="table-settings">
+            <td>${formattedDate}</td>
+            <td>${formattedTime}</td>
+            <td>${ride.placeOfDeparture}</td>
+            <td>${ride.placeOfArrival}</td>
+            <td>${ride.driver}</td>
+            <td>${ride.availableSeats}</td>
+            <td>
+                <div class="table-settings">
                 <button class="table-setting-button"  class="setting-setting" @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button></div></td>
             </tr>
             `
@@ -88,7 +90,6 @@ export class RideTableComponent extends HTMLElement {
             `
         }
     }
-
     tableTemplate(rides: Ride[], currentRide?: Ride) {
         const rows = rides.map(ride => this.rowTemplate(ride))
         // Überprüfen, ob currentRide definiert ist und departureTime hat
@@ -129,6 +130,12 @@ export class RideTableComponent extends HTMLElement {
                     ${rows}
                 </tbody>
                 </table>
+                <div class="pagination">
+                    <p>&laquo;</p>
+                    <p @click=${() => getPage(1)}>1</p>
+                    <p @click=${() => getPage(2)}>2</p>
+                    <p>&raquo;</p>
+                </div>
             </div>`
         } else {
         //w3-table-all/*
@@ -157,6 +164,12 @@ export class RideTableComponent extends HTMLElement {
                 ${rows}
             </tbody>
             </table>
+            <div class="pagination">
+                <p>&laquo;</p>
+                <p @click=${() => getPage(1)}>1</p>
+                <p @click=${() => getPage(2)}>2</p>
+                <p>&raquo;</p>
+            </div>
         </div>
 
         <!-- The Modal -->
@@ -274,7 +287,7 @@ export class RideTableComponent extends HTMLElement {
             })
                 .then(response => {
                     // Handle die Antwort hier
-                    loadRides()
+                    getPage(1)
                     this.closeDialog()
                     console.log("gehd")
                 })
@@ -301,7 +314,7 @@ export class RideTableComponent extends HTMLElement {
         })
             .then(response => {
                 // Handle die Antwort hier
-                loadRides()
+                getPage(1)
                 this.closeDialog()
                 console.log("gehd")
             })

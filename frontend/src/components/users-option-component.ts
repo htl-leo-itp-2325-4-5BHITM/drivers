@@ -3,7 +3,7 @@ import { html, render } from "lit-html"
 import { loadUsers } from "../service/user-service"
 import { DateTime } from 'luxon';
 import { RidePost } from "../model/model"
-import { loadRides } from "../service/ride-service"
+import { loadRides, getPage } from "../service/ride-service"
 
 
 class UsersOptionComponent extends HTMLElement {
@@ -66,7 +66,7 @@ class UsersOptionComponent extends HTMLElement {
                             onblur="(this.type='text')" min="1" id="fplatz" name="fplatz">
                         </div>
                         <div class="table-input"></div>
-                        <input @click=${()=> alert("Plwase log in to regist a new ride!")} type="button" id="submit" value="submit">
+                        <input @click=${()=> alert("Please log in to regist a new ride!")} type="button" id="submit" value="submit">
                 </form>`
             
         } else {
@@ -154,7 +154,7 @@ class UsersOptionComponent extends HTMLElement {
             })
                 .then(response => {
                     // Handle die Antwort hier
-                    loadRides()
+                    getPage(1)
                     console.log("gehd")
                 })
                 .catch(error => {

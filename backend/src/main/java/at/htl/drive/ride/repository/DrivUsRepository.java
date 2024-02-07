@@ -28,6 +28,12 @@ public class DrivUsRepository {
         return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
     }
 
+    public List<Ride> pagination(int page) {
+        String sql = "select r from Ride r order by r.departureTime";
+        TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
+        return query.getResultList().subList((page-1)+7*(page-1), ((page-1)+7*(page-1))+7);
+    }
+
     public void changeRide(RideDto rideDto) {
         Long id = rideDto.id();
         Ride ride = em.find(Ride.class, id);
