@@ -43,7 +43,7 @@ table {
 
 #ride-finder-table td:nth-child(6) {
     width: inherit;
-    text-align: right;
+    text-align: center;
     padding-right: 1%;
 }
 

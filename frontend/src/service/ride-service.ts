@@ -2,17 +2,21 @@ import { Ride, Model } from "Model/model"
 import { store } from "../model/model"
 import { DateTime } from 'luxon'
 import { RegisterData,FilterData } from "Model/model"
+import { produce } from "immer"
 
 const RIDES_URL = "/api/drivus/rides"
 
 async function loadRides() {
     const response = await fetch(RIDES_URL)
     const rides: Ride[] = await response.json()
-    const model: Model = {
+    const nextState = produce(store.getValue(), model => {
+        model.drives = rides
+    })
+    /*const model: Model = {
         drives: rides
-    }
+    }*/
     console.log("rides loaded", rides)
-    store.next(model)
+    store.next(nextState)
 }
 export { loadRides }
 

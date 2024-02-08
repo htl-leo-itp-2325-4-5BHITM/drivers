@@ -177,7 +177,7 @@ export class RideTableComponent extends HTMLElement {
         <!-- The Modal -->
 
         <div id="ride-dialog" class="w3-modal">
-        <div class="w3-modal-content">
+        <div class="w3-modal-content w3-padding-16">
             <div class="w3-container" >
             <span id="close-button" @click=${() => this.closeDialog()}
                 class="w3-button w3-display-topright">&times;</span>
@@ -250,9 +250,9 @@ export class RideTableComponent extends HTMLElement {
     private saveChanges(id: number) {
         var url = "http://localhost:4200/api/drivus/rides/changeRide"
 
-        var driv = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement);
+        var driv = localStorage.getItem("username");
         console.log(driv);
-        console.log(driv.value);
+        console.log(driv);
 
         // Daten aus dem Formular erfassen
         var dateInputValue = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
@@ -270,7 +270,7 @@ export class RideTableComponent extends HTMLElement {
         
             const formData: Ride = {
                 id: id,
-                driver: (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value,
+                driver: localStorage.getItem("username"),
                 departureTime: combinedDateTime,
                 placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
                 placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
@@ -332,7 +332,7 @@ export class RideTableComponent extends HTMLElement {
         let isValid: Boolean = true;
 
         // Überprüfe, ob der Name nicht null oder leer ist
-        var driverInput = (this.shadowRoot.getElementById('fahrer') as HTMLInputElement).value;
+        var driverInput = localStorage.getItem("username");
 
         if (!driverInput.trim() || driverInput.length <= 2) {
             //alert("no name enterd");
