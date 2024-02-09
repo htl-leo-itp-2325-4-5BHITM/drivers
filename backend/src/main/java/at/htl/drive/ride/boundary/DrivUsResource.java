@@ -125,7 +125,7 @@ public class DrivUsResource {
     }
 
     @Path("/getUser")
-    @GET
+    @POST
     public DrivUser getUser(UsernameDto username) {
         return repository.getUser(username);
     }

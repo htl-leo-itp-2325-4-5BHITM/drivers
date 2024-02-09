@@ -1,5 +1,6 @@
 import { DrivUser, Model, store, storeUsers } from "../model/model"
 import { html, render } from "lit-html"
+import { getUserData } from "../service/user-service"
 
 class LoginComponent extends HTMLElement {
     connectedCallback() {
@@ -32,6 +33,7 @@ class LoginComponent extends HTMLElement {
 
         <input @click=${() => this.submit()} type="button" id="submit" value="submit">
         <input @click=${() => this.logout()} type="button" id="logout" value="logout">
+        <input @click=${() => getUserData()} type="button" id="logout" value="getUser">
                 
         <div id="errorWrongInput"></div>
         <div id="logedInWorked"></div>
