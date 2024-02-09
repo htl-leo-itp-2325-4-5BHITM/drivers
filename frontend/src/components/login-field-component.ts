@@ -1,9 +1,5 @@
 import { DrivUser, Model, store, storeUsers } from "../model/model"
 import { html, render } from "lit-html"
-import { loadUsers, getUserData } from "../service/user-service"
-import { loadRides } from "../service/ride-service"
-import { RideTableComponent } from "./ride-table-component"
-import { BehaviorSubject } from "rxjs"
 
 class LoginComponent extends HTMLElement {
     connectedCallback() {
@@ -26,18 +22,16 @@ class LoginComponent extends HTMLElement {
         return html`
         <link rel="stylesheet" href="./style/home.css">
         <div>
-                    
             <select id="fahrer" name="fahrer">
                 ${output}
             </select><br><br>
-
             <input type="password" id="password" name="password"><br><br>
-
         </div>
                 
-                <div class="table-input"></div>
-                <input @click=${() => this.submit()} type="button" id="submit" value="submit">
-                <input @click=${() => this.logout()} type="button" id="logout" value="logout">
+        <div class="table-input"></div>
+
+        <input @click=${() => this.submit()} type="button" id="submit" value="submit">
+        <input @click=${() => this.logout()} type="button" id="logout" value="logout">
                 
         <div id="errorWrongInput"></div>
         <div id="logedInWorked"></div>
@@ -81,8 +75,6 @@ class LoginComponent extends HTMLElement {
                 //DAMIT WORKTS
                 loadRides();
             }*/
-
-
             console.log(localStorage.getItem("username"))
         } else {
             alert("invalid data")
@@ -110,9 +102,7 @@ class LoginComponent extends HTMLElement {
         } else {
             (this.shadowRoot.getElementById('logedInWorked') as HTMLElement).innerHTML = 'Log In worked';
         }
-
-
-
+        
         return isValid;
     }
 

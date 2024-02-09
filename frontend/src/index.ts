@@ -3,12 +3,8 @@ import { loadUsers } from "./service/user-service"
 import "./components/ride-table-component"
 import "./components/users-option-component"
 import "./components/login-field-component"
-import "./components/pagination-nav-component"
-import {Ride,RidePost,store} from "./model/model"
-import { DateTime } from 'luxon';
 
 window.addEventListener("DOMContentLoaded", () => loaded())
-
 
 async function loaded() {
     getPage(1)
@@ -30,9 +26,3 @@ export function sortData(sorted: Boolean, column: String) {
             console.log("Hat nd funktioniert zum speichan")
         });
 }
-
-function saveDataInput() {
-    //var username = (this.shadowRoot.getElementById('log-in-name') as HTMLInputElement).value;
-    console.log("fffff");
-
-} 

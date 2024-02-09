@@ -13,7 +13,6 @@ async function loadUsers() {
     storeUsers.next(model)
 }
 
-
 export function getUserData() {
     var url = "http://localhost:4200/api/drivus/getUser"
     var user = localStorage.getItem("username")
@@ -22,7 +21,7 @@ export function getUserData() {
     console.log(jsonData)
 
         fetch(url, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -37,8 +36,6 @@ export function getUserData() {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
             });
-    
 }
-
 
 export { loadUsers }

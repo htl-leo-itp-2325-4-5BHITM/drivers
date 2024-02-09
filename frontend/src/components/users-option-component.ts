@@ -1,6 +1,5 @@
 import { DrivUser, storeUsers } from "../model/model"
 import { html, render } from "lit-html"
-import { loadUsers } from "../service/user-service"
 import { DateTime } from 'luxon';
 import { RidePost } from "../model/model"
 import { loadRides, getPage } from "../service/ride-service"
@@ -22,55 +21,6 @@ class UsersOptionComponent extends HTMLElement {
         render(this.formTemplate(users), this.shadowRoot)
     }
     formTemplate(users: DrivUser[]) {
-        const output = users.map(drivUser => this.optionTemplate(drivUser))
-        //w3-table-all
-        //localStorage.setItem("username", "hallo");
-////////////////////////////////////////////////////
-        
-        const isLogedIn = localStorage.getItem("isLogedIn");
-        console.log(isLogedIn);
-
-        if (isLogedIn === "false") {
-           
-            return html`
-            <link rel="stylesheet" href="../../style/register.css">
-                <form id="form_head">
-                
-                    <div id="register-image"></div>
-                    <div id="register-content">
-
-                    <div class="table-input" id="register-grid">
-                        <h2>Registration Info</h2>
-                        
-                        <div class="grid-item">
-                            <input type="text" id="abfort" name="abfort" placeholder="From">
-                        </div>
-                        <div class="grid-item">
-                            <input type="text" id="ankort" name="ankort" placeholder="To">
-                        </div>
-                        <div class="grid-item">
-                            
-                            <input placeholder="Date"
-                            onfocus="(this.type='date')"
-                            onblur="(this.type='text')"  
-                            id="datum" name="datum">
-                        </div>
-                        <div class="grid-item">
-                            <input placeholder="Time"
-                            onfocus="(this.type='time')"
-                            onblur="(this.type='text')" id="abfzeit" name="abfzeit">
-                        </div>
-                        <div class="grid-item">
-                            <input placeholder="Available Seats"
-                            onfocus="(this.type='number')"
-                            onblur="(this.type='text')" min="1" id="fplatz" name="fplatz">
-                        </div>
-                        <div class="table-input"></div>
-                        <input @click=${()=> alert("Please log in to regist a new ride!")} type="button" id="submit" value="submit">
-                </form>`
-            
-        } else {
-            console.log("user is inserted")
         return html`
             <link rel="stylesheet" href="../../style/register.css">
                 <form id="form_head">
@@ -88,7 +38,6 @@ class UsersOptionComponent extends HTMLElement {
                             <input type="text" id="ankort" name="ankort" placeholder="To">
                         </div>
                         <div class="grid-item">
-                            
                             <input placeholder="Date"
                             onfocus="(this.type='date')"
                             onblur="(this.type='text')"  
@@ -105,17 +54,16 @@ class UsersOptionComponent extends HTMLElement {
                             onblur="(this.type='text')" min="1" id="fplatz" name="fplatz">
                         </div>
                         <div class="table-input"></div>
-                        <input @click=${()=> this.submit()} type="button" id="submit" value="submit">
-                </form>`
-        }
-    }
-    optionTemplate(drivUser: DrivUser) {
-        console.log("render user", drivUser)
-        return html`
-        <option value="${drivUser.firstName} ${drivUser.lastName}">${drivUser.firstName} ${drivUser.lastName}</option>
+                        <input @click=${() => this.submit()} type="button" id="submit" value="submit">
+                </form>
         `
     }
     private submit() {
+
+        if (localStorage.getItem("isLogedIn") === "false") {
+            return html`
+            ${alert("Please log in to regist a new ride!")}`
+        }
         console.log("bin im form")
 
         // Daten aus dem Formular erfassen
@@ -169,15 +117,6 @@ class UsersOptionComponent extends HTMLElement {
     private checkData() {
         let isValid: Boolean = true;
 
-        // Überprüfe, ob der Name nicht null oder leer ist
-        /*var driverInput = (document.getElementById('fahrer') as HTMLInputElement).value;
-    
-        if (!driverInput.trim() || driverInput.length <= 2) {
-            //alert("no name enterd");
-            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Please enter a valid driver name.';
-            isValid = false;
-        }*/
-
         // Überprüfe, ob der Abfahrtsort nicht null oder leer ist
         var departureInput = (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value;
 
@@ -218,11 +157,4 @@ class UsersOptionComponent extends HTMLElement {
     }
 }
 
-/*const username = localStorage.getItem("isLogedIn");
-if (username === "false") {
-    console.log("Username is present but has a length of 0.");
-    
-}else {
-customElements.define("users-option", UsersOptionComponent)
-}*/
 customElements.define("users-option", UsersOptionComponent)

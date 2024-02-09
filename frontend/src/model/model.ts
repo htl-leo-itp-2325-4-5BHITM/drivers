@@ -1,7 +1,9 @@
 import {BehaviorSubject} from "rxjs"
 import { DateTime } from 'luxon';
-
 export {RidePost} from "./ride-post"
+export {FilterData} from "./rides-filtered"
+export {RegisterData} from "./ride-register"
+
 
 interface Ride {
     id: number
@@ -12,17 +14,7 @@ interface Ride {
     availableSeats: number
 }
 
-
-
-interface RegisterData {
-    rideId: number
-    username: string
-}
-export interface FilterData {
-    filterText: String
-}
-
-interface RideResponse {
+export interface RideResponse {
     data: Ride[]
 }
 
@@ -38,7 +30,6 @@ const initialState: Model = {
 /*export interface Model2 {
     drive: Ride
 }*/
-
 
 // Users
 interface DrivUser {
@@ -57,8 +48,7 @@ const initialStateUser: ModelUser = {
 }
 
 
-
 const store = new BehaviorSubject<Model>(initialState)
 const storeUsers = new BehaviorSubject<ModelUser>(initialStateUser)
 
-export { Ride, DrivUser, RegisterData, RideResponse as DriveResponse, store, storeUsers}
+export { Ride, DrivUser, RideResponse as DriveResponse, store, storeUsers}

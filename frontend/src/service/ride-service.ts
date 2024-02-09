@@ -1,35 +1,29 @@
 import { Ride, Model } from "Model/model"
 import { store } from "../model/model"
-import { DateTime } from 'luxon'
 import { RegisterData,FilterData } from "Model/model"
 import { produce } from "immer"
 
 const RIDES_URL = "/api/drivus/rides"
 
-async function loadRides() {
+export async function loadRides() {
     const response = await fetch(RIDES_URL)
     const rides: Ride[] = await response.json()
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
     })
-    /*const model: Model = {
-        drives: rides
-    }*/
     console.log("rides loaded", rides)
     store.next(nextState)
 }
-export { loadRides }
 
 export async function getPage(page: number) {
     const response = await fetch(`/api/drivus/pagination/${page}`)
     const rides: Ride[] = await response.json()
-    const model: Model = {
-        drives: rides
-    }
+    const nextState = produce(store.getValue(), model => {
+        model.drives = rides
+    })
     console.log("rides loaded", rides)
-    store.next(model)
+    store.next(nextState)
 }
-
 
 export async function getFiltered(filterText: String) {
     console.log("toFilterText: " + filterText);
@@ -37,29 +31,11 @@ export async function getFiltered(filterText: String) {
 
     const response = await fetch(url)
     const rides: Ride[] = await response.json()
-    const model: Model = {
-        drives: rides
-    }
+    const nextState = produce(store.getValue(), model => {
+        model.drives = rides
+    })
     console.log("rides loaded", rides)
-    store.next(model)
-
-    /*fetch(url)
-        .then(response => {
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Handle die Antwort hier
-            console.log(data);
-            getPage(1);
-        })
-        .catch(error => {
-            // Handle Fehler hier
-            console.error('There was a problem with the fetch operation:', error);
-        });*/
+    store.next(nextState)
 }
 
 export function getSeat(ride: Ride) {
@@ -129,54 +105,3 @@ export function removeSeat(ride: Ride) {
             });
     }
 }
-
-
-/*
-export function saveChanges(id: number) {
-    var url = "http://localhost:4200/api/rides/changeRide"
-    
-    var driv = (document.getElementById('fahrer') as HTMLInputElement);
-    console.log(driv);
-    console.log(driv.value);
-
-    // Daten aus dem Formular erfassen
-    var dateInputValue = (document.getElementById('datum') as HTMLInputElement).value;
-    var timeInputValue = (document.getElementById('abfzeit') as HTMLInputElement).value;
-    console.log(dateInputValue)
-
-    const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy-MM-dd:HH:mm');
-
-    console.log("date",dateInputValue); // Überprüfe das Datumformat
-    console.log("time",timeInputValue); // Überprüfe das Zeitformat
-    console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
-
-    const formData: Ride = {
-        id: id,
-        driver: (document.getElementById('fahrer') as HTMLInputElement).value,
-        departureTime: combinedDateTime,
-        placeOfDeparture: (document.getElementById('abfort') as HTMLInputElement).value,
-        placeOfArrival: (document.getElementById('ankort') as HTMLInputElement).value,
-        availableSeats: parseInt((document.getElementById('fplatz') as HTMLInputElement).value)
-    };
-    console.log("form Data: "+formData)
-    // Daten in JSON umwandeln
-    const jsonData = JSON.stringify(formData);
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: jsonData,
-    })
-        .then(response => {
-            // Handle die Antwort hier
-            loadRides()
-            this.closeDialog()
-            console.log("gehd")
-        })
-        .catch(error => {
-            // Handle Fehler hier
-            console.log("Hat nd funktioniert zum Ändern")
-        });
-} */
