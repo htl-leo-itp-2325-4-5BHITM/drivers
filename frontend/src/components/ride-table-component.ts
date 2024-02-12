@@ -24,7 +24,7 @@ export class RideTableComponent extends HTMLElement {
         filterInput.addEventListener("input", async () => {
             const filterText = filterInput.value;
             if(filterText==""){
-                loadRides()
+                getPage(1)
             }else{
                 await getFiltered(filterText);
             }

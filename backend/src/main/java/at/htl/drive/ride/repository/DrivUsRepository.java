@@ -149,10 +149,10 @@ public class DrivUsRepository {
     }
 
     public List<Ride> getFilteredRides(String filterText) {
-        String sql = "SELECT r FROM Ride r " +
-                "WHERE r.placeOfDeparture LIKE :filterText " +
-                "OR r.placeOfArrival LIKE :filterText " +
-                "OR r.driver LIKE :filterText";
+        String sql = "SELECT DISTINCT r FROM Ride r " +
+                "WHERE UPPER(r.placeOfDeparture)  LIKE UPPER(:filterText) " +
+                "OR UPPER(r.placeOfArrival) LIKE UPPER(:filterText) " +
+                "OR UPPER(r.driver) LIKE UPPER(:filterText)";
         TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
         query.setParameter("filterText", "%" + filterText + "%");
 
