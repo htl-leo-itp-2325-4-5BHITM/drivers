@@ -23,7 +23,11 @@ export class RideTableComponent extends HTMLElement {
         const filterInput = this.shadowRoot.getElementById("filterText") as HTMLInputElement;
         filterInput.addEventListener("input", async () => {
             const filterText = filterInput.value;
-            await getFiltered(filterText);
+            if(filterText==""){
+                loadRides()
+            }else{
+                await getFiltered(filterText);
+            }
         });
     }
     constructor() {
