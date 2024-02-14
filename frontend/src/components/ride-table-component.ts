@@ -1,7 +1,8 @@
 import { Ride, store } from "../model/model"
 import { html, render } from "lit-html"
 import { DateTime } from 'luxon'
-import { sortData } from "../index"
+//import { sortData } from "../index"
+import {getSorted} from "../service/ride-service"
 import {loadRides, getSeat, removeSeat, getFiltered, getPage} from "../service/ride-service"
 
 // für Sortierung
@@ -197,7 +198,7 @@ export class RideTableComponent extends HTMLElement {
         lastSortedColumn = column;
 
         //wird sortiert und Spalte an Server
-        sortData(isAscendingOrder, lastSortedColumn)
+        getSorted(isAscendingOrder, lastSortedColumn)
         console.log("in sortRides")
     }
     private saveChanges(id: number) {
@@ -276,6 +277,22 @@ export class RideTableComponent extends HTMLElement {
             .catch(error => {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
+            });
+    }
+
+    private sortData(sorted: Boolean, column: String) {
+        console.log("sortData fetch")
+        fetch('http://localhost:4200/api/drivus/rides/getSortedRide/'+sorted+'/'+column, {
+            method: 'GET',
+        })
+            .then(response => {
+                // Handle die Antwort hier
+
+                console.log("gehd")
+            })
+            .catch(error => {
+                // Handle Fehler hier
+                console.log("Hat nd funktioniert zum speichan")
             });
     }
 

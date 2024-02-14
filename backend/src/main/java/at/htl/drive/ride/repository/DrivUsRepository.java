@@ -22,8 +22,6 @@ public class DrivUsRepository {
     EntityManager em;
 
 
-    //RIDE:
-
     public List<Ride> all() {
         return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
     }
