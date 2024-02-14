@@ -147,12 +147,16 @@ public class DrivUsRepository {
     }
 
     public List<Ride> getFilteredRides(String filterText) {
+        String upperFilterText = "%" + filterText.toUpperCase() + "%";
         String sql = "SELECT DISTINCT r FROM Ride r " +
-                "WHERE UPPER(r.placeOfDeparture)  LIKE UPPER(:filterText) " +
-                "OR UPPER(r.placeOfArrival) LIKE UPPER(:filterText) " +
-                "OR UPPER(r.driver) LIKE UPPER(:filterText)";
+                "WHERE UPPER(r.placeOfDeparture) LIKE :filterText " +
+                "OR UPPER(r.placeOfArrival) LIKE :filterText " +
+                "OR UPPER(r.driver) LIKE :filterText " +
+                "OR UPPER(CAST(r.departureTime AS String)) LIKE :filterText " +
+                "OR CAST(r.availableSeats AS String) LIKE :filterText ";
+
         TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
-        query.setParameter("filterText", "%" + filterText + "%");
+        query.setParameter("filterText", upperFilterText);
 
         return query.getResultList();
     }
