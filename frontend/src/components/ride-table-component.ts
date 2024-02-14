@@ -43,8 +43,8 @@ export class RideTableComponent extends HTMLElement {
         const departureTime = DateTime.fromISO(ride.departureTime);
         // Zeit und Datum separat formatieren
         const formattedTime = departureTime.toFormat('HH:mm'); // Zeit formatieren (z.B. 10:30)
-        const formattedDate = departureTime.toFormat('yyyy-MM-dd'); // Datum formatieren (z.B. 2023-11-22)
-        
+        const formattedDate = departureTime.toFormat('dd-MM-yyyy'); // Datum formatieren (z.B. 2023-11-22)
+
         console.log("render ride", ride)
 
         return html`
