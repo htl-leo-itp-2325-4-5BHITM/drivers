@@ -2,14 +2,11 @@ package at.htl.drive.ride;
 
 
 import com.github.javafaker.Faker;
-import jakarta.persistence.Column;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class DataLoader {
+public class DataLoaderFaker {
 
     public static void main(String[] args) {
         Faker faker = new Faker();
