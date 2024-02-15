@@ -43,7 +43,7 @@ export class RideTableComponent extends HTMLElement {
         const departureTime = DateTime.fromISO(ride.departureTime);
         // Zeit und Datum separat formatieren
         const formattedTime = departureTime.toFormat('HH:mm'); // Zeit formatieren (z.B. 10:30)
-        const formattedDate = departureTime.toFormat('dd-MM-yyyy'); // Datum formatieren (z.B. 2023-11-22)
+        const formattedDate = departureTime.toFormat('dd.MM.yyyy'); // Datum formatieren (z.B. 2023-11-22)
 
         console.log("render ride", ride)
 
@@ -71,7 +71,7 @@ export class RideTableComponent extends HTMLElement {
             const departureTime = DateTime.fromISO(currentRide.departureTime);
 
             // Extrahieren von Datum und Zeit aus dem DateTime-Objekt
-            dateValue = departureTime.toFormat('yyyy-MM-dd');
+            dateValue = departureTime.toFormat('yyyy.MM.dd');
             timeValue = departureTime.toFormat('HH:mm');
         }
 
@@ -213,7 +213,7 @@ export class RideTableComponent extends HTMLElement {
         var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
         console.log(dateInputValue)
 
-        const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy-MM-dd:HH:mm');
+        const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy.MM.dd:HH:mm');
     
         //this.checkData();
         if(this.checkData()){
