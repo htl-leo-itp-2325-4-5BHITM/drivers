@@ -7,6 +7,7 @@ import at.htl.drive.ride.model.Ride;
 import at.htl.drive.ride.dto.RideDto;
 import at.htl.drive.ride.model.RideUserAssociation;
 import at.htl.drive.ride.model.RideUserAssociationId;
+import com.github.javafaker.Faker;
 import io.vertx.ext.auth.User;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -14,7 +15,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
 import java.sql.SQLOutput;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 
 @ApplicationScoped
 public class DrivUsRepository {
@@ -155,5 +159,44 @@ public class DrivUsRepository {
         query.setParameter("filterText", "%" + filterText + "%");
 
         return query.getResultList();
+    }
+
+    public List<Ride> getAllRidesLoader() {
+        Faker faker = new Faker(new Locale("de-AT"));
+        //Ride newRide;
+
+        for (int i = 0; i < 50; i++) {
+            //Datum
+            LocalDateTime now = LocalDateTime.now();
+            LocalDateTime departureTime;
+            Ride newRide = null;
+            do {
+                long randomDays = faker.number().numberBetween(1, 30); // Zufällige Anzahl an Tagen
+                departureTime = now.plusDays(randomDays); // Addiere die zufällige Anzahl an Tagen
+            } while (departureTime.isBefore(now));
+
+            //Adreesse befindet sich nur in Österreich
+            String placeOfDeparture = faker.address().cityName();
+            String placeOfArrival = faker.address().cityName();
+
+            int availableSeats = faker.number().numberBetween(1, 7);
+
+            //nur Vorname und Nachname
+            String driver = faker.name().firstName();
+            driver += " " + faker.name().lastName();
+
+            newRide = new Ride(Timestamp.valueOf(departureTime), placeOfDeparture, placeOfArrival, availableSeats, driver);
+
+            em.persist(newRide);
+            Long rideId = i + 20L;
+            System.out.println(rideId);
+
+            RideUserAssociationId id = new RideUserAssociationId(i + 31L, 7L);
+            RideUserAssociation rua = new RideUserAssociation(id, true);
+            em.persist(rua);
+        }
+
+
+        return em.createQuery("select r from Ride r order by r.id", Ride.class).getResultList();
     }
 }
