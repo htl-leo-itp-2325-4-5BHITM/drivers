@@ -15,6 +15,10 @@ export async function loadRides() {
     store.next(nextState)
 }
 
+export async function getFakeRides() {
+    const response = await fetch(`/api/drivus/rides/getAllRides/javaFaker/`)
+}
+
 export async function getPage(page: number) {
     const response = await fetch(`/api/drivus/pagination/${page}`)
     const rides: Ride[] = await response.json()
