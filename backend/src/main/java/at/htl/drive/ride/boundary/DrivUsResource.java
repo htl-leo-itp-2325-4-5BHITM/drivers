@@ -33,6 +33,13 @@ public class DrivUsResource {
         return Response.ok(dtos).build();
     }
 
+    @Path("/rides/getCount")
+    @GET
+    public Response getRidesCount() {
+        repository.getRidesCount();
+        return Response.ok().build();
+    }
+
     @GET
     @Path("/pagination/{page}")
     public Response pagination(@PathParam("page") int page) {

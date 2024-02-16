@@ -99,7 +99,7 @@ export class RideTableComponent extends HTMLElement {
                         ${rows}
                     </tbody>
                 </table>
-                ${this.paginationNav()}
+                ${this.paginationNav(rides)}
             </div>
 
         <!-- The Modal -->
@@ -174,7 +174,9 @@ export class RideTableComponent extends HTMLElement {
                 `
             }
     }
-    private paginationNav() {
+    private paginationNav(rides: Ride[]) {
+        console.log(rides.length)
+        
         return html`
         <div class="pagination">
             <p>&laquo;</p>
@@ -182,6 +184,7 @@ export class RideTableComponent extends HTMLElement {
             <p @click=${() => getPage(2)}>2</p>
             <p>&raquo;</p>
         </div>`
+
     }
     private sortRides(column: String) {
         console.log(column)

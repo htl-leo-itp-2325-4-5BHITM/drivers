@@ -34,6 +34,12 @@ public class DrivUsRepository {
         return query.getResultList().subList((page-1)+7*(page-1), ((page-1)+7*(page-1))+7);
     }
 
+    public Long getRidesCount() {
+        String sql = "select count(r) from Ride r";
+        TypedQuery<Long> query = em.createQuery(sql, Long.class);
+        return query.getSingleResult();
+    }
+
     public void changeRide(RideDto rideDto) {
         Long id = rideDto.id();
         Ride ride = em.find(Ride.class, id);

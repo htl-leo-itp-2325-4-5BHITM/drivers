@@ -25,6 +25,16 @@ export async function getPage(page: number) {
     store.next(nextState)
 }
 
+export async function getCount() {
+    const response = await fetch(`/api/drivus/getCount`)
+    const rides: Ride[] = await response.json()
+    const nextState = produce(store.getValue(), model => {
+        model.drives = rides
+    })
+    console.log("rides loaded", rides)
+    store.next(nextState)
+}
+
 export async function getFiltered(filterText: String) {
     console.log("toFilterText: " + filterText);
     const url = `http://localhost:4200/api/drivus/rides/getFilteredRide/${filterText}`;

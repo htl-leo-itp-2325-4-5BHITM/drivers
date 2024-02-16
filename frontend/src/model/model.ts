@@ -27,9 +27,6 @@ const initialState: Model = {
     drives: []
 }
 
-/*export interface Model2 {
-    drive: Ride
-}*/
 
 // Users
 interface DrivUser {
