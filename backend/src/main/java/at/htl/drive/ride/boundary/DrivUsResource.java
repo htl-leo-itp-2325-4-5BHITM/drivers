@@ -137,4 +137,19 @@ public class DrivUsResource {
         return repository.getUser(username);
     }
 
+    @Path("/rides/getAllRides/javaFaker")
+    @GET
+    @Transactional
+    public List<Ride> dataLoaderToDatabase() {
+        return repository.getAllRidesLoader();
+    }
+    /*
+    @Path("/rides")
+    @GET
+    public Response all() {
+        System.out.println("bin im all");
+        var rides = repository.all();
+        var dtos = rides.stream().map(rideMapper::toResource);
+        return Response.ok(dtos).build();
+    }*/
 }

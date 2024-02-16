@@ -1,7 +1,8 @@
 import { Ride, store } from "../model/model"
 import { html, render } from "lit-html"
 import { DateTime } from 'luxon'
-import { sortData } from "../index"
+//import { sortData } from "../index"
+import {getSorted} from "../service/ride-service"
 import {loadRides, getSeat, removeSeat, getFiltered, getPage} from "../service/ride-service"
 
 // für Sortierung
@@ -42,8 +43,8 @@ export class RideTableComponent extends HTMLElement {
         const departureTime = DateTime.fromISO(ride.departureTime);
         // Zeit und Datum separat formatieren
         const formattedTime = departureTime.toFormat('HH:mm'); // Zeit formatieren (z.B. 10:30)
-        const formattedDate = departureTime.toFormat('yyyy-MM-dd'); // Datum formatieren (z.B. 2023-11-22)
-        
+        const formattedDate = departureTime.toFormat('dd.MM.yyyy'); // Datum formatieren (z.B. 2023-11-22)
+
         console.log("render ride", ride)
 
         return html`
@@ -70,7 +71,7 @@ export class RideTableComponent extends HTMLElement {
             const departureTime = DateTime.fromISO(currentRide.departureTime);
 
             // Extrahieren von Datum und Zeit aus dem DateTime-Objekt
-            dateValue = departureTime.toFormat('yyyy-MM-dd');
+            dateValue = departureTime.toFormat('yyyy.MM.dd');
             timeValue = departureTime.toFormat('HH:mm');
         }
 
@@ -200,7 +201,7 @@ export class RideTableComponent extends HTMLElement {
         lastSortedColumn = column;
 
         //wird sortiert und Spalte an Server
-        sortData(isAscendingOrder, lastSortedColumn)
+        getSorted(isAscendingOrder, lastSortedColumn)
         console.log("in sortRides")
     }
     private saveChanges(id: number) {
@@ -215,7 +216,7 @@ export class RideTableComponent extends HTMLElement {
         var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
         console.log(dateInputValue)
 
-        const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy-MM-dd:HH:mm');
+        const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy.MM.dd:HH:mm');
     
         //this.checkData();
         if(this.checkData()){
@@ -279,6 +280,22 @@ export class RideTableComponent extends HTMLElement {
             .catch(error => {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
+            });
+    }
+
+    private sortData(sorted: Boolean, column: String) {
+        console.log("sortData fetch")
+        fetch('http://localhost:4200/api/drivus/rides/getSortedRide/'+sorted+'/'+column, {
+            method: 'GET',
+        })
+            .then(response => {
+                // Handle die Antwort hier
+
+                console.log("gehd")
+            })
+            .catch(error => {
+                // Handle Fehler hier
+                console.log("Hat nd funktioniert zum speichan")
             });
     }
 

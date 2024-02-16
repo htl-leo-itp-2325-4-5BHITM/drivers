@@ -15,6 +15,10 @@ export async function loadRides() {
     store.next(nextState)
 }
 
+export async function getFakeRides() {
+    const response = await fetch(`/api/drivus/rides/getAllRides/javaFaker/`)
+}
+
 export async function getPage(page: number) {
     const response = await fetch(`/api/drivus/pagination/${page}`)
     const rides: Ride[] = await response.json()
@@ -47,6 +51,21 @@ export async function getFiltered(filterText: String) {
     console.log("rides loaded", rides)
     store.next(nextState)
 }
+
+export async function getSorted(sorted: Boolean, column: String) {
+    console.log("sorted: " + sorted);
+    console.log("column: " + column);
+    const url = `http://localhost:4200/api/drivus/rides/getSortedRide/${sorted}/${column}`;
+
+    const response = await fetch(url)
+    const rides: Ride[] = await response.json()
+    const nextState = produce(store.getValue(), model => {
+        model.drives = rides
+    })
+    console.log("rides loaded", rides)
+    store.next(nextState)
+}
+
 
 export function getSeat(ride: Ride) {
     console.log(ride)
