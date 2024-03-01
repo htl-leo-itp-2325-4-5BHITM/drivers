@@ -1,4 +1,4 @@
-import { Ride, Model } from "Model/model"
+import { Ride, Model, RideCount } from "Model/model"
 import { store } from "../model/model"
 import { RegisterData,FilterData } from "Model/model"
 import { produce } from "immer"
@@ -30,13 +30,15 @@ export async function getPage(page: number) {
 }
 
 export async function getCount() {
-    const response = await fetch(`/api/drivus/getCount`)
-    const rides: Ride[] = await response.json()
+    const response = await fetch(`/api/drivus/rides/getCount`)
+    const count: number = await response.json()
+    console.log(count)
     const nextState = produce(store.getValue(), model => {
-        model.drives = rides
+        model.ridesCount = count
     })
-    console.log("rides loaded", rides)
+    //console.log("rides loaded", rides)
     store.next(nextState)
+    //return count;
 }
 
 export async function getFiltered(filterText: String) {
