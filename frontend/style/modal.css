@@ -1,0 +1,70 @@
+#ride-dialog {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(80%);
+}
+
+#modal-content {
+    display: flex;
+    position: relative;
+    background-color: var(--colorDark);
+    color: var(--colorBright);
+    box-shadow: 10px 10px 20px #111;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5%;
+    width: 60%;
+    height: 80%;
+
+}
+#modal-content span{
+    position: absolute;
+    border-radius: 1px;
+    font-size: 1.5em;
+    color: var(--colorBright);
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    padding: 1.5% 2.5%;
+}
+#modal-content span:hover{
+    color: var(--colorDark);
+    background-color: var(--colorBright);
+}
+
+#edit-image {
+    width: 50%;
+    background-image: url("../img/background_option10.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+}
+
+#edit-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.edit-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0;
+    height: 80%;
+    padding: 0;
+}
+
+.grid-item {
+    padding: 4% 3%;
+    display: flex;
+}

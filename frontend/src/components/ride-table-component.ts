@@ -78,65 +78,85 @@ export class RideTableComponent extends HTMLElement {
         return html`
             <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
             <link rel="stylesheet" href="./style/rideTable.css">
-            
+
             <div id="ride-finder-table-tab">
                 <table id="ride-finder-table" cellpadding="0">
                     <thead class="ride-finder-tablehead">
-                        <tr>
-                            <th @click=${() => this.sortRides("date")}>Date</th>
-                            <th @click=${() => this.sortRides("departureTime")}>Time</th>
-                            <th @click=${() => this.sortRides("placeOfDeparture")}>From</th>
-                            <th @click=${() => this.sortRides("placeOfArrival")}>To</th>
-                            <th @click=${() => this.sortRides("driver")}>Driver</th>
-                            <th @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
-                            <th> 
-                                <div id="ride-search">
-                                    <input type="text" placeholder="Search" id="filterText"><button @click=${() => getFiltered((this.shadowRoot.getElementById('filterText') as HTMLInputElement).value)}><img src=""./img/magnifying_glass.png></button>
-                                </div>
-                            </th>
-                        </tr>
+                    <tr>
+                        <th @click=${() => this.sortRides("date")}>Date</th>
+                        <th @click=${() => this.sortRides("departureTime")}>Time</th>
+                        <th @click=${() => this.sortRides("placeOfDeparture")}>From</th>
+                        <th @click=${() => this.sortRides("placeOfArrival")}>To</th>
+                        <th @click=${() => this.sortRides("driver")}>Driver</th>
+                        <th @click=${() => this.sortRides("availableSeats")}>Empty seats</th>
+                        <th>
+                            <div id="ride-search">
+                                <input type="text" placeholder="Search" id="filterText">
+                                <button @click=${() => getFiltered((this.shadowRoot.getElementById('filterText') as HTMLInputElement).value)}>
+                                    <img src="" ./img/magnifying_glass.png>
+                                </button>
+                            </div>
+                        </th>
+                    </tr>
                     </thead>
                     <tbody>
-                        ${rows}
+                    ${rows}
                     </tbody>
                 </table>
                 ${this.paginationNav(rides)}
             </div>
 
-        <!-- The Modal -->
 
-        <div id="ride-dialog" class="w3-modal">
-            <div class="w3-modal-content w3-padding-16">
-                <div class="w3-container" >
-                    <span id="close-button" @click=${() => this.closeDialog()}
-                        class="w3-button w3-display-topright">&times;
-                    </span>
-                    <h2 class="w3-text-black">Change data</h2>
-                    <form id="form_head_change" class="w3-text-black">
-                        <div class="table-input" id="form_label">
-                            <label for="abfort">From</label><br>
-                            <input type="text" id="abfort" name="abfort" value='${currentRide?.placeOfDeparture}'><br><br>
+            <!-- The Modal -->
+            <link rel="stylesheet" href="./style/modal.css">
+            <link rel="stylesheet" href="../style/register.css">
+            <div id="ride-dialog">
+                
+                <div id="modal-content">
+                    <span class="close" @click=${() => this.closeDialog()}>&times;</span>
+                    <div id="edit-image"></div>
+                    <div id="edit-content">
+                        
+                        
+                        <h2>Edit Ride</h2>
+                        <form id="form-head-change">
 
-                            <label for="ankort">To</label><br>
-                            <input type="text" id="ankort" name="ankort" value='${currentRide?.placeOfArrival}'><br><br>
+                            <div id="edit-ride-image"></div>
+                            <div id="register-content">
 
-                            <label for="datum">Date</label><br>
-                            <input type="date" id="datum" name="datum" value='${dateValue}'><br><br>
+                                <div class="table-input">
+                                    <div class="grid-item">
+                                        <input type="text" id="abfort" name="abfort"
+                                               value='${currentRide?.placeOfDeparture}'>
+                                    </div>
 
-                            <label for="abfzeit">Time:</label><br>
-                            
-                            <input type="time" id="abfzeit" name="abfzeit" value='${timeValue}'><br><br>
+                                    <div class="gird-item">
+                                        <input type="text" id="ankort" name="ankort"
+                                               value='${currentRide?.placeOfArrival}'>
+                                    </div>
 
-                            <label for="fplatz">Available seats:</label><br>
-                            <input type="number" min="1" id="fplatz" name="fplatz" value='${currentRide?.availableSeats}'><br><br>
-                        </div>
-                        <input @click=${() => this.saveChanges(currentRide?.id)} type="button" id="submit" value="save">
-                        <input @click=${() => this.removeRide(currentRide?.id)} type="button" id="remove" value="remove">
-                    </form>
-                    <div id="errorWrongInput"></div>
+                                    <div class="grid-item">
+                                        <input type="date" id="datum" name="datum" value='${dateValue}'>
+                                    </div>
+
+                                    <div class="grid-item">
+                                        <input type="time" id="abfzeit" name="abfzeit" value='${timeValue}'>
+                                    </div>
+                                    <div class="grid-item">
+                                        <input type="number" min="1" id="fplatz" name="fplatz"
+                                               value='${currentRide?.availableSeats}'>
+                                    </div>
+                                </div>
+                                <input @click=${() => this.saveChanges(currentRide?.id)} type="button" id="submit"
+                                       value="save">
+                                <input @click=${() => this.removeRide(currentRide?.id)} type="button" id="remove"
+                                       value="remove">
+
+                        </form>
+                        <div id="errorWrongInput"></div>
+                    </div>
                 </div>
-            </div>
-        </div>`
+            </div>`
     }
     closeDialog() {
         const dialog = this.shadowRoot.getElementById('ride-dialog')
@@ -155,7 +175,7 @@ export class RideTableComponent extends HTMLElement {
         model.currentRide = ride
         store.next(model)
         const dialog = this.shadowRoot.getElementById('ride-dialog')
-        dialog.style.display = 'block'
+        dialog.style.display = 'flex'
         console.log("in rowclick")
     }
     private rowsButtons(ride :Ride) {

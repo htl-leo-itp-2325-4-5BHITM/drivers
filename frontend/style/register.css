@@ -1,11 +1,11 @@
 #form_head {
+    height: 80vh;
     display: flex;
     background-color: var(--colorDark);
     color: var(--colorBright);
     box-shadow: 10px 10px 20px #111;
     border-radius: 5px;
     overflow: hidden;
-    height: 80vh;
     margin-top: 5%;
 }
 
