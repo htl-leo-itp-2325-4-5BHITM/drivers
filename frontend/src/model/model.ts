@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 export {RidePost} from "./ride-post"
 export {FilterData} from "./rides-filtered"
 export {RegisterData} from "./ride-register"
+export {RideCount} from "./ride-count"
 
 
 interface Ride {
@@ -21,10 +22,12 @@ export interface RideResponse {
 export interface Model {
     drives: Ride[]
     currentRide?: Ride 
+    ridesCount: number
 }
 
 const initialState: Model = {
-    drives: []
+    drives: [],
+    ridesCount: 0
 }
 
 

@@ -35,9 +35,8 @@ public class DrivUsResource {
 
     @Path("/rides/getCount")
     @GET
-    public Response getRidesCount() {
-        repository.getRidesCount();
-        return Response.ok().build();
+    public Long getRidesCount() {
+        return repository.getRidesCount();
     }
 
     @GET

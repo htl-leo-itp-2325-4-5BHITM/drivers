@@ -1,9 +1,10 @@
-import { Ride, store } from "../model/model"
+import { Ride, store, Model } from "../model/model"
 import { html, render } from "lit-html"
 import { DateTime } from 'luxon'
 //import { sortData } from "../index"
-import {getSorted} from "../service/ride-service"
+import {getCount, getSorted} from "../service/ride-service"
 import {loadRides, getSeat, removeSeat, getFiltered, getPage} from "../service/ride-service"
+import {unsafeHTML} from 'lit/directives/unsafe-html.js';
 
 // für Sortierung
 let lastSortedColumn: String | null = null;
@@ -16,7 +17,7 @@ export class RideTableComponent extends HTMLElement {
         console.log("RideTable loaded")
         store.subscribe(model => {
             console.log("data changed", model)
-            this.render(model.drives, model.currentRide);
+            this.render(model.drives, model.currentRide, model.ridesCount);
             // lodt mid dem ois endlos
             //loadRides();
         })
@@ -35,8 +36,8 @@ export class RideTableComponent extends HTMLElement {
         super()
         this.attachShadow({ mode: "open" })
     }
-    render(drives: Ride[], currentRide?: Ride) {
-        render(this.tableTemplate(drives, currentRide), this.shadowRoot)
+    render(drives: Ride[], currentRide?: Ride, ridesCount?: number) {
+        render(this.tableTemplate(drives, currentRide, ridesCount), this.shadowRoot)
     }
     rowTemplate(ride: Ride) {
         // Departure Time in DateTime-Objekt umwandeln
@@ -63,7 +64,7 @@ export class RideTableComponent extends HTMLElement {
             </tr>
         `
     }
-    tableTemplate(rides: Ride[], currentRide?: Ride) {
+    tableTemplate(rides: Ride[], currentRide?: Ride, ridesCount?: number) {
         const rows = rides.map(ride => this.rowTemplate(ride))
         // Überprüfen, ob currentRide definiert ist und departureTime hat
         if (currentRide != null && 'departureTime' in currentRide) {
@@ -103,7 +104,7 @@ export class RideTableComponent extends HTMLElement {
                     ${rows}
                     </tbody>
                 </table>
-                ${this.paginationNav(rides)}
+                ${this.paginationNav(ridesCount)}
             </div>
 
 
@@ -195,18 +196,86 @@ export class RideTableComponent extends HTMLElement {
                 `
             }
     }
-    private paginationNav(rides: Ride[]) {
-        console.log(rides.length)
+
+    private paginationNav(count: number) {
+        console.log(count)
+
+        const objectsPerPage = 7;
+        let selectedPage = 0   
+        getCount();
+        let ridesCount = count;  
+
         
+        let string = []
+        
+        for (let i = 0; i <= ridesCount/objectsPerPage; i++) {
+            string.push(html`<p @click=${() => getPage(i+1)}>${i+1}</p>`)
+        }
+
+        
+
         return html`
         <div class="pagination">
             <p>&laquo;</p>
-            <p @click=${() => getPage(1)}>1</p>
-            <p @click=${() => getPage(2)}>2</p>
+            ${string}
             <p>&raquo;</p>
         </div>`
+        
+       /* renderPage(0)
+
+        function renderPage(number){
+            selectedPage = number  
+            return html`
+                <span class="dots">••</span>
+                ${selectedPage > 0 ? `<span class="swap" onclick="swapPage(-1)">${selectedPage}</span>` : `<span class="spacer"></span>`}
+                <span class="page">${selectedPage +1}</span>
+                ${selectedPage < ridesCount ? `<span class="swap" onclick="swapPage(1)">${selectedPage + 2}</span>` : `<span class="spacer"></span>`}
+                <span class="dots">••</span>
+            `
+            
+            /*let html = ""
+            for (let i = selectedPage*objectsPerPage; i < selectedPage*objectsPerPage+objectsPerPage; i++) {
+                    html += `<li>${i} ${i}</li>`
+            }
+            document.querySelector('.content').innerHTML = html*/
+/*        }
+
+        function swapPage(offset){
+        renderPage(selectedPage + offset)
+        }
+        
+        /*
+
+        /*
+        
+
+        renderPage(0)
+
+        function renderPage(number){
+        selectedPage = number  
+        document.querySelector(".pageselector").innerHTML = `
+            <span class="dots">••</span>
+            ${selectedPage > 0 ? `<span class="swap" onclick="swapPage(-1)">${selectedPage}</span>` : `<span class="spacer"></span>`}
+            <span class="page">${selectedPage +1}</span>
+            ${selectedPage < data.length ? `<span class="swap" onclick="swapPage(1)">${selectedPage + 2}</span>` : `<span class="spacer"></span>`}
+            <span class="dots">••</span>
+        `
+        
+        let html = ""
+        for (let i = selectedPage*objectsPerPage; i < selectedPage*objectsPerPage+objectsPerPage; i++) {
+                html += `<li>${i} ${data[i]}</li>`
+        }
+        document.querySelector('.content').innerHTML = html
+        }
+
+        function swapPage(offset){
+        renderPage(selectedPage + offset)
+        }
+        */
+        
 
     }
+
     private sortRides(column: String) {
         console.log(column)
 
