@@ -41,9 +41,21 @@ export async function getCount() {
     //return count;
 }
 
-export async function getFiltered(filterText: String) {
+export async function getFilteredCount(filterText: String) {
+    const response = await fetch(`/api/drivus/rides/getFilteredCount/${filterText}`)
+    const count: number = await response.json()
+    console.log(count)
+    const nextState = produce(store.getValue(), model => {
+        model.ridesCount = count
+    })
+    //console.log("rides loaded", rides)
+    store.next(nextState)
+    //return count;
+}
+
+export async function getFiltered(filterText: String, page: number) {
     console.log("toFilterText: " + filterText);
-    const url = `http://localhost:4200/api/drivus/rides/getFilteredRide/${filterText}`;
+    const url = `http://localhost:4200/api/drivus/rides/getFilteredRide/${filterText}${page}`;
 
     const response = await fetch(url)
     const rides: Ride[] = await response.json()
@@ -52,6 +64,7 @@ export async function getFiltered(filterText: String) {
     })
     console.log("rides loaded", rides)
     store.next(nextState)
+    getFilteredCount(filterText)
 }
 
 export async function getSorted(sorted: Boolean, column: String) {

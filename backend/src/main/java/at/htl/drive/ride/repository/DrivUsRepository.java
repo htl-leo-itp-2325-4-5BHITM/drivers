@@ -8,13 +8,11 @@ import at.htl.drive.ride.dto.RideDto;
 import at.htl.drive.ride.model.RideUserAssociation;
 import at.htl.drive.ride.model.RideUserAssociationId;
 import com.github.javafaker.Faker;
-import io.vertx.ext.auth.User;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
-import java.sql.SQLOutput;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,7 +31,12 @@ public class DrivUsRepository {
     public List<Ride> pagination(int page) {
         String sql = "select r from Ride r order by r.departureTime";
         TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
-        return query.getResultList().subList((page-1)+7*(page-1), ((page-1)+7*(page-1))+7);
+        try {
+            return query.getResultList().subList((page-1)+6*(page-1), ((page-1)+6*(page-1))+7);
+        } catch (IndexOutOfBoundsException ex) {
+            return query.getResultList().subList((page-1)+6*(page-1), query.getResultList().size());
+        }
+
     }
 
     public Long getRidesCount() {
@@ -156,7 +159,7 @@ public class DrivUsRepository {
         return drivUser;
     }
 
-    public List<Ride> getFilteredRides(String filterText) {
+    public List<Ride> getFilteredRides(String filterText, int page) {
         String upperFilterText = "%" + filterText.toUpperCase() + "%";
         String sql = "SELECT DISTINCT r FROM Ride r " +
                 "WHERE UPPER(r.placeOfDeparture) LIKE :filterText " +
@@ -167,8 +170,32 @@ public class DrivUsRepository {
 
         TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
         query.setParameter("filterText", upperFilterText);
+        System.out.println(query.getResultList().size());
 
-        return query.getResultList();
+        try {
+            return query.getResultList().subList((page-1)+6*(page-1), ((page-1)+6*(page-1))+7);
+        } catch (IndexOutOfBoundsException ex) {
+            return query.getResultList().subList((page-1)+6*(page-1), query.getResultList().size());
+        }
+        //return query.getResultList();
+        //return query.getResultList().subList((page-1)+7*(page-1), ((page-1)+7*(page-1))+7);
+    }
+
+    public Long getFilteredCount(String filterText) {
+        if (filterText.length() == 0) {
+            return getRidesCount();
+        }
+        String upperFilterText = "%" + filterText.toUpperCase() + "%";
+        String sql = "SELECT DISTINCT r FROM Ride r " +
+                "WHERE UPPER(r.placeOfDeparture) LIKE :filterText " +
+                "OR UPPER(r.placeOfArrival) LIKE :filterText " +
+                "OR UPPER(r.driver) LIKE :filterText " +
+                "OR UPPER(CAST(r.departureTime AS String)) LIKE :filterText " +
+                "OR CAST(r.availableSeats AS String) LIKE :filterText ";
+
+        TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
+        query.setParameter("filterText", upperFilterText);
+        return Long.valueOf(query.getResultList().size());
     }
 
     public List<Ride> getAllRidesLoader() {

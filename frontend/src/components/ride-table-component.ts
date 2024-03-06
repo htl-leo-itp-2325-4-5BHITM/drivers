@@ -20,6 +20,7 @@ export class RideTableComponent extends HTMLElement {
             this.render(model.drives, model.currentRide, model.ridesCount);
             // lodt mid dem ois endlos
             //loadRides();
+            //getCount();
         })
 
         const filterInput = this.shadowRoot.getElementById("filterText") as HTMLInputElement;
@@ -28,7 +29,7 @@ export class RideTableComponent extends HTMLElement {
             if(filterText==""){
                 getPage(1)
             }else{
-                await getFiltered(filterText);
+                await getFiltered(filterText, 1);
             }
         });
     }
@@ -65,6 +66,7 @@ export class RideTableComponent extends HTMLElement {
         `
     }
     tableTemplate(rides: Ride[], currentRide?: Ride, ridesCount?: number) {
+        console.log(rides)
         const rows = rides.map(ride => this.rowTemplate(ride))
         // Überprüfen, ob currentRide definiert ist und departureTime hat
         if (currentRide != null && 'departureTime' in currentRide) {
@@ -93,7 +95,7 @@ export class RideTableComponent extends HTMLElement {
                         <th>
                             <div id="ride-search">
                                 <input type="text" placeholder="Search" id="filterText">
-                                <button @click=${() => getFiltered((this.shadowRoot.getElementById('filterText') as HTMLInputElement).value)}>
+                                <button @click=${() => getFiltered((this.shadowRoot.getElementById('filterText') as HTMLInputElement).value, 1)}>
                                     <img src="" ./img/magnifying_glass.png>
                                 </button>
                             </div>
@@ -202,7 +204,7 @@ export class RideTableComponent extends HTMLElement {
 
         const objectsPerPage = 7;
         let selectedPage = 0   
-        getCount();
+        //getCount();
         let ridesCount = count;  
 
         

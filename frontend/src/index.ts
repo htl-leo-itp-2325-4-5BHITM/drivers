@@ -1,4 +1,4 @@
-import {getPage, getSorted, loadRides, getFakeRides} from "./service/ride-service"
+import {getPage, getSorted, loadRides, getFakeRides, getCount} from "./service/ride-service"
 import { loadUsers } from "./service/user-service"
 import "./components/ride-table-component"
 import "./components/users-option-component"
@@ -10,6 +10,7 @@ async function loaded() {
     getPage(1)
     loadUsers()
     getFakeRides()
+    getCount()
 }
 
 //sortieren
