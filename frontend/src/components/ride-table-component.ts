@@ -376,7 +376,7 @@ export class RideTableComponent extends HTMLElement {
 
     private sortData(sorted: Boolean, column: String) {
         console.log("sortData fetch")
-        fetch('http://localhost:4200/api/drivus/rides/getSortedRide/'+sorted+'/'+column, {
+        fetch('http://localhost:4200/api/drivus/rides/getSortedRide/'+sorted+'/'+column+'/', {
             method: 'GET',
         })
             .then(response => {

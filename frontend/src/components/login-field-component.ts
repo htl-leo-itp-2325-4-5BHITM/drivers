@@ -33,7 +33,7 @@ class LoginComponent extends HTMLElement {
 
         <input @click=${() => this.submit()} type="button" id="submit" value="submit">
         <input @click=${() => this.logout()} type="button" id="logout" value="logout">
-        <input @click=${() => getUserData()} type="button" id="logout" value="getUser">
+        <!--<input @click=${() => getUserData()} type="button" id="logout" value="getUser">-->
                 
         <div id="errorWrongInput"></div>
         <div id="logedInWorked"></div>

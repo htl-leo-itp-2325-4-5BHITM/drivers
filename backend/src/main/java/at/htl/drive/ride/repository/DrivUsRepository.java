@@ -116,11 +116,21 @@ public class DrivUsRepository {
         return ride;
     }
 
-    public List<Ride> getSortedRide(Boolean sortedWay, String column) {
+    public List<Ride> getSortedRide(Boolean sortedWay, String column, int page) {
         if (sortedWay) {
-            return em.createQuery("from Ride order by " + column + " asc", Ride.class).getResultList();
+            TypedQuery<Ride> query = em.createQuery("from Ride order by " + column + " asc", Ride.class);
+            try {
+                return query.getResultList().subList((page-1)+6*(page-1), ((page-1)+6*(page-1))+7);
+            } catch (IndexOutOfBoundsException ex) {
+                return query.getResultList().subList((page-1)+6*(page-1), query.getResultList().size());
+            }
         } else {
-            return em.createQuery("from Ride order by " + column + " desc", Ride.class).getResultList();
+            TypedQuery<Ride> query = em.createQuery("from Ride order by " + column + " desc", Ride.class);
+            try {
+                return query.getResultList().subList((page-1)+6*(page-1), ((page-1)+6*(page-1))+7);
+            } catch (IndexOutOfBoundsException ex) {
+                return query.getResultList().subList((page-1)+6*(page-1), query.getResultList().size());
+            }
         }
     }
 

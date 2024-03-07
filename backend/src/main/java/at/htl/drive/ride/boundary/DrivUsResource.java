@@ -60,7 +60,8 @@ public class DrivUsResource {
     @Path("rides/getSortedRide/{sortedWay}/{column}")
     public Response getSortedRide(@PathParam("sortedWay") Boolean sortedWay, @PathParam("column") String column) {
         System.out.println("bin im getSortedRide");
-        var rides = repository.getSortedRide(sortedWay,column);
+        int page = 1;
+        var rides = repository.getSortedRide(sortedWay,column, page);
         var dtos = rides.stream().map(rideMapper::toResource);
         return Response.ok(dtos).build();
     }
