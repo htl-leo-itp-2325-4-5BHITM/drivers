@@ -11,6 +11,7 @@ let lastSortedColumn: String | null = null;
 let isAscendingOrder = true;
 let dateValue = ''; // Standardwerte für Datum und Zeit
 let timeValue = '';
+let ridesPerPage = 7
 
 export class RideTableComponent extends HTMLElement {
     connectedCallback() {
@@ -27,7 +28,7 @@ export class RideTableComponent extends HTMLElement {
         filterInput.addEventListener("input", async () => {
             const filterText = filterInput.value;
             if(filterText==""){
-                getPage(1)
+                getPage(1, ridesPerPage)
             }else{
                 await getFiltered(filterText, 1);
             }
@@ -202,7 +203,6 @@ export class RideTableComponent extends HTMLElement {
     private paginationNav(count: number) {
         console.log(count)
 
-        const objectsPerPage = 7;
         let selectedPage = 0   
         //getCount();
         let ridesCount = count;  
@@ -210,8 +210,8 @@ export class RideTableComponent extends HTMLElement {
         
         let string = []
         
-        for (let i = 0; i <= ridesCount/objectsPerPage; i++) {
-            string.push(html`<p @click=${() => getPage(i+1)}>${i+1}</p>`)
+        for (let i = 0; i <= ridesCount/ridesPerPage; i++) {
+            string.push(html`<p @click=${() => getPage(i+1, ridesPerPage)}>${i+1}</p>`)
         }
 
         
@@ -337,7 +337,7 @@ export class RideTableComponent extends HTMLElement {
             })
                 .then(response => {
                     // Handle die Antwort hier
-                    getPage(1)
+                    getPage(1, ridesPerPage)
                     this.closeDialog()
                     console.log("gehd")
                 })
@@ -364,7 +364,7 @@ export class RideTableComponent extends HTMLElement {
         })
             .then(response => {
                 // Handle die Antwort hier
-                getPage(1)
+                getPage(1, ridesPerPage)
                 this.closeDialog()
                 console.log("gehd")
             })

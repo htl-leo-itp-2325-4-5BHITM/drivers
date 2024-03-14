@@ -28,13 +28,13 @@ public class DrivUsRepository {
         return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
     }
 
-    public List<Ride> pagination(int page) {
+    public List<Ride> pagination(int page, int ridesPerPage) {
         String sql = "select r from Ride r order by r.departureTime";
         TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
         try {
-            return query.getResultList().subList((page-1)+6*(page-1), ((page-1)+6*(page-1))+7);
+            return query.getResultList().subList((page-1)+(ridesPerPage-1)*(page-1), ((page-1)+(ridesPerPage-1)*(page-1))+ridesPerPage);
         } catch (IndexOutOfBoundsException ex) {
-            return query.getResultList().subList((page-1)+6*(page-1), query.getResultList().size());
+            return query.getResultList().subList((page-1)+(ridesPerPage-1)*(page-1), query.getResultList().size());
         }
 
     }

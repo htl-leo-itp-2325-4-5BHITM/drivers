@@ -7,7 +7,7 @@ import "./components/login-field-component"
 window.addEventListener("DOMContentLoaded", () => loaded())
 
 async function loaded() {
-    getPage(1)
+    getPage(1, 7)
     loadUsers()
     getFakeRides()
     getCount()
