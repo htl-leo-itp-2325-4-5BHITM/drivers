@@ -45,11 +45,12 @@
     background-repeat: no-repeat;
     background-position: 50% 0;
 }
-
+/*
 #edit-content {
+    border: 4px solid orange;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     width: 50%;
     height: 100%;
@@ -67,4 +68,26 @@
 .grid-item {
     padding: 4% 3%;
     display: flex;
+}
+
+#edit-submit, #edit-remove{
+    font-size: 1em;
+    color: var(--colorInactive);
+    background-color: #151a24;
+    padding: 1% 5%;
+    border: var(--colorInactive) 0.1rem solid;
+    border-radius: 50px;
+    width: 40%;
+    margin-bottom: 5vh;
+}
+*/
+#form-head-change {
+    height: 80vh;
+    display: flex;
+    background-color: var(--colorDark);
+    color: var(--colorBright);
+    box-shadow: 10px 10px 20px #111;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5%;
 }

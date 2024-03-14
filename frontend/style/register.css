@@ -43,9 +43,9 @@
     color: var(--colorInactive);
 }
 
-.grid-item input {
+.grid-item input{
     color: var(--colorBright);
-    height: 3vh;
+    height: 3.5vh;
     width: 15vw;
     background: transparent;
     outline: none;
@@ -54,18 +54,18 @@
     border-radius: 2px;
 }
 
-#submit {
+#register-submit {
     font-size: 1em;
     color: var(--colorInactive);
     background-color: #151a24;
-    padding: 1% 5%;
+    padding: 2% 5%;
     border: var(--colorInactive) 0.1rem solid;
     border-radius: 50px;
-    width: 40%;
-    margin-bottom: 5vh;
+    width: 60%;
+    justify-self: center;
 }
 
-#submit:hover {
+#register-submit:hover {
     cursor: pointer;
     color: var(--colorDark);
     background-color: var(--colorBright);
@@ -74,5 +74,17 @@
     transition: all 400ms ease-out;
 }
 
+.register-button-center{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(100%) sepia(1%) saturate(3863%) hue-rotate(151deg) brightness(92%) contrast(93%);
+}
 
 /*<label for="datum">Date</label>

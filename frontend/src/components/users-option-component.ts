@@ -54,7 +54,9 @@ class UsersOptionComponent extends HTMLElement {
                             onblur="(this.type='text')" min="1" id="fplatz" name="fplatz">
                         </div>
                         <div class="table-input"></div>
-                        <input @click=${() => this.submit()} type="button" id="submit" value="submit">
+                        <div class="register-button-center">
+                            <input @click=${() => this.submit()} type="button" id="register-submit" value="submit">
+                        </div>
                 </form>
         `
     }
