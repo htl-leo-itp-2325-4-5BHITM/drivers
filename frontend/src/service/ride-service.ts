@@ -4,6 +4,7 @@ import { RegisterData,FilterData } from "Model/model"
 import { produce } from "immer"
 
 const RIDES_URL = "/api/drivus/rides"
+const ridesPerPage = 7
 
 export async function loadRides() {
     const response = await fetch(RIDES_URL)
@@ -19,8 +20,8 @@ export async function getFakeRides() {
     const response = await fetch(`/api/drivus/rides/getAllRides/javaFaker/`)
 }
 
-export async function getPage(page: number) {
-    const response = await fetch(`/api/drivus/pagination/${page}`)
+export async function getPage(page: number, howMany: number) {
+    const response = await fetch(`/api/drivus/pagination/${page}${howMany}`)
     const rides: Ride[] = await response.json()
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
@@ -106,7 +107,7 @@ export function getSeat(ride: Ride) {
         })
             .then(response => {
                 // Handle die Antwort hier
-                getPage(1)
+                getPage(1, ridesPerPage)
                 console.log("gehd")
             })
             .catch(error => {
@@ -140,7 +141,7 @@ export function removeSeat(ride: Ride) {
         })
             .then(response => {
                 // Handle die Antwort hier
-                getPage(1)
+                getPage(1, ridesPerPage)
                 console.log("gehd")
             })
             .catch(error => {

@@ -40,10 +40,10 @@ public class DrivUsResource {
     }
 
     @GET
-    @Path("/pagination/{page}")
-    public Response pagination(@PathParam("page") int page) {
+    @Path("/pagination/{page}{ridesPerPage}")
+    public Response pagination(@PathParam("page") int page, @PathParam("ridesPerPage") int ridesPerPage) {
         System.out.println("in pagination");
-        var rides = repository.pagination(page);
+        var rides = repository.pagination(page, ridesPerPage);
         var dtos = rides.stream().map(rideMapper::toResource);
         return Response.ok(dtos).build();
     }

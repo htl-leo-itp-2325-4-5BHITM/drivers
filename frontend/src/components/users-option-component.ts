@@ -104,7 +104,7 @@ class UsersOptionComponent extends HTMLElement {
             })
                 .then(response => {
                     // Handle die Antwort hier
-                    getPage(1)
+                    getPage(1, 7)
                     console.log("gehd")
                 })
                 .catch(error => {
