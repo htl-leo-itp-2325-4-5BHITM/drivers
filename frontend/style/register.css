@@ -86,5 +86,12 @@ input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(100%) sepia(1%) saturate(3863%) hue-rotate(151deg) brightness(92%) contrast(93%);
 }
+input[type="time"]::-webkit-calendar-picker-indicator{
+    filter: invert(100%) sepia(1%) saturate(3863%) hue-rotate(151deg) brightness(92%) contrast(93%);
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    filter: invert(100%) sepia(1%) saturate(3863%) hue-rotate(151deg) brightness(92%) contrast(93%);
+}
 
 /*<label for="datum">Date</label>
