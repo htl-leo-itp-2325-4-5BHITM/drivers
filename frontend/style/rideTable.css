@@ -22,20 +22,19 @@ table {
 }
 
 #ride-finder-table th:first-child {
-    width: 11%;
+    width: 8vw;
+
 }
 
 #ride-finder-table th:nth-child(2) {
-    width: 5%;
+    width: 5vw;
 }
 
 #ride-finder-table th:nth-child(6) {
-    width: 13%;
+    width: 10vw;
 }
 
-#ride-finder-table th:nth-child(8) {
-    width: 12%;
-}
+
 
 #ride-finder-table th:last-child {
     width: 20%;
@@ -50,6 +49,7 @@ table {
 #ride-finder-table th,
 #ride-finder-table td {
     padding: 1.5%;
+    max-width: 10vw;
 }
 
 #ride-finder-table tbody tr {
@@ -59,6 +59,7 @@ table {
 
 #ride-finder-table tbody tr:nth-of-type(even) {
     background-color: rgba(16, 22, 31, 0.8);
+
 }
 
 #ride-finder-table tbody tr:last-of-type {
@@ -112,7 +113,6 @@ table {
 
 #ride-search button:hover {
     cursor: pointer;
-    background-size: calc(contain + 10vw);
 }
 
 
