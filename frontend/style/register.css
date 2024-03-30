@@ -45,14 +45,17 @@
 
 .grid-item input{
     color: var(--colorBright);
-    height: 3.5vh;
+    height: 4vh;
     width: 15vw;
     background: transparent;
     outline: none;
+    padding-inline: 0;
+    padding-block: 0;
     border: none;
     border-bottom: var(--colorInactive) solid 1px;
     border-radius: 2px;
 }
+
 
 #register-submit {
     font-size: 1em;
@@ -91,7 +94,7 @@ input[type="time"]::-webkit-calendar-picker-indicator{
 }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-    filter: invert(100%) sepia(1%) saturate(3863%) hue-rotate(151deg) brightness(92%) contrast(93%);
+    -webkit-appearance: none;
 }
 
 /*<label for="datum">Date</label>

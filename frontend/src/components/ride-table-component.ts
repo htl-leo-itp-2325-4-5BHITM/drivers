@@ -122,19 +122,18 @@ export class RideTableComponent extends HTMLElement {
                     <div id="edit-content">
                         
                         
-                        <h2>Edit Ride</h2>
+                        <h3>Edit Ride</h3>
                         <form id="form-head-change">
 
                             <div id="edit-ride-image"></div>
-                            <div id="register-content">
 
-                                <div class="table-input">
+                                
                                     <div class="grid-item">
                                         <input type="text" id="abfort" name="abfort"
                                                value='${currentRide?.placeOfDeparture}'>
                                     </div>
 
-                                    <div class="gird-item">
+                                    <div class="grid-item">
                                         <input type="text" id="ankort" name="ankort"
                                                value='${currentRide?.placeOfArrival}'>
                                     </div>
@@ -150,12 +149,12 @@ export class RideTableComponent extends HTMLElement {
                                         <input type="number" min="1" id="fplatz" name="fplatz"
                                                value='${currentRide?.availableSeats}'>
                                     </div>
-                                </div>
-                                <input @click=${() => this.saveChanges(currentRide?.id)} type="button" id="submit"
+                            <div class="register-button-center">
+                                <input @click=${() => this.saveChanges(currentRide?.id)} type="button" id="edit-submit"
                                        value="save">
-                                <input @click=${() => this.removeRide(currentRide?.id)} type="button" id="remove"
+                                <input @click=${() => this.removeRide(currentRide?.id)} type="button" id="edit-remove"
                                        value="remove">
-
+                            </div>    
                         </form>
                         <div id="errorWrongInput"></div>
                     </div>
@@ -218,9 +217,9 @@ export class RideTableComponent extends HTMLElement {
 
         return html`
         <div class="pagination">
-            <p>&laquo;</p>
+            <p>Back</p>
             ${string}
-            <p>&raquo;</p>
+            <p>Next</p>
         </div>`
         
        /* renderPage(0)

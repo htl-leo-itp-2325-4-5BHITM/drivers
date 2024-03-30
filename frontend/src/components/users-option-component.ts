@@ -23,41 +23,41 @@ class UsersOptionComponent extends HTMLElement {
     formTemplate(users: DrivUser[]) {
         return html`
             <link rel="stylesheet" href="../../style/register.css">
-                <form id="form_head">
-                
-                    <div id="register-image"></div>
-                    <div id="register-content">
+            <form id="form_head">
+
+                <div id="register-image"></div>
+                <div id="register-content">
 
                     <div class="table-input" id="register-grid">
                         <h2>Registration Info</h2>
                         
-                        <div class="grid-item">
-                            <input type="text" id="abfort" name="abfort" placeholder="From">
-                        </div>
-                        <div class="grid-item">
-                            <input type="text" id="ankort" name="ankort" placeholder="To">
-                        </div>
-                        <div class="grid-item">
-                            <input placeholder="Date"
-                            onfocus="(this.type='date')"
-                            onblur="(this.type='text')"  
-                            id="datum" name="datum">
-                        </div>
-                        <div class="grid-item">
-                            <input placeholder="Time"
-                            onfocus="(this.type='time')"
-                            onblur="(this.type='text')" id="abfzeit" name="abfzeit">
-                        </div>
-                        <div class="grid-item">
-                            <input placeholder="Available Seats"
-                            onfocus="(this.type='number')"
-                            onblur="(this.type='text')" min="1" id="fplatz" name="fplatz">
-                        </div>
-                        <div class="table-input"></div>
+                            <div class="grid-item">
+                                <input type="text" id="abfort" name="abfort" placeholder="From">
+                            </div>
+                            <div class="grid-item">
+                                <input type="text" id="ankort" name="ankort" placeholder="To">
+                            </div>
+                            <div class="grid-item">
+                                <input placeholder="Date"
+                                       onfocus="(this.type='date')"
+                                       onblur="(this.type='text')"
+                                       id="datum" name="datum">
+                            </div>
+                            <div class="grid-item">
+                                <input placeholder="Time"
+                                       onfocus="(this.type='time')"
+                                       onblur="(this.type='text')" id="abfzeit" name="abfzeit">
+                            </div>
+                            <div class="grid-item">
+                                <input placeholder="Available Seats"
+                                       onfocus="(this.type='number')"
+                                       onblur="(this.type='text')" min="1" max="100" id="fplatz" name="fplatz">
+                            </div>
+                        
                         <div class="register-button-center">
                             <input @click=${() => this.submit()} type="button" id="register-submit" value="submit">
                         </div>
-                </form>
+            </form>
         `
     }
     private submit() {

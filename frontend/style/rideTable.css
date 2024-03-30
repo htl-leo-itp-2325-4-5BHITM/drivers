@@ -138,3 +138,7 @@ table {
     background-color: #ddd;
     border-radius: 5px;
   }
+
+  #filterText{
+      border:none;
+  }
