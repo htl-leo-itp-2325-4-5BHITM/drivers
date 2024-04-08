@@ -5,6 +5,8 @@ import { DateTime } from 'luxon'
 import {getCount, getSorted} from "../service/ride-service"
 import {loadRides, getSeat, removeSeat, getFiltered, getPage} from "../service/ride-service"
 import {unsafeHTML} from 'lit/directives/unsafe-html.js';
+import { } from 'leaflet'
+
 
 // für Sortierung
 let lastSortedColumn: String | null = null;
@@ -49,7 +51,7 @@ export class RideTableComponent extends HTMLElement {
         const formattedDate = departureTime.toFormat('dd.MM.yyyy'); // Datum formatieren (z.B. 2023-11-22)
 
         console.log("render ride", ride)
-
+        //https://www.openstreetmap.org/#map=14/48.2929/14.2725
         return html`
             <tr class="ride-finder-entry-row">
                 <td>${formattedDate}</td>
@@ -198,7 +200,17 @@ export class RideTableComponent extends HTMLElement {
                 `
             }
     }
+    /*private maps() {
+        var map = L.map('map').setView([51.505, -0.09], 13);
 
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([51.5, -0.09]).addTo(map)
+            .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+            .openPopup();
+    }*/
     private paginationNav(count: number) {
         console.log(count)
 
