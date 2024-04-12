@@ -1,15 +1,19 @@
 package at.htl.drive.ride;
 
 
+import at.htl.drive.ride.model.Ride;
+import at.htl.drive.ride.model.RideUserAssociation;
+import at.htl.drive.ride.model.RideUserAssociationId;
 import com.github.javafaker.Faker;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
 public class DataLoaderFaker {
 
     public static void main(String[] args) {
-        Faker faker = new Faker();
+        /*Faker faker = new Faker();
 
         for (int i = 0; i < 50; i++) {
             //Datum
@@ -38,7 +42,7 @@ public class DataLoaderFaker {
             System.out.println(placeOfArrival);
             System.out.println(availableSeats);
             System.out.println(driver);
-        }
+        }*/
 
 
 

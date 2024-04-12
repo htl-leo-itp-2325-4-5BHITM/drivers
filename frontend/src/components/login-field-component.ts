@@ -6,7 +6,6 @@ class LoginComponent extends HTMLElement {
     connectedCallback() {
         console.log("Login loaded")
         storeUsers.subscribe(model => {
-            console.log("data changed", model)
             this.render(model.drivUsers)
         })
     }
@@ -40,7 +39,6 @@ class LoginComponent extends HTMLElement {
         <div id="logedOutWorked"></div>`
     }
     optionTemplate(drivUser: DrivUser) {
-        console.log("render user", drivUser)
         return html`
         <option value="${drivUser.firstName} ${drivUser.lastName}">${drivUser.firstName} ${drivUser.lastName}</option>
         `
@@ -71,7 +69,6 @@ class LoginComponent extends HTMLElement {
 
                 // Subscribe to the store in RideTableComponent
                store.subscribe(model => {
-                    console.log("data changed", model);
                     rideTable.render(model.drives, model.currentRide);
                 });
                 //DAMIT WORKTS

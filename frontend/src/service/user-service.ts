@@ -9,7 +9,6 @@ async function loadUsers() {
     const model: ModelUser = {
         drivUsers: users
     }
-    console.log("users loaded", users)
     storeUsers.next(model)
 }
 

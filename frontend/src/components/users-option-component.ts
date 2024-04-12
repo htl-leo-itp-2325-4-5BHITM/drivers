@@ -9,7 +9,6 @@ class UsersOptionComponent extends HTMLElement {
     connectedCallback() {
         console.log("UserOptions loaded")
         storeUsers.subscribe(model => {
-            console.log("data changed", model)
             this.render(model.drivUsers)
         })
     }
