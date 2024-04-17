@@ -210,6 +210,7 @@ public class DrivUsRepository {
 
     public List<Ride> getAllRidesLoader() {
         Faker faker = new Faker(new Locale("de-AT"));
+        //faker.see(12345);
         //Ride newRide;
 
         for (int i = 0; i < 50; i++) {

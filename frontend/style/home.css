@@ -65,3 +65,8 @@
     box-shadow: 10px 5px 5px #111;
     transition: all 400ms ease-out;
 }
+
+/* sorry andrei */
+#map { 
+    height: 180px; 
+}

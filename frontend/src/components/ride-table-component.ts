@@ -5,6 +5,8 @@ import { DateTime } from 'luxon'
 import {getCount, getSorted} from "../service/ride-service"
 import {loadRides, getSeat, removeSeat, getFiltered, getPage} from "../service/ride-service"
 import {unsafeHTML} from 'lit/directives/unsafe-html.js';
+import { } from 'leaflet'
+
 
 // für Sortierung
 let lastSortedColumn: String | null = null;
@@ -15,9 +17,7 @@ let ridesPerPage = 7
 
 export class RideTableComponent extends HTMLElement {
     connectedCallback() {
-        console.log("RideTable loaded")
         store.subscribe(model => {
-            console.log("data changed", model)
             this.render(model.drives, model.currentRide, model.ridesCount);
             // lodt mid dem ois endlos
             //loadRides();
@@ -48,8 +48,8 @@ export class RideTableComponent extends HTMLElement {
         const formattedTime = departureTime.toFormat('HH:mm'); // Zeit formatieren (z.B. 10:30)
         const formattedDate = departureTime.toFormat('dd.MM.yyyy'); // Datum formatieren (z.B. 2023-11-22)
 
-        console.log("render ride", ride)
-
+        
+        //https://www.openstreetmap.org/#map=14/48.2929/14.2725
         return html`
             <tr class="ride-finder-entry-row">
                 <td>${formattedDate}</td>
@@ -67,7 +67,6 @@ export class RideTableComponent extends HTMLElement {
         `
     }
     tableTemplate(rides: Ride[], currentRide?: Ride, ridesCount?: number) {
-        console.log(rides)
         const rows = rides.map(ride => this.rowTemplate(ride))
         // Überprüfen, ob currentRide definiert ist und departureTime hat
         if (currentRide != null && 'departureTime' in currentRide) {
@@ -166,10 +165,7 @@ export class RideTableComponent extends HTMLElement {
     }
     private rowClick(ride: Ride) {
         const dateAndTime = ride.departureTime;
-        console.log(dateAndTime)
         const words = dateAndTime.split(/[T.]/);
-        console.log(words[0]);
-        console.log(words[1]);
         const date = words[0];
         const time = words[1];
 
@@ -178,7 +174,6 @@ export class RideTableComponent extends HTMLElement {
         store.next(model)
         const dialog = this.shadowRoot.getElementById('ride-dialog')
         dialog.style.display = 'flex'
-        console.log("in rowclick")
     }
     private rowsButtons(ride :Ride) {
         if(ride.driver == localStorage.getItem("username")) {
@@ -197,10 +192,18 @@ export class RideTableComponent extends HTMLElement {
                 `
             }
     }
+    /*private maps() {
+        var map = L.map('map').setView([51.505, -0.09], 13);
 
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([51.5, -0.09]).addTo(map)
+            .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+            .openPopup();
+    }*/
     private paginationNav(count: number) {
-        console.log(count)
-
         let selectedPage = 0   
         //getCount();
         let ridesCount = count;  
@@ -277,7 +280,6 @@ export class RideTableComponent extends HTMLElement {
     }
 
     private sortRides(column: String) {
-        console.log(column)
 
         if (lastSortedColumn === column) {
             // Wenn zweimal hintereinander auf dieselbe Spalte geklickt wird,
@@ -291,29 +293,20 @@ export class RideTableComponent extends HTMLElement {
 
         //wird sortiert und Spalte an Server
         getSorted(isAscendingOrder, lastSortedColumn)
-        console.log("in sortRides")
     }
     private saveChanges(id: number) {
         var url = "http://localhost:4200/api/drivus/rides/changeRide"
 
         var driv = localStorage.getItem("username");
-        console.log(driv);
-        console.log(driv);
-
         // Daten aus dem Formular erfassen
         var dateInputValue = (this.shadowRoot.getElementById('datum') as HTMLInputElement).value;
         var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
-        console.log(dateInputValue)
 
         const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy.MM.dd:HH:mm');
     
         //this.checkData();
         if(this.checkData()){
 
-            console.log("date",dateInputValue); // Überprüfe das Datumformat
-            console.log("time",timeInputValue); // Überprüfe das Zeitformat
-            console.log("combine",combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
-        
             const formData: Ride = {
                 id: id,
                 driver: localStorage.getItem("username"),
@@ -322,7 +315,6 @@ export class RideTableComponent extends HTMLElement {
                 placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
                 availableSeats: parseInt((this.shadowRoot.getElementById('fplatz') as HTMLInputElement).value)
             };
-            console.log("form Data: "+formData)
             // Daten in JSON umwandeln
             const jsonData = JSON.stringify(formData);
         
@@ -337,11 +329,10 @@ export class RideTableComponent extends HTMLElement {
                     // Handle die Antwort hier
                     getPage(1, ridesPerPage)
                     this.closeDialog()
-                    console.log("gehd")
                 })
                 .catch(error => {
                     // Handle Fehler hier
-                    console.log("Hat nd funktioniert zum Ändern")
+                    console.error("error: ",error)
                 });
         } else{
             alert("invalid data")
@@ -364,27 +355,23 @@ export class RideTableComponent extends HTMLElement {
                 // Handle die Antwort hier
                 getPage(1, ridesPerPage)
                 this.closeDialog()
-                console.log("gehd")
             })
             .catch(error => {
                 // Handle Fehler hier
-                console.log("Hat nd funktioniert zum Ändern")
+                console.error("Hat nd funktioniert zum Ändern ", error)
             });
     }
 
     private sortData(sorted: Boolean, column: String) {
-        console.log("sortData fetch")
         fetch('http://localhost:4200/api/drivus/rides/getSortedRide/'+sorted+'/'+column+'/', {
             method: 'GET',
         })
             .then(response => {
                 // Handle die Antwort hier
-
-                console.log("gehd")
             })
             .catch(error => {
                 // Handle Fehler hier
-                console.log("Hat nd funktioniert zum speichan")
+                console.error("Hat nd funktioniert zum speichan", error)
             });
     }
 

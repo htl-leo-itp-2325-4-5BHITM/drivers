@@ -12,7 +12,7 @@ export async function loadRides() {
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
     })
-    console.log("rides loaded", rides)
+    
     store.next(nextState)
 }
 
@@ -26,20 +26,17 @@ export async function getPage(page: number, howMany: number) {
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
     })
-    console.log("rides loaded", rides)
+    
     store.next(nextState)
 }
 
 export async function getCount() {
     const response = await fetch(`/api/drivus/rides/getCount`)
     const count: number = await response.json()
-    console.log(count)
     const nextState = produce(store.getValue(), model => {
         model.ridesCount = count
     })
-    //console.log("rides loaded", rides)
     store.next(nextState)
-    //return count;
 }
 
 export async function getFilteredCount(filterText: String) {
@@ -49,7 +46,7 @@ export async function getFilteredCount(filterText: String) {
     const nextState = produce(store.getValue(), model => {
         model.ridesCount = count
     })
-    //console.log("rides loaded", rides)
+    
     store.next(nextState)
     //return count;
 }
@@ -63,7 +60,6 @@ export async function getFiltered(filterText: String, page: number) {
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
     })
-    console.log("rides loaded", rides)
     store.next(nextState)
     getFilteredCount(filterText)
 }
@@ -78,7 +74,7 @@ export async function getSorted(sorted: Boolean, column: String) {
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
     })
-    console.log("rides loaded", rides)
+
     store.next(nextState)
 }
 
