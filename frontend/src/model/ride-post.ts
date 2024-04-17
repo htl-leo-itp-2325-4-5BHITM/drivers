@@ -6,4 +6,6 @@ export interface RidePost {
     placeOfDeparture: string
     placeOfArrival: string
     availableSeats: number
+    placeOfDepartureCoordinates: string
+    placeOfArrivalCoordinates: string
 }

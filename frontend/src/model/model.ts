@@ -12,6 +12,8 @@ interface Ride {
     departureTime: DateTime
     placeOfDeparture: string
     placeOfArrival: string
+    placeOfDepartureCoordinates?: string
+    placeOfArrivalCoordinates?: string
     availableSeats: number
 }
 
