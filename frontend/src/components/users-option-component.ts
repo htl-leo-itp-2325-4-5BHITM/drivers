@@ -33,9 +33,19 @@ class UsersOptionComponent extends HTMLElement {
                             <div class="grid-item">
                                 <input type="text" id="abfort" name="abfort" placeholder="From">
                             </div>
+                            
+                            <div class="grid-item">
+                                <input type="text" id="abfortC" name="abfortC" placeholder="Coordinates">
+                            </div>
+                      
                             <div class="grid-item">
                                 <input type="text" id="ankort" name="ankort" placeholder="To">
                             </div>
+
+                            <div class="grid-item">
+                                <input type="text" id="ankortC" name="ankortC" placeholder="Coordinates">
+                            </div>
+
                             <div class="grid-item">
                                 <input placeholder="Date"
                                        onfocus="(this.type='date')"

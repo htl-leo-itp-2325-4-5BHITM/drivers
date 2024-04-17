@@ -28,6 +28,11 @@ public class Ride {
     @Column(length = 100,nullable = false)
     public String driver;
 
+    @Column(length = 100,nullable = true)
+    public String placeOfDepartureCoordinates;
+    @Column(length = 100,nullable = true)
+    public String placeOfArrivalCoordinates;
+
     @OneToMany(mappedBy = "ride")
     public List<RideUserAssociation> associationList;
 
@@ -82,6 +87,22 @@ public class Ride {
         this.availableSeats = availableSeats;
     }
 
+    public String getPlaceOfDepartureCoordinates() {
+        return placeOfDepartureCoordinates;
+    }
+
+    public void setPlaceOfDepartureCoordinates(String placeOfDepartureCoordinates) {
+        this.placeOfDepartureCoordinates = placeOfDepartureCoordinates;
+    }
+
+    public String getPlaceOfArrivalCoordinates() {
+        return placeOfArrivalCoordinates;
+    }
+
+    public void setPlaceOfArrivalCoordinates(String placeOfArrivalCoordinates) {
+        this.placeOfArrivalCoordinates = placeOfArrivalCoordinates;
+    }
+
     //</editor-fold>
 
     public Ride() {
@@ -94,5 +115,15 @@ public class Ride {
         this.placeOfArrival = placeOfArrival;
         this.availableSeats = availableSeats;
         this.driver = driver;
+    }
+
+    public Ride(Timestamp departureTime, String placeOfDeparture, String placeOfArrival, int availableSeats, String driver, String placeOfDepartureCoordinates, String placeOfArrivalCoordinates) {
+        this.departureTime = departureTime;
+        this.placeOfDeparture = placeOfDeparture;
+        this.placeOfArrival = placeOfArrival;
+        this.availableSeats = availableSeats;
+        this.driver = driver;
+        this.placeOfDepartureCoordinates = placeOfDepartureCoordinates;
+        this.placeOfArrivalCoordinates = placeOfArrivalCoordinates;
     }
 }

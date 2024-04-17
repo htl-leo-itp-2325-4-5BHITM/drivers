@@ -10,7 +10,9 @@ public record RideDto(
     String placeOfDeparture,
     String placeOfArrival,
     int availableSeats,
-    String driver
+    String driver,
+    String placeOfDepartureCoordinate,
+    String placeOfArrivalCoordinate
 
 )
 {

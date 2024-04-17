@@ -104,7 +104,7 @@ public class DrivUsRepository {
     }
 
     public void postRide(RideDto rideDto) {
-        Ride ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(),rideDto.driver());
+        Ride ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(),rideDto.driver(),rideDto.placeOfDepartureCoordinate(),rideDto.placeOfArrivalCoordinate());
         em.persist(ride);
         RideUserAssociationId id = new RideUserAssociationId(ride.id, 1L);
         RideUserAssociation rua = new RideUserAssociation(id, true);
