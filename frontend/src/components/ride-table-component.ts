@@ -5,8 +5,9 @@ import { DateTime } from 'luxon'
 import {getCount, getSorted} from "../service/ride-service"
 import {loadRides, getSeat, removeSeat, getFiltered, getPage} from "../service/ride-service"
 import {unsafeHTML} from 'lit/directives/unsafe-html.js';
-import { } from 'leaflet'
 
+import L, { map, latLng, tileLayer, MapOptions, marker, LatLngExpression } from "leaflet";
+//import 'leaflet/dist/leaflet.css';
 
 // für Sortierung
 let lastSortedColumn: String | null = null;
@@ -61,6 +62,7 @@ export class RideTableComponent extends HTMLElement {
                 <td>
                     <div class="table-settings">
                         ${this.rowsButtons(ride)}
+                        <button class="table-setting-button"  class="setting-setting" @click=${() => this.map(ride)}>map</button>       
                     </div>
                 </td>
             </tr>
@@ -192,8 +194,8 @@ export class RideTableComponent extends HTMLElement {
                 `
             }
     }
-    /*private maps() {
-        var map = L.map('map').setView([51.505, -0.09], 13);
+    private map(ride :Ride) {
+        /*var map = L.map('map').setView([51.505, -0.09], 13);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -201,8 +203,38 @@ export class RideTableComponent extends HTMLElement {
 
         L.marker([51.5, -0.09]).addTo(map)
             .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-            .openPopup();
-    }*/
+            .openPopup();*/
+        const options: MapOptions = {
+            center: latLng(48.1, 13.9),
+            zoom: 10,
+        };
+              
+              const mymap = map('map', options);
+              
+              const key = "YOUR_MAPTILER_API_KEY_HERE";
+              
+              tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`,{ //style URL
+                tileSize: 512,
+                zoomOffset: -1,
+                minZoom: 1,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                crossOrigin: true
+              }).addTo(mymap);
+
+              //var latlng = new L.latLng(-43.1731, 6.6906);
+              console.log(ride.placeOfDepartureCoordinates)
+              
+              //var depCo = ride.placeOfDepartureCoordinates.split(',');
+
+              //var latlng = L.latLng(parseInt(depCo[0]), parseInt(depCo[1]));
+              //const response: LatLngExpression[] = [ride.placeOfDepartureCoordinates];
+             //ride.placeOfDepartureCoordinates
+              //marker(latlng).addTo(mymap);
+              marker([48.012291243336904, 13.64289128193861]).addTo(mymap);
+              marker([48.22617605120782, 14.240679068045338]).addTo(mymap);
+
+              //return mymap
+    }
     private paginationNav(count: number) {
         let selectedPage = 0   
         //getCount();
