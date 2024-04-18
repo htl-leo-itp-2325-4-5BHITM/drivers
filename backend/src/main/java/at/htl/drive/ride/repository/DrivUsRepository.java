@@ -25,7 +25,7 @@ public class DrivUsRepository {
 
 
     public List<Ride> all() {
-        return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
+       return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
     }
 
     public List<Ride> pagination(int page, int ridesPerPage) {

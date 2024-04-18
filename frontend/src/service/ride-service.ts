@@ -12,7 +12,7 @@ export async function loadRides() {
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
     })
-    
+   
     store.next(nextState)
 }
 
@@ -26,7 +26,7 @@ export async function getPage(page: number, howMany: number) {
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
     })
-    
+    console.log(nextState);
     store.next(nextState)
 }
 

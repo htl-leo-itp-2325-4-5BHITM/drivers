@@ -23,6 +23,7 @@ export class RideTableComponent extends HTMLElement {
             // lodt mid dem ois endlos
             //loadRides();
             //getCount();
+            console.log(model.drives)
         })
 
         const filterInput = this.shadowRoot.getElementById("filterText") as HTMLInputElement;
@@ -39,8 +40,8 @@ export class RideTableComponent extends HTMLElement {
         super()
         this.attachShadow({ mode: "open" })
     }
-    render(drives: Ride[], currentRide?: Ride, ridesCount?: number) {
-        render(this.tableTemplate(drives, currentRide, ridesCount), this.shadowRoot)
+    render(rides: Ride[], currentRide?: Ride, ridesCount?: number) {
+        render(this.tableTemplate(rides, currentRide, ridesCount), this.shadowRoot)
     }
     rowTemplate(ride: Ride) {
         // Departure Time in DateTime-Objekt umwandeln
@@ -48,7 +49,8 @@ export class RideTableComponent extends HTMLElement {
         // Zeit und Datum separat formatieren
         const formattedTime = departureTime.toFormat('HH:mm'); // Zeit formatieren (z.B. 10:30)
         const formattedDate = departureTime.toFormat('dd.MM.yyyy'); // Datum formatieren (z.B. 2023-11-22)
-
+        
+        console.log(ride.placeOfDepartureCoordinate)
         
         //https://www.openstreetmap.org/#map=14/48.2929/14.2725
         return html`
@@ -195,6 +197,9 @@ export class RideTableComponent extends HTMLElement {
             }
     }
     private map(ride :Ride) {
+        console.table(ride);
+        console.log(ride.placeOfArrivalCoordinate)
+        
         /*var map = L.map('map').setView([51.505, -0.09], 13);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -204,36 +209,43 @@ export class RideTableComponent extends HTMLElement {
         L.marker([51.5, -0.09]).addTo(map)
             .bindPopup('A pretty CSS popup.<br> Easily customizable.')
             .openPopup();*/
+
+        var depCo = ride.placeOfDepartureCoordinate.split(',');
+        var deplatlng = L.latLng(parseFloat(depCo[0]), parseFloat(depCo[1]));
+            console.log(deplatlng)
+            
+            var arrCo = ride.placeOfArrivalCoordinate.split(',');
+            var arrlatlng = L.latLng(parseFloat(arrCo[0]), parseFloat(arrCo[1]));
+
+
         const options: MapOptions = {
-            center: latLng(48.1, 13.9),
+            center: latLng((deplatlng.lat+arrlatlng.lat)/2, (deplatlng.lng+arrlatlng.lng)/2),
+           // center: latLng(48.1, 13.9),
             zoom: 10,
         };
               
-              const mymap = map('map', options);
-              
-              const key = "YOUR_MAPTILER_API_KEY_HERE";
-              
-              tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`,{ //style URL
-                tileSize: 512,
-                zoomOffset: -1,
-                minZoom: 1,
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                crossOrigin: true
-              }).addTo(mymap);
+        const mymap = map('map', options);
+        
+        const key = "YOUR_MAPTILER_API_KEY_HERE";
+        
+        tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`,{ //style URL
+        tileSize: 512,
+        zoomOffset: -1,
+        minZoom: 1,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        crossOrigin: true
+        }).addTo(mymap);
 
-              //var latlng = new L.latLng(-43.1731, 6.6906);
-              console.log(ride.placeOfDepartureCoordinates)
-              
-              //var depCo = ride.placeOfDepartureCoordinates.split(',');
+        //var latlng = new L.latLng(-43.1731, 6.6906);
+        
+      
 
-              //var latlng = L.latLng(parseInt(depCo[0]), parseInt(depCo[1]));
-              //const response: LatLngExpression[] = [ride.placeOfDepartureCoordinates];
-             //ride.placeOfDepartureCoordinates
-              //marker(latlng).addTo(mymap);
-              marker([48.012291243336904, 13.64289128193861]).addTo(mymap);
-              marker([48.22617605120782, 14.240679068045338]).addTo(mymap);
+        marker(deplatlng).addTo(mymap);
+        marker(arrlatlng).addTo(mymap);
+        //marker([48.012291243336904, 13.64289128193861]).addTo(mymap);
+        //marker([48.22617605120782, 14.240679068045338]).addTo(mymap);
 
-              //return mymap
+        //return mymap
     }
     private paginationNav(count: number) {
         let selectedPage = 0   
