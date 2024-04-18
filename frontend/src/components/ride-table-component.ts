@@ -2,9 +2,9 @@ import { Ride, store, Model } from "../model/model"
 import { html, render } from "lit-html"
 import { DateTime } from 'luxon'
 //import { sortData } from "../index"
-import {getCount, getSorted} from "../service/ride-service"
-import {loadRides, getSeat, removeSeat, getFiltered, getPage} from "../service/ride-service"
-import {unsafeHTML} from 'lit/directives/unsafe-html.js';
+import { getCount, getSorted } from "../service/ride-service"
+import { loadRides, getSeat, removeSeat, getFiltered, getPage } from "../service/ride-service"
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import L, { map, latLng, tileLayer, MapOptions, marker, LatLngExpression } from "leaflet";
 //import 'leaflet/dist/leaflet.css';
@@ -29,9 +29,9 @@ export class RideTableComponent extends HTMLElement {
         const filterInput = this.shadowRoot.getElementById("filterText") as HTMLInputElement;
         filterInput.addEventListener("input", async () => {
             const filterText = filterInput.value;
-            if(filterText==""){
+            if (filterText == "") {
                 getPage(1, ridesPerPage)
-            }else{
+            } else {
                 await getFiltered(filterText, 1);
             }
         });
@@ -49,9 +49,9 @@ export class RideTableComponent extends HTMLElement {
         // Zeit und Datum separat formatieren
         const formattedTime = departureTime.toFormat('HH:mm'); // Zeit formatieren (z.B. 10:30)
         const formattedDate = departureTime.toFormat('dd.MM.yyyy'); // Datum formatieren (z.B. 2023-11-22)
-        
+
         console.log(ride.placeOfDepartureCoordinate)
-        
+
         //https://www.openstreetmap.org/#map=14/48.2929/14.2725
         return html`
             <tr class="ride-finder-entry-row">
@@ -63,8 +63,8 @@ export class RideTableComponent extends HTMLElement {
                 <td>${ride.availableSeats}</td>
                 <td>
                     <div class="table-settings">
+                        <button class="table-setting-button"  class="setting-setting" @click=${() => this.map(ride)}><img src="../../img/map.png" class="map-icon"></button>       
                         ${this.rowsButtons(ride)}
-                        <button class="table-setting-button"  class="setting-setting" @click=${() => this.map(ride)}>map</button>       
                     </div>
                 </td>
             </tr>
@@ -179,27 +179,27 @@ export class RideTableComponent extends HTMLElement {
         const dialog = this.shadowRoot.getElementById('ride-dialog')
         dialog.style.display = 'flex'
     }
-    private rowsButtons(ride :Ride) {
-        if(ride.driver == localStorage.getItem("username")) {
+    private rowsButtons(ride: Ride) {
+        if (ride.driver == localStorage.getItem("username")) {
             return html`
                 <button class="table-setting-button"  class="setting-setting" @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button>       
             `
-        }else if(localStorage.getItem("isLogedIn") == "false"){
+        } else if (localStorage.getItem("isLogedIn") == "false") {
             return html` 
                 <button class="table-setting-button" @click=${() => alert("Please log in to get a seat!")}><img src="./img/plus_inactive.png" width="15vw"></button>
                 <button class="table-setting-button" class="setting-minus" @click=${() => alert("Please log in to get a seat!")}><img src="./img/minus_inactive.png" width="15vw"></button>
                `
-        }else {
+        } else {
             return html`
                 <button class="table-setting-button" @click=${() => getSeat(ride)}><img src="./img/plus_inactive.png" width="15vw"></button>
                 <button class="table-setting-button" class="setting-minus" @click=${() => removeSeat(ride)}><img src="./img/minus_inactive.png" width="15vw"></button>
                 `
-            }
+        }
     }
-    private map(ride :Ride) {
+    private map(ride: Ride) {
         console.table(ride);
         console.log(ride.placeOfArrivalCoordinate)
-        
+
         /*var map = L.map('map').setView([51.505, -0.09], 13);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -210,35 +210,40 @@ export class RideTableComponent extends HTMLElement {
             .bindPopup('A pretty CSS popup.<br> Easily customizable.')
             .openPopup();*/
 
+            
+
         var depCo = ride.placeOfDepartureCoordinate.split(',');
         var deplatlng = L.latLng(parseFloat(depCo[0]), parseFloat(depCo[1]));
-            console.log(deplatlng)
-            
-            var arrCo = ride.placeOfArrivalCoordinate.split(',');
-            var arrlatlng = L.latLng(parseFloat(arrCo[0]), parseFloat(arrCo[1]));
+        console.log(deplatlng)
+
+        var arrCo = ride.placeOfArrivalCoordinate.split(',');
+        var arrlatlng = L.latLng(parseFloat(arrCo[0]), parseFloat(arrCo[1]));
 
 
         const options: MapOptions = {
-            center: latLng((deplatlng.lat+arrlatlng.lat)/2, (deplatlng.lng+arrlatlng.lng)/2),
-           // center: latLng(48.1, 13.9),
+            center: latLng((deplatlng.lat + arrlatlng.lat) / 2, (deplatlng.lng + arrlatlng.lng) / 2),
             zoom: 10,
         };
-              
+
         const mymap = map('map', options);
-        
+
         const key = "YOUR_MAPTILER_API_KEY_HERE";
-        
-        tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`,{ //style URL
-        tileSize: 512,
-        zoomOffset: -1,
-        minZoom: 1,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        crossOrigin: true
+
+        /*mymap.eachLayer((layer) => {
+            layer.remove();
+        });*/
+
+        tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, { //style URL
+            tileSize: 512,
+            zoomOffset: -1,
+            minZoom: 1,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            crossOrigin: true
         }).addTo(mymap);
 
         //var latlng = new L.latLng(-43.1731, 6.6906);
-        
-      
+
+
 
         marker(deplatlng).addTo(mymap);
         marker(arrlatlng).addTo(mymap);
@@ -248,18 +253,18 @@ export class RideTableComponent extends HTMLElement {
         //return mymap
     }
     private paginationNav(count: number) {
-        let selectedPage = 0   
+        let selectedPage = 0
         //getCount();
-        let ridesCount = count;  
+        let ridesCount = count;
 
-        
+
         let string = []
-        
-        for (let i = 0; i <= ridesCount/ridesPerPage; i++) {
-            string.push(html`<p @click=${() => getPage(i+1, ridesPerPage)}>${i+1}</p>`)
+
+        for (let i = 0; i <= ridesCount / ridesPerPage; i++) {
+            string.push(html`<p @click=${() => getPage(i + 1, ridesPerPage)}>${i + 1}</p>`)
         }
 
-        
+
 
         return html`
         <div class="pagination">
@@ -267,59 +272,59 @@ export class RideTableComponent extends HTMLElement {
             ${string}
             <p>Next</p>
         </div>`
+
+        /* renderPage(0)
+ 
+         function renderPage(number){
+             selectedPage = number  
+             return html`
+                 <span class="dots">••</span>
+                 ${selectedPage > 0 ? `<span class="swap" onclick="swapPage(-1)">${selectedPage}</span>` : `<span class="spacer"></span>`}
+                 <span class="page">${selectedPage +1}</span>
+                 ${selectedPage < ridesCount ? `<span class="swap" onclick="swapPage(1)">${selectedPage + 2}</span>` : `<span class="spacer"></span>`}
+                 <span class="dots">••</span>
+             `
+             
+             /*let html = ""
+             for (let i = selectedPage*objectsPerPage; i < selectedPage*objectsPerPage+objectsPerPage; i++) {
+                     html += `<li>${i} ${i}</li>`
+             }
+             document.querySelector('.content').innerHTML = html*/
+        /*        }
         
-       /* renderPage(0)
-
-        function renderPage(number){
-            selectedPage = number  
-            return html`
-                <span class="dots">••</span>
-                ${selectedPage > 0 ? `<span class="swap" onclick="swapPage(-1)">${selectedPage}</span>` : `<span class="spacer"></span>`}
-                <span class="page">${selectedPage +1}</span>
-                ${selectedPage < ridesCount ? `<span class="swap" onclick="swapPage(1)">${selectedPage + 2}</span>` : `<span class="spacer"></span>`}
-                <span class="dots">••</span>
-            `
-            
-            /*let html = ""
-            for (let i = selectedPage*objectsPerPage; i < selectedPage*objectsPerPage+objectsPerPage; i++) {
-                    html += `<li>${i} ${i}</li>`
-            }
-            document.querySelector('.content').innerHTML = html*/
-/*        }
-
-        function swapPage(offset){
-        renderPage(selectedPage + offset)
-        }
+                function swapPage(offset){
+                renderPage(selectedPage + offset)
+                }
+                
+                /*
         
-        /*
-
-        /*
+                /*
+                
         
-
-        renderPage(0)
-
-        function renderPage(number){
-        selectedPage = number  
-        document.querySelector(".pageselector").innerHTML = `
-            <span class="dots">••</span>
-            ${selectedPage > 0 ? `<span class="swap" onclick="swapPage(-1)">${selectedPage}</span>` : `<span class="spacer"></span>`}
-            <span class="page">${selectedPage +1}</span>
-            ${selectedPage < data.length ? `<span class="swap" onclick="swapPage(1)">${selectedPage + 2}</span>` : `<span class="spacer"></span>`}
-            <span class="dots">••</span>
-        `
+                renderPage(0)
         
-        let html = ""
-        for (let i = selectedPage*objectsPerPage; i < selectedPage*objectsPerPage+objectsPerPage; i++) {
-                html += `<li>${i} ${data[i]}</li>`
-        }
-        document.querySelector('.content').innerHTML = html
-        }
-
-        function swapPage(offset){
-        renderPage(selectedPage + offset)
-        }
-        */
+                function renderPage(number){
+                selectedPage = number  
+                document.querySelector(".pageselector").innerHTML = `
+                    <span class="dots">••</span>
+                    ${selectedPage > 0 ? `<span class="swap" onclick="swapPage(-1)">${selectedPage}</span>` : `<span class="spacer"></span>`}
+                    <span class="page">${selectedPage +1}</span>
+                    ${selectedPage < data.length ? `<span class="swap" onclick="swapPage(1)">${selectedPage + 2}</span>` : `<span class="spacer"></span>`}
+                    <span class="dots">••</span>
+                `
+                
+                let html = ""
+                for (let i = selectedPage*objectsPerPage; i < selectedPage*objectsPerPage+objectsPerPage; i++) {
+                        html += `<li>${i} ${data[i]}</li>`
+                }
+                document.querySelector('.content').innerHTML = html
+                }
         
+                function swapPage(offset){
+                renderPage(selectedPage + offset)
+                }
+                */
+
 
     }
 
@@ -347,9 +352,9 @@ export class RideTableComponent extends HTMLElement {
         var timeInputValue = (this.shadowRoot.getElementById('abfzeit') as HTMLInputElement).value;
 
         const combinedDateTime = DateTime.fromFormat(`${dateInputValue}:${timeInputValue}`, 'yyyy.MM.dd:HH:mm');
-    
+
         //this.checkData();
-        if(this.checkData()){
+        if (this.checkData()) {
 
             const formData: Ride = {
                 id: id,
@@ -361,7 +366,7 @@ export class RideTableComponent extends HTMLElement {
             };
             // Daten in JSON umwandeln
             const jsonData = JSON.stringify(formData);
-        
+
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -376,9 +381,9 @@ export class RideTableComponent extends HTMLElement {
                 })
                 .catch(error => {
                     // Handle Fehler hier
-                    console.error("error: ",error)
+                    console.error("error: ", error)
                 });
-        } else{
+        } else {
             alert("invalid data")
         }
     }
@@ -407,7 +412,7 @@ export class RideTableComponent extends HTMLElement {
     }
 
     private sortData(sorted: Boolean, column: String) {
-        fetch('http://localhost:4200/api/drivus/rides/getSortedRide/'+sorted+'/'+column+'/', {
+        fetch('http://localhost:4200/api/drivus/rides/getSortedRide/' + sorted + '/' + column + '/', {
             method: 'GET',
         })
             .then(response => {
@@ -420,7 +425,7 @@ export class RideTableComponent extends HTMLElement {
     }
 
     //Input überprüfen
-    private checkData(){
+    private checkData() {
 
         let isValid: Boolean = true;
 
@@ -470,9 +475,9 @@ export class RideTableComponent extends HTMLElement {
             isValid = false;
             //alert('Selected date cannot be in the past or null.');
         }
-    
+
         return isValid;
-      }
+    }
 
     private getFilteredList() {
         var filterString = (this.shadowRoot.getElementById('filterText') as HTMLInputElement).value;

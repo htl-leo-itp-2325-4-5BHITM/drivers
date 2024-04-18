@@ -139,3 +139,12 @@ table {
   #filterText{
       border:none;
   }
+
+  .map-icon{
+    width: 1vw;
+    filter: brightness(0) saturate(100%) invert(62%) sepia(10%) saturate(295%) hue-rotate(102deg) brightness(92%) contrast(91%);
+  }
+
+  .map-icon:hover{
+    filter: brightness(0) saturate(100%) invert(93%) sepia(10%) saturate(158%) hue-rotate(132deg) brightness(96%) contrast(93%);
+  }
