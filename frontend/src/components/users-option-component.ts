@@ -96,8 +96,8 @@ class UsersOptionComponent extends HTMLElement {
                 departureTime: combinedDateTime,
                 placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
                 placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
-                placeOfDepartureCoordinates: (this.shadowRoot.getElementById('abfortC') as HTMLInputElement).value,
-                placeOfArrivalCoordinates: (this.shadowRoot.getElementById('ankortC') as HTMLInputElement).value,
+                placeOfDepartureCoordinate: (this.shadowRoot.getElementById('abfortC') as HTMLInputElement).value,
+                placeOfArrivalCoordinate: (this.shadowRoot.getElementById('ankortC') as HTMLInputElement).value,
                 availableSeats: parseInt((this.shadowRoot.getElementById('fplatz') as HTMLInputElement).value)
             };
             console.log("form Data: " + formData)
