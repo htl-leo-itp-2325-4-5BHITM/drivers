@@ -1,4 +1,4 @@
-import { DrivUser, Model, store, storeUsers } from "../model/model"
+/*import { DrivUser, Model, store, storeUsers } from "../model/model"
 import { html, render } from "lit-html"
 import { getUserData } from "../service/user-service"
 
@@ -74,7 +74,7 @@ class LoginComponent extends HTMLElement {
                 //DAMIT WORKTS
                 loadRides();
             }*/
-            console.log(localStorage.getItem("username"))
+           /* console.log(localStorage.getItem("username"))
         } else {
             alert("invalid data")
         }
@@ -107,4 +107,4 @@ class LoginComponent extends HTMLElement {
 
 }
 
-customElements.define("login-field", LoginComponent)
+customElements.define("login-field", LoginComponent)*/

@@ -1,10 +1,16 @@
 @BASE=https://drivus.sytes.net
 @TOKEN_ENDPOINT={{wellknown.response.body.token_endpoint}}
+@ACCESS_TOKEN={{login.response.body.access_token}}
 ###
 # @name wellknown
 GET {{BASE}}/realms/drivus/.well-known/openid-configuration
 ###
+# @name login
 POST {{TOKEN_ENDPOINT}}
 Content-Type: application/x-www-form-urlencoded
 
 client_id=frontend&username=andrei&password=test&grant_type=password&client_secret=QgB7E9RPN5cY1HleQH6JL0O3ZHu6K0uU
+###
+GET http://localhost:4200/rides
+Authorization: Bearer {{ACCESS_TOKEN}}
+###

@@ -7,6 +7,7 @@ import { loadRides, getSeat, removeSeat, getFiltered, getPage } from "../service
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import L, { map, latLng, tileLayer, MapOptions, marker, LatLngExpression } from "leaflet";
+import { filter } from "rxjs"
 //import 'leaflet/dist/leaflet.css';
 
 // für Sortierung
@@ -18,7 +19,10 @@ let ridesPerPage = 7
 
 export class RideTableComponent extends HTMLElement {
     connectedCallback() {
-        store.subscribe(model => {
+        store.pipe(
+            filter(model=> !!model.drives && !!model.currentRide)
+        )
+        .subscribe(model => {
             this.render(model.drives, model.currentRide, model.ridesCount);
             // lodt mid dem ois endlos
             //loadRides();
@@ -26,7 +30,7 @@ export class RideTableComponent extends HTMLElement {
             console.log(model.drives)
         })
 
-        const filterInput = this.shadowRoot.getElementById("filterText") as HTMLInputElement;
+        /*const filterInput = this.shadowRoot.getElementById("filterText") as HTMLInputElement;
         filterInput.addEventListener("input", async () => {
             const filterText = filterInput.value;
             if (filterText == "") {
@@ -34,7 +38,7 @@ export class RideTableComponent extends HTMLElement {
             } else {
                 await getFiltered(filterText, 1);
             }
-        });
+        });*/
     }
     constructor() {
         super()
@@ -98,9 +102,9 @@ export class RideTableComponent extends HTMLElement {
                         <th>
                             <div id="ride-search">
                                 <input type="text" placeholder="Search" id="filterText">
-                                <button @click=${() => getFiltered((this.shadowRoot.getElementById('filterText') as HTMLInputElement).value, 1)}>
+                                <!--<button @click=${() => getFiltered((this.shadowRoot.getElementById('filterText') as HTMLInputElement).value, 1)}>
                                     <img src="" ./img/magnifying_glass.png>
-                                </button>
+                                </button>-->
                             </div>
                         </th>
                     </tr>
