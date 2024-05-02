@@ -8,15 +8,28 @@ import at.htl.drive.ride.model.Ride;
 import at.htl.drive.ride.dto.RideDto;
 import at.htl.drive.ride.RideMapper;
 import at.htl.drive.ride.repository.DrivUsRepository;
+import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.jwt.Claims;
+import org.eclipse.microprofile.jwt.JsonWebToken;
+import org.jboss.logging.Logger;
+import org.keycloak.authorization.client.AuthzClient;
 
 import java.util.List;
 
+
 @Path("/drivus")
 public class DrivUsResource {
+
+    @Inject
+    Logger log;
+    @Inject
+    JsonWebToken jwt;
+    /*@Inject
+    AuthzClient authzClient;*/
     @Inject
     DrivUsRepository repository;
     @Inject
@@ -24,13 +37,17 @@ public class DrivUsResource {
     @Inject
     DrivUserMapper userMapper;
 
+
+    @PermitAll
     @Path("/rides")
     @GET
+    //@RolesAllowed("drivus")
     public Response all() {
         System.out.println("bin im all");
         var rides = repository.all();
         var dtos = rides.stream().map(rideMapper::toResource);
         return Response.ok(dtos).build();
+        //jwt.claim(Claims.groups);
     }
 
     @Path("/rides/getCount")

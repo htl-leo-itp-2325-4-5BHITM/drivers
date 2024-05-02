@@ -31,6 +31,24 @@ kubectl get pods
 kubectl port-forward pos&lt;tab&gt;-&lt;tab&gt; 5433:5432
 ```
 
+Keycloak
+```bash
+ssh drivus
+```
+
+Kubectl
+```bash
+im k8s ordner
+kubectl apply -f postgresql.yml
+kubectl delete -f postgresql.yml 
+
+VSCode
+kubectl port-forward pods/postgres-78cdcdcc55-486sw 5432:5432 -n default
+
+kubectl port-forward postgres-78cdcdcc55-zxbdm 5432:5432
+ 
+```
+
 ## Fehlerbehebeungen 
 
 ###password/user/ (Quarkus) Fehler kann sicht nicht verbinden / connection refused:
