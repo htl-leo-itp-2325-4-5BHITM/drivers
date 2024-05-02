@@ -46,8 +46,15 @@ public class DrivUsResource {
         System.out.println("bin im all");
         var rides = repository.all();
         var dtos = rides.stream().map(rideMapper::toResource);
+        //dumpWebToken();
         return Response.ok(dtos).build();
         //jwt.claim(Claims.groups);
+    }
+
+    void dumpWebToken() {
+        log.infof("email=%s", jwt.claim(Claims.email));
+        String firstname = jwt.claim(Claims.given_name).get().toString();
+        log.infof("firstname=%s", firstname);
     }
 
     @Path("/rides/getCount")

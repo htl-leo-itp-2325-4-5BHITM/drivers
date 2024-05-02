@@ -30,7 +30,7 @@ export class RideTableComponent extends HTMLElement {
             console.log(model.drives)
         })
 
-        /*const filterInput = this.shadowRoot.getElementById("filterText") as HTMLInputElement;
+        const filterInput = this.shadowRoot.getElementById("filterText") as HTMLInputElement;
         filterInput.addEventListener("input", async () => {
             const filterText = filterInput.value;
             if (filterText == "") {
@@ -38,7 +38,7 @@ export class RideTableComponent extends HTMLElement {
             } else {
                 await getFiltered(filterText, 1);
             }
-        });*/
+        });
     }
     constructor() {
         super()
@@ -258,7 +258,7 @@ export class RideTableComponent extends HTMLElement {
             <p>Next</p>
         </div>`
 
-        /* renderPage(0)
+        renderPage(0)
  
          function renderPage(number){
              selectedPage = number  
@@ -275,7 +275,7 @@ export class RideTableComponent extends HTMLElement {
                      html += `<li>${i} ${i}</li>`
              }
              document.querySelector('.content').innerHTML = html*/
-        /*        }
+        }
         
                 function swapPage(offset){
                 renderPage(selectedPage + offset)

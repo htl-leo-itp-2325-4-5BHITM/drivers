@@ -11,6 +11,6 @@ Content-Type: application/x-www-form-urlencoded
 
 client_id=frontend&username=andrei&password=test&grant_type=password&client_secret=QgB7E9RPN5cY1HleQH6JL0O3ZHu6K0uU
 ###
-GET http://localhost:4200/rides
+GET http://localhost:4200/api/drivus/rides
 Authorization: Bearer {{ACCESS_TOKEN}}
 ###
