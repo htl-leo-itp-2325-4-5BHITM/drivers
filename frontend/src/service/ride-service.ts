@@ -17,11 +17,15 @@ export async function loadRides() {
 }
 
 export async function getFakeRides() {
-    const response = await fetch(`/api/drivus/rides/getAllRides/javaFaker/`)
+    const response = await fetch(`/api/drivus/rides/getAllRides/javaFaker/`, {
+        headers: {Authorization: `Bearer ${localStorage.token}`}
+      })
 }
 
 export async function getPage(page: number, howMany: number) {
-    const response = await fetch(`/api/drivus/pagination/${page}${howMany}`)
+    const response = await fetch(`/api/drivus/pagination/${page}${howMany}`, {
+        headers: {Authorization: `Bearer ${localStorage.token}`}
+      })
     const rides: Ride[] = await response.json()
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
@@ -31,7 +35,9 @@ export async function getPage(page: number, howMany: number) {
 }
 
 export async function getCount() {
-    const response = await fetch(`/api/drivus/rides/getCount`)
+    const response = await fetch(`/api/drivus/rides/getCount`, {
+        headers: {Authorization: `Bearer ${localStorage.token}`}
+      })
     const count: number = await response.json()
     const nextState = produce(store.getValue(), model => {
         model.ridesCount = count

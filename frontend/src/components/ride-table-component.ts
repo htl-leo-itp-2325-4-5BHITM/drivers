@@ -19,26 +19,29 @@ let ridesPerPage = 7
 
 export class RideTableComponent extends HTMLElement {
     connectedCallback() {
-        store.pipe(
+        console.log("table")
+        store/*.pipe(
             filter(model=> !!model.drives && !!model.currentRide)
-        )
+        )*/
         .subscribe(model => {
             this.render(model.drives, model.currentRide, model.ridesCount);
             // lodt mid dem ois endlos
             //loadRides();
             //getCount();
             console.log(model.drives)
+            console.log(model);
+        
         })
 
         const filterInput = this.shadowRoot.getElementById("filterText") as HTMLInputElement;
-        filterInput.addEventListener("input", async () => {
+        /*filterInput.addEventListener("input", async () => {
             const filterText = filterInput.value;
             if (filterText == "") {
                 getPage(1, ridesPerPage)
             } else {
                 await getFiltered(filterText, 1);
             }
-        });
+        });*/
     }
     constructor() {
         super()

@@ -3,6 +3,7 @@ import { loadUsers } from "./service/user-service"
 import "./components/ride-table-component"
 import "./components/users-option-component"
 import "./components/login-field-component"
+import "./components/user-details-component"
 import Keycloak from 'keycloak-js'
 
 //window.addEventListener("DOMContentLoaded", () => loaded())
@@ -25,12 +26,17 @@ async function load(){
         const authenticated = await keycloak.init({enableLogging:true});
         console.log(`User is ${authenticated ? 'authenticated' : 'not authenticated'}`);
 
+        //getPage(1, 7)
+
         if (!authenticated) {
           await keycloak.login()
           localStorage.token = keycloak.token
         } else {
             console.log("Keycloak login done", keycloak.token)
             localStorage.token = keycloak.token
+            getPage(1,7)
+            getCount()
+            getFakeRides()
         } 
         console.log('keycloaktoken = ',keycloak.token)
     } catch (error) {
