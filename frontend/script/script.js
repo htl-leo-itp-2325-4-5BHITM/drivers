@@ -15,14 +15,6 @@ function showRegister() {
 
 }
 
-
-
-
-
-
-
-
-
 //Home section
 ScrollReveal().reveal('#info-box-headline', { delay: 100 });
 ScrollReveal().reveal('#usefull-buttons', { delay: 300 });
