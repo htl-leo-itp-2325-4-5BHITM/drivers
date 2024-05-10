@@ -1,10 +1,17 @@
 import { html, render } from "lit-html"
+import { getUserDetails } from "../service/user-service";
+import { Ride, storeUserDetails, ModelUserDetail, UserDetail } from "../model/model"
+
 
 export class UserDetailComponenet extends HTMLElement {
 
     connectedCallback() {
         console.log("details loaded");
-        this.render()
+        storeUserDetails
+        .subscribe(model => {
+            this.render(model.userDetails);
+            console.log(model.userDetails)
+        })
     }
 
     constructor() {
@@ -12,14 +19,36 @@ export class UserDetailComponenet extends HTMLElement {
         this.attachShadow({ mode: "open" })
     }
 
-    render() {
-        render(this.details(), this.shadowRoot)
+    render(userDetails: UserDetail[]) {
+        render(this.details(userDetails), this.shadowRoot)
     }
-   
-    details() {
-        return html`
-            <p>test</p>
+
+    details(userDetails :UserDetail[]) {
+        //getUserDetails()
+        //const details = userDetails.map(details => this.getDetails(details))
+        console.log(userDetails)
+        //if(userDetails.length != undefined && userDetails.length > 0) {
+            const details = userDetails
+            console.log(userDetails.length)
+            return html`
+            <button>user</button>
+           
             `
+            //<!--<button @click=${() => this.getDetails(details)}>user</button>-->
+            //<p>${details[1].name}</p>
+        //}
+        /*return html`
+            <p>not working</p>`*/
+        
+        
+    }
+    getDetails(details :UserDetail) {
+        //getUserDetails()
+        console.log("in details")
+        return html`
+        <h3>geht</h3>
+        `
+        console.log("danach")
     }
 
 }

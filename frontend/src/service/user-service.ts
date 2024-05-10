@@ -1,7 +1,8 @@
-import { DrivUser, ModelUser } from "Model/model"
+import { DrivUser, ModelUser, storeUserDetails, UserDetail } from "Model/model"
 import { storeUsers } from "../model/model"
+import { produce } from "immer"
 
-const USER_URL = "/api/drivus/users"
+const USER_URL = "/api/drivus/user"
 
 async function loadUsers() {
     const response = await fetch(USER_URL)
@@ -10,6 +11,18 @@ async function loadUsers() {
         drivUsers: users
     }
     storeUsers.next(model)
+}
+
+export async function getUserDetails() {
+    const response = await fetch(`/api/drivus/user/detail`, {
+        headers: {Authorization: `Bearer ${localStorage.token}`}
+      })
+    const userDetails: UserDetail[] = await response.json()
+    const nextState = produce(storeUserDetails.getValue(), model => {
+        model.userDetails = userDetails
+    })
+    console.log(nextState);
+    storeUserDetails.next(nextState)
 }
 
 export function getUserData() {

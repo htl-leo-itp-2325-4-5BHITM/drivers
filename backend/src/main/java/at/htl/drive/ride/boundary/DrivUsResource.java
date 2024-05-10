@@ -16,8 +16,10 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.jwt.Claims;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.Logger;
+import org.jose4j.json.internal.json_simple.JSONObject;
 import org.keycloak.authorization.client.AuthzClient;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -51,10 +53,24 @@ public class DrivUsResource {
         //jwt.claim(Claims.groups);
     }
 
-    void dumpWebToken() {
+    @Path("/user/detail")
+    @GET
+    public JSONObject dumpWebToken() {
         log.infof("email=%s", jwt.claim(Claims.email));
-        String firstname = jwt.claim(Claims.given_name).get().toString();
-        log.infof("firstname=%s", firstname);
+        //String firstname = jwt.claim(Claims.given_name).get().toString();
+        String name = jwt.claim(Claims.given_name).get().toString();
+        String email = jwt.claim(Claims.email).get().toString();
+
+        log.infof("name=%s", name);
+        //List<String> userDetails = new LinkedList<>();
+        //userDetails.add(name);
+        //userDetails.add(email);
+
+        JSONObject userDetails = new JSONObject();
+        userDetails.put("name", name);
+        userDetails.put("email", email);
+
+        return userDetails;
     }
 
     @Path("/rides/getCount")

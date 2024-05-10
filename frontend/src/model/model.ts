@@ -42,6 +42,18 @@ interface DrivUser {
     emailAddress: string
 }
 
+export interface UserDetail {
+    name: string,
+    email: string
+}
+
+export interface ModelUserDetail {
+    userDetails: UserDetail[]
+}
+const initialStateUserDetail: ModelUserDetail = {
+    userDetails: []
+}
+
 export interface ModelUser {
     drivUsers: DrivUser[]
 }
@@ -52,5 +64,6 @@ const initialStateUser: ModelUser = {
 
 const store = new BehaviorSubject<Model>(initialState)
 const storeUsers = new BehaviorSubject<ModelUser>(initialStateUser)
+const storeUserDetails = new BehaviorSubject<ModelUserDetail>(initialStateUserDetail)
 
-export { Ride, DrivUser, RideResponse as DriveResponse, store, storeUsers}
+export { Ride, DrivUser, RideResponse as DriveResponse, store, storeUsers, storeUserDetails}

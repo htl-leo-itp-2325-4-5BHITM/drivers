@@ -1,5 +1,5 @@
 import {getPage, getSorted, loadRides, getFakeRides, getCount} from "./service/ride-service"
-import { loadUsers } from "./service/user-service"
+import { getUserData, getUserDetails, loadUsers } from "./service/user-service"
 import "./components/ride-table-component"
 import "./components/users-option-component"
 import "./components/login-field-component"
@@ -37,6 +37,7 @@ async function load(){
             getPage(1,7)
             getCount()
             getFakeRides()
+            getUserDetails()
         } 
         console.log('keycloaktoken = ',keycloak.token)
     } catch (error) {
