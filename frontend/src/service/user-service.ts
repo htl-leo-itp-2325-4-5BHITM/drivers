@@ -17,7 +17,7 @@ export async function getUserDetails() {
     const response = await fetch(`/api/drivus/user/detail`, {
         headers: {Authorization: `Bearer ${localStorage.token}`}
       })
-    const userDetails: UserDetail[] = await response.json()
+    const userDetails: UserDetail = await response.json()
     const nextState = produce(storeUserDetails.getValue(), model => {
         model.userDetails = userDetails
     })

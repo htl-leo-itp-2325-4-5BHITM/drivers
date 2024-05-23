@@ -48,10 +48,13 @@ export interface UserDetail {
 }
 
 export interface ModelUserDetail {
-    userDetails: UserDetail[]
+    userDetails: UserDetail
 }
 const initialStateUserDetail: ModelUserDetail = {
-    userDetails: []
+    userDetails: {
+        name: "",
+        email: ""
+    }
 }
 
 export interface ModelUser {

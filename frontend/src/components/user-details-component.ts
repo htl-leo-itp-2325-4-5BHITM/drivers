@@ -10,7 +10,7 @@ export class UserDetailComponenet extends HTMLElement {
         storeUserDetails
         .subscribe(model => {
             this.render(model.userDetails);
-            console.log(model.userDetails)
+            
         })
     }
 
@@ -19,38 +19,39 @@ export class UserDetailComponenet extends HTMLElement {
         this.attachShadow({ mode: "open" })
     }
 
-    render(userDetails: UserDetail[]) {
+    render(userDetails: UserDetail) {
         render(this.details(userDetails), this.shadowRoot)
-    }
-
-    details(userDetails :UserDetail[]) {
-        //getUserDetails()
-        //const details = userDetails.map(details => this.getDetails(details))
         console.log(userDetails)
-        //if(userDetails.length != undefined && userDetails.length > 0) {
-            const details = userDetails
-            console.log(userDetails.length)
-            return html`
-            <button>user</button>
-           
-            `
-            //<!--<button @click=${() => this.getDetails(details)}>user</button>-->
-            //<p>${details[1].name}</p>
-        //}
-        /*return html`
-            <p>not working</p>`*/
-        
-        
-    }
-    getDetails(details :UserDetail) {
-        //getUserDetails()
-        console.log("in details")
-        return html`
-        <h3>geht</h3>
-        `
-        console.log("danach")
     }
 
+    details(userDetails :UserDetail) {
+        console.log("userDetails", userDetails)
+        const details = userDetails
+            
+        return html`
+            
+            <button @click=${() => this.getDetails(details)}>user</button>
+            <!-- The Modal -->
+            <link rel="stylesheet" href="./style/modal.css">
+            <link rel="stylesheet" href="../style/register.css">
+            <div id="ride-dialog">
+                
+                <div id="modal-content">
+                    <span class="close" @click=${() => this.closeDialog()}>&times;</span>
+                    <p>${details.name}</p><br>
+                    <p>${details.email}</p>
+                    </div>
+                </div>
+            </div>`  
+    }
+    closeDialog() {
+        const dialog = this.shadowRoot.getElementById('ride-dialog')
+        dialog.style.display = 'none'
+    }
+    private getDetails(details :UserDetail) {
+        const dialog = this.shadowRoot.getElementById('ride-dialog')
+        dialog.style.display = 'flex'
+    }
 }
 
 customElements.define("user-details", UserDetailComponenet)
