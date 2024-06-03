@@ -7,41 +7,30 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-public class Ride {
+public class Swipe {
 
     //<editor-fold desc="Initialize">
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-    @Column(nullable = false)
-    public Timestamp departureTime;
-    @Column(length = 100,nullable = false)
-    public String placeOfDeparture;
-
-    @Column(length = 100,nullable = false)
-    public String placeOfArrival;
-
-    @Column(length = 50,nullable = false)
-    public int availableSeats;
-
-    @Column(length = 100,nullable = false)
-    public String driver;
-
-    @Column(length = 100,nullable = true)
-    public String placeOfDepartureCoordinates;
-    @Column(length = 100,nullable = true)
-    public String placeOfArrivalCoordinates;
-
-    @OneToMany(mappedBy = "ride")
-    public List<RideUserAssociation> associationList;
+    @ManyToOne
+    @JoinColumn(name = "user_id_1", nullable = false)
+    public DrivUser firstUser;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    public DrivUser user;
+    @JoinColumn(name = "user_id_2", nullable = false)
+    public DrivUser secondUser;
 
-    @OneToMany(mappedBy = "ride")
-    public List<Swipe> swipes;
+    @Column(nullable = false)
+    public boolean firstAnswer;
+
+    @Column(nullable = false)
+    public boolean secondAnswer;
+
+    @OneToOne(mappedBy = "swipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Match match;
+
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
@@ -53,7 +42,7 @@ public class Ride {
         this.id = id;
     }
 
-    public String getDriver() {
+    /*public String getDriver() {
         return driver;
     }
 
@@ -131,5 +120,6 @@ public class Ride {
         this.driver = driver;
         this.placeOfDepartureCoordinates = placeOfDepartureCoordinates;
         this.placeOfArrivalCoordinates = placeOfArrivalCoordinates;
-    }
+    }*/
 }
+
