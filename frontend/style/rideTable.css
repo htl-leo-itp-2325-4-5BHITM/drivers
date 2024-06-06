@@ -148,3 +148,12 @@ table {
   .map-icon:hover{
     filter: brightness(0) saturate(100%) invert(93%) sepia(10%) saturate(158%) hue-rotate(132deg) brightness(96%) contrast(93%);
   }
+
+  #map { 
+    height: 500px; 
+    width: 50vw;
+    background-color: #fff;
+  }
+  #modal-detail-content {
+    width: 50vw;
+  }

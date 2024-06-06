@@ -58,16 +58,18 @@ public class DrivUsResource {
     public JSONObject dumpWebToken() {
         log.infof("email=%s", jwt.claim(Claims.email));
         //String firstname = jwt.claim(Claims.given_name).get().toString();
-        String name = jwt.claim(Claims.given_name).get().toString();
+        String firstName = jwt.claim(Claims.given_name).get().toString();
+        String lastName = jwt.claim(Claims.family_name).get().toString();
         String email = jwt.claim(Claims.email).get().toString();
 
-        log.infof("name=%s", name);
+        log.infof("firstName=%s", firstName);
         //List<String> userDetails = new LinkedList<>();
         //userDetails.add(name);
         //userDetails.add(email);
 
         JSONObject userDetails = new JSONObject();
-        userDetails.put("name", name);
+        userDetails.put("firstName", firstName);
+        userDetails.put("lastName", lastName);
         userDetails.put("email", email);
 
         return userDetails;

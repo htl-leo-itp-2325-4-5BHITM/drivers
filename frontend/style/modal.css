@@ -10,6 +10,18 @@
     backdrop-filter: blur(80%);
 }
 
+#details-dialog {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(80%);
+}
+
 
 #modal-content {
     display: flex;
@@ -24,6 +36,7 @@
     height: 80%;
 
 }
+
 
 #modal-content span{
     position: absolute;

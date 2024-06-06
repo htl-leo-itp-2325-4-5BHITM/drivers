@@ -7,7 +7,9 @@ import { loadRides, getSeat, removeSeat, getFiltered, getPage } from "../service
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import L, { map, latLng, tileLayer, MapOptions, marker, LatLngExpression } from "leaflet";
+
 import { filter } from "rxjs"
+import { current } from "immer"
 //import 'leaflet/dist/leaflet.css';
 
 // für Sortierung
@@ -48,6 +50,8 @@ export class RideTableComponent extends HTMLElement {
         this.attachShadow({ mode: "open" })
     }
     render(rides: Ride[], currentRide?: Ride, ridesCount?: number) {
+        console.log("rendering", currentRide);
+        
         render(this.tableTemplate(rides, currentRide, ridesCount), this.shadowRoot)
     }
     rowTemplate(ride: Ride) {
@@ -58,6 +62,7 @@ export class RideTableComponent extends HTMLElement {
         const formattedDate = departureTime.toFormat('dd.MM.yyyy'); // Datum formatieren (z.B. 2023-11-22)
 
         console.log(ride.placeOfDepartureCoordinate)
+        this.closeDialog2()
 
         //https://www.openstreetmap.org/#map=14/48.2929/14.2725
         return html`
@@ -88,6 +93,9 @@ export class RideTableComponent extends HTMLElement {
             dateValue = departureTime.toFormat('yyyy.MM.dd');
             timeValue = departureTime.toFormat('HH:mm');
         }
+
+        console.log("current ride", currentRide);
+        
 
         return html`
             <link rel="stylesheet" href="./style/rideTable.css">
@@ -168,7 +176,36 @@ export class RideTableComponent extends HTMLElement {
                         <div id="errorWrongInput"></div>
                     </div>
                 </div>
-            </div>`
+            </div>
+            
+           
+            <!-- The Modal2 -->
+            <link rel="stylesheet" href="./style/modal.css">
+            <link rel="stylesheet" href="../style/register.css">
+            <div id="details-dialog">
+                
+                <div id="modal-content">
+                    <span class="close" @click=${() => this.closeDialog2()}>&times;</span>
+                    <h1>Ride Info</h1>
+                    
+                    <div id="map"></div>
+                        
+                  
+                    <div id="modal-detail-content">
+                        <p>Driver: ${currentRide?.driver}</p>
+                        <p>Date: ${currentRide?.departureTime}</p>
+                        <p>Place Of Departure: ${currentRide?.placeOfDeparture}</p>
+                        <p>Place Of Arrival: ${currentRide?.placeOfArrival}</p>
+                        <p>Available seats: ${currentRide?.availableSeats}</p>
+                    </div>
+                </div>
+            </div>
+            
+            `
+
+            /**<p>${currentRide.placeOfArrival} </p><br>
+                    <p>${currentRide.departureTime} - </p><br>
+                    <p>${currentRide.placeOfDeparture}</p> */
     }
     closeDialog() {
         const dialog = this.shadowRoot.getElementById('ride-dialog')
@@ -225,8 +262,8 @@ export class RideTableComponent extends HTMLElement {
                 this.mapInstance.remove();
             }
             
-            this.mapInstance = map('map', options);
-           
+            this.mapInstance = map(this.shadowRoot.querySelector("#map") as HTMLElement, options);
+           //this.mapInstance = map('map', options);
 
             tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, { //style URL
                 tileSize: 512,
@@ -239,7 +276,48 @@ export class RideTableComponent extends HTMLElement {
             marker(deplatlng).addTo(this.mapInstance);
             marker(arrlatlng).addTo(this.mapInstance);
         } 
+        this.getDetails(ride)
     }
+    /*details(ride: Ride) {
+        
+            
+        return html`
+            
+            <!-- The Modal2 -->
+            <link rel="stylesheet" href="./style/modal.css">
+            <link rel="stylesheet" href="../style/register.css">
+            <div id="details-dialog">
+                
+                <div id="modal-content">
+                    <span class="close" @click=${() => this.closeDialog2()}>&times;</span>
+                    <h1>Account Info</h1>
+                    <p>${ride.driver} </p><br>
+                    <p>${ride.departureTime} - </p><br>
+                    <p>${ride.placeOfDeparture}</p>
+                    </div>
+                </div>
+            </div>`  
+    }*/
+    closeDialog2() {
+        const dialog = this.shadowRoot.getElementById('details-dialog')
+        dialog.style.display = 'none'
+    }
+    private getDetails(ride :Ride) {
+        console.log();
+        const dateAndTime = ride.departureTime;
+        const words = dateAndTime.split(/[T.]/);
+        const date = words[0];
+        const time = words[1];
+
+        const model = Object.assign({}, store.getValue())
+        model.currentRide = ride
+        store.next(model)
+        const dialog = this.shadowRoot.getElementById('details-dialog')
+        dialog.style.display = 'flex'
+    }
+    
+
+
     private paginationNav(count: number) {
         let selectedPage = 0
         //getCount();

@@ -38,7 +38,9 @@ export class UserDetailComponenet extends HTMLElement {
                 
                 <div id="modal-content">
                     <span class="close" @click=${() => this.closeDialog()}>&times;</span>
-                    <p>${details.name}</p><br>
+                    <h1>Account Info</h1>
+                    <p>${details.firstName} </p><br>
+                    <p>${details.lastName} - </p><br>
                     <p>${details.email}</p>
                     </div>
                 </div>
