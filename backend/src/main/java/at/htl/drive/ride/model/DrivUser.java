@@ -21,6 +21,8 @@ public class DrivUser {
     @OneToMany(mappedBy = "user")
     public List<RideUserAssociation> associationList;
 
+    @OneToMany(mappedBy = "user")
+    public List<Ride> rides;
     public DrivUser() {
     }
 
