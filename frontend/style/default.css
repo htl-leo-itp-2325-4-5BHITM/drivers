@@ -45,9 +45,16 @@ footer {
 /****/
 
 .button-user-login{
-    border-radius: 15px;
+    border-radius: 50px;
     background-color: var(--colorDark);
     color: var(--colorBright);
+    border: solid 3px var(--colorInactive);
+    width: 3vw;
+    height: 3vw;
+    cursor: pointer;
 }
 
-
+.button-user-login *{
+    text-decoration: none;
+    font-size: 1.5rem;
+}
