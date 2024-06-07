@@ -30,10 +30,11 @@ export class UserDetailComponenet extends HTMLElement {
             
         return html`
             
-            <button @click=${() => this.getDetails(details)}>user</button>
+            <button @click=${() => this.getDetails(details)} class="button-user-login">user</button>
             <!-- The Modal -->
             <link rel="stylesheet" href="./style/modal.css">
             <link rel="stylesheet" href="../style/register.css">
+            <link rel="stylesheet" href="../style/default.css">
             <div id="ride-dialog">
                 
                 <div id="modal-content">
@@ -42,6 +43,7 @@ export class UserDetailComponenet extends HTMLElement {
                     <p>${details.firstName} </p><br>
                     <p>${details.lastName} - </p><br>
                     <p>${details.email}</p>
+                    <button><a href="https://drivus.sytes.net/realms/drivus/protocol/openid-connect/logout">Logout</a></button>
                     </div>
                 </div>
             </div>`  
