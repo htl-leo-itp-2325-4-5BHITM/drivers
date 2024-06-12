@@ -28,7 +28,7 @@ public class Swipe {
     @Column(nullable = false)
     public boolean secondAnswer;
 
-    @OneToOne(mappedBy = "swipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "swipes", cascade = CascadeType.ALL, orphanRemoval = true)
     public Match match;
 
     //</editor-fold>

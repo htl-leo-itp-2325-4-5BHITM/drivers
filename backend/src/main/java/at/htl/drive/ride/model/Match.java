@@ -11,7 +11,7 @@ public class Match {
     public Long id;
     @OneToOne
     @JoinColumn(name = "swipe_id", nullable = false)
-    public Swipe swipe;
+    public Swipe swipes;
 
     @ManyToOne
     @JoinColumn(name = "user_id_1", nullable = false)

@@ -40,7 +40,7 @@ public class Ride {
     @JoinColumn(name = "user_id", nullable = false)
     public DrivUser user;
 
-    @OneToMany(mappedBy = "ride")
+    @OneToMany
     public List<Swipe> swipes;
     //</editor-fold>
 
