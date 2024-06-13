@@ -1,0 +1,35 @@
+# See https://github.com/compose-spec/compose-spec/issues/510
+# The syntax error below is reported due to a bug in the docker compose sepc.
+include:
+  - keycloak.yaml
+
+services:
+  backend:
+    container_name: backend
+    image: backend
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_URL=postgres://demo:demo@postgres/demo
+      - PUBLIC_KEY=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0vtKuQx4Y7vn+O59uGIAINc99IS5w+EXsbzwBBS5iIukSnYM5eI5XRINTtM0+SIhg2HH7zJ5dE1m1eKj+84VfgQwBdsYZkSg+J7MvaHIADba/v7no2RKaYKZCI6CjwFzioYP3EtF3xuwOFoitr/7sn8MmtmkKrMUpCjuikaDyFxuSJ26GHK9cco60QXHqRw4R8K0Eg5/8zryDDFi86eepsV/ZwoBhEj4QnMVwOs8XzPE/9kZOn0xbEhHt2hMCREqq3QG4EovLyUTrdDRIdDL9eIv7yO4I9Yce4zBCitidq6JwHUcZR5Sa3QhyXg5Vt29OW2enhq5o892mvmbD/MeMwIDAQAB
+  nginx:
+    container_name: www
+    image: www
+    ports:
+      - 4200:80
+    healthcheck:
+      test: curl --fail --head -fsS http://localhost || exit 1
+      interval: 40s
+      timeout: 30s
+      retries: 2
+      start_period: 10s
+    depends_on:
+      keycloak:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+volumes:
+  postgres:
