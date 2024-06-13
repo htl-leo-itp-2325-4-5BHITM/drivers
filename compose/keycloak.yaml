@@ -6,9 +6,9 @@ services:
     image: keycloak
     command: ["start-dev",
       "--db=postgres",
-      "--db-url=jdbc:postgresql://postgres:5432/keycloak",
-      "--db-username=keycloak",
-      "--db-password=keycloak",
+      "--db-url=jdbc:postgresql://postgres:5432/demo",
+      "--db-username=demo",
+      "--db-password=demo",
       "--http-enabled=true",
       "--health-enabled=true",
       "--metrics-enabled=true"

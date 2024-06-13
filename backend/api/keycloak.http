@@ -1,4 +1,4 @@
-@BASE=https://drivus.sytes.net
+@BASE=http://localhost:8000
 @TOKEN_ENDPOINT={{wellknown.response.body.token_endpoint}}
 @ACCESS_TOKEN={{login.response.body.access_token}}
 ###
