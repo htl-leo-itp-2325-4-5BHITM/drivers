@@ -18,7 +18,7 @@ async function loaded() {
 async function load(){
     console.log("ich bin im index.ts") 
     const keycloak = new Keycloak({
-        url: 'https://drivus.sytes.net',
+        url: 'http://localhost:8000',
         realm: 'drivus',
         clientId: 'frontend'
     });
