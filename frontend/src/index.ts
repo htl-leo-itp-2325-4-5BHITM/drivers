@@ -22,14 +22,17 @@ async function load(){
         realm: 'drivus',
         clientId: 'frontend'
     });
-    try {
+    //try {
+        debugger;
         const authenticated = await keycloak.init({enableLogging:true});
         console.log(`User is ${authenticated ? 'authenticated' : 'not authenticated'}`);
 
         //getPage(1, 7)
 
+        debugger;
         if (!authenticated) {
           await keycloak.login()
+          debugger;
           localStorage.token = keycloak.token
         } else {
             console.log("Keycloak login done", keycloak.token)
@@ -40,10 +43,10 @@ async function load(){
             getUserDetails()
         } 
         console.log('keycloaktoken = ',keycloak.token)
-    } catch (error) {
+   /* } catch (error) {
         console.error('Failed to initialize adapter:', error);
         
-    }
+    }*/
 }
 load()
 //https://drivus.sytes.net

@@ -9,7 +9,7 @@ GET {{BASE}}/realms/drivus/.well-known/openid-configuration
 POST {{TOKEN_ENDPOINT}}
 Content-Type: application/x-www-form-urlencoded
 
-client_id=frontend&username=andrei&password=test&grant_type=password&client_secret=QgB7E9RPN5cY1HleQH6JL0O3ZHu6K0uU
+client_id=frontend&username=andrei&password=test&grant_type=password&client_secret=Gvpc18BIEthDcpvDkmsZ7hLWh4DcuWdE
 ###
 GET http://localhost:4200/api/drivus/rides
 Authorization: Bearer {{ACCESS_TOKEN}}
