@@ -410,7 +410,7 @@ export class RideTableComponent extends HTMLElement {
         getSorted(isAscendingOrder, lastSortedColumn)
     }
     private saveChanges(id: number) {
-        var url = "http://localhost:4200/api/drivus/rides/changeRide"
+        var url = "./api/drivus/rides/changeRide"
 
         var driv = localStorage.getItem("username");
         // Daten aus dem Formular erfassen
@@ -454,7 +454,7 @@ export class RideTableComponent extends HTMLElement {
         }
     }
     private removeRide(id: number) {
-        var url = "http://localhost:4200/api/rides/removeRide"
+        var url = "./api/rides/removeRide"
 
         // Daten in JSON umwandeln
         const jsonData = JSON.stringify(id);
@@ -478,7 +478,7 @@ export class RideTableComponent extends HTMLElement {
     }
 
     private sortData(sorted: Boolean, column: String) {
-        fetch('http://localhost:4200/api/drivus/rides/getSortedRide/' + sorted + '/' + column + '/', {
+        fetch('./api/drivus/rides/getSortedRide/' + sorted + '/' + column + '/', {
             method: 'GET',
         })
             .then(response => {

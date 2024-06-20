@@ -106,7 +106,7 @@ class UsersOptionComponent extends HTMLElement {
             console.log("form Data JSON: " + jsonData)
 
             // Hier kannst du die JSON-Daten an deinen Pfad senden, z. B. mit fetch()
-            fetch('http://localhost:4200/api/drivus/rides/postRide', {
+            fetch('./api/drivus/rides/postRide', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -23,16 +23,13 @@ async function load(){
         clientId: 'frontend'
     });
     //try {
-        debugger;
         const authenticated = await keycloak.init({enableLogging:true});
         console.log(`User is ${authenticated ? 'authenticated' : 'not authenticated'}`);
 
         //getPage(1, 7)
 
-        debugger;
         if (!authenticated) {
           await keycloak.login()
-          debugger;
           localStorage.token = keycloak.token
         } else {
             console.log("Keycloak login done", keycloak.token)

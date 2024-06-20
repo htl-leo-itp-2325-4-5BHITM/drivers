@@ -59,7 +59,7 @@ export async function getFilteredCount(filterText: String) {
 
 export async function getFiltered(filterText: String, page: number) {
     console.log("toFilterText: " + filterText);
-    const url = `http://localhost:4200/api/drivus/rides/getFilteredRide/${filterText}${page}`;
+    const url = `./api/drivus/rides/getFilteredRide/${filterText}${page}`;
 
     const response = await fetch(url)
     const rides: Ride[] = await response.json()
@@ -73,7 +73,7 @@ export async function getFiltered(filterText: String, page: number) {
 export async function getSorted(sorted: Boolean, column: String) {
     console.log("sorted: " + sorted);
     console.log("column: " + column);
-    const url = `http://localhost:4200/api/drivus/rides/getSortedRide/${sorted}/${column}`;
+    const url = `./api/drivus/rides/getSortedRide/${sorted}/${column}`;
 
     const response = await fetch(url)
     const rides: Ride[] = await response.json()
@@ -87,7 +87,7 @@ export async function getSorted(sorted: Boolean, column: String) {
 
 export function getSeat(ride: Ride) {
     console.log(ride)
-    var url = "http://localhost:4200/api/drivus/rides/registerForRide"
+    var url = "./api/drivus/rides/registerForRide"
     var id = ride.id
     console.log(id)
 
@@ -121,7 +121,7 @@ export function getSeat(ride: Ride) {
 
 export function removeSeat(ride: Ride) {
     console.log(ride)
-    var url = "http://localhost:4200/api/drivus/rides/unregisterForRide"
+    var url = "./api/drivus/rides/unregisterForRide"
     var id = ride.id
     console.log(id)
 

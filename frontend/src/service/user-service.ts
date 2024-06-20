@@ -26,7 +26,7 @@ export async function getUserDetails() {
 }
 
 export function getUserData() {
-    var url = "http://localhost:4200/api/drivus/getUser"
+    var url = "./api/drivus/getUser"
     var user = localStorage.getItem("username")
 
     let data = {"username": user};
