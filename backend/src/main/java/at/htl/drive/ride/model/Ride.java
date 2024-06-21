@@ -37,12 +37,12 @@ public class Ride {
     public List<RideUserAssociation> associationList;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     public DrivUser user;
 
-    @OneToMany
+    /*@OneToMany
     public List<Swipe> swipes;
-    //</editor-fold>
+    //</editor-fold>*/
 
     //<editor-fold desc="Getter and Setter">
     public Long getId() {
