@@ -69,7 +69,7 @@ class UsersOptionComponent extends HTMLElement {
             </form>
         `
     }
-    private submit() {
+    private async submit() {
 
         if (localStorage.getItem("isLogedIn") === "false") {
             return html`
@@ -105,10 +105,13 @@ class UsersOptionComponent extends HTMLElement {
             const jsonData = JSON.stringify(formData);
             console.log("form Data JSON: " + jsonData)
 
+            
+
             // Hier kannst du die JSON-Daten an deinen Pfad senden, z. B. mit fetch()
-            fetch('./api/drivus/rides/postRide', {
+            const response = await fetch('./api/drivus/rides/postRide', {
                 method: 'POST',
                 headers: {
+                    Authorization: `Bearer ${localStorage.token}`,
                     'Content-Type': 'application/json',
                 },
                 body: jsonData,

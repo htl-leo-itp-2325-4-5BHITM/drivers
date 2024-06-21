@@ -30,18 +30,18 @@ export class UserDetailComponenet extends HTMLElement {
             
         return html`
             
-            <button @click=${() => this.getDetails(details)} class="button-user-login">user</button>
+            <button @click=${() => this.getDetails(details)} class="button-user-login">User</button>
             <!-- The Modal -->
             <link rel="stylesheet" href="./style/modal.css">
             <link rel="stylesheet" href="../style/register.css">
             <link rel="stylesheet" href="../style/default.css">
             <div id="ride-dialog">
                 
-                <div id="modal-content">
+                <div class="login-modal">
                     <span class="close" @click=${() => this.closeDialog()}>&times;</span>
                     <h1>Account Info</h1>
                     <p>${details.firstName} </p><br>
-                    <p>${details.lastName} - </p><br>
+                    <p>${details.lastName}</p><br>
                     <p>${details.email}</p>
                     <button><a href="https://drivus.sytes.net/realms/drivus/protocol/openid-connect/logout">Logout</a></button>
                     </div>

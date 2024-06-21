@@ -63,7 +63,7 @@ public class DrivUsRepository {
         ride.setAvailableSeats(ride.availableSeats -1);
         em.persist(ride);
 
-        String[] name = ruaDto.username().split(" ");
+        /*String[] name = ruaDto.username().split(" ");
         String sql = "select d from DrivUser d " +
                 "where d.firstName = '" + name[0] + "' and d.lastName = '" + name[1] + "'";
         TypedQuery<DrivUser> query = em.createQuery(sql, DrivUser.class);
@@ -73,7 +73,7 @@ public class DrivUsRepository {
 
         RideUserAssociationId ruaId = new RideUserAssociationId(ride.id, userId);
         RideUserAssociation rua = new RideUserAssociation(ruaId, false);
-        em.persist(rua);
+        em.persist(rua);*/
     }
 
     public void unregisterForRide(RegisterRideDto ruaDto) {
@@ -83,7 +83,7 @@ public class DrivUsRepository {
         ride.setAvailableSeats(ride.availableSeats +1);
         em.persist(ride);
 
-        String[] name = ruaDto.username().split(" ");
+        /*String[] name = ruaDto.username().split(" ");
         String sql = "select d from DrivUser d " +
                 "where d.firstName = '" + name[0] + "' and d.lastName = '" + name[1] + "'";
         TypedQuery<DrivUser> query = em.createQuery(sql, DrivUser.class);
@@ -93,7 +93,7 @@ public class DrivUsRepository {
 
         RideUserAssociationId ruaId = new RideUserAssociationId(ride.id, userId);
         RideUserAssociation rua = new RideUserAssociation(ruaId, false);
-        em.remove(em.contains(rua) ? rua : em.merge(rua));
+        em.remove(em.contains(rua) ? rua : em.merge(rua));*/
 
         //em.remove(rua);
     }
@@ -104,11 +104,11 @@ public class DrivUsRepository {
     }
 
     public void postRide(RideDto rideDto) {
-        Ride ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(),rideDto.driver(),rideDto.placeOfDepartureCoordinate(),rideDto.placeOfArrivalCoordinate());
+        Ride ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(),"rider",rideDto.placeOfDepartureCoordinate(),rideDto.placeOfArrivalCoordinate());
         em.persist(ride);
-        RideUserAssociationId id = new RideUserAssociationId(ride.id, 1L);
+        /*RideUserAssociationId id = new RideUserAssociationId(ride.id, 1L);
         RideUserAssociation rua = new RideUserAssociation(id, true);
-        em.persist(rua);
+        em.persist(rua);*/
     }
 
     public Ride getRide(Long id) {

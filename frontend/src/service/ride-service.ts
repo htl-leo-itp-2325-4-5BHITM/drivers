@@ -46,7 +46,9 @@ export async function getCount() {
 }
 
 export async function getFilteredCount(filterText: String) {
-    const response = await fetch(`/api/drivus/rides/getFilteredCount/${filterText}`)
+    const response = await fetch(`/api/drivus/rides/getFilteredCount/${filterText}` , {
+        headers: {Authorization: `Bearer ${localStorage.token}`}
+      })
     const count: number = await response.json()
     console.log(count)
     const nextState = produce(store.getValue(), model => {
@@ -61,7 +63,9 @@ export async function getFiltered(filterText: String, page: number) {
     console.log("toFilterText: " + filterText);
     const url = `./api/drivus/rides/getFilteredRide/${filterText}${page}`;
 
-    const response = await fetch(url)
+    const response = await fetch(url, {
+        headers: {Authorization: `Bearer ${localStorage.token}`}
+      })
     const rides: Ride[] = await response.json()
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
@@ -75,7 +79,12 @@ export async function getSorted(sorted: Boolean, column: String) {
     console.log("column: " + column);
     const url = `./api/drivus/rides/getSortedRide/${sorted}/${column}`;
 
-    const response = await fetch(url)
+    
+
+    const response = await fetch(url, {
+        headers: {Authorization: `Bearer ${localStorage.token}`}
+      })
+    
     const rides: Ride[] = await response.json()
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
@@ -85,7 +94,7 @@ export async function getSorted(sorted: Boolean, column: String) {
 }
 
 
-export function getSeat(ride: Ride) {
+export async function getSeat(ride: Ride) {
     console.log(ride)
     var url = "./api/drivus/rides/registerForRide"
     var id = ride.id
@@ -100,9 +109,31 @@ export function getSeat(ride: Ride) {
         const jsonData = JSON.stringify(data);
         console.log(jsonData)
 
-        fetch(url, {
+
+        
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
+                Authorization: `Bearer ${localStorage.token}`,
+                'Content-Type': 'application/json',
+            },
+            body: jsonData,
+          })
+          .then(response => {
+            // Handle die Antwort hier
+            getPage(1, ridesPerPage)
+            console.log("gehd")
+        })
+        .catch(error => {
+            // Handle Fehler hier
+            console.log("Hat nd funktioniert zum Ändern")
+        });
+
+
+        /*fetch(url, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.token}`,
                 'Content-Type': 'application/json',
             },
             body: jsonData,
@@ -115,11 +146,11 @@ export function getSeat(ride: Ride) {
             .catch(error => {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
-            });
+            });*/
     }
 }
 
-export function removeSeat(ride: Ride) {
+export async function removeSeat(ride: Ride) {
     console.log(ride)
     var url = "./api/drivus/rides/unregisterForRide"
     var id = ride.id
@@ -134,13 +165,14 @@ export function removeSeat(ride: Ride) {
         const jsonData = JSON.stringify(data);
         console.log(jsonData)
 
-        fetch(url, {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
+                Authorization: `Bearer ${localStorage.token}`,
                 'Content-Type': 'application/json',
             },
             body: jsonData,
-        })
+          })
             .then(response => {
                 // Handle die Antwort hier
                 getPage(1, ridesPerPage)

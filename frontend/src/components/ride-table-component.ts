@@ -113,9 +113,9 @@ export class RideTableComponent extends HTMLElement {
                         <th>
                             <div id="ride-search">
                                 <input type="text" placeholder="Search" id="filterText">
-                                <!--<button @click=${() => getFiltered((this.shadowRoot.getElementById('filterText') as HTMLInputElement).value, 1)}>
+                                <button @click=${() => getFiltered((this.shadowRoot.getElementById('filterText') as HTMLInputElement).value, 1)}>
                                     <img src="" ./img/magnifying_glass.png>
-                                </button>-->
+                                </button>
                             </div>
                         </th>
                     </tr>
