@@ -18,7 +18,7 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 #COPY ./import/ /opt/keycloak/data/import/
 # change these values to point to a running postgres instance
 ENV KC_DB=postgres
-ENV KC_DB_URL=keycloak
+ENV KC_DB_URL=jdbc:postgresql://keycloak:5432/keycloak
 ENV KC_DB_USERNAME=keycloak
 ENV KC_DB_PASSWORD=keycloak
 ENV KC_HOSTNAME=localhost
