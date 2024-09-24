@@ -22,6 +22,23 @@ data:
         OWNER = drivers
         ENCODING = 'UTF8'
         CONNECTION LIMIT = -1;
+    DROP database if exists keycloak;
+    DROP user if exists keycloak;
+    CREATE USER keycloak WITH
+    LOGIN
+    NOSUPERUSER
+    NOCREATEDB
+    NOCREATEROLE
+    INHERIT
+    NOREPLICATION
+    CONNECTION LIMIT -1
+    PASSWORD 'keycloak';
+    
+    CREATE DATABASE keycloak
+    WITH
+    OWNER = keycloak
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
   allow-all.sh: |
     echo "allow all hosts..."
     echo "host all  all    0.0.0.0/0  md5" >> /var/lib/postgresql/data/pg_hba.conf
@@ -36,7 +53,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: hostpath
+
   resources:
     requests:
       storage: 100Mi

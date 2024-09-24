@@ -39,8 +39,8 @@ ssh drivus
 Kubectl
 ```bash
 im k8s ordner
-kubectl apply -f postgresql.yml
-kubectl delete -f postgresql.yml 
+kubectl apply -f postgresql.yaml
+kubectl delete -f postgresql.yaml 
 
 VSCode
 kubectl port-forward pods/postgres-78cdcdcc55-486sw 5432:5432 -n default
