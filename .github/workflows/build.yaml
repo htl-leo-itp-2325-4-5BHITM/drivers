@@ -16,5 +16,6 @@ jobs:
       - name: build backend
         working-directory: ./backend
         run: |
-          mvn -B package
+          mvn -B package 
+          ./build.sh
       
