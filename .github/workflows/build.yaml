@@ -24,4 +24,6 @@ jobs:
         run: |
           mvn -B package 
           ./build.sh
-      
+      - run: |
+          ./build.sh
+        working-directory: ./k8s/keycloak
