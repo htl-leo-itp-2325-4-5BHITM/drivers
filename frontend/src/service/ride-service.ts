@@ -17,15 +17,11 @@ export async function loadRides() {
 }
 
 export async function getFakeRides() {
-    const response = await fetch(`/api/drivus/rides/getAllRides/javaFaker/`, {
-        headers: {Authorization: `Bearer ${localStorage.token}`}
-      })
+    const response = await fetch(`/api/drivus/rides/getAllRides/javaFaker/`)
 }
 
 export async function getPage(page: number, howMany: number) {
-    const response = await fetch(`/api/drivus/pagination/${page}${howMany}`, {
-        headers: {Authorization: `Bearer ${localStorage.token}`}
-      })
+    const response = await fetch(`/api/drivus/pagination/${page}${howMany}`)
     const rides: Ride[] = await response.json()
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
@@ -35,9 +31,7 @@ export async function getPage(page: number, howMany: number) {
 }
 
 export async function getCount() {
-    const response = await fetch(`/api/drivus/rides/getCount`, {
-        headers: {Authorization: `Bearer ${localStorage.token}`}
-      })
+    const response = await fetch(`/api/drivus/rides/getCount`)
     const count: number = await response.json()
     const nextState = produce(store.getValue(), model => {
         model.ridesCount = count
@@ -46,9 +40,7 @@ export async function getCount() {
 }
 
 export async function getFilteredCount(filterText: String) {
-    const response = await fetch(`/api/drivus/rides/getFilteredCount/${filterText}` , {
-        headers: {Authorization: `Bearer ${localStorage.token}`}
-      })
+    const response = await fetch(`/api/drivus/rides/getFilteredCount/${filterText}`)
     const count: number = await response.json()
     console.log(count)
     const nextState = produce(store.getValue(), model => {
@@ -63,9 +55,7 @@ export async function getFiltered(filterText: String, page: number) {
     console.log("toFilterText: " + filterText);
     const url = `./api/drivus/rides/getFilteredRide/${filterText}${page}`;
 
-    const response = await fetch(url, {
-        headers: {Authorization: `Bearer ${localStorage.token}`}
-      })
+    const response = await fetch(url)
     const rides: Ride[] = await response.json()
     const nextState = produce(store.getValue(), model => {
         model.drives = rides
@@ -81,9 +71,7 @@ export async function getSorted(sorted: Boolean, column: String) {
 
     
 
-    const response = await fetch(url, {
-        headers: {Authorization: `Bearer ${localStorage.token}`}
-      })
+    const response = await fetch(url)
     
     const rides: Ride[] = await response.json()
     const nextState = produce(store.getValue(), model => {
@@ -114,7 +102,6 @@ export async function getSeat(ride: Ride) {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                Authorization: `Bearer ${localStorage.token}`,
                 'Content-Type': 'application/json',
             },
             body: jsonData,
@@ -168,7 +155,6 @@ export async function removeSeat(ride: Ride) {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                Authorization: `Bearer ${localStorage.token}`,
                 'Content-Type': 'application/json',
             },
             body: jsonData,

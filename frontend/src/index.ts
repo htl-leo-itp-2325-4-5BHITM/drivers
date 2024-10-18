@@ -17,13 +17,14 @@ async function loaded() {
 
 async function load(){
     console.log("ich bin im index.ts") 
-    const keycloak = new Keycloak({
+    loaded()
+    /*const keycloak = new Keycloak({
         url: 'http://localhost:8000',
         realm: 'drivus',
         clientId: 'frontend'
-    });
+    });*/
     //try {
-        const authenticated = await keycloak.init({enableLogging:true});
+        /*const authenticated = await keycloak.init({enableLogging:true});
         console.log(`User is ${authenticated ? 'authenticated' : 'not authenticated'}`);
 
         //getPage(1, 7)
