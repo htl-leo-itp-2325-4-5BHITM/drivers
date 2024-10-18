@@ -2,8 +2,8 @@ package at.htl.drive.ride;
 
 
 import at.htl.drive.ride.model.Ride;
-import at.htl.drive.ride.model.RideUserAssociation;
-import at.htl.drive.ride.model.RideUserAssociationId;
+//import at.htl.drive.ride.model.RideUserAssociation;
+//import at.htl.drive.ride.model.RideUserAssociationId;
 import com.github.javafaker.Faker;
 
 import java.sql.Timestamp;

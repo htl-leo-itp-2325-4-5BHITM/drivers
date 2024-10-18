@@ -4,7 +4,7 @@ import jakarta.persistence.Embeddable;
 
 import java.io.Serializable;
 import java.util.Objects;
-
+/*
 @Embeddable
 public class RideUserAssociationId implements Serializable {
 
@@ -48,4 +48,4 @@ public class RideUserAssociationId implements Serializable {
     public int hashCode() {
         return Objects.hash(RideId, UserId);
     }
-}
+}*/

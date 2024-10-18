@@ -43,21 +43,17 @@ public class DrivUsResource {
     @PermitAll
     @Path("/rides")
     @GET
-    //@RolesAllowed("drivus")
     public Response all() {
         System.out.println("bin im all");
         var rides = repository.all();
         var dtos = rides.stream().map(rideMapper::toResource);
-        //dumpWebToken();
         return Response.ok(dtos).build();
-        //jwt.claim(Claims.groups);
     }
 
     @Path("/user/detail")
     @GET
     public JSONObject dumpWebToken() {
         log.infof("email=%s", jwt.claim(Claims.email));
-        //String firstname = jwt.claim(Claims.given_name).get().toString();
         String firstName = jwt.claim(Claims.given_name).get().toString();
         String lastName = jwt.claim(Claims.family_name).get().toString();
         String email = jwt.claim(Claims.email).get().toString();
@@ -115,8 +111,6 @@ public class DrivUsResource {
         var rides = repository.getFilteredRides(filterText, page);
         var dtos = rides.stream().map(rideMapper::toResource);
         return Response.ok(dtos).build();
-
-        //public Response pagination(@PathParam("page") int page) {
     }
 
     @GET

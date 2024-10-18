@@ -33,8 +33,8 @@ public class Ride {
     @Column(length = 100,nullable = true)
     public String placeOfArrivalCoordinates;
 
-    @OneToMany(mappedBy = "ride")
-    public List<RideUserAssociation> associationList;
+    /*@OneToMany(mappedBy = "ride")
+    public List<RideUserAssociation> associationList;*/
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)

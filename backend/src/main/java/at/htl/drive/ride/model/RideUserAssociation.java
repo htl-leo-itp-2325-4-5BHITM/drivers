@@ -4,7 +4,7 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
+/*
 @Entity
 public class RideUserAssociation {
 
@@ -42,4 +42,4 @@ public class RideUserAssociation {
 
     public RideUserAssociation() {
     }
-}
+}*/

@@ -5,8 +5,8 @@ import at.htl.drive.ride.dto.UsernameDto;
 import at.htl.drive.ride.model.DrivUser;
 import at.htl.drive.ride.model.Ride;
 import at.htl.drive.ride.dto.RideDto;
-import at.htl.drive.ride.model.RideUserAssociation;
-import at.htl.drive.ride.model.RideUserAssociationId;
+//import at.htl.drive.ride.model.RideUserAssociation;
+//import at.htl.drive.ride.model.RideUserAssociationId;
 import com.github.javafaker.Faker;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -149,13 +149,14 @@ public class DrivUsRepository {
         where rideid >= ALL (select rideid from rideuserassociation);
          */
 
-        String sql = "select u.id, u.emailAddress, u.firstName, u.lastName, u.phoneNr " +
+        /*String sql = "select u.id, u.emailAddress, u.firstName, u.lastName, u.phoneNr " +
                 "from RideUserAssociation rua " +
                 "join rua.user u " +
-                "where rua.ride.id >= ALL (select rua.ride.id from RideUserAssociation) ";
+                "where rua.ride.id >= ALL (select rua.ride.id from RideUserAssociation) ";*/
 
-        TypedQuery<DrivUser> query = em.createQuery(sql, DrivUser.class);
-        return query.getResultList();
+        //TypedQuery<DrivUser> query = em.createQuery(sql, DrivUser.class);
+        //return query.getResultList();
+        return null;
     }
 
     public DrivUser getUser(UsernameDto username) {
@@ -239,9 +240,9 @@ public class DrivUsRepository {
             Long rideId = i + 20L;
             System.out.println(rideId);
 
-            RideUserAssociationId id = new RideUserAssociationId(i + 31L, 7L);
+            /*RideUserAssociationId id = new RideUserAssociationId(i + 31L, 7L);
             RideUserAssociation rua = new RideUserAssociation(id, true);
-            em.persist(rua);
+            em.persist(rua);*/
         }
 
 

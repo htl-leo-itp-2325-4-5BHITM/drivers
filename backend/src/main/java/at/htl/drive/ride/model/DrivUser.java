@@ -18,8 +18,8 @@ public class DrivUser {
     @Column(length = 100,nullable = false)
     public String emailAddress;
 
-    @OneToMany(mappedBy = "user")
-    public List<RideUserAssociation> associationList;
+    /*@OneToMany(mappedBy = "user")
+    public List<RideUserAssociation> associationList;*/
 
     @OneToMany(mappedBy = "user")
     public List<Ride> rides;

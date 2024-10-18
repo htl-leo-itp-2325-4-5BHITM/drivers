@@ -5,12 +5,12 @@ import { produce } from "immer"
 const USER_URL = "/api/drivus/user"
 
 async function loadUsers() {
-    const response = await fetch(USER_URL)
+    /*const response = await fetch(USER_URL)
     const users: DrivUser[] = await response.json()
     const model: ModelUser = {
         drivUsers: users
     }
-    storeUsers.next(model)
+    storeUsers.next(model)*/
 }
 
 export async function getUserDetails() {
