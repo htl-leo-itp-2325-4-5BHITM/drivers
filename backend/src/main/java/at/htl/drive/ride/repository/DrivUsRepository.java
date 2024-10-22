@@ -1,5 +1,6 @@
 package at.htl.drive.ride.repository;
 
+import at.htl.drive.ride.dto.DrivUserDto;
 import at.htl.drive.ride.dto.RegisterRideDto;
 import at.htl.drive.ride.dto.UsernameDto;
 import at.htl.drive.ride.model.DrivUser;
@@ -141,6 +142,11 @@ public class DrivUsRepository {
         return em.createQuery("select d from DrivUser d order by d.lastName", DrivUser.class).getResultList();
     }
 
+    public void postUser(DrivUserDto user) {
+        DrivUser newUser = new DrivUser(user.firstName(), user.lastName(), user.phoneNr(), user.emailAddress(), user.username());
+        em.persist(newUser);
+    }
+
 
     public List<DrivUser> getDriverofNew() {
         /*
@@ -188,8 +194,6 @@ public class DrivUsRepository {
         } catch (IndexOutOfBoundsException ex) {
             return query.getResultList().subList((page-1)+6*(page-1), query.getResultList().size());
         }
-        //return query.getResultList();
-        //return query.getResultList().subList((page-1)+7*(page-1), ((page-1)+7*(page-1))+7);
     }
 
     public Long getFilteredCount(String filterText) {

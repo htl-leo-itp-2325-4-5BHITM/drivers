@@ -5,7 +5,8 @@ public record DrivUserDto(
         String firstName,
         String lastName,
         String phoneNr,
-        String emailAddress
+        String emailAddress,
+        String username
 )
 {
 }

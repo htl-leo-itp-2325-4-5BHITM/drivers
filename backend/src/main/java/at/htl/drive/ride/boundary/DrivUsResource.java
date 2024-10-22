@@ -1,6 +1,7 @@
 package at.htl.drive.ride.boundary;
 
 import at.htl.drive.ride.DrivUserMapper;
+import at.htl.drive.ride.dto.DrivUserDto;
 import at.htl.drive.ride.dto.RegisterRideDto;
 import at.htl.drive.ride.dto.UsernameDto;
 import at.htl.drive.ride.model.DrivUser;
@@ -30,8 +31,6 @@ public class DrivUsResource {
     Logger log;
     @Inject
     JsonWebToken jwt;
-    /*@Inject
-    AuthzClient authzClient;*/
     @Inject
     DrivUsRepository repository;
     @Inject
@@ -168,6 +167,15 @@ public class DrivUsResource {
         var users = repository.allUsers();
         var dtos = users.stream().map(userMapper::toResource);
         return Response.ok(dtos).build();
+    }
+
+    @POST
+    @Transactional
+    @Path("users/postUser")
+    public Response postUser(DrivUserDto user) {
+        System.out.println("bin im postUser");
+        repository.postUser(user);
+        return Response.ok().build();
     }
 
     @Path("/getDriverOfNew")
