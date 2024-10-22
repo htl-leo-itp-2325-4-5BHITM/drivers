@@ -43,10 +43,5 @@ public class DataLoaderFaker {
             System.out.println(availableSeats);
             System.out.println(driver);
         }*/
-
-
-
-
     }
-
 }
