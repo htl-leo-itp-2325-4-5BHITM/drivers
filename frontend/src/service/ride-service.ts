@@ -17,7 +17,7 @@ export async function loadRides() {
 }
 
 export async function getFakeRides() {
-    //const response = await fetch(`/api/drivus/rides/getAllRides/javaFaker/`)
+    const response = await fetch(`/api/drivus/rides/getAllRides/javaFaker/`)
 }
 
 export async function getPage(page: number, howMany: number) {
