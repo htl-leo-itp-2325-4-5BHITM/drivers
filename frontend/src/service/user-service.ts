@@ -58,8 +58,8 @@ export function getUserData() {
 }
 
 
-/*export function createNewUser() {
-    var url = "./api/drivus/postUser"
+/*export function createNewUser(firstname, lastname, phonenumber, email, username) {
+    var url = "./api/drivus/user/postUser"
     var user = localStorage.getItem("username")
 
     let data = {"username": user};
@@ -72,6 +72,8 @@ export function getUserData() {
                 'Content-Type': 'application/json',
             },
             body: jsonData,
+            
+            
         })
             .then(response => {
                 return response.json()
@@ -80,23 +82,62 @@ export function getUserData() {
             .then(data => {
                 console.log(data);
                 
-                /* const users: DrivUser[] = data
+                 const users: DrivUser[] = data
                 const model: ModelUser = {
                     drivUsers: users
                 }
-                storeUsers.next(model) */
-            /*})
+                storeUsers.next(model) 
+            })
             .catch(error => {
                 // Handle Fehler hier
                 console.error(error)
             });
+            console.log("jsondata: ",jsonData);
 }*/
+
+export function createNewUser(firstname, lastname, phonenumber, email, username) {
+    const url = "http://localhost:4200/api/drivus/users/postUser";
+
+    let data = {
+        firstName: firstname,
+        lastName: lastname,
+        emailAddress: email,
+        phoneNr: phonenumber,
+        username: username
+    };
+    const jsonData = JSON.stringify(data);
+    console.log("jsonData:", jsonData);
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: jsonData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Received data:", data);
+        const users: DrivUser[] = data;
+        const model: ModelUser = { drivUsers: users };
+        storeUsers.next(model);
+    })
+    .catch(error => {
+        console.error("Error details:", error.message, error);
+    });
+}
+
 
 
 // In user-service.js
-export async function createNewUser(firstname, lastname, phonenumber, email, username) {
+/*export async function createNewUser(firstname, lastname, phonenumber, email, username) {
     try {
-        const response = await fetch(`http://localhost:8080/drivus/users/postUser`, {
+        const response = await fetch(`http://localhost:8080/api/drivus/users/postUser`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -104,8 +145,8 @@ export async function createNewUser(firstname, lastname, phonenumber, email, use
             body: JSON.stringify({
                 firstName: firstname,
                 lastName: lastname,
-                phoneNumber: phonenumber,
-                email: email,
+                emailAddress: email,
+                phoneNr: phonenumber,
                 username: username
             })
         });
@@ -118,7 +159,7 @@ export async function createNewUser(firstname, lastname, phonenumber, email, use
     } catch (error) {
         console.error("Error creating user:", error);
     }
-}
+}*/
 
 
 

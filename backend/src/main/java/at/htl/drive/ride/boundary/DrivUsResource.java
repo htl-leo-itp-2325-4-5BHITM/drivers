@@ -179,7 +179,7 @@ public class DrivUsResource {
     @POST
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("users/postUser")
+    @Path("/users/postUser")
     public Response postUser(DrivUserDto user) {
         System.out.println("bin im postUser");
         repository.postUser(user);
