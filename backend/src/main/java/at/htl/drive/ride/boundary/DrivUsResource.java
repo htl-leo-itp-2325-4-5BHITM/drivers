@@ -13,6 +13,7 @@ import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.jwt.Claims;
 import org.eclipse.microprofile.jwt.JsonWebToken;
@@ -171,6 +172,7 @@ public class DrivUsResource {
 
     @POST
     @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("users/postUser")
     public Response postUser(DrivUserDto user) {
         System.out.println("bin im postUser");
