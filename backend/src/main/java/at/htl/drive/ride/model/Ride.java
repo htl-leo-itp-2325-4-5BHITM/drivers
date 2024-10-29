@@ -123,6 +123,15 @@ public class Ride {
         this.driver = driver;
     }
 
+    public Ride(Long id, Timestamp departureTime, String placeOfDeparture, String placeOfArrival, int availableSeats, String driver) {
+        this.id = id;
+        this.departureTime = departureTime;
+        this.placeOfDeparture = placeOfDeparture;
+        this.placeOfArrival = placeOfArrival;
+        this.availableSeats = availableSeats;
+        this.driver = driver;
+    }
+
     public Ride(Timestamp departureTime, String placeOfDeparture, String placeOfArrival, int availableSeats, String driver, String placeOfDepartureCoordinates, String placeOfArrivalCoordinates) {
         this.departureTime = departureTime;
         this.placeOfDeparture = placeOfDeparture;

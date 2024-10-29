@@ -39,6 +39,12 @@ public class DrivUsResource {
     @Inject
     DrivUserMapper userMapper;
 
+    @GET
+    public Response start() {
+        System.out.println("start");
+        //repository.getAllRidesLoader();
+        return Response.ok().build();
+    }
 
     @PermitAll
     @Path("/rides")

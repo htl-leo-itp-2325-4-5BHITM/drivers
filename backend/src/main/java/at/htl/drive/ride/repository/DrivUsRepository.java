@@ -26,7 +26,7 @@ public class DrivUsRepository {
 
 
     public List<Ride> all() {
-       return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
+        return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
     }
 
     public List<Ride> pagination(int page, int ridesPerPage) {
@@ -218,7 +218,14 @@ public class DrivUsRepository {
         //faker.see(12345);
         //Ride newRide;
 
-        for (int i = 0; i < 50; i++) {
+        Ride check = em.find(Ride.class, 150);
+        System.out.println(check);
+
+        if(em.find(Ride.class, 150) != null) {
+            return null;
+        }
+
+        for (int i = 150; i < 200; i++) {
             //Datum
             LocalDateTime now = LocalDateTime.now();
             LocalDateTime departureTime;
@@ -233,16 +240,17 @@ public class DrivUsRepository {
             String placeOfArrival = faker.address().cityName();
 
             int availableSeats = faker.number().numberBetween(1, 7);
+            Long id = Long.valueOf(i);
 
             //nur Vorname und Nachname
             String driver = faker.name().firstName();
             driver += " " + faker.name().lastName();
 
-            newRide = new Ride(Timestamp.valueOf(departureTime), placeOfDeparture, placeOfArrival, availableSeats, driver);
+            newRide = new Ride(id, Timestamp.valueOf(departureTime), placeOfDeparture, placeOfArrival, availableSeats, driver);
 
             em.persist(newRide);
-            Long rideId = i + 20L;
-            System.out.println(rideId);
+            //Long rideId = i + 20L;
+            //System.out.println(rideId);
 
             /*RideUserAssociationId id = new RideUserAssociationId(i + 31L, 7L);
             RideUserAssociation rua = new RideUserAssociation(id, true);
