@@ -122,6 +122,11 @@ export function createNewUser(firstname, lastname, phonenumber, email, username)
         return response.json();
     })
     .then(data => {
+        //sessionStorage.setItem("driver_username", username);
+
+        //console.log(sessionStorage);
+        
+
         console.log("Received data:", data);
         const users: DrivUser[] = data;
         const model: ModelUser = { drivUsers: users };
