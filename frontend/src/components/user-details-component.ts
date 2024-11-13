@@ -52,9 +52,9 @@ export class UserDetailComponenet extends HTMLElement {
                     </div>
                 </div>
 
-                <div class="login-modal">
-                    <div id="register-dialog" class="modal">
-                        <div class="register-modal">
+                
+                <div id="register-dialog">
+                    <div class="login-field">
                             <span class="close" @click=${() => this.closeRegistrationDialog()}>&times;</span>
                             <h1>Register</h1>
                             <input id="firstName" type="text" placeholder="firstname" /><br />
@@ -63,10 +63,11 @@ export class UserDetailComponenet extends HTMLElement {
                             <input id="emailAddress" type="text" placeholder="email" /><br />
                             <input id="username" type="text" placeholder="username" /><br />
                             <button @click=${() => this.submitRegistrationForm()}>Submit</button>
-                        </div>
+                        
                     </div>
                 </div>
 
+                <div id="input-missing-variable"></div>
 
 
             </div>`  
@@ -79,14 +80,21 @@ export class UserDetailComponenet extends HTMLElement {
         const usernameInput = this.shadowRoot.getElementById("username") as HTMLInputElement;
 
         if (emailInput && firstnameInput && lastnameInput && phonenumberInput && usernameInput) {
-            const emailAddress = emailInput.value;
-            const firstName = firstnameInput.value;
-            const lastName = lastnameInput.value;
-            const phoneNr = phonenumberInput.value;
-            const username = phonenumberInput.value;
-
+            const emailAddress = emailInput.value.trim();
+            const firstName = firstnameInput.value.trim();
+            const lastName = lastnameInput.value.trim();
+            const phoneNr = phonenumberInput.value.trim();
+            const username = usernameInput.value.trim();
+    
+            // Überprüfung, ob alle Felder ausgefüllt sind
+            if (!firstName || !lastName || !phoneNr || !emailAddress || !username) {
+                console.error("fill out all input fields");
+                alert("fill out all input fields")
+                return;
+            }
+    
             console.log("Form Input:", firstName, lastName, phoneNr, emailAddress, username);
-
+    
             // Übergabe der Eingabewerte an die createNewUser-Funktion
             createNewUser(firstName, lastName, phoneNr, emailAddress, username);
         } else {
