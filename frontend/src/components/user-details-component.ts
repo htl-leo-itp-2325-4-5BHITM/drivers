@@ -62,7 +62,7 @@ export class UserDetailComponenet extends HTMLElement {
                             <input id="phoneNr" type="text" placeholder="phonenumber" /><br />
                             <input id="emailAddress" type="text" placeholder="email" /><br />
                             <input id="username" type="text" placeholder="username" /><br />
-                            <button @click=${() => this.submitRegistrationForm()}>Submit</button>
+                            <button id="button-submit-nre-user" @click=${() => this.submitRegistrationForm()}>Submit</button>
                         
                     </div>
                 </div>
@@ -89,7 +89,7 @@ export class UserDetailComponenet extends HTMLElement {
             // Überprüfung, ob alle Felder ausgefüllt sind
             if (!firstName || !lastName || !phoneNr || !emailAddress || !username) {
                 console.error("fill out all input fields");
-                alert("fill out all input fields")
+                alert("please fill out all input fields")
                 return;
             }
     
