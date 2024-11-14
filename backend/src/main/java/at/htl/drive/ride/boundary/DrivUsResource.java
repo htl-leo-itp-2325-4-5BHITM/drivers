@@ -1,6 +1,7 @@
 package at.htl.drive.ride.boundary;
 
 import at.htl.drive.ride.DrivUserMapper;
+import at.htl.drive.ride.dto.DrivUserDto;
 import at.htl.drive.ride.dto.RegisterRideDto;
 import at.htl.drive.ride.dto.UsernameDto;
 import at.htl.drive.ride.model.DrivUser;
@@ -12,6 +13,7 @@ import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.jwt.Claims;
 import org.eclipse.microprofile.jwt.JsonWebToken;
@@ -30,8 +32,6 @@ public class DrivUsResource {
     Logger log;
     @Inject
     JsonWebToken jwt;
-    /*@Inject
-    AuthzClient authzClient;*/
     @Inject
     DrivUsRepository repository;
     @Inject
@@ -39,25 +39,27 @@ public class DrivUsResource {
     @Inject
     DrivUserMapper userMapper;
 
+    @GET
+    public Response start() {
+        System.out.println("start");
+        //repository.getAllRidesLoader();
+        return Response.ok().build();
+    }
 
     @PermitAll
     @Path("/rides")
     @GET
-    //@RolesAllowed("drivus")
     public Response all() {
         System.out.println("bin im all");
         var rides = repository.all();
         var dtos = rides.stream().map(rideMapper::toResource);
-        //dumpWebToken();
         return Response.ok(dtos).build();
-        //jwt.claim(Claims.groups);
     }
 
     @Path("/user/detail")
     @GET
     public JSONObject dumpWebToken() {
         log.infof("email=%s", jwt.claim(Claims.email));
-        //String firstname = jwt.claim(Claims.given_name).get().toString();
         String firstName = jwt.claim(Claims.given_name).get().toString();
         String lastName = jwt.claim(Claims.family_name).get().toString();
         String email = jwt.claim(Claims.email).get().toString();
@@ -115,8 +117,6 @@ public class DrivUsResource {
         var rides = repository.getFilteredRides(filterText, page);
         var dtos = rides.stream().map(rideMapper::toResource);
         return Response.ok(dtos).build();
-
-        //public Response pagination(@PathParam("page") int page) {
     }
 
     @GET
@@ -174,6 +174,16 @@ public class DrivUsResource {
         var users = repository.allUsers();
         var dtos = users.stream().map(userMapper::toResource);
         return Response.ok(dtos).build();
+    }
+
+    @POST
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/users/postUser")
+    public Response postUser(DrivUserDto user) {
+        System.out.println("bin im postUser");
+        repository.postUser(user);
+        return Response.ok().build();
     }
 
     @Path("/getDriverOfNew")

@@ -33,8 +33,8 @@ public class Ride {
     @Column(length = 100,nullable = true)
     public String placeOfArrivalCoordinates;
 
-    @OneToMany(mappedBy = "ride")
-    public List<RideUserAssociation> associationList;
+    /*@OneToMany(mappedBy = "ride")
+    public List<RideUserAssociation> associationList;*/
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
@@ -116,6 +116,15 @@ public class Ride {
     }
 
     public Ride(Timestamp departureTime, String placeOfDeparture, String placeOfArrival, int availableSeats, String driver) {
+        this.departureTime = departureTime;
+        this.placeOfDeparture = placeOfDeparture;
+        this.placeOfArrival = placeOfArrival;
+        this.availableSeats = availableSeats;
+        this.driver = driver;
+    }
+
+    public Ride(Long id, Timestamp departureTime, String placeOfDeparture, String placeOfArrival, int availableSeats, String driver) {
+        this.id = id;
         this.departureTime = departureTime;
         this.placeOfDeparture = placeOfDeparture;
         this.placeOfArrival = placeOfArrival;

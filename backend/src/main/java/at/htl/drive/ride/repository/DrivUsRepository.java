@@ -1,12 +1,13 @@
 package at.htl.drive.ride.repository;
 
+import at.htl.drive.ride.dto.DrivUserDto;
 import at.htl.drive.ride.dto.RegisterRideDto;
 import at.htl.drive.ride.dto.UsernameDto;
 import at.htl.drive.ride.model.DrivUser;
 import at.htl.drive.ride.model.Ride;
 import at.htl.drive.ride.dto.RideDto;
-import at.htl.drive.ride.model.RideUserAssociation;
-import at.htl.drive.ride.model.RideUserAssociationId;
+//import at.htl.drive.ride.model.RideUserAssociation;
+//import at.htl.drive.ride.model.RideUserAssociationId;
 import com.github.javafaker.Faker;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -25,7 +26,7 @@ public class DrivUsRepository {
 
 
     public List<Ride> all() {
-       return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
+        return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
     }
 
     public List<Ride> pagination(int page, int ridesPerPage) {
@@ -141,6 +142,11 @@ public class DrivUsRepository {
         return em.createQuery("select d from DrivUser d order by d.lastName", DrivUser.class).getResultList();
     }
 
+    public void postUser(DrivUserDto user) {
+        DrivUser newUser = new DrivUser(user.firstName(), user.lastName(), user.phoneNr(), user.emailAddress(), user.username());
+        em.persist(newUser);
+    }
+
 
     public List<DrivUser> getDriverofNew() {
         /*
@@ -149,13 +155,14 @@ public class DrivUsRepository {
         where rideid >= ALL (select rideid from rideuserassociation);
          */
 
-        String sql = "select u.id, u.emailAddress, u.firstName, u.lastName, u.phoneNr " +
+        /*String sql = "select u.id, u.emailAddress, u.firstName, u.lastName, u.phoneNr " +
                 "from RideUserAssociation rua " +
                 "join rua.user u " +
-                "where rua.ride.id >= ALL (select rua.ride.id from RideUserAssociation) ";
+                "where rua.ride.id >= ALL (select rua.ride.id from RideUserAssociation) ";*/
 
-        TypedQuery<DrivUser> query = em.createQuery(sql, DrivUser.class);
-        return query.getResultList();
+        //TypedQuery<DrivUser> query = em.createQuery(sql, DrivUser.class);
+        //return query.getResultList();
+        return null;
     }
 
     public DrivUser getUser(UsernameDto username) {
@@ -187,8 +194,6 @@ public class DrivUsRepository {
         } catch (IndexOutOfBoundsException ex) {
             return query.getResultList().subList((page-1)+6*(page-1), query.getResultList().size());
         }
-        //return query.getResultList();
-        //return query.getResultList().subList((page-1)+7*(page-1), ((page-1)+7*(page-1))+7);
     }
 
     public Long getFilteredCount(String filterText) {
@@ -213,7 +218,14 @@ public class DrivUsRepository {
         //faker.see(12345);
         //Ride newRide;
 
-        for (int i = 0; i < 50; i++) {
+        Ride check = em.find(Ride.class, 150);
+        System.out.println(check);
+
+        if(em.find(Ride.class, 150) != null) {
+            return null;
+        }
+
+        for (int i = 150; i < 200; i++) {
             //Datum
             LocalDateTime now = LocalDateTime.now();
             LocalDateTime departureTime;
@@ -228,20 +240,21 @@ public class DrivUsRepository {
             String placeOfArrival = faker.address().cityName();
 
             int availableSeats = faker.number().numberBetween(1, 7);
+            Long id = Long.valueOf(i);
 
             //nur Vorname und Nachname
             String driver = faker.name().firstName();
             driver += " " + faker.name().lastName();
 
-            newRide = new Ride(Timestamp.valueOf(departureTime), placeOfDeparture, placeOfArrival, availableSeats, driver);
+            newRide = new Ride(id, Timestamp.valueOf(departureTime), placeOfDeparture, placeOfArrival, availableSeats, driver);
 
             em.persist(newRide);
-            Long rideId = i + 20L;
-            System.out.println(rideId);
+            //Long rideId = i + 20L;
+            //System.out.println(rideId);
 
-            RideUserAssociationId id = new RideUserAssociationId(i + 31L, 7L);
+            /*RideUserAssociationId id = new RideUserAssociationId(i + 31L, 7L);
             RideUserAssociation rua = new RideUserAssociation(id, true);
-            em.persist(rua);
+            em.persist(rua);*/
         }
 
 

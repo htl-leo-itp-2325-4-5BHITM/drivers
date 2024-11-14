@@ -111,7 +111,6 @@ class UsersOptionComponent extends HTMLElement {
             const response = await fetch('./api/drivus/rides/postRide', {
                 method: 'POST',
                 headers: {
-                    Authorization: `Bearer ${localStorage.token}`,
                     'Content-Type': 'application/json',
                 },
                 body: jsonData,

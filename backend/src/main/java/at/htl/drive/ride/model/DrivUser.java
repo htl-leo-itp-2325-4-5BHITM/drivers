@@ -17,21 +17,30 @@ public class DrivUser {
     public String phoneNr;
     @Column(length = 100,nullable = false)
     public String emailAddress;
+    @Column(length = 100,nullable = false)
+    public String username;
 
-    @OneToMany(mappedBy = "user")
-    public List<RideUserAssociation> associationList;
 
     @OneToMany(mappedBy = "user")
     public List<Ride> rides;
     public DrivUser() {
     }
 
-    public DrivUser(Long id, String firstName, String lastName, String phoneNr, String emailAddress) {
+    public DrivUser(Long id, String firstName, String lastName, String phoneNr, String emailAddress, String username) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNr = phoneNr;
         this.emailAddress = emailAddress;
+        this.username = username;
+    }
+
+    public DrivUser(String firstName, String lastName, String phoneNr, String emailAddress, String username) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNr = phoneNr;
+        this.emailAddress = emailAddress;
+        this.username = username;
     }
 
     public Long getId() {
@@ -72,5 +81,13 @@ public class DrivUser {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

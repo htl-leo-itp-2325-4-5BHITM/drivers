@@ -18,12 +18,12 @@ INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableS
      ('2023-11-17 14:30:00', nextval('ride_id_seq'::regclass), 'Romana Schned', 'Walding',3,'Ottensheim','48.351521431061364, 14.15807648298771','48.33679298027719, 14.175010003575805');
 
 
-INSERT INTO public.drivuser (id, firstname, lastname, phonenr, emailaddress) VALUES
-    (nextval('drivuser_id_seq'::regclass), 'Natalie', 'Schmitzberger', '068181735181', 'n.schmitzberger@students.htl-leonding.ac.at'),
-    (nextval('drivuser_id_seq'::regclass), 'Romana', 'Schned', '068181735182', 'r.schned@students.htl-leonding.ac.at'),
-    (nextval('drivuser_id_seq'::regclass), 'Andrei', 'Brehar', '068181735183', 'a.brehar@students.htl-leonding.ac.at'),
-    (nextval('drivuser_id_seq'::regclass), 'Janine', 'Wenninger', '068181735180', 'j.wenninger@students.htl-leonding.ac.at'),
-    (nextval('drivuser_id_seq'::regclass), 'Robert', 'Schmitzberger', '068181735184', 'rober.schmitzberger@gmx.at');
+INSERT INTO public.drivuser (id, firstname, lastname, phonenr, emailaddress, username) VALUES
+    (nextval('drivuser_id_seq'::regclass), 'Natalie', 'Schmitzberger', '068181735181', 'n.schmitzberger@students.htl-leonding.ac.at', 'natalie'),
+    (nextval('drivuser_id_seq'::regclass), 'Romana', 'Schned', '068181735182', 'r.schned@students.htl-leonding.ac.at', 'romana'),
+    (nextval('drivuser_id_seq'::regclass), 'Andrei', 'Brehar', '068181735183', 'a.brehar@students.htl-leonding.ac.at', 'andrei'),
+    (nextval('drivuser_id_seq'::regclass), 'Janine', 'Wenninger', '068181735180', 'j.wenninger@students.htl-leonding.ac.at', 'janine');
+
 
 /*INSERT INTO public.rideuserassociation (isdriver, rideid, userid) VALUES
     (true, 1, 1),

@@ -1,0 +1,11 @@
+###
+POST http://localhost:4200/api/drivus/users/postUser
+Content-Type: application/json
+
+{
+  "firstName": "Max",
+  "lastName": "Muster",
+  "emailAddress": "test@gmail.com",
+  "phoneNr": "1133676",
+  "username": "maxii"
+}

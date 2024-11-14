@@ -61,7 +61,7 @@ export class RideTableComponent extends HTMLElement {
         const formattedTime = departureTime.toFormat('HH:mm'); // Zeit formatieren (z.B. 10:30)
         const formattedDate = departureTime.toFormat('dd.MM.yyyy'); // Datum formatieren (z.B. 2023-11-22)
 
-        console.log(ride.placeOfDepartureCoordinate)
+        //console.log(ride.placeOfDepartureCoordinate)
         this.closeDialog2()
 
         //https://www.openstreetmap.org/#map=14/48.2929/14.2725
