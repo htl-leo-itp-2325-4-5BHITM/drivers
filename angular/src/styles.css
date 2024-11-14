@@ -1,0 +1,34 @@
+body{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  overflow-x:hidden;
+  font-family: var(--fontDrivUs), sans-serif;
+  width: 100vw;
+  height: auto;
+  background-color: var(--colorDark);
+}
+
+:root {
+  --colorDark: #10161f;
+  --colorBright: #d7e4e4;
+  --inactiveColorBright:#879790;
+  --boxShadowDark:10px 5px 5px #111;
+  --fontDrivUs: 'Gabarito';
+  --logoSize:15vw;
+  --mediumText:1.8rem;
+  --divMargin:3vw;
+}
+
+
+.logoContainer{
+  width: 25vw;
+  height: 10vw;
+  margin-top: 1vw;
+  margin-left: -1vw;
+  background-image: url("../public/img/Logo_font_dark.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+  position:absolute;
+}
