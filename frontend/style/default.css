@@ -97,3 +97,51 @@ footer {
     color: var(--colorDark);
     background-color: var(--colorBright);
 }
+
+.login-modal {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: var(--colorDark);
+    color: var(--colorBright);
+    box-shadow: 10px 10px 20px #111;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5%;
+    width: 30vw;
+    padding: .5vw;
+    align-items: center;
+}
+
+
+.login-field button{
+    width: 20%;
+}
+
+.login-field span{
+    position: absolute;
+    border-radius: 1px;
+    font-size: 1.5em;
+    color: var(--colorBright);
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    padding: 1.5% 2.5%;
+}
+.login-field span:hover{
+    color: var(--colorDark);
+    background-color: var(--colorBright);
+}
+
+.modal {
+    display: none;  
+    position: fixed;
+    top: auto;
+    left: auto;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #button-submit-nre-user{
+    width: 20vw
+  }
