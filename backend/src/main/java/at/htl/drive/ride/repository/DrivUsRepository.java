@@ -143,6 +143,9 @@ public class DrivUsRepository {
     }
 
     public void postUser(DrivUserDto user) {
+        if (em.find(Ride.class, user.emailAddress()) != null || em.find(Ride.class, user.username()) != null) {
+            return;
+        }
         DrivUser newUser = new DrivUser(user.firstName(), user.lastName(), user.phoneNr(), user.emailAddress(), user.username());
         em.persist(newUser);
     }
