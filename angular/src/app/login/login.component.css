@@ -1,0 +1,12 @@
+.login-window {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box{
+  width: 30vw;
+  border: red solid;
+}
