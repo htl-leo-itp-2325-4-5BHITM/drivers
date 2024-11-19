@@ -97,6 +97,21 @@ export class UserDetailComponenet extends HTMLElement {
     
             // Übergabe der Eingabewerte an die createNewUser-Funktion
             createNewUser(firstName, lastName, phoneNr, emailAddress, username);
+
+            const clearFirstName = this.shadowRoot.getElementById("firstName") as HTMLInputElement;
+            const clearLastName = this.shadowRoot.getElementById("lastName") as HTMLInputElement;
+            const clearEmail = this.shadowRoot.getElementById("emailAddress") as HTMLInputElement;
+            const clearPhoneNr = this.shadowRoot.getElementById("phoneNr") as HTMLInputElement;
+            const clearUsername = this.shadowRoot.getElementById("username") as HTMLInputElement;
+
+            clearFirstName.value = '';
+            clearLastName.value = '';
+            clearEmail.value = '';
+            clearPhoneNr.value = '';
+            clearUsername.value = '';
+            
+
+            alert("saved user")
         } else {
             console.error("Eingabefelder konnten nicht gefunden werden.");
         }

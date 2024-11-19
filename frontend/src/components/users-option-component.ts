@@ -86,7 +86,8 @@ class UsersOptionComponent extends HTMLElement {
         //Funktionaufruf von Daten überprüfen
         //checkData();
         if (this.checkData()) {
-            (document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Added ride.';
+            //(document.getElementById('errorWrongInputNewRide') as HTMLInputElement).innerHTML = 'Added ride.';
+            alert("Added ride!");
             console.log("date", dateInputValue); // Überprüfe das Datumformat
             console.log("time", timeInputValue); // Überprüfe das Zeitformat
             console.log("combine", combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
@@ -105,6 +106,23 @@ class UsersOptionComponent extends HTMLElement {
             const jsonData = JSON.stringify(formData);
             console.log("form Data JSON: " + jsonData)
 
+
+            const cleardepartureDate = this.shadowRoot.getElementById("datum") as HTMLInputElement;
+            const cleardepartureTime = this.shadowRoot.getElementById("abfzeit") as HTMLInputElement;
+            const clearPlaceOfDeparture = this.shadowRoot.getElementById("abfort") as HTMLInputElement;
+            const clearPlaceOfArrival = this.shadowRoot.getElementById("ankort") as HTMLInputElement;
+            const clearPlaceOfDepartureCoordinate = this.shadowRoot.getElementById("abfortC") as HTMLInputElement;
+            const clearPlaceOfArrivalCoordinate = this.shadowRoot.getElementById("ankortC") as HTMLInputElement;
+            const clearAvailableSeats = this.shadowRoot.getElementById("fplatz") as HTMLInputElement;
+
+
+            cleardepartureDate.value = '';
+            cleardepartureTime.value = '';
+            clearPlaceOfDeparture.value = '';
+            clearPlaceOfArrival.value = '';
+            clearPlaceOfDepartureCoordinate.value = '';
+            clearPlaceOfArrivalCoordinate.value = '';
+            clearAvailableSeats.value = '';
             
 
             // Hier kannst du die JSON-Daten an deinen Pfad senden, z. B. mit fetch()
