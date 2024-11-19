@@ -2,16 +2,24 @@
 </div>
 <div class="login-window">
 
-  <div class="login-box">
-    <form [formGroup]="login" (ngSubmit)="loginFunction()">
-      <p>Log In</p>
-      <input placeholder="username" formControlName="username">
-      <button class="login-button">Log in</button>
-      <div class="sign-in-link">
-        <label>Don't have an account yet?</label>
-        <a href="#">Sign up for free</a>
-      </div>
 
-    </form>
-  </div>
+    <div class="login-box">
+      <form [formGroup]="login" (ngSubmit)="loginFunction()">
+        <p>Log In</p>
+        <div class="input-box">
+          <input placeholder="Username" formControlName="username">
+          <img src="../img/icons/benutzer.png" alt="no image"><!----------------------IMG VERLINKUNG-->
+        </div>
+        <div class="input-box">
+          <input placeholder="Password" formControlName="password" type="password">
+          <img src="../img/icons/key.png" alt="no image"><!----------------------IMG VERLINKUNG-->
+        </div>
+        <button class="login-button">Log in</button>
+        <div class="sign-in-link">
+          <label>Don't have an account yet?</label>
+          <a href="#">Sign up for free</a>
+        </div>
+
+      </form>
+    </div>
 </div>

@@ -4,9 +4,84 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url("../../../public/img/background_option7.jpg");
+  background-size: cover;
 }
 
 .login-box{
-  width: 30vw;
-  border: red solid;
+  border-radius: 2vw;
+  background: rgba(16, 22, 31, 0.5);
+  width:40vw;
 }
+
+form{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 10%;
+}
+
+
+form p{
+  margin:10% 0;
+  color: var(--colorBright);
+  font-size: calc(var(--mediumText) *1.5);
+  font-weight: bold;
+}
+
+.input-box{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  height: 3.8vw;
+  border-radius: 2vw;
+  background: none;
+  border: var(--colorBright) solid 2px;
+  padding: 0 7%;
+  margin: 3% 0;
+  overflow:hidden;
+}
+
+.input-box input{
+  color: var(--colorBright);
+  border: none;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  padding-inline: 0;
+  padding-block: 0;
+  font-family: var(--fontDrivUs), sans-serif;
+  font-size: 1rem;
+}
+
+
+.input-box img{
+  width: 2vw;
+  height: 2vw;
+  filter: invert(93%) sepia(5%) saturate(286%) hue-rotate(131deg) brightness(96%) contrast(94%);
+}
+
+form button{
+  font-family: var(--fontDrivUs), sans-serif;
+  display: flex;
+  outline: none;
+  border-radius: 2vw;
+  border: var(--colorBright) solid 2px;
+  background:none;
+  color: var(--colorBright);
+  margin:10% 0 5%;
+  padding:1vw 5vw;
+  text-align: center;
+}
+
+form button:hover{
+  cursor: pointer;
+  background: var(--colorBright);
+  color: var(--colorDark);
+}
+
+
+
+

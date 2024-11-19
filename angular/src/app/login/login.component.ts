@@ -12,7 +12,8 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 })
 export class LoginComponent {
   login: FormGroup = new FormGroup({
-    'username': new FormControl()
+    'username': new FormControl(),
+    'password': new FormControl()
   })
 
   loginFunction(){
