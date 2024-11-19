@@ -1,3 +1,9 @@
+/*
+https://isotropic.co/tool/hex-color-to-css-filter/
+https://www.flaticon.com/de/
+
+ */
+
 body{
   margin:0;
   padding:0;
@@ -17,7 +23,10 @@ body{
   --fontDrivUs: 'Gabarito';
   --logoSize:15vw;
   --mediumText:1.8rem;
+  --normalText:1rem;
+  --smallText:0.8rem;
   --divMargin:3vw;
+  --shadows: 5px 5px 5px #111;
 }
 
 

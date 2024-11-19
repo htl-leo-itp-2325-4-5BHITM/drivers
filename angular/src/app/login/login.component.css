@@ -10,7 +10,7 @@
 
 .login-box{
   border-radius: 2vw;
-  background: rgba(16, 22, 31, 0.5);
+  background: rgba(16, 22, 31, 0.66);
   width:40vw;
 }
 
@@ -53,7 +53,7 @@ form p{
   padding-inline: 0;
   padding-block: 0;
   font-family: var(--fontDrivUs), sans-serif;
-  font-size: 1rem;
+  font-size: var(--normalText);
 }
 
 
@@ -74,12 +74,27 @@ form button{
   margin:10% 0 5%;
   padding:1vw 5vw;
   text-align: center;
+  transition: 250ms ease-out;
 }
 
 form button:hover{
   cursor: pointer;
   background: var(--colorBright);
   color: var(--colorDark);
+  box-shadow: var(--shadows);
+}
+
+.sign-in-link{
+  color: var(--inactiveColorBright);
+  font-size: var(--smallText);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.sign-in-link a{
+  color: var(--colorBright);
 }
 
 
