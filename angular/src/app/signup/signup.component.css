@@ -1,0 +1,112 @@
+.signup-window {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../../public/img/background_option7.jpg");
+  background-size: cover;
+}
+
+.signup-box {
+  border-radius: 2vw;
+  background: rgba(16, 22, 31, 0.66);
+  width: 40vw;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 10%;
+}
+
+
+form p {
+  margin: 8% 0;
+  color: var(--colorBright);
+  font-size: calc(var(--mediumText) * 1.5);
+  font-weight: bold;
+}
+form button {
+  font-family: var(--fontDrivUs), sans-serif;
+  display: flex;
+  outline: none;
+  border-radius: 2vw;
+  border: var(--colorBright) solid 2px;
+  background: none;
+  color: var(--colorBright);
+  margin: 5% 0 5%;
+  padding: 1vw 5vw;
+  text-align: center;
+  transition: 250ms ease-out;
+}
+
+form button:hover {
+  cursor: pointer;
+  background: var(--colorBright);
+  color: var(--colorDark);
+  box-shadow: var(--shadows);
+}
+
+.sign-in-link {
+  color: var(--inactiveColorBright);
+  font-size: var(--smallText);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.sign-in-link a {
+  color: var(--colorBright);
+}
+
+img{
+  width: 1.3vw;
+  height: 1.3vw;
+  filter: invert(93%) sepia(5%) saturate(286%) hue-rotate(131deg) brightness(96%) contrast(94%);
+}
+
+
+
+input{
+  color: var(--colorBright);
+  border: none;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  padding-inline: 0;
+  padding-block: 0;
+  font-family: var(--fontDrivUs), sans-serif;
+  font-size: var(--normalText);
+}
+
+.input-box, .input-box-half{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  height: 2.5vw;
+  border-radius: 2vw;
+  background: none;
+  border: var(--colorBright) solid 2px;
+  padding: 0 4%;
+  margin: 3% 0;
+  overflow:hidden;
+}
+
+.input-box-divided{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.input-box-half{
+  width: 33%;
+}
+
+
+
+
