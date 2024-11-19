@@ -117,7 +117,11 @@ export function createNewUser(firstname, lastname, phonenumber, email, username)
     })
     .then(response => {
         if (!response.ok) {
+            alert("user already exists");
             throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        else {
+            alert("saved user");
         }
         return response.json();
     })
@@ -125,7 +129,6 @@ export function createNewUser(firstname, lastname, phonenumber, email, username)
         //sessionStorage.setItem("driver_username", username);
 
         //console.log(sessionStorage);
-        
 
         console.log("Received data:", data);
         const users: DrivUser[] = data;

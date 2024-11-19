@@ -182,7 +182,12 @@ public class DrivUsResource {
     @Path("/users/postUser")
     public Response postUser(DrivUserDto user) {
         System.out.println("bin im postUser");
-        repository.postUser(user);
+        try {
+            repository.postUser(user);
+        }
+        catch (IllegalArgumentException ex) {
+            return Response.status(400, "User already exists").build();
+        }
         return Response.ok().build();
     }
 

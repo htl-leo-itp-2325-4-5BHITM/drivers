@@ -109,9 +109,7 @@ export class UserDetailComponenet extends HTMLElement {
             clearEmail.value = '';
             clearPhoneNr.value = '';
             clearUsername.value = '';
-            
-
-            alert("saved user")
+    
         } else {
             console.error("Eingabefelder konnten nicht gefunden werden.");
         }

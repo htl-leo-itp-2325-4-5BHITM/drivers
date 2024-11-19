@@ -13,6 +13,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.ws.rs.core.Response;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -143,9 +144,17 @@ public class DrivUsRepository {
     }
 
     public void postUser(DrivUserDto user) {
-        /*if (em.find(Ride.class, user.emailAddress()) != null || em.find(Ride.class, user.username()) != null) {
-            return;
-        }*/
+        //check if already exist
+        String jpql = "SELECT COUNT(u) FROM DrivUser u WHERE u.emailAddress = :email or u.username = :username";
+        TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+        query.setParameter("email", user.emailAddress());
+        query.setParameter("username", user.username());
+        Long count = query.getSingleResult();
+
+        if(count > 0) {
+            throw new IllegalArgumentException();
+        }
+
         DrivUser newUser = new DrivUser(user.firstName(), user.lastName(), user.phoneNr(), user.emailAddress(), user.username());
         em.persist(newUser);
     }
