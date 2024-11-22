@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {User} from '../model/user.model';
+import {UserService} from '../service/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -19,6 +21,9 @@ export class SignupComponent {
   email?: string;
   password?: string;
 
+  /*constructor(private userService: UserService) {
+  }*/
+
   signup: FormGroup = new FormGroup({
     'firstname': new FormControl(),
     'lastname': new FormControl(),
@@ -35,6 +40,32 @@ export class SignupComponent {
     this.email=this.signup.get('email')?.value;
     this.username=this.signup.get('username')?.value;
     this.password=this.signup.get('password')?.value;
+
+    /*let newUser :User = new class implements User {
+      emailAddress: string;
+      firstName: string;
+      id: number;
+      lastName: string;
+      phoneNr: string;
+      username: string;
+    };
+    if (this.firstName != null) {
+      newUser.firstName = this.firstName;
+    }
+    if (this.lastName != null) {
+      newUser.lastName = this.lastName;
+    }
+    if (this.phoneNumber != null) {
+      newUser.phoneNr = this.phoneNumber;
+    }
+    if (this.email != null) {
+      newUser.emailAddress = this.email;
+    }
+    if (this.username != null) {
+      newUser.username = this.username;
+    }
+
+    this.userService.createNewUser(newUser);*/
 
     console.log('Saved')
   }
