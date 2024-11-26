@@ -84,6 +84,27 @@ table {
     filter: invert(#fff);
 }
 
+.book-unbook-button{
+    color: var(--colorInactive);
+    background-color: #151a24;
+    padding: 2% 5%;
+    border: var(--colorInactive) 0.1rem solid;
+    border-radius: 10px;
+    width: 5vw;
+    justify-self: center;
+
+}
+
+.book-unbook-button:hover{
+    cursor: pointer;
+    color: var(--colorDark);
+    background-color: var(--colorBright);
+    border: var(--colorDark) 0.1rem solid;
+
+    transition: all 400ms ease-out;
+
+}
+
 #ride-search {
     display: flex;
     justify-content: center;
