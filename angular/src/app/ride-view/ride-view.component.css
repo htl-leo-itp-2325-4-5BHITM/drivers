@@ -1,0 +1,5 @@
+*{
+  background: var(--colorBright);
+  color: var(--colorDark);
+  height: 85vw;
+}
