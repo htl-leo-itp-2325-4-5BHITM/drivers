@@ -42,16 +42,7 @@ export class SignupComponent {
     this.password=this.signup.get('password')?.value;
 
     let newUser :User = <User>{};
-    //newUser.username = this.#
 
-    /*let newUser :User = new class implements User {
-      emailAddress: string;
-      firstName: string;
-      id: number;
-      lastName: string;
-      phoneNr: string;
-      username: string;
-    };*/
     if (this.firstName != null) {
       newUser.firstName = this.firstName;
     }

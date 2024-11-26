@@ -2,19 +2,27 @@ import {Injectable, model} from '@angular/core';
 import {Ride} from '../model/ride.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {User} from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RideService {
 
-  private ridesURL = "/api/drivus/rides"
+  private url = "http://localhost:8080/api/drivus/rides"
 
   constructor(private http: HttpClient) { }
 
-  getRides() {
-      let rides: Ride[] =  this.http.get(this.ridesURL) as Ride[]
+  getRides() : Observable<Ride[]>{
+      //let rides: Observable<Ride[]>
+    /*
+    this.http.get<Ride>(this.url).subscribe(rides => {
+      console.log('load rides:', rides);
+      rides = rides
+    });
       console.log(rides)
-      return rides
+      return rides*/
+    return this.http.get<Ride[]>(this.url);
   }
+
 }
