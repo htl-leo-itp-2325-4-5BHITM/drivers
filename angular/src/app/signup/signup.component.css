@@ -19,10 +19,11 @@ form {
   align-items: center;
   flex-direction: column;
   padding: 0 10%;
+  position:relative;
 }
 
 
-form p {
+form .log-title {
   margin: 8% 0;
   color: var(--colorBright);
   font-size: calc(var(--mediumText) * 1.5);
@@ -107,6 +108,19 @@ input{
   width: 33%;
 }
 
+.back-button{
+  position: absolute;
+  font-size: var(--mediumText);
+  color: var(--inactiveColorBright);
+  cursor: pointer;
+  left: 5vw;
+  top: 1vw;
+  transition: 250ms ease-out;
+}
+
+.back-button:hover{
+  color: var(--colorBright);
+}
 
 
 
