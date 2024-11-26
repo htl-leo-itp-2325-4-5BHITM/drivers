@@ -4,26 +4,30 @@
   padding-top: 5%;
   background-size: 80%;
   cursor: pointer;
-  /**/
+}
+
+.contains-logo{
+  margin-top: -1vw;
 }
 
 .navigation{
-  height:15vh;
-  float:right;
-  border:pink solid;
+  height:13vh;
+  display: flex;
+  text-align: center;
 }
 
 .navigation a{
-  margin:5vw;
+  margin:3vw 3vw 0;
+  text-decoration: none;
+  color: var(--inactiveColorBright);
+  font-size: var(--normalText);
 }
 
 .row{
   display: flex;
-  flex-direction: column;
-  position:fixed;
   top:0;
   left: 0;
   width: 100%;
-  background:green;
-  border:blue solid;
+  justify-content: space-between;
+  padding-bottom: 1vw;
 }
