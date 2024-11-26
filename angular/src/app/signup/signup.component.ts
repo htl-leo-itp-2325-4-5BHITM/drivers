@@ -25,8 +25,8 @@ export class SignupComponent {
   email?: string;
   password?: string;
 
-  /*constructor(private userService: UserService) {
-  }*/
+  constructor(private userService: UserService) {
+  }
 
   signup: FormGroup = new FormGroup({
     'firstname': new FormControl(),
@@ -40,10 +40,13 @@ export class SignupComponent {
   signupFunction(){
     this.firstName=this.signup.get('firstname')?.value;
     this.lastName=this.signup.get('lastname')?.value;
-    this.phoneNumber=this.signup.get('phonenumber')?.value;
+    this.phoneNumber=this.signup.get('phonenr')?.value;
     this.email=this.signup.get('email')?.value;
     this.username=this.signup.get('username')?.value;
     this.password=this.signup.get('password')?.value;
+
+    let newUser :User = <User>{};
+    //newUser.username = this.#
 
     /*let newUser :User = new class implements User {
       emailAddress: string;
@@ -52,7 +55,7 @@ export class SignupComponent {
       lastName: string;
       phoneNr: string;
       username: string;
-    };
+    };*/
     if (this.firstName != null) {
       newUser.firstName = this.firstName;
     }
@@ -69,7 +72,7 @@ export class SignupComponent {
       newUser.username = this.username;
     }
 
-    this.userService.createNewUser(newUser);*/
+    this.userService.createNewUser(newUser);
 
     console.log('Saved')
   }

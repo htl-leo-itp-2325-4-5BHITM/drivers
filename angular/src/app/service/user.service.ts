@@ -8,13 +8,19 @@ import {User} from '../model/user.model';
 })
 export class UserService {
 
-  private url = "/api/drivus/users"
+  private url = "http://localhost:8080/api/drivus/users"
 
   constructor(private http: HttpClient) { }
 
   createNewUser(user: User) {
     console.log("in createUser")
-    return this.http.post(this.url + "postUser/", user)
+    console.log(user)
+
+    this.http.post<User>(this.url + '/postUser', user).subscribe(user => {
+      console.log('Updated user:', user);
+    });
+
+    //return this.http.post(this.url + "postUser/", user)
   }
 
 }
