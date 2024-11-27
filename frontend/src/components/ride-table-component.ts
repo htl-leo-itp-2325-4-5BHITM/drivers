@@ -224,11 +224,12 @@ export class RideTableComponent extends HTMLElement {
         dialog.style.display = 'flex'
     }
     private rowsButtons(ride: Ride) {
-        let isBooked = false;
-
-        
-
-
+        //let isBooked = false;
+        const currentUser = localStorage.getItem("username")
+        const isBooked = ride.driver 
+            ? ride.driver.includes(currentUser)
+            : false;
+    
         if (ride.driver == localStorage.getItem("username")) {
             return html`
                 <button class="table-setting-button"  class="setting-setting" @click=${() => this.rowClick(ride)}><img src="./img/gear.png" width="15vw"></button>       
@@ -236,13 +237,14 @@ export class RideTableComponent extends HTMLElement {
         } else if (localStorage.getItem("isLogedIn") == "false") {
             return html` 
                 <button class="book-unbook-button" @click=${() => alert("Please log in to get a seat!")}>book</button>
-                <button class="table-setting-button" class="setting-minus" @click=${() => alert("Please log in to get a seat!")}><img src="./img/minus_inactive.png" width="15vw"></button>
+                <button class="book-unbook-button" @click=${() => alert("Please log in to get a seat!")}>unbook</button>
                `
         } else {
             return html`
-                <button class="book-unbook-button" @click=${() => getSeat(ride)}> ${isBooked ? "unbook" : "book"}</button>
-                <button class="table-setting-button" class="setting-minus" @click=${() => removeSeat(ride)}><img src="./img/minus_inactive.png" width="15vw"></button>
+                <button class="book-unbook-button" @click=${() => getSeat(ride)}>book</button>
+                <button class="book-unbook-button" @click=${() => removeSeat(ride)}>unbook</button>
                 `
+            
             
         }
     }

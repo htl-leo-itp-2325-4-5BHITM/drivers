@@ -134,6 +134,8 @@ export async function getSeat(ride: Ride) {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
             });*/
+    }else{
+        alert("No more seats available")
     }
 }
 
@@ -143,7 +145,7 @@ export async function removeSeat(ride: Ride) {
     var id = ride.id
     console.log(id)
 
-    if (ride.availableSeats > 0) {
+    if (ride.availableSeats >= 0 && ride.availableSeats < 5) {
         // Daten in JSON umwandeln
         let data: RegisterData = {
             rideId: id,
@@ -168,5 +170,7 @@ export async function removeSeat(ride: Ride) {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
             });
+    }else{
+        alert("No more seats available")
     }
 }

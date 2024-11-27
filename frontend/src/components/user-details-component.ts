@@ -22,6 +22,7 @@ export class UserDetailComponent extends HTMLElement {
         if (storedUserDetails) {
             this.userDetails = JSON.parse(storedUserDetails); // Benutzerdaten aus dem Local Storage laden
             this.loggedIn = true; // Benutzer als eingeloggt markieren
+            localStorage.setItem("isLogedIn", "true");
         }
 
         storeUserDetails.subscribe((model) => {
@@ -122,7 +123,7 @@ export class UserDetailComponent extends HTMLElement {
             console.log(data); // Zum Debuggen die Antwort in der Konsole ausgeben
             this.userDetails = data; // Benutzerdetails speichern
             this.loggedIn = true; // Benutzer als eingeloggt markieren
-
+            localStorage.setItem("isLogedIn", "true");
             // Speichern der Benutzerdaten im Local Storage
             localStorage.setItem('userDetails', JSON.stringify(this.userDetails));
 
@@ -134,6 +135,9 @@ export class UserDetailComponent extends HTMLElement {
 
     // Registrierung: Erstellen eines neuen Benutzers
     submitRegistrationForm() {
+        this.loggedIn = true;
+        localStorage.setItem("isLogedIn", "true");
+
         const firstNameInput = this.shadowRoot.getElementById("firstName") as HTMLInputElement;
         const lastNameInput = this.shadowRoot.getElementById("lastName") as HTMLInputElement;
         const phoneNrInput = this.shadowRoot.getElementById("phoneNr") as HTMLInputElement;
@@ -169,6 +173,7 @@ export class UserDetailComponent extends HTMLElement {
     // Logout-Logik: Setze Zustand zurück
     handleLogout() {
         this.loggedIn = false;
+        localStorage.setItem("isLogedIn", "false");
         this.userDetails = null;
 
         // Lösche die Benutzerdaten aus dem Local Storage
