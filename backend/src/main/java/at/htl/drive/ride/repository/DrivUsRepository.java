@@ -188,6 +188,17 @@ public class DrivUsRepository {
         return drivUser;
     }
 
+    public DrivUser getUserByUsername(UsernameDto username) {
+        String name = username.username();
+        String sql = "select d from DrivUser d " +
+                "where d.username = '" + name + "'";
+        TypedQuery<DrivUser> query = em.createQuery(sql, DrivUser.class);
+        List<DrivUser> user = query.getResultList();
+        Long userId = user.get(0).getId();
+        DrivUser drivUser = em.find(DrivUser.class, userId);
+        return drivUser;
+    }
+
     public List<Ride> getFilteredRides(String filterText, int page) {
         String upperFilterText = "%" + filterText.toUpperCase() + "%";
         String sql = "SELECT DISTINCT r FROM Ride r " +

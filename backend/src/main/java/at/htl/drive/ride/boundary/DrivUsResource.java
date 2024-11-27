@@ -203,12 +203,18 @@ public class DrivUsResource {
         return repository.getUser(username);
     }
 
-    @Path("/rides/getAllRides/javaFaker")
+    @Path("/getUserByUsername")
+    @POST
+    public DrivUser getUserByUsername(UsernameDto username) {
+        return repository.getUserByUsername(username);
+    }
+
+   /* @Path("/rides/getAllRides/javaFaker")
     @GET
     @Transactional
     public List<Ride> dataLoaderToDatabase() {
         return repository.getAllRidesLoader();
-    }
+    }*/
     /*
     @Path("/rides")
     @GET

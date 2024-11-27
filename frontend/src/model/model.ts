@@ -45,7 +45,9 @@ interface DrivUser {
 export interface UserDetail {
     firstName: string,
     lastName: string,
-    email: string
+    emailAddress: string,
+    phoneNr: string,
+    username: string
 }
 
 export interface ModelUserDetail {
@@ -55,7 +57,9 @@ const initialStateUserDetail: ModelUserDetail = {
     userDetails: {
         firstName: "",
         lastName: "",
-        email: ""
+        emailAddress: "",
+        phoneNr: "",
+        username: ""
     }
 }
 

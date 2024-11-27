@@ -1,6 +1,8 @@
-/*import { DrivUser, Model, store, storeUsers } from "../model/model"
+import { DrivUser, Model, store, storeUsers } from "../model/model"
 import { html, render } from "lit-html"
 import { getUserData } from "../service/user-service"
+import {loadRides} from "../service/ride-service";
+import {RideTableComponent} from "./ride-table-component";
 
 class LoginComponent extends HTMLElement {
     connectedCallback() {
@@ -61,7 +63,7 @@ class LoginComponent extends HTMLElement {
             localStorage.setItem("username", name);
             localStorage.setItem("isLogedIn", "true");
             //NUR AUSPROBIER DINGSI -> FÜR TASKBAR WEG
-            /*if (localStorage.getItem("isLogedIn") === "true" ) {//todo:überprüfen dass keine 3 anzeigen
+            if (localStorage.getItem("isLogedIn") === "true" ) {//todo:überprüfen dass keine 3 anzeigen
                 // Create an instance of RideTableComponent
                 const rideTable = new RideTableComponent();
                 // Append the instance to the document body (or another desired location)
@@ -73,8 +75,8 @@ class LoginComponent extends HTMLElement {
                 });
                 //DAMIT WORKTS
                 loadRides();
-            }*/
-           /* console.log(localStorage.getItem("username"))
+            }
+           console.log(localStorage.getItem("username"))
         } else {
             alert("invalid data")
         }
@@ -107,4 +109,4 @@ class LoginComponent extends HTMLElement {
 
 }
 
-customElements.define("login-field", LoginComponent)*/
+customElements.define("login-field", LoginComponent)
