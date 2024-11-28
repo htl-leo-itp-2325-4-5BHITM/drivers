@@ -1,4 +1,102 @@
-*{
-  height: 100vh;
-  background: var(--colorBright);
+.content{
+  background: var(--colorBeige);
 }
+form {
+  transform:scale(.9);
+  display: flex;
+  background-color: var(--colorDark);
+  color: var(--colorBright);
+  box-shadow: 10px 10px 20px #111;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.register-image {
+  width: 50%;
+  background-image: url("../../../public/img/background_option9.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 80% 0;
+}
+
+.register-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+}
+
+.register-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 0;
+  height: 80%;
+  padding: 0;
+}
+
+.grid-item {
+  padding: 4% 3%;
+  display: flex;
+}
+
+.grid-item::placeholder {
+  color: var(--inactiveColorBright);
+}
+
+.grid-item input{
+  color: var(--colorBright);
+  height: 4vh;
+  width: 15vw;
+  background: transparent;
+  outline: none;
+  padding-inline: 0;
+  padding-block: 0;
+  border: none;
+  border-bottom: var(--inactiveColorBright) solid 1px;
+  border-radius: 2px;
+}
+
+
+.register-submit {
+  font-size: 1em;
+  color: var(--inactiveColorBright);
+  background-color: #151a24;
+  padding: 2% 5%;
+  border: var(--inactiveColorBright) 0.1rem solid;
+  border-radius: 50px;
+  width: 60%;
+  justify-self: center;
+  margin: 1.5vw 0;
+}
+
+.register-submit:hover {
+  cursor: pointer;
+  color: var(--colorDark);
+  background-color: var(--colorBright);
+  border: var(--colorDark) 0.1rem solid;
+  box-shadow: 10px 5px 5px #111;
+  transition: all 400ms ease-out;
+}
+
+.register-button-center{
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(100%) sepia(1%) saturate(3863%) hue-rotate(151deg) brightness(92%) contrast(93%);
+}
+input[type="time"]::-webkit-calendar-picker-indicator{
+  filter: invert(100%) sepia(1%) saturate(3863%) hue-rotate(151deg) brightness(92%) contrast(93%);
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
