@@ -1,2 +1,18 @@
 <app-navbar></app-navbar>
-<p>ride-view works!</p>
+<div class="content">
+  <ul>
+    <li *ngFor="let ride of rides">
+      <div class="rideItemView">
+        <img src="./img/placeholder.jpg" alt="placeholder">
+        <div class="text">
+          <p>From: {{ ride.placeOfDeparture }}</p>
+          <p>To: {{ ride.placeOfArrival }}</p>
+          <div class="dateRow">
+            <p>{{ ride.departureTime | date: 'EEE, dd-MM-yyyy' }}</p>
+            <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

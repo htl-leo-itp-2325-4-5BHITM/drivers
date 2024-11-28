@@ -4,38 +4,47 @@ import {UserService} from '../service/user.service';
 import {RideService} from '../service/ride.service';
 import {Ride} from '../model/ride.model';
 import {Observable} from 'rxjs';
+import {HardDataService} from '../service/hard-data.service';
+import {DatePipe, NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-ride-view',
   standalone: true,
   imports: [
-    NavbarComponent
+    NavbarComponent,
+    NgForOf,
+    DatePipe
   ],
   templateUrl: './ride-view.component.html',
   styleUrl: './ride-view.component.css'
 })
 export class RideViewComponent implements OnInit {
-    private rides :Ride[] = [];
+  rides: Ride[] = [];
 
 
-    constructor(private rideService: RideService) {
+  constructor(private rideService: RideService, private hardData: HardDataService) {
+    this.rides = hardData.hardcodedRide
+  }
 
-    }
+  ngOnInit() {
+    /*
+    this.rideService.getRides().subscribe((value ) => {
+      this.rides = value;
+      console.log(this.rides);
+    })
+    /*this.getRidesFunction()
+    console.log(this.rides)
 
-    ngOnInit() {
-      this.rideService.getRides().subscribe((value ) => {
-        this.rides = value;
-        console.log(this.rides);
-      })
-      /*this.getRidesFunction()
-      console.log(this.rides)*/
-    }
+     */
+  }
 
-    getRidesFunction(){
-      //this.rides = this.rideService.getRides()
-    }
+  /*
 
+  getRidesFunction(){
+    //this.rides = this.rideService.getRides()
+  }
 
+*/
 
 
   //@Input() isLoggedIn: boolean = false;
