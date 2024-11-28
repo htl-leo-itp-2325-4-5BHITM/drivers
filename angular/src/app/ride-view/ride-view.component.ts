@@ -23,11 +23,11 @@ export class RideViewComponent implements OnInit {
 
 
   constructor(private rideService: RideService, private hardData: HardDataService) {
-    this.rides = hardData.hardcodedRide
+    //this.rides = hardData.hardcodedRide
   }
 
   ngOnInit() {
-    /*
+
     this.rideService.getRides().subscribe((value ) => {
       this.rides = value;
       console.log(this.rides);

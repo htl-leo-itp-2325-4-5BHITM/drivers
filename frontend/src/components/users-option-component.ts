@@ -1,4 +1,4 @@
-import { DrivUser, storeUsers } from "../model/model"
+import { DrivUser, storeUserDetails, storeUsers } from "../model/model"
 import { html, render } from "lit-html"
 import { DateTime } from 'luxon';
 import { RidePost } from "../model/model"
@@ -92,8 +92,15 @@ class UsersOptionComponent extends HTMLElement {
             console.log("time", timeInputValue); // Überprüfe das Zeitformat
             console.log("combine", combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
 
+            //let driver = localStorage.getItem("username");
+            let driver = localStorage.getItem('userDetails')
+            
+            //let driver = "janine"
+            console.log(driver)
+            //userdetail
+
             const formData: RidePost = {
-                driver: localStorage.getItem("username"),
+                driver: driver,
                 departureTime: combinedDateTime,
                 placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
                 placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,

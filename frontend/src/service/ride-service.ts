@@ -6,6 +6,7 @@ import { produce } from "immer"
 const RIDES_URL = "/api/drivus/rides"
 const ridesPerPage = 7
 
+
 export async function loadRides() {
     const response = await fetch(RIDES_URL)
     const rides: Ride[] = await response.json()
@@ -134,6 +135,7 @@ export async function getSeat(ride: Ride) {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
             });*/
+        alert("Seat booked.")     
     }else{
         alert("No more seats available")
     }
@@ -170,6 +172,7 @@ export async function removeSeat(ride: Ride) {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
             });
+        alert("Seat unbooked.")
     }else{
         alert("No more seats available")
     }

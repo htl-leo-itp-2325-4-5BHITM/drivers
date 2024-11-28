@@ -19,6 +19,8 @@ let dateValue = ''; // Standardwerte für Datum und Zeit
 let timeValue = '';
 let ridesPerPage = 7
 
+let bookRide = [];
+
 export class RideTableComponent extends HTMLElement {
     connectedCallback() {
         console.log("table")
@@ -226,6 +228,7 @@ export class RideTableComponent extends HTMLElement {
     private rowsButtons(ride: Ride) {
         //let isBooked = false;
         const currentUser = localStorage.getItem("username")
+        //bookRide[ride.id] = true
         const isBooked = ride.driver 
             ? ride.driver.includes(currentUser)
             : false;
@@ -240,12 +243,23 @@ export class RideTableComponent extends HTMLElement {
                 <button class="book-unbook-button" @click=${() => alert("Please log in to get a seat!")}>unbook</button>
                `
         } else {
-            return html`
+            return html`                
                 <button class="book-unbook-button" @click=${() => getSeat(ride)}>book</button>
                 <button class="book-unbook-button" @click=${() => removeSeat(ride)}>unbook</button>
-                `
-            
-            
+                `    
+            /*if(bookRide[ride.id]){
+                bookRide[ride.id] = false
+                return html`
+                <button class="book-unbook-button" @click=${() => getSeat(ride)}>book</button>
+                `    
+            }
+            else {
+                bookRide[ride.id] = true
+                return html`
+                <button class="book-unbook-button" @click=${() => removeSeat(ride)}>unbook</button>
+                `    
+            }*/
+                    
         }
     }
 
@@ -325,8 +339,6 @@ export class RideTableComponent extends HTMLElement {
         const dialog = this.shadowRoot.getElementById('details-dialog')
         dialog.style.display = 'flex'
     }
-    
-
 
     private paginationNav(count: number) {
         let selectedPage = 0
