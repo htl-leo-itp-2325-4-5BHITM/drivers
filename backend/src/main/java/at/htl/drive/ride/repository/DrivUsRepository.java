@@ -31,7 +31,7 @@ public class DrivUsRepository {
     }
 
     public List<Ride> pagination(int page, int ridesPerPage) {
-        String sql = "select r from Ride r order by r.departureTime";
+        String sql = "select r from Ride r order by r.id desc";
         TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
         try {
             return query.getResultList().subList((page-1)+(ridesPerPage-1)*(page-1), ((page-1)+(ridesPerPage-1)*(page-1))+ridesPerPage);
@@ -106,7 +106,7 @@ public class DrivUsRepository {
     }
 
     public void postRide(RideDto rideDto) {
-        Ride ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(),"rider",rideDto.placeOfDepartureCoordinate(),rideDto.placeOfArrivalCoordinate());
+        Ride ride = new Ride(rideDto.departureTime(),rideDto.placeOfDeparture(),rideDto.placeOfArrival(),rideDto.availableSeats(), rideDto.driver(),rideDto.placeOfDepartureCoordinate(),rideDto.placeOfArrivalCoordinate());
         em.persist(ride);
         /*RideUserAssociationId id = new RideUserAssociationId(ride.id, 1L);
         RideUserAssociation rua = new RideUserAssociation(id, true);
