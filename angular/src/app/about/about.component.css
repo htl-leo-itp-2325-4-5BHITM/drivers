@@ -1,7 +1,7 @@
 .reason {
   width: 100vw;
   height: 120vh;
-  background: #a68c78;
+  background: var(--colorBeige);
   display: flex;
   align-items: center;
   justify-content: space-around;

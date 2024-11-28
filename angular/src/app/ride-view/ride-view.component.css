@@ -1,5 +1,60 @@
-*{
-  background: var(--colorBright);
+.content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background: var(--colorBeige);
   color: var(--colorDark);
-  height: 85vw;
+}
+
+ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5vw;
+  width: 100vw;
+  justify-content: center;
+  margin-left: 4vw;
+  margin-top:5vw;
+}
+
+li {
+  background-color: var(--colorBright);
+  width: 20vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 20px 20px 20px 20px;
+  box-shadow: 3px 3px 15px #333;
+  transition: ease-out 200ms;
+}
+
+li:hover{
+
+  box-shadow: 0 0 0 #111;
+  transform: scale(1.1);
+  background: var(--colorBright);
+}
+
+
+.rideItemView{
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.rideItemView img {
+  width: 20vw;
+  overflow: hidden;
+}
+
+.rideItemView .text{
+  padding: 1vw;
+}
+
+.dateRow{
+  margin-top: -1vw;
+  display: flex;
+  justify-content: space-between;
 }

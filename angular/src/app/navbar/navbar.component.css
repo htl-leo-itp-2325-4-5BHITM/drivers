@@ -1,3 +1,13 @@
+.row{
+  display: flex;
+  top:0;
+  left: 0;
+  width: 100%;
+  justify-content: space-between;
+  background-color: var(--colorDark);
+  padding-bottom: 1vw;
+  z-index:100;
+}
 .logoContainer{
   height: 10vh;
   margin:0;
@@ -14,20 +24,37 @@
   height:13vh;
   display: flex;
   text-align: center;
+  margin-right: var(--divMargin);
 }
 
 .navigation a{
+  position: relative;
   margin:3vw 3vw 0;
   text-decoration: none;
   color: var(--inactiveColorBright);
   font-size: var(--normalText);
+  transition: 250ms ease-out;
 }
 
-.row{
-  display: flex;
-  top:0;
+.navigation a:hover{
+  color: var(--colorBright);
+}
+
+
+
+.navigation a::before{
+  content: '';
+  position: absolute;
+  top: 50%;
   left: 0;
+  width: 0;
+  height: .25vw;
+  background-color: var(--inactiveColorBright);
+  transition: 250ms ease-out;
+  border-radius: 1vw;
+}
+
+.navigation a:hover::before{
+  background-color: var(--colorBright);
   width: 100%;
-  justify-content: space-between;
-  padding-bottom: 1vw;
 }
