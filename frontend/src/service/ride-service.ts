@@ -135,6 +135,7 @@ export async function getSeat(ride: Ride) {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
             });*/
+        alert("Seat booked.")     
     }else{
         alert("No more seats available")
     }
@@ -171,6 +172,7 @@ export async function removeSeat(ride: Ride) {
                 // Handle Fehler hier
                 console.log("Hat nd funktioniert zum Ändern")
             });
+        alert("Seat unbooked.")
     }else{
         alert("No more seats available")
     }
