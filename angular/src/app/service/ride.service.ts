@@ -25,4 +25,12 @@ export class RideService {
     return this.http.get<Ride[]>(this.url);
   }
 
+  createNewRide(ride: Ride) {
+    console.log("in createRide")
+    console.log(ride)
+
+    this.http.post<Ride>(this.url + '/postRide', ride).subscribe(ride => {
+      console.log('Updated ride:', ride);
+    });
+  }
 }
