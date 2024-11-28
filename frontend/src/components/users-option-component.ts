@@ -93,14 +93,19 @@ class UsersOptionComponent extends HTMLElement {
             console.log("combine", combinedDateTime); // Überprüfe das kombinierte Datum und die Zeit
 
             //let driver = localStorage.getItem("username");
-            let driver = localStorage.getItem('userDetails')
-            
+            let data = localStorage.getItem('userDetails');
+            console.log(data)
+            let parsedData = JSON.parse(data);
+
+            let drivers = parsedData.username;
+
+            //let driver = drivers.username;
             //let driver = "janine"
-            console.log(driver)
+            //console.log(driver)
             //userdetail
 
             const formData: RidePost = {
-                driver: driver,
+                driver: drivers,
                 departureTime: combinedDateTime,
                 placeOfDeparture: (this.shadowRoot.getElementById('abfort') as HTMLInputElement).value,
                 placeOfArrival: (this.shadowRoot.getElementById('ankort') as HTMLInputElement).value,
