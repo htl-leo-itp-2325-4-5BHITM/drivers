@@ -6,6 +6,7 @@ import { produce } from "immer"
 const RIDES_URL = "/api/drivus/rides"
 const ridesPerPage = 7
 
+
 export async function loadRides() {
     const response = await fetch(RIDES_URL)
     const rides: Ride[] = await response.json()
