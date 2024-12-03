@@ -8,6 +8,7 @@ import at.htl.drive.ride.model.Ride;
 import at.htl.drive.ride.dto.RideDto;
 //import at.htl.drive.ride.model.RideUserAssociation;
 //import at.htl.drive.ride.model.RideUserAssociationId;
+import at.htl.drive.ride.model.RideRegister;
 import com.github.javafaker.Faker;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -58,12 +59,25 @@ public class DrivUsRepository {
         em.persist(ride);
     }
 
-    public void registerForRide(RegisterRideDto ruaDto) {
-        Long id = ruaDto.rideId();
-        System.out.println(id);
-        Ride ride = em.find(Ride.class, ruaDto.rideId());
-        ride.setAvailableSeats(ride.availableSeats -1);
-        em.persist(ride);
+    public List<RideRegister> registerForRide(RegisterRideDto ruaDto) {
+        String jpql = "SELECT COUNT(r) FROM RideRegister r WHERE r.rideId = :id and r.username = :username";
+        TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+        query.setParameter("id", ruaDto.rideId());
+        query.setParameter("username", ruaDto.username());
+        Long count = query.getSingleResult();
+
+        if(count == 0) {
+            Long id = ruaDto.rideId();
+            System.out.println(id);
+            Ride ride = em.find(Ride.class, ruaDto.rideId());
+            ride.setAvailableSeats(ride.availableSeats -1);
+            em.persist(ride);
+
+            RideRegister rideRegister = new RideRegister(ruaDto.rideId(), ruaDto.username());
+            em.persist(rideRegister);
+        }
+
+        return em.createQuery("select r from RideRegister r", RideRegister.class).getResultList();
 
         /*String[] name = ruaDto.username().split(" ");
         String sql = "select d from DrivUser d " +
@@ -155,7 +169,7 @@ public class DrivUsRepository {
             throw new IllegalArgumentException();
         }
 
-        DrivUser newUser = new DrivUser(user.firstName(), user.lastName(), user.phoneNr(), user.emailAddress(), user.username());
+        DrivUser newUser = new DrivUser(user.firstName(), user.lastName(), user.phoneNr(), user.emailAddress(), user.username(), user.password());
         em.persist(newUser);
     }
 

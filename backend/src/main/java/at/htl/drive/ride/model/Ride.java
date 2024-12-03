@@ -109,7 +109,6 @@ public class Ride {
         this.placeOfArrivalCoordinates = placeOfArrivalCoordinates;
     }
 
-    //</editor-fold>
 
     public Ride() {
 

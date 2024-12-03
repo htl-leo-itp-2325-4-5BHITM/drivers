@@ -7,10 +7,12 @@
         <div class="text">
           <p>From: {{ ride.placeOfDeparture }}</p>
           <p>To: {{ ride.placeOfArrival }}</p>
+          <p>Seats: {{ ride.availableSeats }}</p>
           <div class="dateRow">
             <p>{{ ride.departureTime | date: 'EEE, dd-MM-yyyy' }}</p>
             <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
           </div>
+          <button (click)="getSeat(ride)">book</button>
         </div>
       </div>
     </li>

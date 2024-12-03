@@ -69,6 +69,9 @@ export class SignupComponent {
     if (this.username != null) {
       newUser.username = this.username;
     }
+    if (this.password != null) {
+      newUser.password = this.password;
+    }
 
     this.userService.createNewUser(newUser);
 
