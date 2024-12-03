@@ -10,9 +10,18 @@
         <div class="input-box-half">
           <input placeholder="First name" formControlName="firstname">
         </div>
+
         <div class="input-box-half">
           <input placeholder="Last name" formControlName="lastname">
         </div>
+      </div>
+
+      <div class="input-box-divided">
+        <span *ngIf="!signup.get('firstname')?.valid && signup.get('firstname')?.touched"
+              class="help-block">Firstname is required!</span>
+
+        <span *ngIf="!signup.get('lastname')?.valid && signup.get('lastname')?.touched"
+              class="help-block">Lastname is required!</span>
       </div>
 
       <div class="input-box-divided">
@@ -26,19 +35,33 @@
         </div>
       </div>
 
+      <div class="input-box-divided">
+          <span *ngIf="!signup.get('username')?.valid && signup.get('username')?.touched"
+                class="help-block">Username is required!</span>
+
+          <span *ngIf="!signup.get('phonenr')?.valid && signup.get('phonenr')?.touched"
+                class="help-block">Phone-number is required!</span>
+      </div>
 
 
       <div class="input-box">
         <input placeholder="Email" formControlName="email">
         <img src="../img/icons/envelope.png" alt="no image"><!----------------------IMG VERLINKUNG-->
       </div>
+      <span *ngIf="!signup.get('email')?.valid && signup.get('email')?.touched"
+            class="help-block">Email is required!</span>
 
       <div class="input-box">
         <input placeholder="Password" formControlName="password" type="password">
         <img src="../img/icons/lock.png" alt="no image"><!----------------------IMG VERLINKUNG-->
       </div>
+      <span *ngIf="!signup.get('password')?.valid && signup.get('password')?.touched"
+            class="help-block">Password is required and needs to have 8 symbols!</span>
 
-      <button class="login-button">Sign up</button>
+      <button type="submit" class="login-button">Sign up</button>
+      <span *ngIf="!signup.valid && submitted" class="error-message">
+        Please fill out all required fields correctly!
+      </span>
 
       <div class="sign-in-link">
         <label>Already have an account?</label>
