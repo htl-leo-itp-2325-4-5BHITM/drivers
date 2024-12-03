@@ -3,8 +3,9 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {User} from '../model/user.model';
 import {UserService} from '../service/user.service';
 import {NavbarComponent} from '../navbar/navbar.component';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {NgIf} from '@angular/common';
+
 
 @Component({
   selector: 'app-signup',
@@ -29,7 +30,8 @@ export class SignupComponent {
 
   submitted = false;
 
-  constructor(private userService: UserService) {
+
+  constructor(private userService: UserService,private router: Router) {
   }
 
   signup: FormGroup = new FormGroup({
@@ -79,7 +81,11 @@ export class SignupComponent {
 
     console.log('Saved')
     this.submitted = false
+
+    this.router.navigate(['/rides']);
   }
+
+
 
   onSubmit(){
     this.submitted = true;

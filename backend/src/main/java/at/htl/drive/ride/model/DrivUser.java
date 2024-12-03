@@ -28,7 +28,7 @@ public class DrivUser {
     public DrivUser() {
     }
 
-    public DrivUser(String password,Long id, String firstName, String lastName, String phoneNr, String emailAddress, String username) {
+    public DrivUser(Long id, String firstName, String lastName, String phoneNr, String emailAddress, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,7 +38,7 @@ public class DrivUser {
         this.password = password;
     }
 
-    public DrivUser(String password,String firstName, String lastName, String phoneNr, String emailAddress, String username) {
+    public DrivUser(String firstName, String lastName, String phoneNr, String emailAddress, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNr = phoneNr;
