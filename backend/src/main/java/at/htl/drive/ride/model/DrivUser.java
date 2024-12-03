@@ -19,6 +19,8 @@ public class DrivUser {
     public String emailAddress;
     @Column(length = 100,nullable = false)
     public String username;
+    @Column(length = 100,nullable = false)
+    public String password;
 
 
     @OneToMany(mappedBy = "user")
@@ -26,21 +28,23 @@ public class DrivUser {
     public DrivUser() {
     }
 
-    public DrivUser(Long id, String firstName, String lastName, String phoneNr, String emailAddress, String username) {
+    public DrivUser(String password,Long id, String firstName, String lastName, String phoneNr, String emailAddress, String username) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNr = phoneNr;
         this.emailAddress = emailAddress;
         this.username = username;
+        this.password = password;
     }
 
-    public DrivUser(String firstName, String lastName, String phoneNr, String emailAddress, String username) {
+    public DrivUser(String password,String firstName, String lastName, String phoneNr, String emailAddress, String username) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNr = phoneNr;
         this.emailAddress = emailAddress;
         this.username = username;
+        this.password = password;
     }
 
     public Long getId() {
@@ -85,6 +89,14 @@ public class DrivUser {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setUsername(String username) {
