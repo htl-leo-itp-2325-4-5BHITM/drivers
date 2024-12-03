@@ -99,11 +99,6 @@ class UsersOptionComponent extends HTMLElement {
 
             let drivers = parsedData.username;
 
-            //let driver = drivers.username;
-            //let driver = "janine"
-            //console.log(driver)
-            //userdetail
-
             const formData: RidePost = {
                 driver: drivers,
                 departureTime: combinedDateTime,

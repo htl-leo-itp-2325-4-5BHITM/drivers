@@ -169,7 +169,7 @@ public class DrivUsRepository {
             throw new IllegalArgumentException();
         }
 
-        DrivUser newUser = new DrivUser(user.firstName(), user.lastName(), user.phoneNr(), user.emailAddress(), user.username());
+        DrivUser newUser = new DrivUser(user.firstName(), user.lastName(), user.phoneNr(), user.emailAddress(), user.username(), user.password());
         em.persist(newUser);
     }
 
