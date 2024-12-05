@@ -1,0 +1,26 @@
+<div class="driver-screen">
+  <div class="driver-contact-window">
+    <div class="ride-section">
+      <div class="image">
+        <img src="./img/placeholder.jpg" alt="">
+      </div>
+      <div class="ride-content">
+        <p>From: {{ ride?.placeOfDeparture }}</p>
+        <p>To: {{ ride?.placeOfArrival }}</p>
+        <p>Seats: {{ ride?.availableSeats }}</p>
+        <div class="dateRow">
+          <p>{{ ride?.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
+          <p>{{ ride?.departureTime | date: 'hh:mm' }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="driver-section">
+      <p>{{ driver?.firstName}}</p>
+      <p>{{ driver?.lastName}}</p>
+      <p>{{ driver?.emailAddress}}</p>
+      <p>{{ driver?.phoneNr}}</p>
+      <button (click)="toggleState()" class="exit">X</button>
+    </div>
+
+  </div>
+</div>
