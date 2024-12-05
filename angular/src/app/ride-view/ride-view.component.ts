@@ -4,8 +4,9 @@ import {UserService} from '../service/user.service';
 import {getSeat, RideService} from '../service/ride.service';
 import {Ride} from '../model/ride.model';
 import {Observable} from 'rxjs';
-import {DatePipe, NgForOf} from '@angular/common';
-import {HardcodeService} from '../service/hardcode.service';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import {Driver, HardcodeService} from '../service/hardcode.service';
+import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.component';
 
 @Component({
   selector: 'app-ride-view',
@@ -13,13 +14,17 @@ import {HardcodeService} from '../service/hardcode.service';
   imports: [
     NavbarComponent,
     NgForOf,
-    DatePipe
+    DatePipe,
+    DriverRideViewComponent,
+    NgIf
   ],
   templateUrl: './ride-view.component.html',
   styleUrl: './ride-view.component.css'
 })
 export class RideViewComponent implements OnInit {
   rides: Ride[] = [];
+  driver: string = "";
+  showDriver: boolean=false;
 
 
   constructor(private rideService: RideService, private hardData: HardcodeService) {
@@ -36,6 +41,10 @@ export class RideViewComponent implements OnInit {
 
   getSeat(ride: Ride){
     this.rideService.getSeat(ride)
+  }
+  //fia de Detailansicht
+  onStateChange(newState: boolean) {
+    this.showDriver = newState;
   }
 
 }

@@ -2,14 +2,13 @@
 <div class="content">
   <ul>
     <li *ngFor="let ride of rides">
-      <div class="rideItemView">
+      <div class="rideItemView" (click)="showDriver=true; driver=ride.driver">
         <img src="./img/placeholder.jpg" alt="placeholder">
         <div class="text">
           <p>From: {{ ride.placeOfDeparture }}</p>
           <p>To: {{ ride.placeOfArrival }}</p>
-          <p>Seats: {{ ride.availableSeats }}</p>
           <div class="dateRow">
-            <p>{{ ride.departureTime | date: 'EEE, dd-MM-yyyy' }}</p>
+            <p>{{ ride.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
             <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
           </div>
           <button (click)="getSeat(ride)">book</button>
@@ -18,3 +17,6 @@
     </li>
   </ul>
 </div>
+<app-driver-ride-view *ngIf="showDriver" (stateChange)="onStateChange($event)" [driverString]="driver"></app-driver-ride-view>
+
+

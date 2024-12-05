@@ -12,7 +12,7 @@ export class HardcodeService {
       "placeOfDeparture": "New York City",
       "placeOfArrival": "Los Angeles",
       "availableSeats": 3,
-      "driver": "John Doe"
+      "driver": "johndoe"
     },
     {
       "id": 2,
@@ -20,7 +20,7 @@ export class HardcodeService {
       "placeOfDeparture": "Chicago",
       "placeOfArrival": "Miami",
       "availableSeats": 2,
-      "driver": "Jane Smith"
+      "driver": "johndoe"
     },
     {
       "id": 3,
@@ -28,7 +28,7 @@ export class HardcodeService {
       "placeOfDeparture": "San Francisco",
       "placeOfArrival": "Seattle",
       "availableSeats": 4,
-      "driver": "David Lee"
+      "driver": "janesmith"
     },
     {
       "id": 4,
@@ -36,7 +36,7 @@ export class HardcodeService {
       "placeOfDeparture": "Houston",
       "placeOfArrival": "Dallas",
       "availableSeats": 1,
-      "driver": "Emily Brown"
+      "driver": "janesmith"
     },
     {
       "id": 5,
@@ -44,9 +44,57 @@ export class HardcodeService {
       "placeOfDeparture": "Phoenix",
       "placeOfArrival": "Las Vegas",
       "availableSeats": 5,
-      "driver": "Michael Wilson"
+      "driver": "janesmith"
     }
   ]
+  hardcodedDriver: Driver[] = [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "phoneNr": 1234567890,
+      "emailAddress": "john.doe@example.com",
+      "username": "johndoe",
+      "password": "password123"
+    },
+    {
+      "id": 2,
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "phoneNr": 2345678901,
+      "emailAddress": "jane.smith@example.com",
+      "username": "janesmith",
+      "password": "mypassword456"
+    },
+    {
+      "id": 3,
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "phoneNr": 3456789012,
+      "emailAddress": "alice.johnson@example.com",
+      "username": "alicej",
+      "password": "alicepass789"
+    },
+    {
+      "id": 4,
+      "firstName": "Bob",
+      "lastName": "Brown",
+      "phoneNr": 4567890123,
+      "emailAddress": "bob.brown@example.com",
+      "username": "bobbrown",
+      "password": "bobsecure123"
+    },
+    {
+      "id": 5,
+      "firstName": "Charlie",
+      "lastName": "Davis",
+      "phoneNr": 5678901234,
+      "emailAddress": "charlie.davis@example.com",
+      "username": "charlied",
+      "password": "charliepass321"
+    }
+  ]
+
 
   constructor() { }
 }
@@ -58,4 +106,14 @@ export interface Ride{
   placeOfArrival: string;
   availableSeats: number;
   driver: string;
+}
+
+export interface Driver {
+  id: number;
+  firstName: string;
+  lastName: string;
+  phoneNr: number;
+  emailAddress: string;
+  username: string;
+  password: string;
 }
