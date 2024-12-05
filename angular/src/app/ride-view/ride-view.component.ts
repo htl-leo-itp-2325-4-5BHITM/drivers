@@ -24,7 +24,7 @@ export class RideViewComponent implements OnInit {
 
   constructor(private rideService: RideService, private hardData: HardcodeService) {
     //für andrei wegn backend einf auskommentieren wenn backend rennt
-    this.rides = hardData.hardcodedRide
+    //this.rides = hardData.hardcodedRide
   }
 
   ngOnInit() {

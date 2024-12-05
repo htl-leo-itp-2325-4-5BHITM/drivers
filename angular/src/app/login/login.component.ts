@@ -1,27 +1,30 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {RouterLink} from "@angular/router";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Router, RouterLink} from "@angular/router";
 import {UserService} from '../service/user.service'
+import {NgIf} from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        RouterLink
-    ],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    NgIf
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
   username?: string;
   password?: string;
+  submitted = false;
 
   login: FormGroup = new FormGroup({
-    'username': new FormControl(),
-    'password': new FormControl()
+    'username': new FormControl(null, Validators.required),
+    'password': new FormControl(null, Validators.required)
   })
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,private router: Router) {
   }
 
   loginFunction(){
@@ -30,8 +33,21 @@ export class LoginComponent {
 
     this.userService.loginValid(this.password,this.username);
 
+    this.onSubmit();
+    this.submitted = false
+
+    //this.router.navigate(['/rides']);
   }
 
+  onSubmit(){
+    this.submitted = true;
+
+    if (this.login.valid) {
+      console.log('Login valid.');
+    } else {
+      console.error('Login not valid');
+    }
+  }
 
 
 }

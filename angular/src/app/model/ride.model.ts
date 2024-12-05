@@ -1,3 +1,5 @@
+import {Timestamp} from 'rxjs';
+
 export interface Ride {
   id: number
   driver: string

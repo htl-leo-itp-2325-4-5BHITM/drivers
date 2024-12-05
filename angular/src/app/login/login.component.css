@@ -113,4 +113,14 @@ form button:hover{
 }
 
 
+span{
+  color: darkred;
+  margin-left: 10px;
+  font-size: 13px;
+}
+
+.error-message{
+  margin-bottom: 4%;
+}
+
 

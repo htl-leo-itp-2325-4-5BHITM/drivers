@@ -37,7 +37,7 @@ export class SignupComponent {
   signup: FormGroup = new FormGroup({
     'firstname': new FormControl(null, Validators.required),
     'lastname': new FormControl(null, Validators.required),
-    'phonenr': new FormControl(null, Validators.required),
+    'phonenr': new FormControl(null, [Validators.required, Validators.pattern("^[+0-9]*$")]),
     'username': new FormControl(null, Validators.required),
     'email': new FormControl(null,[Validators.required, Validators.email]),
     'password': new FormControl(null, [Validators.required, Validators.minLength(8)]),
@@ -75,26 +75,28 @@ export class SignupComponent {
       newUser.password = this.password;
     }
 
-    this.userService.createNewUser(newUser);
-
-    this.onSubmit()
-
-    console.log('Saved')
-    this.submitted = false
-
-    this.router.navigate(['/rides']);
-  }
-
-
-
-  onSubmit(){
     this.submitted = true;
 
     if (this.signup.valid) {
-      console.log('Login valid.');
+      console.log('sign up valid.');
+      this.userService.createNewUser(newUser);
+
+      console.log('Saved')
+      this.submitted = false
+
+      sessionStorage.setItem('isloged','true');
+      sessionStorage.setItem('firstname',newUser.firstName);
+      sessionStorage.setItem('username',newUser.username);
+      sessionStorage.setItem('lastname',newUser.lastName);
+      sessionStorage.setItem('email',newUser.emailAddress);
+      sessionStorage.setItem('phoneNr',newUser.phoneNr);
+
+      this.router.navigate(['/rides']);
     } else {
-      console.error('Login not valid');
+      console.error('sign up not valid');
     }
+
   }
+
 
 }

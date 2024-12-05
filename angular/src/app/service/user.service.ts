@@ -30,6 +30,7 @@ export class UserService {
         let user: User = response;
         sessionStorage.setItem('firstname',user.firstName);
         sessionStorage.setItem('lastname',user.lastName);
+        sessionStorage.setItem('username',user.username);
         sessionStorage.setItem('email',user.emailAddress);
         sessionStorage.setItem('phoneNr',user.phoneNr);
       },
