@@ -1,12 +1,9 @@
 package at.htl.drive.ride.boundary;
 
 import at.htl.drive.ride.DrivUserMapper;
-import at.htl.drive.ride.dto.DrivUserDto;
-import at.htl.drive.ride.dto.RegisterRideDto;
-import at.htl.drive.ride.dto.UsernameDto;
+import at.htl.drive.ride.dto.*;
 import at.htl.drive.ride.model.DrivUser;
 import at.htl.drive.ride.model.Ride;
-import at.htl.drive.ride.dto.RideDto;
 import at.htl.drive.ride.RideMapper;
 import at.htl.drive.ride.repository.DrivUsRepository;
 import jakarta.annotation.security.PermitAll;
@@ -189,6 +186,22 @@ public class DrivUsResource {
             return Response.status(400, "User already exists").build();
         }
         return Response.ok().build();
+    }
+
+    @POST
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/users/postLogIn")
+    public Response postLogIn(LoginDto user) {
+        System.out.println("bin im postLogIn");
+        try {
+            boolean valid = true;
+            valid = repository.postLogIn(user);
+            return Response.ok(valid).build();
+        }
+        catch (IllegalArgumentException ex) {
+            return Response.status(400, "User already exists").build();
+        }
     }
 
     @Path("/getDriverOfNew")

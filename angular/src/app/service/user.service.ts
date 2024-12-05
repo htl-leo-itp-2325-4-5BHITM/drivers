@@ -23,4 +23,23 @@ export class UserService {
     //return this.http.post(this.url + "postUser/", user)
   }
 
+  loginValid(password?: String, username?: string ){
+    console.log("in loginValid");
+    console.log("password:"+password+", username:"+username);
+
+    const body = { username: username, password: password };
+
+    this.http.post<boolean>(this.url + '/postLogIn', body).subscribe((isValid: boolean) => {
+        if (isValid) {
+          console.log('Login erfolgreich!!!');
+        } else {
+          console.log('Login fehlgeschlagen!!!');
+        }
+      },
+      (error) => {
+        console.error('Fehler bei der Login-Anfrage:', error);
+      }
+    );
+  }
+
 }

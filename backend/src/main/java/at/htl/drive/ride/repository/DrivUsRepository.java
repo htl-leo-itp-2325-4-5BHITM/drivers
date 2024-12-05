@@ -1,11 +1,8 @@
 package at.htl.drive.ride.repository;
 
-import at.htl.drive.ride.dto.DrivUserDto;
-import at.htl.drive.ride.dto.RegisterRideDto;
-import at.htl.drive.ride.dto.UsernameDto;
+import at.htl.drive.ride.dto.*;
 import at.htl.drive.ride.model.DrivUser;
 import at.htl.drive.ride.model.Ride;
-import at.htl.drive.ride.dto.RideDto;
 //import at.htl.drive.ride.model.RideUserAssociation;
 //import at.htl.drive.ride.model.RideUserAssociationId;
 import com.github.javafaker.Faker;
@@ -157,6 +154,23 @@ public class DrivUsRepository {
 
         DrivUser newUser = new DrivUser(user.firstName(), user.lastName(), user.phoneNr(), user.emailAddress(), user.username(), user.password());
         em.persist(newUser);
+    }
+
+    public boolean postLogIn(LoginDto user) {
+        // JPQL-Abfrage zum Abrufen des Benutzers mit dem angegebenen Benutzernamen oder E-Mail-Adresse und Passwort
+        String jpql = "SELECT u FROM DrivUser u WHERE (u.username = :username) AND u.password = :password";
+        TypedQuery<DrivUser> query = em.createQuery(jpql, DrivUser.class);
+        query.setParameter("username", user.username());
+        query.setParameter("password", user.password());
+
+        List<DrivUser> result = query.getResultList();
+
+        // Überprüfe, ob genau ein Benutzer gefunden wurde
+        if (result.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 
