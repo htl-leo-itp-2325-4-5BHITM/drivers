@@ -8,17 +8,97 @@
   align-items: center;
 }
 
+.background{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: var(--colorDark);
+  opacity: 0.9;
+}
 .driver-contact-window {
   display: flex;
+  width: 50vw;
+  height: 38vw;
+  overflow: hidden;
+  position: relative;
   background: var(--colorBright);
+  border-radius: 25px;
+  box-shadow: 3px 3px 15px #333;
+}
+.ride-section, .driver-section{
+  width: 25vw;
+}
+.ride-section .image img {
+  width: 25vw;
 }
 
-.ride-section .image img {
-  width: 20vw;
+
+
+.ride-content{
+  padding-left: 2vw;
 }
 
 .driver-section{
+  padding:1.5vw 2vw 0;
+}
+
+.centerButton{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.book{
+  font-family: var(--fontDrivUs), sans-serif;
+  display: flex;
+  outline: none;
+  border-radius: 2vw;
+  border: var(--colorDark) solid 2px;
+  background:var(--colorBright);
+  color: var(--colorDark);
+  padding:1vw 5vw;
+  margin-top: 4vw;
+  text-align: center;
+  transition: 250ms ease-out;
+  justify-self: center;
+  box-shadow: 2px 2px 2px #333;
+}
+
+.book:hover{
+  cursor: pointer;
+  background: var(--colorDark);
+  color: var(--colorBright);
+  box-shadow: none;
+}
+
+.driver-section .exit{
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 1vw;
+  right: 1vw;
+  outline: none;
+  border: none;
+  color: var(--colorDark);
+  font-weight: bold;
+  font-size: var(--normalText);
+  background: var(--colorBright);
+  cursor: pointer;
+}
+
+.profile img{
+  width: 10vw;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3vw;
+}
+
+.dateRow{
+  margin-top: -1vw;
+  display: flex;
+  justify-content: space-between;
 }

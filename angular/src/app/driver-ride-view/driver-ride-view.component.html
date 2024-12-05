@@ -1,24 +1,30 @@
 <div class="driver-screen">
+  <div class="background"></div>
   <div class="driver-contact-window">
     <div class="ride-section">
       <div class="image">
         <img src="./img/placeholder.jpg" alt="">
       </div>
       <div class="ride-content">
-        <p>From: {{ ride?.placeOfDeparture }}</p>
-        <p>To: {{ ride?.placeOfArrival }}</p>
-        <p>Seats: {{ ride?.availableSeats }}</p>
+        <p>From: {{ selectedRide?.placeOfDeparture }}</p>
+        <p>To: {{ selectedRide?.placeOfArrival }}</p>
         <div class="dateRow">
-          <p>{{ ride?.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
-          <p>{{ ride?.departureTime | date: 'hh:mm' }}</p>
+          <p>{{ selectedRide?.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
+          <p>{{ selectedRide?.departureTime | date: 'hh:mm' }}</p>
         </div>
       </div>
     </div>
     <div class="driver-section">
-      <p>{{ driver?.firstName}}</p>
-      <p>{{ driver?.lastName}}</p>
-      <p>{{ driver?.emailAddress}}</p>
-      <p>{{ driver?.phoneNr}}</p>
+      <div class="profile">
+        <img src="./img/placeholder.jpg" alt="">
+      </div>
+      <p>Name: {{ driver?.firstName }} {{ driver?.lastName }}</p>
+      <p>Email: {{ driver?.emailAddress }}</p>
+      <p>Phone: {{ driver?.phoneNr }}</p>
+      <p>Empty Seats: {{ selectedRide?.availableSeats }}</p>
+      <div class="centerButton">
+        <button class="book">book</button>
+      </div>
       <button (click)="toggleState()" class="exit">X</button>
     </div>
 
