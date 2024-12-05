@@ -1,5 +1,5 @@
 import {Injectable, model} from '@angular/core';
-import {Ride} from '../model/ride.model';
+import {RegisterRide, Ride} from '../model/ride.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../model/user.model';
@@ -14,14 +14,6 @@ export class RideService {
   constructor(private http: HttpClient) { }
 
   getRides() : Observable<Ride[]>{
-      //let rides: Observable<Ride[]>
-    /*
-    this.http.get<Ride>(this.url).subscribe(rides => {
-      console.log('load rides:', rides);
-      rides = rides
-    });
-      console.log(rides)
-      return rides*/
     return this.http.get<Ride[]>(this.url);
   }
 
@@ -33,4 +25,31 @@ export class RideService {
       console.log('Updated ride:', ride);
     });
   }
+
+  getSeat(ride: Ride) {
+    console.log("in getSeat: ", ride)
+
+    let newRegister :RegisterRide = <RegisterRide>{};
+
+    if (ride.id != null) {
+      newRegister.rideId = ride.id;
+    }
+    newRegister.username = "test";
+
+    console.log(newRegister)
+
+    this.http.post(this.url + '/registerForRide', newRegister).subscribe(registerRide => {
+      console.log('booked ride: ', registerRide);
+    });
+
+    this.getRides()
+  }
+}
+
+  export async function getSeat(ride: Ride) {
+  console.log(ride)
+  var url = "./api/drivus/rides/registerForRide"
+  var id = ride.id
+  console.log(id)
+
 }

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HardDataService } from './hard-data.service';
+import { HardcodeService } from './hardcode.service';
 
-describe('HardDataService', () => {
-  let service: HardDataService;
+describe('HardcodeService', () => {
+  let service: HardcodeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HardDataService);
+    service = TestBed.inject(HardcodeService);
   });
 
   it('should be created', () => {

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Timestamp} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HardDataService {
+export class HardcodeService {
 
   hardcodedRide: Ride[]= [
     {
@@ -48,7 +47,6 @@ export class HardDataService {
       "driver": "Michael Wilson"
     }
   ]
-
 
   constructor() { }
 }

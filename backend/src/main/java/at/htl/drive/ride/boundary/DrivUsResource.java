@@ -5,6 +5,7 @@ import at.htl.drive.ride.dto.*;
 import at.htl.drive.ride.model.DrivUser;
 import at.htl.drive.ride.model.Ride;
 import at.htl.drive.ride.RideMapper;
+import at.htl.drive.ride.model.RideRegister;
 import at.htl.drive.ride.repository.DrivUsRepository;
 import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
@@ -134,9 +135,8 @@ public class DrivUsResource {
     @POST
     @Transactional
     @Path("rides/registerForRide")
-    public Response registerForRide(RegisterRideDto ruaDto) {
-        repository.registerForRide(ruaDto);
-        return Response.ok().build();
+    public List<RideRegister> registerForRide(RegisterRideDto ruaDto) {
+        return repository.registerForRide(ruaDto);
     }
 
     @POST

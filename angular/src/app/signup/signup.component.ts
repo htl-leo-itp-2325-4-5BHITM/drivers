@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {User} from '../model/user.model';
 import {UserService} from '../service/user.service';
 import {NavbarComponent} from '../navbar/navbar.component';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
+import {NgIf} from '@angular/common';
+
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +14,8 @@ import {RouterLink} from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     NavbarComponent,
-    RouterLink
+    RouterLink,
+    NgIf
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
@@ -25,19 +28,25 @@ export class SignupComponent {
   email?: string;
   password?: string;
 
-  constructor(private userService: UserService) {
+  submitted = false;
+
+
+  constructor(private userService: UserService,private router: Router) {
   }
 
   signup: FormGroup = new FormGroup({
-    'firstname': new FormControl(),
-    'lastname': new FormControl(),
-    'phonenr': new FormControl(),
-    'username': new FormControl(),
-    'email': new FormControl(),
-    'password': new FormControl()
+    'firstname': new FormControl(null, Validators.required),
+    'lastname': new FormControl(null, Validators.required),
+    'phonenr': new FormControl(null, Validators.required),
+    'username': new FormControl(null, Validators.required),
+    'email': new FormControl(null,[Validators.required, Validators.email]),
+    'password': new FormControl(null, [Validators.required, Validators.minLength(8)]),
   })
 
   signupFunction(){
+    console.log(FormGroup)
+    console.log(this.firstName, this.lastName, this.phoneNumber, this.username)
+
     this.firstName=this.signup.get('firstname')?.value;
     this.lastName=this.signup.get('lastname')?.value;
     this.phoneNumber=this.signup.get('phonenr')?.value;
@@ -68,7 +77,24 @@ export class SignupComponent {
 
     this.userService.createNewUser(newUser);
 
+    this.onSubmit()
+
     console.log('Saved')
+    this.submitted = false
+
+    this.router.navigate(['/rides']);
+  }
+
+
+
+  onSubmit(){
+    this.submitted = true;
+
+    if (this.signup.valid) {
+      console.log('Login valid.');
+    } else {
+      console.error('Login not valid');
+    }
   }
 
 }

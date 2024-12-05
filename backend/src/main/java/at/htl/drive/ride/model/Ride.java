@@ -39,7 +39,7 @@ public class Ride {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
     public DrivUser user;
-
+    
     /*@OneToMany
     public List<Swipe> swipes;
     //</editor-fold>*/
@@ -109,7 +109,6 @@ public class Ride {
         this.placeOfArrivalCoordinates = placeOfArrivalCoordinates;
     }
 
-    //</editor-fold>
 
     public Ride() {
 

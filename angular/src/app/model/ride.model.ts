@@ -8,3 +8,8 @@ export interface Ride {
   placeOfArrivalCoordinate?: string
   availableSeats: number
 }
+
+export interface RegisterRide {
+  rideId: number,
+  username: string
+}
