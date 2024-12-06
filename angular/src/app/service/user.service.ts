@@ -40,9 +40,11 @@ export class UserService {
     );
   }
 
-  loginValid(password?: String, username?: string ){
+  loginValid(password?: String, username?: string ) : boolean {
     console.log("in loginValid");
     console.log("password:"+password+", username:"+username);
+
+    let returnValidation = false
 
     const body = { username: username, password: password };
 
@@ -51,6 +53,8 @@ export class UserService {
           console.log('Login erfolgreich!!!');
           sessionStorage.setItem('isloged','true');
           this.getUserDetails(password,username);
+
+          returnValidation = true;
         } else {
           console.log('Login fehlgeschlagen!!!');
         }
@@ -59,6 +63,7 @@ export class UserService {
         console.error('Fehler bei der Login-Anfrage:', error);
       }
     );
+    return returnValidation;
   }
 
 }
