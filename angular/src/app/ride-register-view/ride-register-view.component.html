@@ -9,9 +9,9 @@
 
     <div class="grid-item">
       <input type="text" id="abfort" formControlName="abfort" placeholder="From">
-      <span *ngIf="!registerRide.get('abfort')?.valid && registerRide.get('abfort')?.touched"
-            class="help-block">Departure point is required!</span>
     </div>
+    <span *ngIf="!registerRide.get('abfort')?.valid && registerRide.get('abfort')?.touched"
+          class="help-block">Departure point is required!</span>
 
     <div class="grid-item">
       <input type="text" id="abfortC" formControlName="abfortC" placeholder="Coordinates">
@@ -19,9 +19,9 @@
 
     <div class="grid-item">
       <input type="text" id="ankort" formControlName="ankort" placeholder="To">
-      <span *ngIf="!registerRide.get('ankort')?.valid && registerRide.get('ankort')?.touched"
-            class="help-block">Arrival location is required!</span>
     </div>
+    <span *ngIf="!registerRide.get('ankort')?.valid && registerRide.get('ankort')?.touched"
+          class="help-block">Arrival location is required!</span>
 
     <div class="grid-item">
       <input type="text" id="ankortC" formControlName="ankortC" placeholder="Coordinates">
@@ -32,30 +32,32 @@
              onfocus="(this.type='date')"
              onblur="(this.type='text')"
              id="datum" formControlName="datum">
-      <span *ngIf="!registerRide.get('datum')?.valid && registerRide.get('datum')?.touched"
-            class="help-block">Date is required!</span>
     </div>
+    <span *ngIf="!registerRide.get('datum')?.valid && registerRide.get('datum')?.touched"
+          class="help-block">Date is required!</span>
+
     <div class="grid-item">
       <input placeholder="Time"
              onfocus="(this.type='time')"
              onblur="(this.type='text')" id="abfzeit" formControlName="abfzeit">
-      <span *ngIf="!registerRide.get('abfzeit')?.valid && registerRide.get('abfzeit')?.touched"
-            class="help-block">Departure time is required!</span>
     </div>
+    <span *ngIf="!registerRide.get('abfzeit')?.valid && registerRide.get('abfzeit')?.touched"
+          class="help-block">Departure time is required!</span>
+
     <div class="grid-item">
       <input placeholder="Available Seats"
              onfocus="(this.type='number')"
              onblur="(this.type='text')" min="1" max="100" id="fplatz" formControlName="fplatz">
-      <span *ngIf="!registerRide.get('fplatz')?.valid && registerRide.get('fplatz')?.touched"
-            class="help-block">Available seats is required!</span>
     </div>
+    <span *ngIf="!registerRide.get('fplatz')?.valid && registerRide.get('fplatz')?.touched"
+          class="help-block">Available seats is required!</span>
 
     <div class="register-button-center">
       <button class="register-submit">Submit</button>
-      <span *ngIf="!registerRide.valid && submitted" class="error-message">
+    </div>
+    <span *ngIf="!registerRide.valid && submitted" class="error-message">
         Please fill out all required fields correctly!
       </span>
-    </div>
   </div>
 
 </form>

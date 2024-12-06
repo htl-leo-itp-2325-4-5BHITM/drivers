@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import {NavbarComponent} from '../navbar/navbar.component';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from '@angular/forms';
 import {User} from '../model/user.model';
 import {BackendRide, Ride} from '../model/ride.model';
 import {UserService} from '../service/user.service';
@@ -78,36 +86,36 @@ export class RideRegisterViewComponent {
       newRide.departureTime =  combinedDateTime;
     }
 
-
-    /*if (this.datum && this.abfzeit) {
-      const departureDate = new Date(`${this.datum}T${this.abfzeit}`);
-      newRide.departureTime = departureDate.getTime()
-    } else {
-      console.error("Datum oder Uhrzeit fehlt!");
-      return;
-    }*/
-
     if (sessionStorage.getItem('isloged')=='true'){
       newRide.driver = sessionStorage.getItem('username');
+
+
+
+      if (this.registerRide.valid){
+        this.onSubmit()
+        this.submitted = false
+
+        this.rideService.createNewRide(newRide);
+        console.log(this.abfort,this.ankort, this.fplatz, this.datum, this.abfzeit)
+
+        console.log('Saved')
+      } else {
+        alert("please fill out correct")
+      }
+
+
+    } else {
+      alert("please log in")
     }
-
-    this.rideService.createNewRide(newRide);
-
-    this.onSubmit()
-    this.submitted = false
-
-    console.log(this.abfort,this.ankort, this.fplatz, this.datum, this.abfzeit)
-
-    console.log('Saved')
   }
 
   onSubmit(){
     this.submitted = true;
 
     if (this.registerRide.valid) {
-      console.log('Login valid.');
+      console.log('new ride valid.');
     } else {
-      console.error('Login not valid');
+      console.error('new ride not valid');
     }
   }
 
