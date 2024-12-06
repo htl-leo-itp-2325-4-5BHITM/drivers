@@ -1,5 +1,5 @@
 import {Injectable, model} from '@angular/core';
-import {RegisterRide, Ride} from '../model/ride.model';
+import {BackendRide, RegisterRide, Ride} from '../model/ride.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../model/user.model';
@@ -17,11 +17,12 @@ export class RideService {
     return this.http.get<Ride[]>(this.url);
   }
 
-  createNewRide(ride: Ride) {
+  createNewRide(ride: BackendRide) {
     console.log("in createRide")
     console.log(ride)
 
     this.http.post<Ride>(this.url + '/postRide', ride).subscribe(ride => {
+
       console.log('Updated ride:', ride);
     });
   }
