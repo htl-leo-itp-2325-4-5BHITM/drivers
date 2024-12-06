@@ -1,5 +1,24 @@
 <app-navbar></app-navbar>
 <div class="full-Page" [ngClass]="{'noScroll': showDriver}">
+<<<<<<< HEAD
+  <div class="filter-box">
+    <button (click)="showFilter=true" routerLink="/rides">Filter</button>
+    <app-filter *ngIf="showFilter"></app-filter>
+    <div class="br"></div>
+  </div>
+  <div class="content">
+    <ul>
+      <li *ngFor="let ride of rides">
+        <div class="rideItemView" (click)="showDriver=true; driver=ride.driver; selectedRide=ride">
+          <img src="./img/placeholder.jpg" alt="placeholder">
+          <div class="text">
+            <p>From: {{ ride.placeOfDeparture }}</p>
+            <p>To: {{ ride.placeOfArrival }}</p>
+            <div class="dateRow">
+              <p>{{ ride.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
+              <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
+            </div>
+=======
   <button (click)="showFilter=true" routerLink="/rides">Filter</button>
   <app-filter *ngIf="showFilter"></app-filter>
   <br>
@@ -8,6 +27,7 @@
   <ul>
     <li *ngFor="let ride of rides">
       <div class="rideItemView" (click)="showDriver=true; driver=ride.driver; selectedRide=ride">
+        <!--<app-map class="map" [ride]="ride"></app-map>-->
         <img src="./img/placeholder.jpg" alt="placeholder">
         <div class="text">
           <p>From: {{ ride.placeOfDeparture }}</p>
@@ -15,8 +35,8 @@
           <div class="dateRow">
             <p>{{ ride.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
             <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
+>>>>>>> fb10906942d34c6c3abbdce8245aa2b6304d8773
           </div>
-        </div>
         </div>
       </li>
     </ul>
