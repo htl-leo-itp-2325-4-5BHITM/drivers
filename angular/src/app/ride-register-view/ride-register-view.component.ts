@@ -1,19 +1,23 @@
 import { Component } from '@angular/core';
 import {NavbarComponent} from '../navbar/navbar.component';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {User} from '../model/user.model';
-import {Ride} from '../model/ride.model';
+import {BackendRide, Ride} from '../model/ride.model';
 import {UserService} from '../service/user.service';
 import {RideService} from '../service/ride.service';
 import {NgIf} from "@angular/common";
+import { DateTime } from 'luxon';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-ride-register-view',
   standalone: true,
     imports: [
-        NavbarComponent,
-        ReactiveFormsModule,
-        NgIf
+      FormsModule,
+      ReactiveFormsModule,
+      NavbarComponent,
+      RouterLink,
+      NgIf
     ],
   templateUrl: './ride-register-view.component.html',
   styleUrl: './ride-register-view.component.css'
@@ -53,7 +57,11 @@ export class RideRegisterViewComponent {
     this.abfzeit=this.registerRide.get('abfzeit')?.value;
     this.fplatz=this.registerRide.get('fplatz')?.value;
 
-    let newRide :Ride = <Ride>{};
+    const combinedDateTime = DateTime.fromFormat(
+      `${this.datum} ${this.abfzeit}`,
+      'yyyy-MM-dd HH:mm'
+    );
+    let newRide :BackendRide = <BackendRide>{};
 
     if (this.abfort != null) {
       newRide.placeOfDeparture = this.abfort;
@@ -64,8 +72,8 @@ export class RideRegisterViewComponent {
     if (this.fplatz != null) {
       newRide.availableSeats = this.fplatz;
     }
-    if (this.abfzeit != null) {
-      //newRide.departureTime = this.abfzeit;
+    if (this.abfzeit != null && this.datum) {
+      newRide.departureTime =  combinedDateTime;
     }
 
 
@@ -77,8 +85,9 @@ export class RideRegisterViewComponent {
       return;
     }*/
 
-
-    newRide.driver = "not yet"
+    if (sessionStorage.getItem('isloged')=='true'){
+      newRide.driver = sessionStorage.getItem('username');
+    }
 
     this.rideService.createNewRide(newRide);
 
