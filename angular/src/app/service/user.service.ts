@@ -44,7 +44,7 @@ export class UserService {
     console.log("in loginValid");
     console.log("password:"+password+", username:"+username);
 
-    let returnValidation :boolean
+    let returnValidation = false;
 
     const body = { username: username, password: password };
 
