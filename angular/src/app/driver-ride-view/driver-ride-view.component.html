@@ -23,7 +23,7 @@
       <p>Phone: {{ driver?.phoneNr }}</p>
       <p>Empty Seats: {{ selectedRide?.availableSeats }}</p>
       <div class="centerButton">
-        <button class="book">book</button>
+        <button (click)="getSeat(selectedRide)" class="book">book</button>
       </div>
       <button (click)="toggleState()" class="exit">X</button>
     </div>

@@ -28,25 +28,21 @@ export class LoginComponent {
   }
 
   loginFunction(){
+    this.submitted = true;
+
     this.username=this.login.get('username')?.value;
     this.password=this.login.get('password')?.value;
 
-    this.userService.loginValid(this.password,this.username);
-
-    this.onSubmit();
-    this.submitted = false
-
-    //this.router.navigate(['/rides']);
-  }
-
-  onSubmit(){
-    this.submitted = true;
-
-    if (this.login.valid) {
+    if (this.userService.loginValid(this.password,this.username)) {
       console.log('Login valid.');
+
+
+      this.submitted = false
     } else {
       console.error('Login not valid');
     }
+
+    this.router.navigate(['/rides']);
   }
 
 
