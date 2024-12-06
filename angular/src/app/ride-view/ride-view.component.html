@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 <div class="full-Page" [ngClass]="{'noScroll': showDriver}">
   <div class="filter-box">
-    <button (click)="showFilter=true" routerLink="/rides"><img src="./img/icons/filter.png" alt=""></button>
-    <app-filter *ngIf="showFilter"></app-filter>
+    <button (click)="showFilter=true" routerLink="/rides" class="filter-button"><img src="./img/icons/filter.png" alt=""> <p>Filter</p></button>
+    <app-filter *ngIf="showFilter" (stateChangeFilter)="onStateChangeFilter($event)"></app-filter>
     <div class="br"></div>
   </div>
 

@@ -1,7 +1,18 @@
 <form [formGroup]="filterOption" (ngSubmit)="filterFunction()">
+  <p class="filter-title">Filter Options:</p>
   <input placeholder="From" formControlName="from">
   <input placeholder="To" formControlName="to">
-  <input placeholder="Date" formControlName="date">
-  <input placeholder="Time" formControlName="time">
-  <button (click)="toggleState()">Search</button>
+  <div class="date-box">
+    <input placeholder="Date" onfocus="(this.type='date')"
+           onblur="(this.type='text')" formControlName="date">
+    <input placeholder="Time" onfocus="(this.type='time')"
+           onblur="(this.type='text')" formControlName="time">
+  </div>
+  <div class="check-box">
+    <input type="checkbox" formControlName="showOwnRides">
+    <p>Show my rides only</p>
+  </div>
+  <div class="center-button">
+    <button (click)="toggleState()">Apply Filter</button>
+  </div>
 </form>

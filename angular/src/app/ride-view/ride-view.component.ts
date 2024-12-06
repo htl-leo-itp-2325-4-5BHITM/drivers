@@ -59,4 +59,7 @@ export class RideViewComponent implements OnInit {
     this.showDriver = newState;
   }
 
+  onStateChangeFilter(newState: boolean) {
+    this.showFilter=newState
+  }
 }

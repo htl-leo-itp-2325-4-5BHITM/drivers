@@ -19,12 +19,14 @@ export class FilterComponent {
   to:string=""
   date: Date = new Date();
   time: Date = new Date();
+  showOwnRides:boolean=false;
 
   filterOption: FormGroup = new FormGroup({
     'from': new FormControl(''),
     'to': new FormControl(''),
     'date': new FormControl(''),
-    'time': new FormControl('')
+    'time': new FormControl(''),
+    'showOwnRides': new FormControl(false)
   })
 
   filterFunction() {
@@ -32,6 +34,7 @@ export class FilterComponent {
     this.to=this.filterOption.get('to')?.value;
     this.date=this.filterOption.get('date')?.value;
     this.time=this.filterOption.get('time')?.value;
+    this.showOwnRides=this.filterOption.get('showOwnRides')?.value;
   }
 
   toggleState() {
