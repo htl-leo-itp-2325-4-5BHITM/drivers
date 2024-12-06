@@ -7,7 +7,6 @@ import {Observable} from 'rxjs';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {Driver, HardcodeService} from '../service/hardcode.service';
 import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.component';
-//import {MapComponent} from '../map/map.component';
 
 @Component({
   selector: 'app-ride-view',
@@ -17,8 +16,7 @@ import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.comp
     NgForOf,
     DatePipe,
     DriverRideViewComponent,
-    NgIf,
-    //MapComponent
+    NgIf
   ],
   templateUrl: './ride-view.component.html',
   styleUrl: './ride-view.component.css'
@@ -26,13 +24,12 @@ import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.comp
 export class RideViewComponent implements OnInit {
   rides: Ride[] = [];
   driver: string = "";
-  selectedRide: Ride = <Ride>{};
   showDriver: boolean=false;
 
 
   constructor(private rideService: RideService, private hardData: HardcodeService) {
     //für andrei wegn backend einf auskommentieren wenn backend rennt
-    //this.rides = hardData.hardcodedRide
+    this.rides = hardData.hardcodedRide
   }
 
   ngOnInit() {
@@ -41,9 +38,9 @@ export class RideViewComponent implements OnInit {
       console.log(this.rides);
     })
   }
-  /*getSeat(ride: Ride){
+  getSeat(ride: Ride){
     this.rideService.getSeat(ride)
-  }*/
+  }
 
 
   //fia de Detailansicht

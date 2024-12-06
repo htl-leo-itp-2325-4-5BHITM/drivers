@@ -19,12 +19,12 @@ export class DriverRideViewComponent implements OnInit {
   driver!: Driver | undefined;
   @Input() selectedRide!: Ride;
   @Input() driverString!: string;
-  @Output() stateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() stateChangeDriver: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 
   toggleState() {
     this.seeDriverDetail=false;
-    this.stateChange.emit(this.seeDriverDetail);
+    this.stateChangeDriver.emit(this.seeDriverDetail);
   }
 
   constructor(private rideService: RideService, private hardData: HardcodeService) {
