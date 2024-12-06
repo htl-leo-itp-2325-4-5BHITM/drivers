@@ -1,6 +1,9 @@
 .content{
   background: var(--colorBeige);
 }
+
+
+
 form {
   transform:scale(.9);
   display: flex;
