@@ -38,6 +38,14 @@ export class DriverRideViewComponent implements OnInit {
 
 
   getSeat(ride: Ride){
-    this.rideService.getSeat(ride)
+
+    if(sessionStorage.getItem("isloged")){
+      this.rideService.getSeat(ride)
+      alert("ride reserve")
+    } else {
+      alert("Please log in to reserve a ride!")
+    }
+
+
   }
 }
