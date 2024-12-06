@@ -29,7 +29,7 @@
 .ride-section, .driver-section{
   width: 25vw;
 }
-.ride-section .image img {
+.ride-section .image .map {
   width: 25vw;
 }
 

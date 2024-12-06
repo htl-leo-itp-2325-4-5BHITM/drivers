@@ -1,5 +1,6 @@
-import { Component, AfterViewInit } from '@angular/core';
+import {Component, AfterViewInit, Input} from '@angular/core';
 import * as L from 'leaflet';
+import {Ride} from '../model/ride.model';
 
 @Component({
   selector: 'app-map',
@@ -10,6 +11,7 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements AfterViewInit {
   private map?: L.Map;
+  @Input() ride: Ride = <Ride>{};
 
   private initMap(): void {
     this.map = L.map('map', {
