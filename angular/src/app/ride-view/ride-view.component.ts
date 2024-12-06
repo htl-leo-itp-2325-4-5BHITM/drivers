@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {Driver, HardcodeService} from '../service/hardcode.service';
 import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.component';
+import {MapComponent} from '../map/map.component';
 //import {MapComponent} from '../map/map.component';
 
 @Component({
@@ -18,6 +19,7 @@ import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.comp
     DatePipe,
     DriverRideViewComponent,
     NgIf,
+    MapComponent,
     //MapComponent
   ],
   templateUrl: './ride-view.component.html',

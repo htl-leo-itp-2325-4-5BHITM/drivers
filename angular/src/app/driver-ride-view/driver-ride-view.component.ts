@@ -3,12 +3,14 @@ import {Driver, HardcodeService} from '../service/hardcode.service';
 import {Ride} from '../model/ride.model';
 import {DatePipe} from '@angular/common';
 import {getSeat, RideService} from '../service/ride.service';
+import {MapComponent} from '../map/map.component';
 
 @Component({
   selector: 'app-driver-ride-view',
   standalone: true,
   imports: [
-    DatePipe
+    DatePipe,
+    MapComponent
   ],
   templateUrl: './driver-ride-view.component.html',
   styleUrl: './driver-ride-view.component.css'
