@@ -48,7 +48,7 @@ export class RideRegisterViewComponent {
   })
 
   registerRideFunction() {
-    console.log(this.abfort,this.ankort,this.datum,this.abfzeit)
+
 
     this.abfort=this.registerRide.get('abfort')?.value;
     this.abfortC=this.registerRide.get('abfortC')?.value;
@@ -62,6 +62,8 @@ export class RideRegisterViewComponent {
       'yyyy-MM-dd HH:mm'
     );
     let newRide :BackendRide = <BackendRide>{};
+
+    console.log(this.abfort)
 
     if (this.abfort != null) {
       newRide.placeOfDeparture = this.abfort;

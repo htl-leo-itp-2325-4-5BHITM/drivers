@@ -1,0 +1,7 @@
+<form [formGroup]="filterOption" (ngSubmit)="filterFunction()">
+  <input placeholder="From" formControlName="from">
+  <input placeholder="To" formControlName="to">
+  <input placeholder="Date" formControlName="date">
+  <input placeholder="Time" formControlName="time">
+  <button (click)="toggleState()">Search</button>
+</form>

@@ -62,3 +62,10 @@ li:hover{
 .full-Page{
   background-color: var(--colorBeige);
 }
+
+.noScroll{
+  height: 85vh;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}

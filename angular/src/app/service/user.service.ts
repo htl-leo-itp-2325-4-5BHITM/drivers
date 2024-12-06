@@ -44,7 +44,7 @@ export class UserService {
     console.log("in loginValid");
     console.log("password:"+password+", username:"+username);
 
-    let returnValidation = false
+    let returnValidation = true
 
     const body = { username: username, password: password };
 
@@ -54,10 +54,12 @@ export class UserService {
           sessionStorage.setItem('isloged','true');
           this.getUserDetails(password,username);
 
-          returnValidation = true;
+          returnValidation = false;
+          console.log(returnValidation+" Value returned true")
         } else {
           console.log('Login fehlgeschlagen!!!');
         }
+        return returnValidation
       },
       (error) => {
         console.error('Fehler bei der Login-Anfrage:', error);

@@ -3,7 +3,8 @@
   <div class="driver-contact-window">
     <div class="ride-section">
       <div class="image">
-        <img src="./img/placeholder.jpg" alt="">
+        <app-map class="map" [ride]="selectedRide"></app-map>
+        <!--<img src="./img/placeholder.jpg" alt="">-->
       </div>
       <div class="ride-content">
         <p>From: {{ selectedRide?.placeOfDeparture }}</p>
@@ -23,7 +24,7 @@
       <p>Phone: {{ driver?.phoneNr }}</p>
       <p>Empty Seats: {{ selectedRide?.availableSeats }}</p>
       <div class="centerButton">
-        <button class="book">book</button>
+        <button (click)="getSeat(selectedRide)" class="book">book</button>
       </div>
       <button (click)="toggleState()" class="exit">X</button>
     </div>
