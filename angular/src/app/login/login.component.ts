@@ -32,7 +32,7 @@ export class LoginComponent {
 
     this.username=this.login.get('username')?.value;
     this.password=this.login.get('password')?.value;
-    
+
     if (this.userService.loginValid(this.password,this.username)) {
       console.log('Login valid.');
 

@@ -44,7 +44,7 @@ export class RideRegisterViewComponent {
   })
 
   registerRideFunction() {
-    console.log(this.abfort,this.ankort,this.datum,this.abfzeit)
+
 
     this.abfort=this.registerRide.get('abfort')?.value;
     this.abfortC=this.registerRide.get('abfortC')?.value;
@@ -53,7 +53,11 @@ export class RideRegisterViewComponent {
     this.abfzeit=this.registerRide.get('abfzeit')?.value;
     this.fplatz=this.registerRide.get('fplatz')?.value;
 
+    console.log(this.abfort,this.ankort,this.datum,this.abfzeit)
+
     let newRide :Ride = <Ride>{};
+
+    console.log(this.abfort)
 
     if (this.abfort != null) {
       newRide.placeOfDeparture = this.abfort;
