@@ -75,7 +75,7 @@ li:hover{
 }
 
 .br{
-  margin-top:1vw;
+  margin:1vw 0;
   content: "";
   height: 2px;
   background: var(--colorDark);
