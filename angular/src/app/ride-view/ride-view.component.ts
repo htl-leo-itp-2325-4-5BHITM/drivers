@@ -4,9 +4,11 @@ import {UserService} from '../service/user.service';
 import {getSeat, RideService} from '../service/ride.service';
 import {Ride} from '../model/ride.model';
 import {Observable} from 'rxjs';
-import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import {DatePipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import {Driver, HardcodeService} from '../service/hardcode.service';
 import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.component';
+import {FilterComponent} from '../filter/filter.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-ride-view',
@@ -16,7 +18,10 @@ import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.comp
     NgForOf,
     DatePipe,
     DriverRideViewComponent,
-    NgIf
+    NgIf,
+    FilterComponent,
+    RouterLink,
+    NgClass
   ],
   templateUrl: './ride-view.component.html',
   styleUrl: './ride-view.component.css'
@@ -25,6 +30,7 @@ export class RideViewComponent implements OnInit {
   rides: Ride[] = [];
   driver: string = "";
   showDriver: boolean=false;
+  showFilter: boolean = false;
 
 
   constructor(private rideService: RideService, private hardData: HardcodeService) {
@@ -44,8 +50,12 @@ export class RideViewComponent implements OnInit {
 
 
   //fia de Detailansicht
-  onStateChange(newState: boolean) {
+  onStateChangeDriver(newState: boolean) {
     this.showDriver = newState;
+  }
+
+  onStateChangeFilter(newState: boolean) {
+    this.showFilter = newState;
   }
 
 }

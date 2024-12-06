@@ -1,26 +1,28 @@
 <app-navbar></app-navbar>
-<div class="full-Page">
-<button>Filter</button>
+<div class="full-Page" [ngClass]="{'noScroll': showDriver}">
+  <button (click)="showFilter=true" routerLink="/rides">Filter</button>
+  <app-filter *ngIf="showFilter"></app-filter>
   <br>
-<div class="content">
-  <ul>
-    <li *ngFor="let ride of rides">
-      <div class="rideItemView" (click)="showDriver=true; driver=ride.driver">
-        <img src="./img/placeholder.jpg" alt="placeholder">
-        <div class="text">
-          <p>From: {{ ride.placeOfDeparture }}</p>
-          <p>To: {{ ride.placeOfArrival }}</p>
-          <div class="dateRow">
-            <p>{{ ride.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
-            <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
-          </div>
+  <div class="content">
+    <ul>
+      <li *ngFor="let ride of rides">
+        <div class="rideItemView" (click)="showDriver=true; driver=ride.driver">
+          <img src="./img/placeholder.jpg" alt="placeholder">
+          <div class="text">
+            <p>From: {{ ride.placeOfDeparture }}</p>
+            <p>To: {{ ride.placeOfArrival }}</p>
+            <div class="dateRow">
+              <p>{{ ride.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
+              <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
+            </div>
 
-          <button (click)="getSeat(ride)">book</button>
+            <button (click)="getSeat(ride)">book</button>
+          </div>
         </div>
-      </div>
-    </li>
-  </ul>
-</div>
-<app-driver-ride-view *ngIf="showDriver" (stateChange)="onStateChange($event)" [driverString]="driver"></app-driver-ride-view>
+      </li>
+    </ul>
+  </div>
+  <app-driver-ride-view *ngIf="showDriver" (stateChangeDriver)="onStateChangeDriver($event)"
+                        [driverString]="driver"></app-driver-ride-view>
 </div>
 
