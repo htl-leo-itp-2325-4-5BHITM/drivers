@@ -34,6 +34,10 @@ export class RideService {
     if (ride.id != null) {
       newRegister.rideId = ride.id;
     }
+
+    //let user = sessionStorage.getItem("username");
+    //console.log(user)
+
     newRegister.username = "test";
 
     console.log(newRegister)
