@@ -2,10 +2,11 @@
 <div class="full-Page">
 <button>Filter</button>
   <br>
+  <!--<app-map></app-map>-->
 <div class="content">
   <ul>
     <li *ngFor="let ride of rides">
-      <div class="rideItemView" (click)="showDriver=true; driver=ride.driver">
+      <div class="rideItemView" (click)="showDriver=true; driver=ride.driver; selectedRide=ride">
         <img src="./img/placeholder.jpg" alt="placeholder">
         <div class="text">
           <p>From: {{ ride.placeOfDeparture }}</p>
@@ -15,12 +16,12 @@
             <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
           </div>
 
-          <button (click)="getSeat(ride)">book</button>
+          <!--<button (click)="getSeat(ride)">book</button>-->
         </div>
       </div>
     </li>
   </ul>
 </div>
-<app-driver-ride-view *ngIf="showDriver" (stateChange)="onStateChange($event)" [driverString]="driver"></app-driver-ride-view>
+<app-driver-ride-view *ngIf="showDriver" (stateChange)="onStateChange($event)" [driverString]="driver" [selectedRide]="selectedRide"></app-driver-ride-view>
 </div>
 
