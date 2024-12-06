@@ -25,6 +25,7 @@
   display: flex;
   text-align: center;
   margin-right: var(--divMargin);
+  overflow: hidden;
 }
 
 .navigation a{

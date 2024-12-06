@@ -4,11 +4,13 @@ import {UserService} from '../service/user.service';
 import {getSeat, RideService} from '../service/ride.service';
 import {Ride} from '../model/ride.model';
 import {Observable} from 'rxjs';
-import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import {DatePipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import {Driver, HardcodeService} from '../service/hardcode.service';
 import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.component';
 import {MapComponent} from '../map/map.component';
 //import {MapComponent} from '../map/map.component';
+import {FilterComponent} from '../filter/filter.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-ride-view',
@@ -21,6 +23,9 @@ import {MapComponent} from '../map/map.component';
     NgIf,
     MapComponent,
     //MapComponent
+    NgClass,
+    FilterComponent,
+    RouterLink
   ],
   templateUrl: './ride-view.component.html',
   styleUrl: './ride-view.component.css'
@@ -30,11 +35,12 @@ export class RideViewComponent implements OnInit {
   driver: string = "";
   selectedRide: Ride = <Ride>{};
   showDriver: boolean=false;
+  showFilter: boolean=false;
 
 
   constructor(private rideService: RideService, private hardData: HardcodeService) {
     //für andrei wegn backend einf auskommentieren wenn backend rennt
-    //this.rides = hardData.hardcodedRide
+    this.rides = hardData.hardcodedRide
   }
 
   ngOnInit() {
@@ -43,13 +49,13 @@ export class RideViewComponent implements OnInit {
       console.log(this.rides);
     })
   }
-  /*getSeat(ride: Ride){
+  getSeat(ride: Ride){
     this.rideService.getSeat(ride)
-  }*/
+  }
 
 
   //fia de Detailansicht
-  onStateChange(newState: boolean) {
+  onStateChangeDriver(newState: boolean) {
     this.showDriver = newState;
   }
 

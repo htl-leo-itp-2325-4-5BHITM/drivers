@@ -21,12 +21,12 @@ export class DriverRideViewComponent implements OnInit {
   driver!: Driver | undefined;
   @Input() selectedRide!: Ride;
   @Input() driverString!: string;
-  @Output() stateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() stateChangeDriver: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 
   toggleState() {
     this.seeDriverDetail=false;
-    this.stateChange.emit(this.seeDriverDetail);
+    this.stateChangeDriver.emit(this.seeDriverDetail);
   }
 
   constructor(private rideService: RideService, private hardData: HardcodeService) {
@@ -40,6 +40,14 @@ export class DriverRideViewComponent implements OnInit {
 
 
   getSeat(ride: Ride){
-    this.rideService.getSeat(ride)
+
+    if(sessionStorage.getItem("isloged")){
+      this.rideService.getSeat(ride)
+      alert("ride reserve")
+    } else {
+      alert("Please log in to reserve a ride!")
+    }
+
+
   }
 }
