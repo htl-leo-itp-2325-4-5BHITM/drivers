@@ -3,7 +3,7 @@
   <button (click)="showFilter=true" routerLink="/rides">Filter</button>
   <app-filter *ngIf="showFilter"></app-filter>
   <br>
- 
+
 <div class="content">
   <ul>
     <li *ngFor="let ride of rides">
@@ -22,6 +22,6 @@
     </ul>
   </div>
   <app-driver-ride-view *ngIf="showDriver" (stateChangeDriver)="onStateChangeDriver($event)"
-                        [driverString]="driver"></app-driver-ride-view>
+                        [driverString]="driver" [selectedRide]="selectedRide"></app-driver-ride-view>
 </div>
 
