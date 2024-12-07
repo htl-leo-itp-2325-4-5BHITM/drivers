@@ -311,4 +311,8 @@ public class DrivUsRepository {
 
         return em.createQuery("select r from Ride r order by r.id", Ride.class).getResultList();
     }
+
+    public DrivUser getUserThrewRideId(int id) {
+
+    }
 }

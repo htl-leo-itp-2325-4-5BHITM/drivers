@@ -30,7 +30,11 @@ export class DriverRideViewComponent implements OnInit {
   }
 
   constructor(private rideService: RideService, private hardData: HardcodeService) {
+    //this.getDriverInfos();
+  }
 
+  getDriverInfos() {
+    this.driver = this.rideService.getUserThrewRideId(this.selectedRide.id);
   }
 
   ngOnInit(): void {
@@ -47,7 +51,6 @@ export class DriverRideViewComponent implements OnInit {
     } else {
       alert("Please log in to reserve a ride!")
     }
-
 
   }
 }

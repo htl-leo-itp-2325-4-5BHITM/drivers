@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
 import {NavbarComponent} from '../navbar/navbar.component';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from '@angular/forms';
 import {User} from '../model/user.model';
 import {BackendRide, Ride} from '../model/ride.model';
 import {UserService} from '../service/user.service';
 import {RideService} from '../service/ride.service';
 import {NgIf} from "@angular/common";
 import { DateTime } from 'luxon';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-ride-register-view',
@@ -33,7 +41,7 @@ export class RideRegisterViewComponent {
 
   submitted = false;
 
-  constructor(private rideService: RideService) {
+  constructor(private rideService: RideService, private router: Router) {
   }
 
 
@@ -78,38 +86,29 @@ export class RideRegisterViewComponent {
       newRide.departureTime =  combinedDateTime;
     }
 
-
-    /*if (this.datum && this.abfzeit) {
-      const departureDate = new Date(`${this.datum}T${this.abfzeit}`);
-      newRide.departureTime = departureDate.getTime()
-    } else {
-      console.error("Datum oder Uhrzeit fehlt!");
-      return;
-    }*/
-
     if (sessionStorage.getItem('isloged')=='true'){
       newRide.driver = sessionStorage.getItem('username');
-    }
 
-    this.rideService.createNewRide(newRide);
+      this.submitted = true
 
-    this.onSubmit()
-    this.submitted = false
+      if (this.registerRide.valid){
 
-    console.log(this.abfort,this.ankort, this.fplatz, this.datum, this.abfzeit)
+        this.submitted = false
+        console.log('new ride valid.');
+        console.log("submitted"+this.submitted)
 
-    console.log('Saved')
-  }
+        this.rideService.createNewRide(newRide);
+        console.log(this.abfort,this.ankort, this.fplatz, this.datum, this.abfzeit)
 
-  onSubmit(){
-    this.submitted = true;
-
-    if (this.registerRide.valid) {
-      console.log('Login valid.');
+        console.log('Saved')
+        this.router.navigate(['/rides']);
+      } else {
+        //this.submitted = true
+        console.log("submitted "+this.submitted)
+        console.log("please fill out correct")
+      }
     } else {
-      console.error('Login not valid');
+      alert("please log in")
     }
   }
-
-
 }
