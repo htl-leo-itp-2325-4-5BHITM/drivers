@@ -49,6 +49,12 @@ export class RideService {
 
     this.getRides()
   }
+
+
+  filteredRides(filteredText: String) {
+    this.http.get<Ride>(this.url + '/getFilteredCount/' + filteredText)
+  }
+
 }
 
   export async function getSeat(ride: Ride) {

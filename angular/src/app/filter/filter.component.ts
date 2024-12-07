@@ -32,6 +32,10 @@ export class FilterComponent {
     this.to=this.filterOption.get('to')?.value;
     this.date=this.filterOption.get('date')?.value;
     this.time=this.filterOption.get('time')?.value;
+
+    console.log(this.from, this.to, this.date, this.time)
+
+
   }
 
   toggleState() {
