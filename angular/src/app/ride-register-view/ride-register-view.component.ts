@@ -15,7 +15,7 @@ import {UserService} from '../service/user.service';
 import {RideService} from '../service/ride.service';
 import {NgIf} from "@angular/common";
 import { DateTime } from 'luxon';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-ride-register-view',
@@ -41,7 +41,7 @@ export class RideRegisterViewComponent {
 
   submitted = false;
 
-  constructor(private rideService: RideService) {
+  constructor(private rideService: RideService, private router: Router) {
   }
 
 
@@ -89,18 +89,23 @@ export class RideRegisterViewComponent {
     if (sessionStorage.getItem('isloged')=='true'){
       newRide.driver = sessionStorage.getItem('username');
 
-
+      this.submitted = true
 
       if (this.registerRide.valid){
-        this.onSubmit()
+
         this.submitted = false
+        console.log('new ride valid.');
+        console.log("submitted"+this.submitted)
 
         this.rideService.createNewRide(newRide);
         console.log(this.abfort,this.ankort, this.fplatz, this.datum, this.abfzeit)
 
         console.log('Saved')
+        this.router.navigate(['/rides']);
       } else {
-        alert("please fill out correct")
+        //this.submitted = true
+        console.log("submitted "+this.submitted)
+        console.log("please fill out correct")
       }
 
 
@@ -108,16 +113,4 @@ export class RideRegisterViewComponent {
       alert("please log in")
     }
   }
-
-  onSubmit(){
-    this.submitted = true;
-
-    if (this.registerRide.valid) {
-      console.log('new ride valid.');
-    } else {
-      console.error('new ride not valid');
-    }
-  }
-
-
 }
