@@ -117,9 +117,11 @@ public class DrivUsResource {
         return Response.ok(dtos).build();
     }
 
-    @GET
-    @Path("rides/getFilteredCount/{filterText}")
-    public Long getFilteredCount(@PathParam("filterText") String filterText) {
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    @Path("rides/getFilteredCount")
+    public List<Ride> getFilteredCount(FilterDto filterText) {
         System.out.println("bin im getFilteredRide");
         return repository.getFilteredCount(filterText);
     }

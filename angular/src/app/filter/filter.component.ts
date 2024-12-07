@@ -1,6 +1,12 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Time} from '@angular/common';
+import {User} from '../model/user.model';
+import {Filter} from '../model/filter.model';
+import {DateTime} from 'luxon';
+import {UserService} from '../service/user.service';
+import {Router} from '@angular/router';
+import {RideService} from '../service/ride.service';
 
 @Component({
   selector: 'app-filter',
@@ -21,6 +27,9 @@ export class FilterComponent {
   time: Date = new Date();
   showOwnRides:boolean=false;
 
+  constructor(private rideService: RideService) {
+  }
+
   filterOption: FormGroup = new FormGroup({
     'from': new FormControl(''),
     'to': new FormControl(''),
@@ -36,6 +45,24 @@ export class FilterComponent {
     this.time=this.filterOption.get('time')?.value;
 
     console.log(this.from, this.to, this.date, this.time)
+
+    const combinedDateTime = DateTime.fromFormat(
+      `${this.date} ${this.time}`,
+      'yyyy-MM-dd HH:mm'
+    );
+
+    let filter :Filter = <Filter>{};
+
+    if (this.from != null) {
+      filter.placeOfDeparture = this.from;
+    }
+    if (this.to != null) {
+      filter.placeOfArrival = this.to;
+    }
+
+    filter.departureTime = combinedDateTime;
+
+    this.rideService.filterRides(filter)
 
 
     this.showOwnRides=this.filterOption.get('showOwnRides')?.value;

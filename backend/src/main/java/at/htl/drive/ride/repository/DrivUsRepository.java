@@ -11,7 +11,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import jakarta.ws.rs.core.Response;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -247,21 +246,17 @@ public class DrivUsRepository {
         }
     }
 
-    public Long getFilteredCount(String filterText) {
-        if (filterText.length() == 0) {
-            return getRidesCount();
-        }
-        String upperFilterText = "%" + filterText.toUpperCase() + "%";
+    public List<Ride> getFilteredCount(FilterDto filterText) {
         String sql = "SELECT DISTINCT r FROM Ride r " +
-                "WHERE UPPER(r.placeOfDeparture) LIKE :filterText " +
-                "OR UPPER(r.placeOfArrival) LIKE :filterText " +
-                "OR UPPER(r.driver) LIKE :filterText " +
-                "OR UPPER(CAST(r.departureTime AS String)) LIKE :filterText " +
-                "OR CAST(r.availableSeats AS String) LIKE :filterText ";
+                "WHERE UPPER(r.placeOfDeparture) LIKE :placeOfDeparture " +
+                "OR UPPER(r.placeOfArrival) LIKE :placeOfArrival " +
+                "OR UPPER(CAST(r.departureTime AS String)) LIKE :departureTime ";
 
         TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
-        query.setParameter("filterText", upperFilterText);
-        return Long.valueOf(query.getResultList().size());
+        query.setParameter("placeOfArrival", filterText.placeOfArrival().toUpperCase());
+        query.setParameter("placeOfDeparture", filterText.placeOfDeparture().toUpperCase());
+        query.setParameter("departureTime", filterText.departureTime());
+        return query.getResultList();
     }
 
     public List<Ride> getAllRidesLoader() {
@@ -313,6 +308,6 @@ public class DrivUsRepository {
     }
 
     public DrivUser getUserThrewRideId(int id) {
-
+        return null;
     }
 }
