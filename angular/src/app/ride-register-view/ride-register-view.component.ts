@@ -107,8 +107,6 @@ export class RideRegisterViewComponent {
         console.log("submitted "+this.submitted)
         console.log("please fill out correct")
       }
-
-
     } else {
       alert("please log in")
     }

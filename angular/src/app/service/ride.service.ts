@@ -3,6 +3,8 @@ import {BackendRide, RegisterRide, Ride} from '../model/ride.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../model/user.model';
+import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.component';
+import {Driver} from './hardcode.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,14 @@ export class RideService {
 
       console.log('Updated ride:', ride);
     });
+  }
+
+  getUserThrewRideId(id: number):Driver | undefined {
+    this.http.post<Driver>(this.url + '/getUserThrewRideId', id).subscribe(driver => {
+      return driver;
+      console.log('got a user threw ride:', driver);
+    });
+    return undefined;
   }
 
   getSeat(ride: Ride) {

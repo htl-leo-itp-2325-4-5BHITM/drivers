@@ -164,6 +164,12 @@ public class DrivUsResource {
         return Response.ok().build();
     }
 
+    @Path("rides/getUserThrewRideId")
+    @POST
+    public DrivUser getUserThrewRideId(int id) {
+        return repository.getUserThrewRideId(id);
+    }
+
     @Path("/users")
     @GET
     public Response allUsers() {
