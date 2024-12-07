@@ -38,6 +38,7 @@ export class LoginComponent {
 
 
       this.submitted = false
+      console.log("submitted " + this.submitted)
 
       this.router.navigate(['/rides']);
     } else {
