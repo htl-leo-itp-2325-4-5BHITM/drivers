@@ -10,6 +10,7 @@ import com.github.javafaker.Faker;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import jakarta.ws.rs.core.Response;
 
@@ -313,6 +314,32 @@ public class DrivUsRepository {
     }
 
     public DrivUser getUserThrewRideId(int id) {
+        // 1. Finde das Ride anhand der ID und hole den driver-Namen
+        String rideSql = "SELECT r.driver FROM Ride r WHERE r.id = :id";
+        TypedQuery<String> rideQuery = em.createQuery(rideSql, String.class);
+        rideQuery.setParameter("id", id);
+
+        String driverUsername;
+        try {
+            driverUsername = rideQuery.getSingleResult();
+        } catch (NoResultException e) {
+            throw new IllegalArgumentException("Kein Ride mit der ID gefunden: " + id);
+        }
+
+        // 2. Suche in der DrivUser-Tabelle nach dem Eintrag mit diesem driver-Namen (Username)
+        String userSql = "SELECT u FROM DrivUser u WHERE u.username = :driverUsername";
+        TypedQuery<DrivUser> userQuery = em.createQuery(userSql, DrivUser.class);
+        userQuery.setParameter("driverUsername", driverUsername);
+
+        DrivUser driver;
+        try {
+            driver = userQuery.getSingleResult();
+        } catch (NoResultException e) {
+            throw new IllegalArgumentException("Kein Benutzer mit dem Benutzernamen gefunden: " + driverUsername);
+        }
+
+        // 3. Gebe den gefundenen DrivUser zurück
+        return driver;
 
     }
 }

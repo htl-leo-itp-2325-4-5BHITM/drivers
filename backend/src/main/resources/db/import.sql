@@ -1,17 +1,17 @@
 INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableSeats, placeOfArrival) VALUES
-    ('2023-11-18 06:30:00', nextval('ride_id_seq'::regclass), 'Natalie Schmitzberger', 'Limesstrasse Parkplatz Schule',2,'Thening'),
-    ('2023-11-18 17:00:00', nextval('ride_id_seq'::regclass), 'Robert Schmitzberger', 'Hinterstoder Parkplatz',2,'Thening'),
-    ('2023-11-17 17:00:00', nextval('ride_id_seq'::regclass), 'Andrei Brehar', 'NMS Marchtrenk',4,'Linz'),
-    ('2024-01-18 06:00:00', nextval('ride_id_seq'::regclass), 'Natalie Schmitzberger', 'Wien',1,'Thening'),
-    ('2024-01-11 17:00:00', nextval('ride_id_seq'::regclass), 'Natalie Schmitzberger', 'Walding',4,'Traun'),
-    ('2024-01-20 21:00:00', nextval('ride_id_seq'::regclass), 'Andrei Brehar', 'Wels',3,'Grieskirchen'),
-    ('2023-12-25 18:30:00', nextval('ride_id_seq'::regclass), 'Janine Wenninger', 'Timelkam',4,'Attnang'),
-    ('2024-01-07 11:30:00', nextval('ride_id_seq'::regclass), 'Romana Schned', 'Vöcklabruck',4,'Walding'),
-    ('2024-01-19 16:30:00', nextval('ride_id_seq'::regclass), 'Natalie Schmitzberger', 'Graz',1,'Thening'),
-    ('2024-01-18 17:00:00', nextval('ride_id_seq'::regclass), 'Robert Schmitzberger', 'München',2,'Thening'),
-    ('2024-01-31 10:00:00', nextval('ride_id_seq'::regclass), 'Andrei Brehar', 'Leonding',4,'Neumarkt'),
-    ('2024-01-05 08:30:00', nextval('ride_id_seq'::regclass), 'Janine Wenninger', 'Ungenach',2,'Regau'),
-    ('2024-01-26 14:50:00', nextval('ride_id_seq'::regclass), 'Romana Schned', 'Puchenau',3,'Walding');
+    ('2023-11-18 06:30:00', nextval('ride_id_seq'::regclass), 'natalie', 'Limesstrasse Parkplatz Schule',2,'Thening'),
+    ('2023-11-18 17:00:00', nextval('ride_id_seq'::regclass), 'robert', 'Hinterstoder Parkplatz',2,'Thening'),
+    ('2023-11-17 17:00:00', nextval('ride_id_seq'::regclass), 'andrei', 'NMS Marchtrenk',4,'Linz'),
+    ('2024-01-18 06:00:00', nextval('ride_id_seq'::regclass), 'natalie', 'Wien',1,'Thening'),
+    ('2024-01-11 17:00:00', nextval('ride_id_seq'::regclass), 'natalie', 'Walding',4,'Traun'),
+    ('2024-01-20 21:00:00', nextval('ride_id_seq'::regclass), 'andrei', 'Wels',3,'Grieskirchen'),
+    ('2023-12-25 18:30:00', nextval('ride_id_seq'::regclass), 'janine', 'Timelkam',4,'Attnang'),
+    ('2024-01-07 11:30:00', nextval('ride_id_seq'::regclass), 'romana', 'Vöcklabruck',4,'Walding'),
+    ('2024-01-19 16:30:00', nextval('ride_id_seq'::regclass), 'natalie', 'Graz',1,'Thening'),
+    ('2024-01-18 17:00:00', nextval('ride_id_seq'::regclass), 'robert', 'München',2,'Thening'),
+    ('2024-01-31 10:00:00', nextval('ride_id_seq'::regclass), 'andrei', 'Leonding',4,'Neumarkt'),
+    ('2024-01-05 08:30:00', nextval('ride_id_seq'::regclass), 'janine', 'Ungenach',2,'Regau'),
+    ('2024-01-26 14:50:00', nextval('ride_id_seq'::regclass), 'romana', 'Puchenau',3,'Walding');
 
 INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableSeats, placeOfArrival, placeofdeparturecoordinates, placeofarrivalcoordinates) VALUES
      ('2023-11-17 11:30:00', nextval('ride_id_seq'::regclass), 'Janine Wenninger', 'Vöcklabruck',1,'Traun','48.012291243336904, 13.64289128193861','48.22617605120782, 14.240679068045338'),
