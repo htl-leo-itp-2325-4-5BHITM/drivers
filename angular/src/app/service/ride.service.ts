@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {User} from '../model/user.model';
 import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.component';
 import {Driver} from './hardcode.service';
+import {Filter} from '../model/filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,14 @@ export class RideService {
 
     this.getRides()
   }
+
+
+  filterRides(filteredText: Filter) {
+    this.http.post<Ride>(this.url + '/getFilteredCount', filteredText).subscribe(filteredRides => {
+      console.log('filtered rides: ', filteredRides);
+    });
+  }
+
 }
 
   export async function getSeat(ride: Ride) {

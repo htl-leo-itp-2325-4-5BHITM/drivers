@@ -12,7 +12,6 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
-import jakarta.ws.rs.core.Response;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -29,7 +28,7 @@ public class DrivUsRepository {
         return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
     }
 
-    public List<Ride> pagination(int page, int ridesPerPage) {
+    /*public List<Ride> pagination(int page, int ridesPerPage) {
         String sql = "select r from Ride r order by r.id desc";
         TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
         try {
@@ -38,7 +37,7 @@ public class DrivUsRepository {
             return query.getResultList().subList((page-1)+(ridesPerPage-1)*(page-1), query.getResultList().size());
         }
 
-    }
+    }*/
 
     public Long getRidesCount() {
         String sql = "select count(r) from Ride r";
@@ -248,21 +247,17 @@ public class DrivUsRepository {
         }
     }
 
-    public Long getFilteredCount(String filterText) {
-        if (filterText.length() == 0) {
-            return getRidesCount();
-        }
-        String upperFilterText = "%" + filterText.toUpperCase() + "%";
+    public List<Ride> getFilteredCount(FilterDto filterText) {
         String sql = "SELECT DISTINCT r FROM Ride r " +
-                "WHERE UPPER(r.placeOfDeparture) LIKE :filterText " +
-                "OR UPPER(r.placeOfArrival) LIKE :filterText " +
-                "OR UPPER(r.driver) LIKE :filterText " +
-                "OR UPPER(CAST(r.departureTime AS String)) LIKE :filterText " +
-                "OR CAST(r.availableSeats AS String) LIKE :filterText ";
+                "WHERE UPPER(r.placeOfDeparture) LIKE :placeOfDeparture " +
+                "OR UPPER(r.placeOfArrival) LIKE :placeOfArrival " +
+                "OR UPPER(CAST(r.departureTime AS String)) LIKE :departureTime ";
 
         TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
-        query.setParameter("filterText", upperFilterText);
-        return Long.valueOf(query.getResultList().size());
+        query.setParameter("placeOfArrival", filterText.placeOfArrival().toUpperCase());
+        query.setParameter("placeOfDeparture", filterText.placeOfDeparture().toUpperCase());
+        query.setParameter("departureTime", filterText.departureTime());
+        return query.getResultList();
     }
 
     public List<Ride> getAllRidesLoader() {

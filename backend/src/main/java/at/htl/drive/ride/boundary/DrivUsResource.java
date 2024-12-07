@@ -81,14 +81,14 @@ public class DrivUsResource {
         return repository.getRidesCount();
     }
 
-    @GET
+    /*@GET
     @Path("/pagination/{page}{ridesPerPage}")
     public Response pagination(@PathParam("page") int page, @PathParam("ridesPerPage") int ridesPerPage) {
         System.out.println("in pagination");
         var rides = repository.pagination(page, ridesPerPage);
         var dtos = rides.stream().map(rideMapper::toResource);
         return Response.ok(dtos).build();
-    }
+    }*/
 
     @GET
     @Path("rides/getRide/{id}")
@@ -117,9 +117,11 @@ public class DrivUsResource {
         return Response.ok(dtos).build();
     }
 
-    @GET
-    @Path("rides/getFilteredCount/{filterText}")
-    public Long getFilteredCount(@PathParam("filterText") String filterText) {
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    @Path("rides/getFilteredCount")
+    public List<Ride> getFilteredCount(FilterDto filterText) {
         System.out.println("bin im getFilteredRide");
         return repository.getFilteredCount(filterText);
     }

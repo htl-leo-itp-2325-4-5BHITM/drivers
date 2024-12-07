@@ -11,6 +11,7 @@ import {MapComponent} from '../map/map.component';
 //import {MapComponent} from '../map/map.component';
 import {FilterComponent} from '../filter/filter.component';
 import {RouterLink} from '@angular/router';
+import {Filter} from '../model/filter.model';
 
 @Component({
   selector: 'app-ride-view',
@@ -40,14 +41,20 @@ export class RideViewComponent implements OnInit {
 
   constructor(private rideService: RideService, private hardData: HardcodeService) {
     //für andrei wegn backend einf auskommentieren wenn backend rennt
-    this.rides = hardData.hardcodedRide
+    //this.rides = hardData.hardcodedRide
   }
 
   ngOnInit() {
+    let filter = <Filter>{}
+    filter.placeOfArrival = "alle"
+
+    //this.rideService.filterRides(filter).
+
     this.rideService.getRides().subscribe((value) => {
       this.rides = value;
       console.log(this.rides);
     })
+     
   }
   getSeat(ride: Ride){
     this.rideService.getSeat(ride)
