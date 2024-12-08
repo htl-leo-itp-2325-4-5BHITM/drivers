@@ -1,24 +1,28 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Time} from '@angular/common';
+import {NgIf, Time} from '@angular/common';
 import {User} from '../model/user.model';
 import {Filter} from '../model/filter.model';
 import {DateTime} from 'luxon';
 import {UserService} from '../service/user.service';
 import {Router} from '@angular/router';
 import {RideService} from '../service/ride.service';
+import {RideViewComponent} from '../ride-view/ride-view.component';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf,
+    RideViewComponent
   ],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.css'
 })
 export class FilterComponent {
   seeFilters: boolean=false;
+  seeRides: boolean=false;
   @Output() stateChangeFilter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   from:string=""
@@ -71,5 +75,6 @@ export class FilterComponent {
   toggleState() {
     this.seeFilters=false;
     this.stateChangeFilter.emit(this.seeFilters);
+    this.seeRides=true
   }
 }
