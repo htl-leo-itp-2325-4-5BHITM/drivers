@@ -166,8 +166,10 @@ public class DrivUsResource {
         return Response.ok().build();
     }
 
-    @Path("rides/getUserThrewRideId")
+    //braucht man eigentlich nicht
     @POST
+    @Transactional
+    @Path("rides/getUserThrewRideId")
     public DrivUser getUserThrewRideId(int id) {
         return repository.getUserThrewRideId(id);
     }

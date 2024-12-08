@@ -327,8 +327,10 @@ public class DrivUsRepository {
         userQuery.setParameter("driverUsername", driverUsername);
 
         DrivUser driver;
+        DrivUserDto driverDTO;
         try {
             driver = userQuery.getSingleResult();
+            //driverDTO(driver.firstName,driver.lastName,driver.phoneNr,driver.emailAddress,driver.username,driver.password);
         } catch (NoResultException e) {
             throw new IllegalArgumentException("Kein Benutzer mit dem Benutzernamen gefunden: " + driverUsername);
         }

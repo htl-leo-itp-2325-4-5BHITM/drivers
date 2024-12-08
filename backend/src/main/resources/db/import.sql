@@ -14,8 +14,8 @@ INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableS
     ('2024-01-26 14:50:00', nextval('ride_id_seq'::regclass), 'romana', 'Puchenau',3,'Walding');
 
 INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableSeats, placeOfArrival, placeofdeparturecoordinates, placeofarrivalcoordinates) VALUES
-     ('2023-11-17 11:30:00', nextval('ride_id_seq'::regclass), 'Janine Wenninger', 'Vöcklabruck',1,'Traun','48.012291243336904, 13.64289128193861','48.22617605120782, 14.240679068045338'),
-     ('2023-11-17 14:30:00', nextval('ride_id_seq'::regclass), 'Romana Schned', 'Walding',3,'Ottensheim','48.351521431061364, 14.15807648298771','48.33679298027719, 14.175010003575805');
+     ('2023-11-17 11:30:00', nextval('ride_id_seq'::regclass), 'janine', 'Vöcklabruck',1,'Traun','48.012291243336904, 13.64289128193861','48.22617605120782, 14.240679068045338'),
+     ('2023-11-17 14:30:00', nextval('ride_id_seq'::regclass), 'romana', 'Walding',3,'Ottensheim','48.351521431061364, 14.15807648298771','48.33679298027719, 14.175010003575805');
 
 
 INSERT INTO public.drivuser (password,id, firstname, lastname, phonenr, emailaddress, username) VALUES

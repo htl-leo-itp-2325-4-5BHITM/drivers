@@ -30,10 +30,11 @@ export class RideService {
     });
   }
 
-  getUserThrewRideId(id: number):Driver | undefined {
-    this.http.post<Driver>(this.url + '/getUserThrewRideId', id).subscribe(driver => {
-      return driver;
+  getUserThrewRideId(driver: string):Driver | undefined {
+    console.log("im getDriverInfo SERVICE")
+    this.http.post<Driver>(this.url + '/getUserByUsername', driver).subscribe(driver => {
       console.log('got a user threw ride:', driver);
+      return driver;
     });
     return undefined;
   }
