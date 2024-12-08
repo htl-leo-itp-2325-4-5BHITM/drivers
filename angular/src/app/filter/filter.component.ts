@@ -8,6 +8,8 @@ import {UserService} from '../service/user.service';
 import {Router} from '@angular/router';
 import {RideService} from '../service/ride.service';
 import {RideViewComponent} from '../ride-view/ride-view.component';
+import {Ride} from '../model/ride.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-filter',
@@ -31,7 +33,9 @@ export class FilterComponent {
   time: Date = new Date();
   showOwnRides:boolean=false;
 
-  constructor(private rideService: RideService) {
+  filteredRides :Subscription = <Subscription>{};
+
+  constructor(private rideService: RideService, private router: Router) {
   }
 
   filterOption: FormGroup = new FormGroup({
@@ -66,7 +70,14 @@ export class FilterComponent {
 
     filter.departureTime = combinedDateTime;
 
-    this.rideService.filterRides(filter)
+
+    this.filteredRides = this.rideService.filterRides(filter);
+    console.log(this.filteredRides)
+
+    /*this.rideService.filterRides(filter).subscribe((value) => {
+      this.filteredRides = value;
+      console.log(this.filteredRides);
+    })*/
 
 
     this.showOwnRides=this.filterOption.get('showOwnRides')?.value;
@@ -76,5 +87,6 @@ export class FilterComponent {
     this.seeFilters=false;
     this.stateChangeFilter.emit(this.seeFilters);
     this.seeRides=true
+    this.router.navigate(['/rides'])
   }
 }
