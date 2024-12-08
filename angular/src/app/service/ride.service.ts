@@ -63,8 +63,8 @@ export class RideService {
   }
 
 
-  filterRides(filteredText: Filter) {
-    this.http.post<Ride>(this.url + '/getFilteredCount', filteredText).subscribe(filteredRides => {
+  filterRides(filteredText: Filter)  {
+    return this.http.post<Ride>(this.url + '/getFilteredCount', filteredText).subscribe(filteredRides => {
       console.log('filtered rides: ', filteredRides);
     });
   }

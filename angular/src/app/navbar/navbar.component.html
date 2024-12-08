@@ -5,9 +5,9 @@
   </div>
 
   <div class="navigation">
-    <a (click)="selectLink('rides')" [ngClass]="{'active': selectedLink == 'rides'}" routerLink="/rides"  >Available Rides</a>
-    <a (click)="selectLink('register')" routerLink="/register" [ngClass]="{'active': selectedLink == 'register'}" >Register a Ride</a>
-    <a (click)="selectLink('about')" routerLink="/about" [ngClass]="{'active': selectedLink == 'about'}" >About</a>
+    <a routerLink="/rides" routerLinkActive="active">Available Rides</a>
+    <a routerLink="/register" routerLinkActive="active">Register a Ride</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
     <a routerLink="/login">Log In</a>
   </div>
 </div>

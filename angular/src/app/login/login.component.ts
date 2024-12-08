@@ -43,6 +43,7 @@ export class LoginComponent {
       this.router.navigate(['/rides']);
     } else {
       console.error('Login not valid');
+      this.router.navigate(['/rides']);
     }
 
 
