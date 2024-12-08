@@ -41,7 +41,7 @@ export class UserService {
     );
   }
 
-  async getUserDetails2(username?: string): Promise<Driver | undefined> {
+  async getUserDetailsForRide(username?: string): Promise<Driver | undefined> {
     try {
       const response = await this.http.post<User>(this.url + '/getUserByUsername', username).toPromise();
 

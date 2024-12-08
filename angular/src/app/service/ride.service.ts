@@ -30,15 +30,6 @@ export class RideService {
     });
   }
 
-  getUserThrewRideId(driver: string):Driver | undefined {
-    console.log("im getDriverInfo SERVICE")
-    this.http.post<Driver>(this.url + '/getUserByUsername', driver).subscribe(driver => {
-      console.log('got a user threw ride:', driver);
-      return driver;
-    });
-    return undefined;
-  }
-
   getSeat(ride: Ride) {
     console.log("in getSeat: ", ride)
 

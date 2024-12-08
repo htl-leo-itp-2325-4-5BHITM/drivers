@@ -36,7 +36,7 @@ export class DriverRideViewComponent implements OnInit {
   async getDriverInfos() {
     console.log("im getDriverInfo")
     let username: string = this.selectedRide.driver;
-    this.driver = await this.userService.getUserDetails2(username);
+    this.driver = await this.userService.getUserDetailsForRide(username);
     console.log("DEEES DRIVER:", this.driver);
   }
 
