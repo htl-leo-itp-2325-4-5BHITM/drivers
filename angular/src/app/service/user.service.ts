@@ -41,26 +41,31 @@ export class UserService {
     );
   }
 
-  getUserDetails2(username?: string):Driver|undefined{
-    this.http.post<User>(this.url + '/getUserByUsername', username).subscribe((response) => {
-      console.log(response)
+  async getUserDetails2(username?: string): Promise<Driver | undefined> {
+    try {
+      const response = await this.http.post<User>(this.url + '/getUserByUsername', username).toPromise();
 
-        let user: Driver = {
+      // Überprüfe, ob die Antwort definiert ist, bevor du fortfährst
+      if (response) {
+        const user: Driver = {
           id: response.id,
           firstName: response.firstName,
           lastName: response.lastName,
-          phoneNr: parseInt(response.phoneNr),
+          phoneNr: parseInt(response.phoneNr),  // Wandelt die Telefonnummer in eine Zahl um
           emailAddress: response.emailAddress,
           username: response.username,
           password: response.password
         };
-        return user;
-      },
-      (error) => {
-        console.error('Fehler bei der Login-Anfrage:', error);
+
+        return user; // Gebe den 'user' zurück, wenn alles OK ist
+      } else {
+        console.error('Die Antwort war undefined.');
+        return undefined; // Falls keine Antwort vorliegt
       }
-    );
-    return undefined;
+    } catch (error) {
+      console.error('Fehler bei der Login-Anfrage:', error);
+      return undefined;  // Im Fehlerfall wird 'undefined' zurückgegeben
+    }
   }
 
   loginValid(password?: String, username?: string ) : boolean {

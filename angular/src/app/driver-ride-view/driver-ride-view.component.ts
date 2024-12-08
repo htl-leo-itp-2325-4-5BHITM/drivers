@@ -33,10 +33,11 @@ export class DriverRideViewComponent implements OnInit {
   constructor(private userService: UserService,private rideService: RideService, private hardData: HardcodeService) {
   }
 
-  getDriverInfos() {
+  async getDriverInfos() {
     console.log("im getDriverInfo")
-    let username : string = this.selectedRide.driver;
-    this.driver = this.userService.getUserDetails2(username);
+    let username: string = this.selectedRide.driver;
+    this.driver = await this.userService.getUserDetails2(username);
+    console.log("DEEES DRIVER:", this.driver);
   }
 
   ngOnInit(): void {
