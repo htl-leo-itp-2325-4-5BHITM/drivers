@@ -24,26 +24,31 @@ export class LoginComponent {
     'password': new FormControl(null, Validators.required)
   })
 
+
   constructor(private userService: UserService,private router: Router) {
   }
 
   loginFunction(){
-    this.submitted = true;
+    //this.submitted = true;
 
     this.username=this.login.get('username')?.value;
     this.password=this.login.get('password')?.value;
 
-    if (this.userService.loginValid(this.password,this.username)) {
+    this.submitted = sessionStorage.get('loginValid') === 'true';
+
+    console.log("getting valid or invalid "+ this.submitted)
+
+    if (this.userService.loginValid(this.password,this.username) && this.submitted) {
+
       console.log('Login valid.');
 
-
-      this.submitted = false
       console.log("submitted " + this.submitted)
 
       this.router.navigate(['/rides']);
     } else {
       console.error('Login not valid');
-      this.router.navigate(['/rides']);
+      console.log("submitted " + this.submitted)
+      //this.router.navigate(['/rides']);
     }
 
 

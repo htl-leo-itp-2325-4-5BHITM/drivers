@@ -55,17 +55,21 @@ export class UserService {
           this.getUserDetails(password,username);
 
           console.log(returnValidation+" Value returned true")
-          returnValidation = true;
+          returnValidation = isValid;
+          console.log(returnValidation)
         } else {
           console.log('Login fehlgeschlagen!!!');
-          returnValidation = false
+          returnValidation = isValid
+          console.log(returnValidation)
         }
       },
       (error) => {
+
         console.error('Fehler bei der Login-Anfrage:', error);
       }
     );
     console.log(returnValidation +" 2 return valtidation")
+    sessionStorage.setItem('loginValid',String(returnValidation));
     return returnValidation;
   }
 
