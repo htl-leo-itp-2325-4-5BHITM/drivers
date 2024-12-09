@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Ride} from '../model/ride.model';
 import {User} from '../model/user.model';
+import {Driver} from './hardcode.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class UserService {
     //return this.http.post(this.url + "postUser/", user)
   }
 
-  getUserDetails(password?: String, username?: string){
+  getUserDetails(username?: string){
     //const body = { username: username, password: password };
 
     this.http.post<User>(this.url + '/getUserByUsername', username).subscribe((response) => {
@@ -40,6 +41,33 @@ export class UserService {
     );
   }
 
+  async getUserDetailsForRide(username?: string): Promise<Driver | undefined> {
+    try {
+      const response = await this.http.post<User>(this.url + '/getUserByUsername', username).toPromise();
+
+      // Überprüfe, ob die Antwort definiert ist, bevor du fortfährst
+      if (response) {
+        const user: Driver = {
+          id: response.id,
+          firstName: response.firstName,
+          lastName: response.lastName,
+          phoneNr: parseInt(response.phoneNr),  // Wandelt die Telefonnummer in eine Zahl um
+          emailAddress: response.emailAddress,
+          username: response.username,
+          password: response.password
+        };
+
+        return user; // Gebe den 'user' zurück, wenn alles OK ist
+      } else {
+        console.error('Die Antwort war undefined.');
+        return undefined; // Falls keine Antwort vorliegt
+      }
+    } catch (error) {
+      console.error('Fehler bei der Login-Anfrage:', error);
+      return undefined;  // Im Fehlerfall wird 'undefined' zurückgegeben
+    }
+  }
+
   loginValid(password?: String, username?: string ) : boolean {
     console.log("in loginValid");
     console.log("password:"+password+", username:"+username);
@@ -52,7 +80,7 @@ export class UserService {
         if (isValid) {
           console.log('Login erfolgreich!!!');
           sessionStorage.setItem('isloged','true');
-          this.getUserDetails(password,username);
+          this.getUserDetails(username);
 
           console.log(returnValidation+" Value returned true")
           returnValidation = isValid;

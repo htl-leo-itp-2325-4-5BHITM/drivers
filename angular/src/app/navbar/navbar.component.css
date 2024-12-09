@@ -60,7 +60,21 @@
   width: 100%;
 }
 
-.active{
-  color:green;
-  background:yellow;
+.navigation a.active{
+  color: var(--colorBright);
 }
+
+.navigation a.active::after{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: .25vw;
+  background-color: var(--colorBright);
+  transition: 250ms ease-out;
+  border-radius: 1vw;
+}
+
+
+

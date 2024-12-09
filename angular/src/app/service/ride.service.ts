@@ -30,14 +30,6 @@ export class RideService {
     });
   }
 
-  getUserThrewRideId(id: number):Driver | undefined {
-    this.http.post<Driver>(this.url + '/getUserThrewRideId', id).subscribe(driver => {
-      return driver;
-      console.log('got a user threw ride:', driver);
-    });
-    return undefined;
-  }
-
   getSeat(ride: Ride) {
     console.log("in getSeat: ", ride)
 
@@ -62,8 +54,8 @@ export class RideService {
   }
 
 
-  filterRides(filteredText: Filter) {
-    this.http.post<Ride>(this.url + '/getFilteredCount', filteredText).subscribe(filteredRides => {
+  filterRides(filteredText: Filter)  {
+    return this.http.post<Ride>(this.url + '/getFilteredCount', filteredText).subscribe(filteredRides => {
       console.log('filtered rides: ', filteredRides);
     });
   }

@@ -4,6 +4,7 @@ import {Ride} from '../model/ride.model';
 import {DatePipe} from '@angular/common';
 import {getSeat, RideService} from '../service/ride.service';
 import {MapComponent} from '../map/map.component';
+import {UserService} from '../service/user.service';
 
 @Component({
   selector: 'app-driver-ride-view',
@@ -29,16 +30,19 @@ export class DriverRideViewComponent implements OnInit {
     this.stateChangeDriver.emit(this.seeDriverDetail);
   }
 
-  constructor(private rideService: RideService, private hardData: HardcodeService) {
-    //this.getDriverInfos();
+  constructor(private userService: UserService,private rideService: RideService, private hardData: HardcodeService) {
   }
 
-  getDriverInfos() {
-    this.driver = this.rideService.getUserThrewRideId(this.selectedRide.id);
+  async getDriverInfos() {
+    console.log("im getDriverInfo")
+    let username: string = this.selectedRide.driver;
+    this.driver = await this.userService.getUserDetailsForRide(username);
+    console.log("DEEES DRIVER:", this.driver);
   }
 
   ngOnInit(): void {
     this.driver = this.hardData.hardcodedDriver.find(d => {return d.username == this.driverString})
+    this.getDriverInfos();
     //this.selectedRide = this.hardData.hardcodedRide.find(d => {return d.driver == this.driverString})
   }
 

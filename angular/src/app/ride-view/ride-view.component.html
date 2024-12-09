@@ -9,9 +9,10 @@
 <div class="content">
   <ul>
     <li *ngFor="let ride of rides">
-      <div class="rideItemView" (click)="showDriver=true; driver=ride.driver; selectedRide=ride">
+      <div class="rideItemView" (click)="showDriver=true;driver=ride.driver; selectedRide=ride">
         <!--<app-map class="map" [ride]="ride"></app-map>-->
-        <img src="./img/placeholder.jpg" alt="placeholder">
+        <img src="./img/{{ ride.placeOfDeparture}}.png" alt="map">
+        <!--<img src="./img/{{ ride.placeOfDeparture}}.png" alt="placeholder">-->
         <div class="text">
           <p>From: {{ ride.placeOfDeparture }}</p>
           <p>To: {{ ride.placeOfArrival }}</p>
