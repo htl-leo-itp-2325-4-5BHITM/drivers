@@ -5,11 +5,11 @@ import {User} from '../model/user.model';
 import {Filter} from '../model/filter.model';
 import {DateTime} from 'luxon';
 import {UserService} from '../service/user.service';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {RideService} from '../service/ride.service';
 import {RideViewComponent} from '../ride-view/ride-view.component';
 import {Ride} from '../model/ride.model';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-filter',
@@ -17,7 +17,8 @@ import {Subscription} from 'rxjs';
   imports: [
     ReactiveFormsModule,
     NgIf,
-    RideViewComponent
+    RideViewComponent,
+    RouterLink
   ],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.css'
@@ -33,7 +34,7 @@ export class FilterComponent {
   time: Date = new Date();
   showOwnRides:boolean=false;
 
-  filteredRides :Subscription = <Subscription>{};
+  filteredRides :Ride[] = [];
 
   constructor(private rideService: RideService, private router: Router) {
   }
@@ -70,9 +71,10 @@ export class FilterComponent {
 
     filter.departureTime = combinedDateTime;
 
-
-    this.filteredRides = this.rideService.filterRides(filter);
-    console.log(this.filteredRides)
+    this.rideService.filterRides(filter).subscribe((value) => {
+      this.filteredRides = value;
+      console.log(this.filteredRides);
+    })
 
     /*this.rideService.filterRides(filter).subscribe((value) => {
       this.filteredRides = value;

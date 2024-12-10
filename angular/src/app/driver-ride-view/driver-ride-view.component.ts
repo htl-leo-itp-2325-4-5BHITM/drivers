@@ -5,13 +5,15 @@ import {DatePipe} from '@angular/common';
 import {getSeat, RideService} from '../service/ride.service';
 import {MapComponent} from '../map/map.component';
 import {UserService} from '../service/user.service';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-driver-ride-view',
   standalone: true,
   imports: [
     DatePipe,
-    MapComponent
+    MapComponent,
+    RouterLink
   ],
   templateUrl: './driver-ride-view.component.html',
   styleUrl: './driver-ride-view.component.css'
@@ -55,6 +57,7 @@ export class DriverRideViewComponent implements OnInit {
     } else {
       alert("Please log in to reserve a ride!")
     }
+    window.location.reload();
 
   }
 }

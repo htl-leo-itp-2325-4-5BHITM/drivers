@@ -1,7 +1,7 @@
 import {Injectable, model} from '@angular/core';
 import {BackendRide, RegisterRide, Ride} from '../model/ride.model';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {User} from '../model/user.model';
 import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.component';
 import {Driver} from './hardcode.service';
@@ -13,12 +13,17 @@ import {Filter} from '../model/filter.model';
 export class RideService {
 
   private url = "http://localhost:8080/api/drivus/rides"
+  //private ridesSubject: Subject<Ride> = new Subject<Ride>();
 
   constructor(private http: HttpClient) { }
 
   getRides() : Observable<Ride[]>{
     return this.http.get<Ride[]>(this.url);
   }
+
+  /*getRides2() : Observable<Ride[]>{
+    this.ridesSubject.next(this.getRides())
+  }*/
 
   createNewRide(ride: BackendRide) {
     console.log("in createRide")
@@ -55,9 +60,7 @@ export class RideService {
 
 
   filterRides(filteredText: Filter)  {
-    return this.http.post<Ride>(this.url + '/getFilteredCount', filteredText).subscribe(filteredRides => {
-      console.log('filtered rides: ', filteredRides);
-    });
+    return this.http.post<Ride[]>(this.url + '/getFilteredCount', filteredText);
   }
 
 }
