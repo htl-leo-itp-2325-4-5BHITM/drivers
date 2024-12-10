@@ -10,7 +10,7 @@
   <ul>
     <li *ngFor="let ride of rides">
       <div class="rideItemView" (click)="showDriver=true;driver=ride.driver; selectedRide=ride">
-        <!--<app-map class="map" [ride]="ride"></app-map>-->
+        <app-map-all class="map" [ride]="ride"></app-map-all>
         <img src="./img/{{ ride.placeOfDeparture}}.png" alt="map">
         <!--<img src="./img/{{ ride.placeOfDeparture}}.png" alt="placeholder">-->
         <div class="text">

@@ -12,6 +12,7 @@ import {MapComponent} from '../map/map.component';
 import {FilterComponent} from '../filter/filter.component';
 import {ActivatedRoute, Route, Router, RouterLink} from '@angular/router';
 import {Filter} from '../model/filter.model';
+import {MapAllComponent} from '../map-all/map-all.component';
 
 @Component({
   selector: 'app-ride-view',
@@ -26,7 +27,8 @@ import {Filter} from '../model/filter.model';
     //MapComponent
     NgClass,
     FilterComponent,
-    RouterLink
+    RouterLink,
+    MapAllComponent
   ],
   templateUrl: './ride-view.component.html',
   styleUrl: './ride-view.component.css'
