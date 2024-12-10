@@ -34,7 +34,7 @@ export class LoginComponent {
     this.username=this.login.get('username')?.value;
     this.password=this.login.get('password')?.value;
 
-    this.submitted = sessionStorage.get('loginValid') === 'true';
+    //this.submitted = sessionStorage.get('loginValid') === 'true';
 
     console.log("getting valid or invalid "+ this.submitted)
 
