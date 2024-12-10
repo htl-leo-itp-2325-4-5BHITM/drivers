@@ -38,8 +38,6 @@ export class RideViewComponent implements OnInit, OnDestroy {
   selectedRide: Ride = <Ride>{};
   showDriver: boolean=false;
   showFilter: boolean=false;
-  private filteredRides: string | null = "";
-
 
   constructor(private rideService: RideService, private hardData: HardcodeService, private router: Router, private route: ActivatedRoute) {
     //für andrei wegn backend einf auskommentieren wenn backend rennt
@@ -47,8 +45,7 @@ export class RideViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    let filter = <Filter>{}
-    filter.placeOfArrival = "alle"
+
 
     //this.filteredRides = this.route.snapshot.paramMap.get('filtered')
     //console.log(this.filteredRides)

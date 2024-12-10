@@ -74,6 +74,7 @@ export class FilterComponent {
     this.rideService.filterRides(filter).subscribe((value) => {
       this.filteredRides = value;
       console.log(this.filteredRides);
+      
     })
 
     /*this.rideService.filterRides(filter).subscribe((value) => {

@@ -63,6 +63,15 @@ export class RideService {
     return this.http.post<Ride[]>(this.url + '/getFilteredCount', filteredText);
   }
 
+  getRides2(filteredText: Filter) {
+    console.log(filteredText)
+    if(filteredText) {
+      return this.http.get<Ride[]>(this.url);
+    } else {
+      return this.http.post<Ride[]>(this.url + '/getFilteredCount', filteredText);
+    }
+  }
+
 }
 
   export async function getSeat(ride: Ride) {
