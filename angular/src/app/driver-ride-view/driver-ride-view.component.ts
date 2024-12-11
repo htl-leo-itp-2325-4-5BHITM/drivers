@@ -8,6 +8,9 @@ import {UserService} from '../service/user.service';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Timestamp} from 'rxjs';
 
+import {RouterLink} from '@angular/router';
+
+
 @Component({
   selector: 'app-driver-ride-view',
   standalone: true,
@@ -15,7 +18,8 @@ import {Timestamp} from 'rxjs';
     DatePipe,
     MapComponent,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './driver-ride-view.component.html',
   styleUrl: './driver-ride-view.component.css'
@@ -73,6 +77,7 @@ export class DriverRideViewComponent implements OnInit {
     } else {
       alert("Please log in to reserve a ride!")
     }
+    window.location.reload();
 
   }
 
