@@ -58,6 +58,29 @@ export class RideService {
     this.getRides()
   }
 
+  unbookSeat(ride: Ride) {
+    console.log("unbookseat this.seat: ", ride)
+
+    let newRegister :RegisterRide = <RegisterRide>{};
+
+    if (ride.id != null) {
+      newRegister.rideId = ride.id;
+    }
+
+    //let user = sessionStorage.getItem("username");
+    //console.log(user)
+
+    newRegister.username = "test";
+
+    console.log(newRegister)
+
+    this.http.post(this.url + '/unregisterForRide', newRegister).subscribe(registerRide => {
+      console.log('booked ride: ', registerRide);
+    });
+
+    this.getRides()
+  }
+
 
   filterRides(filteredText: Filter)  {
     return this.http.post<Ride[]>(this.url + '/getFilteredCount', filteredText);

@@ -36,9 +36,6 @@ export class LoginComponent {
 
     //this.submitted = sessionStorage.get('loginValid') === 'true';
 
-
-
-
     console.log("getting valid or invalid "+ this.submitted)
 
     if (this.userService.loginValid(this.password,this.username) ) {
@@ -68,6 +65,7 @@ export class LoginComponent {
 
 
   }
+
 
 
 }

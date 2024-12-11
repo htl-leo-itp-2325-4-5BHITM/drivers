@@ -68,8 +68,37 @@ export class DriverRideViewComponent implements OnInit {
     //this.selectedRide = this.hardData.hardcodedRide.find(d => {return d.driver == this.driverString})
   }
 
+  isBooked: boolean = false; // Zustand des Buttons
 
-  getSeat(ride: Ride){
+  toggleBooking(ride: Ride) {
+    if (this.isBooked) {
+      this.unbookSeat(ride); // Funktion zum Abmelden
+    } else {
+      this.getSeat(ride); // Funktion zum Buchen
+    }
+  }
+
+  getSeat(ride: Ride) {
+    if (sessionStorage.getItem("isloged")) {
+      this.rideService.getSeat(ride);
+      alert("Ride reserved");
+      this.isBooked = true; // Zustand auf 'gebucht' setzen
+    } else {
+      alert("Please log in to reserve a ride!");
+    }
+  }
+
+  unbookSeat(ride: Ride) {
+    if (sessionStorage.getItem("isloged")) {
+      this.rideService.unbookSeat(ride); // Beispiel-Funktion zum Stornieren
+      alert("Ride cancelled");
+      this.isBooked = false; // Zustand auf 'nicht gebucht' setzen
+    } else {
+      alert("Please log in to cancel a ride!");
+    }
+  }
+
+  /*getSeat(ride: Ride){
 
     if(sessionStorage.getItem("isloged")){
       this.rideService.getSeat(ride)

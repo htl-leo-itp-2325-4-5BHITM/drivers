@@ -112,4 +112,30 @@ export class UserService {
     return returnValidation;
   }
 
+  /*validateLogin(username?: string, password?: string ): boolean {
+    console.log('Überprüfung der Anmeldedaten gestartet.');
+
+    // Auslesen der gespeicherten Daten aus dem sessionStorage
+    const storedUsername = sessionStorage.getItem('username');
+    const storedPassword = sessionStorage.getItem('password');
+
+    console.log('Gespeicherte Daten - Username:', storedUsername, 'Password:', storedPassword);
+
+    // Validierung
+    if (username === storedUsername && password === storedPassword) {
+      console.log('Login erfolgreich.');
+      return true;
+    } else {
+      console.error('Login fehlgeschlagen: Ungültige Anmeldedaten.');
+      return false;
+    }
+  }*/
+
+  // Optional: Registrierung von Benutzerdaten
+  registerUser(username: string, password: string): void {
+    sessionStorage.setItem('username', username);
+    sessionStorage.setItem('password', password);
+    console.log('Benutzerdaten erfolgreich gespeichert.');
+  }
+
 }

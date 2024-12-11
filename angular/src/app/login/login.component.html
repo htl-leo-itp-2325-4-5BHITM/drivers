@@ -1,7 +1,7 @@
 <!--
 <div class="logoContainer">
-</div>
--->
+</div>-->
+
 <div class="login-window">
 
 
@@ -19,7 +19,7 @@
       <div class="input-box">
         <input placeholder="Password" formControlName="password" type="password">
         <img src="../img/icons/lock.png" alt="no image"><!----------------------IMG VERLINKUNG-->
-      </div>
+     </div>
       <span *ngIf="!login.get('password')?.valid && login.get('password')?.touched"
             class="help-block">Password is required!</span>
 
@@ -36,3 +36,30 @@
     </form>
   </div>
 </div>
+
+
+
+<!--<div class="login-window">
+  <div class="login-box">
+    <form [formGroup]="login" (ngSubmit)="loginFunction()">
+      <p class="log-title">Log In</p>
+      <div class="input-box">
+        <input placeholder="Username" formControlName="username">
+      </div>
+      <span *ngIf="!login.get('username')?.valid && login.get('username')?.touched" class="help-block">Username is required!</span>
+
+      <div class="input-box">
+        <input placeholder="Password" formControlName="password" type="password">
+      </div>
+      <span *ngIf="!login.get('password')?.valid && login.get('password')?.touched" class="help-block">Password is required!</span>
+
+      <button class="login-button">Log in</button>
+      <span *ngIf="!login.valid && submitted" class="error-message">Please fill out all required fields correctly!</span>
+
+      <div class="sign-in-link">
+        <label>Don't have an account yet?</label>
+        <a href="/signup">Sign up for free</a>
+      </div>
+    </form>
+  </div>
+</div>-->

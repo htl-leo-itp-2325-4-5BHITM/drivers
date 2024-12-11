@@ -44,9 +44,16 @@
         <button  (click)="editRide(selectedRide)" class="edit">Edit</button>
       </div>-->
 
-      <div class="centerButton" >
+      <!--<div class="centerButton" >
         <button (click)="getSeat(selectedRide)" class="book">book</button>
+      </div>-->
+
+      <div class="centerButton">
+        <button (click)="toggleBooking(selectedRide)" class="book">
+          {{ isBooked ? 'unbook' : 'book' }}
+        </button>
       </div>
+
       <button (click)="toggleState()" class="exit">X</button>
     </div>
     </div>
