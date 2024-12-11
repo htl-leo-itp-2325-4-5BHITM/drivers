@@ -81,6 +81,18 @@ export class RideService {
     this.getRides()
   }
 
+  /*isSeatBooked(rideId: number, username: string): Observable<number> {
+    const payload = { rideId, username }; // Daten für die API
+    return this.http.post<number>(`${this.url}/bookedSeatCheck`, payload);
+  }*/
+
+  isSeatBooked(rideId: number, username: string): Observable<number> {
+    // Erstellung des Payload-Objekts für die API-Anfrage
+    const payload = { rideId, username };
+    return this.http.post<number>(`http://localhost:8080/api/drivus/bookedSeatCheck`, payload);
+  }
+
+
 
   filterRides(filteredText: Filter)  {
     return this.http.post<Ride[]>(this.url + '/getFilteredCount', filteredText);

@@ -150,6 +150,21 @@ public class DrivUsResource {
     }
 
     @POST
+    @Path("/bookedSeatCheck")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response isSeatBooked(RegisterRideDto rideDto) {
+        try {
+            int isBooked = repository.bookedSeatCheck(rideDto); // Aufruf der Repository-Methode
+            System.out.println("Booking check result: " + isBooked);
+            return Response.ok(isBooked).type(MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.FORBIDDEN).entity("Error checking booking status").build();
+        }
+    }
+
+
+    @POST
     @Transactional
     @Path("rides/postRide")
     public Response postRide(RideDto rideDto) {

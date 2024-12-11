@@ -56,6 +56,17 @@ public class DrivUsRepository {
         em.persist(ride);
     }
 
+    public int bookedSeatCheck(RegisterRideDto ruaDto) {
+        String jpql = "SELECT COUNT(r) FROM RideRegister r WHERE r.rideId = :id and r.username = :username";
+        TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+        query.setParameter("id", ruaDto.rideId());
+        query.setParameter("username", ruaDto.username());
+
+        Long count = query.getSingleResult(); // Holt das Ergebnis der COUNT-Abfrage
+        return count.intValue(); // Konvertiert Long in int und gibt es zurück
+    }
+
+
     public List<RideRegister> registerForRide(RegisterRideDto ruaDto) {
         String jpql = "SELECT COUNT(r) FROM RideRegister r WHERE r.rideId = :id and r.username = :username";
         TypedQuery<Long> query = em.createQuery(jpql, Long.class);

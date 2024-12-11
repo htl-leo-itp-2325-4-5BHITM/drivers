@@ -105,20 +105,59 @@ export class DriverRideViewComponent implements OnInit {
 
 
 
-  toggleBooking(ride: Ride) {
-    //const storageKey = `isBooked_${ride.id}`;
-    if (this.isBooked) {
-      //sessionStorage.setItem(storageKey, 'false'); // Status speichern
-      sessionStorage.setItem('storageKey', String(false));
-      //console.log(storageKey+ " STORAGEKEY")
-      this.unbookSeat(ride); // Abmelden
-
-    } else {
-      this.getSeat(ride); // Buchen
-      sessionStorage.setItem('storageKey', String(true));
-      //console.log(storageKey+ " STORAGEKEY")
+  /*toggleBooking(ride: Ride) {
+    const username = sessionStorage.getItem('username');
+    if (!username) {
+      alert('Please log in to reserve or cancel a ride!');
+      return;
     }
-    console.log("is do")
+
+    /*this.rideService.isSeatBooked(ride.id, username).subscribe({
+      next: (data) => console.log('Response from server:', data),
+      error: (err) => console.error('API error:', err),
+    });*/
+
+    /*this.rideService.isSeatBooked(ride.id, username).subscribe({
+      next: (data) => {
+        console.log('Response from server:', data); // Gibt die Daten des Servers aus
+      },
+      error: (err) => {
+        console.error('API error:', err); // Gibt API-Fehler aus
+      },
+      complete: () => {
+        console.log('Request completed successfully.');
+      }
+    });
+
+
+  }*/
+
+  toggleBooking(ride: Ride) {
+    const username = sessionStorage.getItem('username');
+    if (!username) {
+      alert('Please log in to reserve or cancel a ride!');
+      return;
+    }
+
+    // Das Payload-Objekt wird hier erstellt
+    const payload = { rideId: ride.id, username: username };
+
+    // Debugging-Ausgabe, um sicherzustellen, dass die Daten korrekt sind
+    console.log('Payload:', payload);
+
+    this.rideService.isSeatBooked(ride.id, username).subscribe({
+      next: (isBooked) => {
+        console.log('Seat booking status before toggle:', isBooked);
+        if (isBooked === 1) {
+          this.unbookSeat(ride); // Bereits gebucht, also stornieren
+        } else {
+          this.getSeat(ride); // Nicht gebucht, also buchen
+        }
+      },
+      error: (error) => {
+        console.error('Error checking booking status:', error);
+      },
+    });
   }
 
   getSeat(ride: Ride) {
