@@ -32,6 +32,8 @@ export class DriverRideViewComponent implements OnInit {
   @Input() driverString!: string;
   @Output() stateChangeDriver: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  isBooked: boolean = false;
+
   placeOfDeparture?: string;
   placeOfArrival?: string;
   availableSeats?: number;
@@ -91,17 +93,29 @@ export class DriverRideViewComponent implements OnInit {
       departureTime: this.selectedRide?.departureTime,
       departureTimeTwo: this.selectedRide?.departureTime ? new Date(this.selectedRide?.departureTime).toISOString().slice(11, 16) : ''
     });
+
+    /*if (this.selectedRide?.id && this.driver?.username) {
+      this.checkBookingStatus(this.driver.username); // Nur aufrufen, wenn der 'username' vorhanden ist
+    }*/
   }
 
 
-  isBooked: boolean = false; // Zustand des Buttons
+
 
   toggleBooking(ride: Ride) {
+    //const storageKey = `isBooked_${ride.id}`;
     if (this.isBooked) {
-      this.unbookSeat(ride); // Funktion zum Abmelden
+      //sessionStorage.setItem(storageKey, 'false'); // Status speichern
+      sessionStorage.setItem('storageKey', String(false));
+      //console.log(storageKey+ " STORAGEKEY")
+      this.unbookSeat(ride); // Abmelden
+
     } else {
-      this.getSeat(ride); // Funktion zum Buchen
+      this.getSeat(ride); // Buchen
+      sessionStorage.setItem('storageKey', String(true));
+      //console.log(storageKey+ " STORAGEKEY")
     }
+    console.log("is do")
   }
 
   getSeat(ride: Ride) {
@@ -114,6 +128,17 @@ export class DriverRideViewComponent implements OnInit {
     }
   }
 
+  checkBookingStatus(rideId: string | undefined) {
+    if (!rideId) {
+      console.warn('Ride ID is undefined');
+      return; // Verhindert die Ausführung, wenn der rideId undefined ist
+    }
+
+    const storageKey = `isBooked_${rideId}`;
+    const status = localStorage.getItem(storageKey) === 'true';
+    this.isBooked = status
+  }
+  
   unbookSeat(ride: Ride) {
     if (sessionStorage.getItem("isloged")) {
       this.rideService.unbookSeat(ride); // Beispiel-Funktion zum Stornieren
