@@ -54,7 +54,7 @@ export class RideViewComponent implements OnInit {
       this.rides = value;
       console.log(this.rides);
     })
-     
+
   }
   getSeat(ride: Ride){
     this.rideService.getSeat(ride)

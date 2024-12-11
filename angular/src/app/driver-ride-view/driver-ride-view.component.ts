@@ -1,17 +1,21 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Driver, HardcodeService} from '../service/hardcode.service';
 import {Ride} from '../model/ride.model';
-import {DatePipe} from '@angular/common';
+import {DatePipe, NgIf, Time} from '@angular/common';
 import {getSeat, RideService} from '../service/ride.service';
 import {MapComponent} from '../map/map.component';
 import {UserService} from '../service/user.service';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Timestamp} from 'rxjs';
 
 @Component({
   selector: 'app-driver-ride-view',
   standalone: true,
   imports: [
     DatePipe,
-    MapComponent
+    MapComponent,
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './driver-ride-view.component.html',
   styleUrl: './driver-ride-view.component.css'
@@ -24,6 +28,20 @@ export class DriverRideViewComponent implements OnInit {
   @Input() driverString!: string;
   @Output() stateChangeDriver: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  placeOfDeparture?: string;
+  placeOfArrival?: string;
+  availableSeats?: number;
+  depatureTime?: Date;
+  depatureTimeTwo?: Time;
+
+
+  edit: FormGroup = new FormGroup({
+    'placeOfDeparture': new FormControl(null, Validators.required),
+    'placeOfArrival': new FormControl(null, Validators.required),
+    'availableSeats': new FormControl(null, Validators.required),
+    'depatureTime': new FormControl(null, Validators.required),
+    'depatureTimeTwo': new FormControl(null, Validators.required)
+  })
 
   toggleState() {
     this.seeDriverDetail=false;
@@ -56,5 +74,42 @@ export class DriverRideViewComponent implements OnInit {
       alert("Please log in to reserve a ride!")
     }
 
+  }
+
+  /*editRide(ride: Ride) {
+    let username: string = this.selectedRide.driver;
+    console.log(username + "... das ist der user")
+
+    console.log("edit ride")
+    if(sessionStorage.getItem("isloged")&& username == sessionStorage.getItem("username")){
+      //this.rideService.getSeat(ride)
+      let username: string = this.selectedRide.driver;
+      console.log(username + " eingeloggt richtig")
+
+      alert("richtig")
+
+    } else {
+      alert("You only can edit your rides!")
+    }
+  }*/
+
+  /*canEditRide(ride: Ride): boolean {
+    const loggedInUsername = sessionStorage.getItem("username");
+    console.log("Logged-in username:", loggedInUsername);
+    console.log("Ride driver:", ride.driver);
+
+    const isAuthorized = ride.driver === loggedInUsername;
+    console.log("Authorization result:", isAuthorized);
+
+    return isAuthorized;
+  }*/
+
+
+  editFunction() {
+    this.placeOfDeparture=this.edit.get('placeOfDeparture')?.value;
+    this.placeOfArrival=this.edit.get('placeOfArrival')?.value;
+    this.availableSeats=this.edit.get('availableSeats')?.value;
+    this.depatureTime=this.edit.get('depatureTime')?.value;
+    this.depatureTimeTwo=this.edit.get('depatureTimeTwo')?.value;
   }
 }

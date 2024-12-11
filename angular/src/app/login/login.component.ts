@@ -36,15 +36,30 @@ export class LoginComponent {
 
     //this.submitted = sessionStorage.get('loginValid') === 'true';
 
+
+
+
     console.log("getting valid or invalid "+ this.submitted)
 
-    if (this.userService.loginValid(this.password,this.username) && this.submitted) {
+    if (this.userService.loginValid(this.password,this.username) ) {
+      console.log("loginVR VOR SUBMITTED:",sessionStorage.getItem('loginValid'))
+      this.submitted = sessionStorage.getItem('loginValid') === 'true';
+      console.log("SUBMITTED:",this.submitted)
 
-      console.log('Login valid.');
+      if (this.submitted){
+        console.log("submitted soida true sei "+ this.submitted)
 
-      console.log("submitted " + this.submitted)
+        console.log('Login valid.');
 
-      this.router.navigate(['/rides']);
+        console.log("submitted " + this.submitted)
+
+        this.router.navigate(['/rides']);
+
+        alert("richitg i guess")
+      }
+
+      alert("idk why foisch")
+
     } else {
       console.error('Login not valid');
       console.log("submitted " + this.submitted)

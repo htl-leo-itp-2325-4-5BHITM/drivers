@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Ride} from '../model/ride.model';
 import {User} from '../model/user.model';
 import {Driver} from './hardcode.service';
+import {async} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -77,27 +78,37 @@ export class UserService {
     const body = { username: username, password: password };
 
     this.http.post<boolean>(this.url + '/users/postLogIn', body).subscribe((isValid: boolean) => {
-        if (isValid) {
-          console.log('Login erfolgreich!!!');
+        //console.log(isValid + " isVlaid backend ...")
+      if (isValid) {
+          //console.log('Login erfolgreich!!!');
           sessionStorage.setItem('isloged','true');
           this.getUserDetails(username);
-
-          console.log(returnValidation+" Value returned true")
           returnValidation = isValid;
-          console.log(returnValidation)
-        } else {
-          console.log('Login fehlgeschlagen!!!');
+
+          //console.log("isValid backend " + isValid)
+
+          //console.log(returnValidation+" Value returned true")
+
+          //console.log(returnValidation + " sollte funktionieren !!!")
+
+          //console.log(returnValidation +" 2 return valtidation")
+        console.log("RETURN 1 is valid is: ",isValid)
+        console.log("RETURN 1",returnValidation)
+        sessionStorage.setItem('loginValid',String(returnValidation));
+      } else {
+          //console.log('Login fehlgeschlagen!!!');
           returnValidation = isValid
-          console.log(returnValidation)
+          //console.log(returnValidation + " sollte nd funkt")
+
+          sessionStorage.setItem('loginValid',String(returnValidation));
         }
+        console.log("login Valid variable:",sessionStorage.getItem('loginValid'))
       },
       (error) => {
-
         console.error('Fehler bei der Login-Anfrage:', error);
       }
     );
-    console.log(returnValidation +" 2 return valtidation")
-    sessionStorage.setItem('loginValid',String(returnValidation));
+    console.log("RETURN 2",returnValidation)
     return returnValidation;
   }
 

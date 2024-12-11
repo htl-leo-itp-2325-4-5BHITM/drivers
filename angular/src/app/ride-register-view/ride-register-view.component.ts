@@ -111,4 +111,6 @@ export class RideRegisterViewComponent {
       alert("please log in")
     }
   }
+
+
 }

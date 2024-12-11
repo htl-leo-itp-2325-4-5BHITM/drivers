@@ -62,7 +62,6 @@
   background:var(--colorBright);
   color: var(--colorDark);
   padding:1vw 5vw;
-  margin-top: 4vw;
   text-align: center;
   transition: 250ms ease-out;
   justify-self: center;
@@ -108,5 +107,26 @@
   justify-content: space-between;
 }
 
+.edit{
+  font-family: var(--fontDrivUs), sans-serif;
+  display: flex;
+  outline: none;
+  border-radius: 2vw;
+  border: var(--colorDark) solid;
+  background:var(--colorBright);
+  color: var(--colorDark);
+  padding:1vw 5vw;
+  margin-top: 2vw;
+  text-align: center;
+  transition: 250ms ease-out;
+  justify-self: center;
+  box-shadow: 5px 5px 10px var(--inactiveColorBright);
+}
 
+.edit:hover{
+  cursor: pointer;
+  background: var(--colorDark);
+  color: var(--colorBright);
+  box-shadow: none;
+}
 

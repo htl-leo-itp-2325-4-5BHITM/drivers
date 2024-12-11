@@ -18,7 +18,7 @@ INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableS
      ('2023-11-17 14:30:00', nextval('ride_id_seq'::regclass), 'romana', 'Walding',3,'Ottensheim','48.351521431061364, 14.15807648298771','48.33679298027719, 14.175010003575805');
 
 
- */
+ *//**
 INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableSeats, placeOfArrival, placeofdeparturecoordinates, placeofarrivalcoordinates) VALUES
       ('2023-11-18 06:30:00', nextval('ride_id_seq'::regclass), 'natalie', 'Limesstrasse Parkplatz Schule', 2, 'Thening', '48.012291, 13.642891', '48.351521, 14.158076'),
       ('2023-11-18 17:00:00', nextval('ride_id_seq'::regclass), 'robert', 'Hinterstoder Parkplatz', 2, 'Thening', '48.012291, 13.642891', '48.351521, 14.158076'),
@@ -33,8 +33,8 @@ INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableS
       ('2024-01-31 10:00:00', nextval('ride_id_seq'::regclass), 'andrei', 'Leonding', 4, 'Neumarkt', '48.012291, 13.642891', '48.351521, 14.158076'),
       ('2024-01-05 08:30:00', nextval('ride_id_seq'::regclass), 'janine', 'Ungenach', 2, 'Regau', '48.012291, 13.642891', '48.351521, 14.158076'),
       ('2024-01-26 14:50:00', nextval('ride_id_seq'::regclass), 'romana', 'Puchenau', 3, 'Walding', '48.012291, 13.642891', '48.351521, 14.158076');
+**/
 
-/*
 INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableSeats, placeOfArrival, placeofdeparturecoordinates, placeofarrivalcoordinates) VALUES
       ('2023-11-18 06:30:00', nextval('ride_id_seq'::regclass), 'natalie', 'Limesstrasse Parkplatz Schule', 2, 'Thening', '49.021056, 11.270480', '48.259003, 14.164950'),
       ('2023-11-18 17:00:00', nextval('ride_id_seq'::regclass), 'robert', 'Hinterstoder Parkplatz', 2, 'Thening', '47.693900, 14.158900', '48.259003, 14.164950'),
@@ -50,7 +50,7 @@ INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableS
       ('2024-01-05 08:30:00', nextval('ride_id_seq'::regclass), 'janine', 'Ungenach', 2, 'Regau', '48.015600, 13.648100', '48.009100, 13.650300'),
       ('2024-01-26 14:50:00', nextval('ride_id_seq'::regclass), 'romana', 'Puchenau', 3, 'Walding', '48.312500, 14.255000', '48.351521, 14.158076');
 
-**/
+
 
 INSERT INTO public.drivuser (password,id, firstname, lastname, phonenr, emailaddress, username) VALUES
     ('natalie1234',nextval('drivuser_id_seq'::regclass), 'Natalie', 'Schmitzberger', '068181735181', 'n.schmitzberger@students.htl-leonding.ac.at', 'natalie'),
