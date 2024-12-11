@@ -52,6 +52,8 @@ export class DriverRideViewComponent implements OnInit {
   toggleState() {
     this.seeDriverDetail=false;
     this.stateChangeDriver.emit(this.seeDriverDetail);
+
+
   }
 
   constructor(private userService: UserService,private rideService: RideService, private hardData: HardcodeService) {
@@ -93,6 +95,7 @@ export class DriverRideViewComponent implements OnInit {
       departureTime: this.selectedRide?.departureTime,
       departureTimeTwo: this.selectedRide?.departureTime ? new Date(this.selectedRide?.departureTime).toISOString().slice(11, 16) : ''
     });
+    //checkLoginStatus();
 
     /*if (this.selectedRide?.id && this.driver?.username) {
       this.checkBookingStatus(this.driver.username); // Nur aufrufen, wenn der 'username' vorhanden ist
@@ -138,7 +141,7 @@ export class DriverRideViewComponent implements OnInit {
     const status = localStorage.getItem(storageKey) === 'true';
     this.isBooked = status
   }
-  
+
   unbookSeat(ride: Ride) {
     if (sessionStorage.getItem("isloged")) {
       this.rideService.unbookSeat(ride); // Beispiel-Funktion zum Stornieren
@@ -196,5 +199,21 @@ export class DriverRideViewComponent implements OnInit {
     this.availableSeats=this.edit.get('availableSeats')?.value;
     this.depatureTime=this.edit.get('depatureTime')?.value;
     this.depatureTimeTwo=this.edit.get('depatureTimeTwo')?.value;
+
+  }
+
+  protected readonly sessionStorage = sessionStorage;
+
+  editButton() {
+    console.log("kannst editen")
+  }
+
+  checkLoginStatus() {
+    const loggedInUsername = sessionStorage.getItem("username"); // Benutzername aus sessionStorage
+    /*if (loggedInUsername && this.driver?.username === loggedInUsername) {
+      this.isLoggedInAsDriver = true; // Wenn der Fahrer und der eingeloggte Benutzer übereinstimmen
+    } else {
+      this.isLoggedInAsDriver = false; // Wenn sie nicht übereinstimmen
+    }*/
   }
 }

@@ -26,7 +26,10 @@
           <p>Empty Seats: </p>
           <input formControlName="availableSeats" type="number" placeholder="{{ selectedRide?.availableSeats }}">
 
-          <button class="edit">edit</button>
+          <!--<button (click)="editButton()" class="edit">edit</button>-->
+
+          <button (click)="editButton()" class="exit">edit</button>
+
 
         </form>
 
@@ -53,6 +56,9 @@
           {{ isBooked ? 'unbook' : 'book' }}
         </button>
       </div>
+
+      <!--<button *ngIf="sessionStorage.getItem('isloged') === 'true'" (click)="toggleState()" class="exit">X</button>-->
+
 
       <button (click)="toggleState()" class="exit">X</button>
     </div>
