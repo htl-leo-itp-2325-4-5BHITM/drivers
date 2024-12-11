@@ -55,18 +55,44 @@ export class DriverRideViewComponent implements OnInit {
   constructor(private userService: UserService,private rideService: RideService, private hardData: HardcodeService) {
   }
 
-  async getDriverInfos() {
+  /*async getDriverInfos() {
     console.log("im getDriverInfo")
     let username: string = this.selectedRide.driver;
     this.driver = await this.userService.getUserDetailsForRide(username);
     console.log("DEEES DRIVER:", this.driver);
+  }*/
+
+  async getDriverInfos() {
+    console.log("im getDriverInfo");
+    let username: string = this.selectedRide.driver;
+
+    // Asynchroner Aufruf
+    this.driver = await this.userService.getUserDetailsForRide(username);
+
+    // Sicherstellen, dass die Ansicht aktualisiert wird
+    //this.cdr.detectChanges();
+    console.log("Driver details:", this.driver);
   }
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     this.driver = this.hardData.hardcodedDriver.find(d => {return d.username == this.driverString})
     this.getDriverInfos();
     //this.selectedRide = this.hardData.hardcodedRide.find(d => {return d.driver == this.driverString})
+  }*/
+
+  async ngOnInit(): Promise<void> {
+    this.driver = await this.userService.getUserDetailsForRide(this.driverString);
+
+    this.getDriverInfos();
+
+    this.edit.patchValue({
+      placeOfDeparture: this.selectedRide?.placeOfDeparture,
+      placeOfArrival: this.selectedRide?.placeOfArrival,
+      departureTime: this.selectedRide?.departureTime,
+      departureTimeTwo: this.selectedRide?.departureTime ? new Date(this.selectedRide?.departureTime).toISOString().slice(11, 16) : ''
+    });
   }
+
 
   isBooked: boolean = false; // Zustand des Buttons
 
