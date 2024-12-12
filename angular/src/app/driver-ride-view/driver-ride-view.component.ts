@@ -87,6 +87,8 @@ export class DriverRideViewComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.driver = await this.userService.getUserDetailsForRide(this.driverString);
 
+    const canEdit = this.canEditRide(this.selectedRide);
+
     this.getDriverInfos();
 
     this.edit.patchValue({
@@ -95,6 +97,12 @@ export class DriverRideViewComponent implements OnInit {
       departureTime: this.selectedRide?.departureTime,
       departureTimeTwo: this.selectedRide?.departureTime ? new Date(this.selectedRide?.departureTime).toISOString().slice(11, 16) : ''
     });
+
+    if (!canEdit) {
+      Object.keys(this.edit.controls).forEach((controlName) => {
+        this.edit.get(controlName)?.disable();
+      });
+    }
     //checkLoginStatus();
 
     /*if (this.selectedRide?.id && this.driver?.username) {
@@ -201,9 +209,9 @@ export class DriverRideViewComponent implements OnInit {
     }
     window.location.reload();
 
-  }
+  }*/
 
-  /*editRide(ride: Ride) {
+  editRide(ride: Ride) {
     let username: string = this.selectedRide.driver;
     console.log(username + "... das ist der user")
 
@@ -218,18 +226,39 @@ export class DriverRideViewComponent implements OnInit {
     } else {
       alert("You only can edit your rides!")
     }
-  }*/
+  }
 
   /*canEditRide(ride: Ride): boolean {
     const loggedInUsername = sessionStorage.getItem("username");
     console.log("Logged-in username:", loggedInUsername);
     console.log("Ride driver:", ride.driver);
 
-    const isAuthorized = ride.driver === loggedInUsername;
+    let isAuthorized = false
+
+    if (loggedInUsername == ride.driver){
+      isAuthorized = true
+    }
+
     console.log("Authorization result:", isAuthorized);
 
     return isAuthorized;
   }*/
+
+  canEditRide(ride: Ride): boolean {
+    const loggedInUsername = sessionStorage.getItem("username");
+    console.log("Logged-in username:", loggedInUsername);
+    console.log("Ride driver:", ride.driver);
+
+    let isAuthorized = false;
+
+    if (loggedInUsername === ride.driver) {
+      isAuthorized = true;
+    }
+
+    console.log("Authorization result:", isAuthorized);
+
+    return isAuthorized;
+  }
 
 
   editFunction() {
@@ -241,7 +270,7 @@ export class DriverRideViewComponent implements OnInit {
 
   }
 
-  protected readonly sessionStorage = sessionStorage;
+  //protected readonly sessionStorage = sessionStorage;
 
   editButton() {
     console.log("kannst editen")
