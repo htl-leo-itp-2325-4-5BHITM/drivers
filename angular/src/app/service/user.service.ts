@@ -112,6 +112,22 @@ export class UserService {
     return returnValidation;
   }*/
 
+  /*getUsernameAndPassword(password: string | undefined, username: string | undefined): {
+    username: string;
+    password: string
+  } | null {
+    const username = sessionStorage.getItem('username');
+    const password = sessionStorage.getItem('password'); // Angenommen, das Passwort wird hier gespeichert.
+
+    if (username && password) {
+      return { username, password };
+    } else {
+      console.warn('Username or password is missing in sessionStorage.');
+      return null;
+    }
+  }*/
+
+
   loginValid(username: string | undefined, password: string | undefined): Observable<boolean> {
     console.log(username)
     const body = { username, password };

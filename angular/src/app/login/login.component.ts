@@ -99,6 +99,9 @@ export class LoginComponent {
       console.log("loginVR VOR SUBMITTED:",sessionStorage.getItem('loginValid'))
       this.submitted = sessionStorage.getItem('loginValid') === 'true';
       console.log("SUBMITTED:",this.submitted)
+      console.log(this.submitted)
+
+      this.submitted = true
 
       if (this.submitted){
         console.log("submitted soida true sei "+ this.submitted)

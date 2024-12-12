@@ -39,6 +39,8 @@ export class DriverRideViewComponent implements OnInit {
   availableSeats?: number;
   depatureTime?: Date;
   depatureTimeTwo?: Time;
+  abfortC?: string;
+  ankortC?: number;
 
 
   edit: FormGroup = new FormGroup({
@@ -109,6 +111,11 @@ export class DriverRideViewComponent implements OnInit {
       departureTimeTwo: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'HH:mm', 'en') : ''],
       availableSeats: [this.selectedRide?.availableSeats || 0],
     });*/
+
+    this.edit.get('departureTime')?.disable();
+    if (this.canEditRide(this.selectedRide)) {
+      this.edit.get('departureTime')?.enable();
+    }
 
     if (!this.canEditRide(this.selectedRide)) {
       Object.keys(this.edit.controls).forEach(controlName => {
@@ -320,6 +327,8 @@ export class DriverRideViewComponent implements OnInit {
     this.availableSeats=this.edit.get('availableSeats')?.value;
     this.depatureTime=this.edit.get('depatureTime')?.value;
     this.depatureTimeTwo=this.edit.get('depatureTimeTwo')?.value;
+    this.abfortC=this.edit.get('abfortC')?.value;
+    this.ankortC=this.edit.get('ankortC')?.value;
 
     console.log(this.placeOfDeparture, this.placeOfArrival, this.availableSeats, this.depatureTime, this.depatureTimeTwo)
   }
@@ -334,7 +343,9 @@ export class DriverRideViewComponent implements OnInit {
     const updatedRide = {
       id: this.selectedRide.id,
       placeOfDeparture: this.edit.get('placeOfDeparture')?.value,
+      abfortC: this.edit.get('abfortC')?.value,
       placeOfArrival: this.edit.get('placeOfArrival')?.value,
+      ankortC: this.edit.get('ankortC')?.value,
       availableSeats: this.edit.get('availableSeats')?.value,
       departureTime: this.mergeDateAndTime(
         this.edit.get('depatureTime')?.value,
@@ -344,15 +355,17 @@ export class DriverRideViewComponent implements OnInit {
 
     console.log("Updated Ride Data:", updatedRide);
 
+
+
     // Service-Funktion aufrufen, um die Daten an den Server zu senden
 
-    this.rideService.updateRide(updatedRide).subscribe({
+    /*this.rideService.updateRide(updatedRide).subscribe({
       next: response => alert('Ride updated successfully!'),
       error: err => {
         console.error('Error updating ride:', err);
         alert('Failed to update the ride. Please try again.');
       }
-    });
+    });*/
 
 
     /*this.rideService.updateRide(updatedRide).subscribe({
