@@ -11,6 +11,7 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular
 import {Router} from '@angular/router';
 import {DateTime} from 'luxon';
 import {Filter} from '../model/filter.model';
+import {HardcodeService} from '../service/hardcode.service';
 
 @Component({
   selector: 'app-ride-view',
@@ -40,7 +41,9 @@ export class RideViewComponent implements OnInit, OnDestroy {
 
   driver: string = '';  // To display the driver of the selected ride
 
-  constructor(private rideService: RideService, private router: Router) {}
+  constructor(private rideService: RideService, private router: Router, private hardCoded: HardcodeService) {
+    this.rides=this.hardCoded.hardcodedRide;
+  }
 
   ngOnInit() {
     // Initially load all rides
