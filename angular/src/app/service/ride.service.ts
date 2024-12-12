@@ -47,7 +47,20 @@ export class RideService {
     //let user = sessionStorage.getItem("username");
     //console.log(user)
 
-    newRegister.username = "test";
+    //newRegister.username = "test";
+    //newRegister.username = user;
+
+    let user = sessionStorage.getItem("username");
+
+    if (user) {
+      // Make sure newRegister is defined
+      if (typeof newRegister === "object") {
+        newRegister.username = user;
+      } else {
+        console.error("newRegister is not defined or not an object.");
+      }
+    } 
+
 
     console.log(newRegister)
 
