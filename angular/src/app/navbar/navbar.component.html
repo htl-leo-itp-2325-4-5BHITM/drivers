@@ -8,6 +8,7 @@
     <a routerLink="/rides" routerLinkActive="active">Available Rides</a>
     <a routerLink="/register" routerLinkActive="active">Register a Ride</a>
     <a routerLink="/about" routerLinkActive="active">About</a>
-    <a [routerLink]="link" routerLinkActive="active" (click)="logedButton()">{{this.LogedInText}}</a>
+    <a [routerLink]="link" (click)="logedButton($event)" routerLinkActive="active">{{ LogedInText }}</a>
+
   </div>
 </div>

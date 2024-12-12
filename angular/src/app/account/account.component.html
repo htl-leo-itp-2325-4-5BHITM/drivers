@@ -1,7 +1,28 @@
 <app-navbar></app-navbar>
-<div>
-  <p>Name: {{ sessionStorage.getItem('username')}} </p>
-  <p>Name: {{ sessionStorage.getItem('firstname')}} {{ sessionStorage.getItem('lastname') }}</p>
-  <p>Email: {{ sessionStorage.getItem('email') }}</p>
-  <p>Phone: {{ sessionStorage.getItem('phoneNr')}}</p>
+<div class="account-window">
+  <div class="account-box">
+    <div class="account-form">
+      <p class="title-account">Account</p>
+      <div class="profile">
+        <img src="./img/placeholder.jpg" alt="">
+      </div>
+      <div class="row">
+        <p class="detail">Username: </p>
+        <p class="detail">{{ sessionStorage.getItem('username') }} </p>
+      </div>
+      <div class="row">
+        <p class="detail">Name:</p>
+        <p class="detail"> {{ sessionStorage.getItem('firstname') }} {{ sessionStorage.getItem('lastname') }}</p>
+      </div>
+      <div class="row">
+        <p class="detail">Email:</p>
+        <p class="detail">{{ sessionStorage.getItem('email') }}</p>
+      </div>
+      <div class="row">
+        <p class="detail">Phone: </p>
+        <p class="detail">{{ sessionStorage.getItem('phoneNr') }}</p>
+      </div>
+      <button class="logout-button">Log out</button>
+    </div>
+  </div>
 </div>
