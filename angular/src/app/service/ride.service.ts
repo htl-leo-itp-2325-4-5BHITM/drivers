@@ -92,6 +92,11 @@ export class RideService {
     return this.http.post<number>(`http://localhost:8080/api/drivus/bookedSeatCheck`, payload);
   }
 
+  updateRide(ride: any) {
+    return this.http.put(`http://localhost:8080/api/drivus/rides/updateRide/${ride.id}`, ride);
+  }
+
+
 
 
   filterRides(filteredText: Filter)  {

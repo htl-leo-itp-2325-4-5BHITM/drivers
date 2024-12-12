@@ -98,6 +98,18 @@ public class DrivUsResource {
         return ride;
     }
 
+    @POST
+    @Transactional
+    @Path("rides/updateRide")
+    public Response updateRide(RideDto rideDto) {
+        try {
+            repository.updateRide(rideDto);
+            return Response.ok("Fahrt erfolgreich aktualisiert.").build();
+        } catch (IllegalArgumentException ex) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build();
+        }
+    }
+
     @GET
     @Path("rides/getSortedRide/{sortedWay}/{column}")
     public Response getSortedRide(@PathParam("sortedWay") Boolean sortedWay, @PathParam("column") String column) {

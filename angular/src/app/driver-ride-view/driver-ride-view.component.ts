@@ -246,8 +246,8 @@ export class DriverRideViewComponent implements OnInit {
 
   canEditRide(ride: Ride): boolean {
     const loggedInUsername = sessionStorage.getItem("username");
-    console.log("Logged-in username:", loggedInUsername);
-    console.log("Ride driver:", ride.driver);
+    //console.log("Logged-in username:", loggedInUsername);
+    //console.log("Ride driver:", ride.driver);
 
     let isAuthorized = false;
 
@@ -255,11 +255,10 @@ export class DriverRideViewComponent implements OnInit {
       isAuthorized = true;
     }
 
-    console.log("Authorization result:", isAuthorized);
+    //console.log("Authorization result:", isAuthorized);
 
     return isAuthorized;
   }
-
 
   editFunction() {
     this.placeOfDeparture=this.edit.get('placeOfDeparture')?.value;
@@ -268,12 +267,40 @@ export class DriverRideViewComponent implements OnInit {
     this.depatureTime=this.edit.get('depatureTime')?.value;
     this.depatureTimeTwo=this.edit.get('depatureTimeTwo')?.value;
 
+    console.log(this.placeOfDeparture, this.placeOfArrival, this.availableSeats, this.depatureTime, this.depatureTimeTwo)
   }
 
   //protected readonly sessionStorage = sessionStorage;
 
+  private mergeDateAndTime(date: string, time: string): string {
+    return `${date}T${time}:00`;
+  }
+
   editButton() {
-    console.log("kannst editen")
+    const updatedRide = {
+      id: this.selectedRide.id,
+      placeOfDeparture: this.edit.get('placeOfDeparture')?.value,
+      placeOfArrival: this.edit.get('placeOfArrival')?.value,
+      availableSeats: this.edit.get('availableSeats')?.value,
+      departureTime: this.mergeDateAndTime(
+        this.edit.get('depatureTime')?.value,
+        this.edit.get('depatureTimeTwo')?.value
+      ),
+    };
+
+    console.log("Updated Ride Data:", updatedRide);
+
+    // Service-Funktion aufrufen, um die Daten an den Server zu senden
+    this.rideService.updateRide(updatedRide).subscribe({
+      next: (response) => {
+        console.log('Ride updated successfully:', response);
+        alert('Ride updated successfully!');
+      },
+      error: (err) => {
+        console.error('Error updating ride:', err);
+        alert('Failed to update the ride. Please try again.');
+      }
+    });
   }
 
   checkLoginStatus() {

@@ -12,11 +12,14 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
+
+import static io.quarkus.hibernate.orm.panache.PanacheEntityBase.findById;
 
 @ApplicationScoped
 public class DrivUsRepository {
@@ -55,6 +58,27 @@ public class DrivUsRepository {
         ride.setDriver(rideDto.driver());
         em.persist(ride);
     }
+
+    @Transactional
+    public void updateRide(RideDto rideDto) {
+
+        Ride ride = em.find(Ride.class, rideDto.id()); 
+
+        if (ride == null) {
+            throw new IllegalArgumentException("Fahrt mit der angegebenen ID existiert nicht.");
+        }
+
+        ride.setDepartureTime(rideDto.departureTime());
+        ride.setDriver(rideDto.driver());
+        ride.setPlaceOfArrivalCoordinates(rideDto.placeOfArrival());
+        ride.setPlaceOfDepartureCoordinates(rideDto.placeOfDeparture());
+        ride.setPlaceOfArrival(rideDto.placeOfArrival());
+        ride.setPlaceOfDeparture(rideDto.placeOfDeparture());
+        ride.setAvailableSeats(rideDto.availableSeats());
+        ride.setDepartureTime(rideDto.departureTime());
+
+    }
+
 
     public int bookedSeatCheck(RegisterRideDto ruaDto) {
         String jpql = "SELECT COUNT(r) FROM RideRegister r WHERE r.rideId = :id and r.username = :username";
