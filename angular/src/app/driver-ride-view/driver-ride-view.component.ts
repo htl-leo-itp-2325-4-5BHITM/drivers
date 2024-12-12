@@ -331,7 +331,7 @@ export class DriverRideViewComponent implements OnInit {
     this.depatureTime=this.edit.get('depatureTime')?.value;
     this.depatureTimeTwo=this.edit.get('depatureTimeTwo')?.value;
     this.abfortC=this.edit.get('abfortC')?.value;
-    //this.ankortC=this.edit.get('ankortC')?.value;
+    this.ankortC=this.edit.get('ankortC')?.value;
 
     console.log(this.placeOfDeparture, this.placeOfArrival, this.availableSeats, this.depatureTime, this.depatureTimeTwo)
   }
