@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Ride} from '../model/ride.model';
 import {User} from '../model/user.model';
 import {Driver} from './hardcode.service';
-import {async} from 'rxjs';
+import {async, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -69,7 +69,7 @@ export class UserService {
     }
   }
 
-  loginValid(password?: String, username?: string ) : boolean {
+  /*loginValid(password?: String, username?: string ) : boolean {
     console.log("in loginValid");
     console.log("password:"+password+", username:"+username);
 
@@ -110,6 +110,13 @@ export class UserService {
     );
     console.log("RETURN 2",returnValidation)
     return returnValidation;
+  }*/
+
+  loginValid(username: string | undefined, password: string | undefined): Observable<boolean> {
+    const body = { username, password };
+
+    // Sende die Login-Daten an das Backend zur Überprüfung
+    return this.http.post<boolean>(`${this.url}/users/postLogIn`, body);
   }
 
   /*validateLogin(username?: string, password?: string ): boolean {

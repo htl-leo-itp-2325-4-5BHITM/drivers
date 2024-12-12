@@ -62,7 +62,7 @@ public class DrivUsRepository {
     @Transactional
     public void updateRide(RideDto rideDto) {
 
-        Ride ride = em.find(Ride.class, rideDto.id()); 
+        Ride ride = em.find(Ride.class, rideDto.id());
 
         if (ride == null) {
             throw new IllegalArgumentException("Fahrt mit der angegebenen ID existiert nicht.");

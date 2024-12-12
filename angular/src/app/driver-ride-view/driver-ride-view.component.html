@@ -17,9 +17,10 @@
 
           <div class="dateRow">
             <p>Date & Time: </p>
-            <input formControlName="departureTime" type="date" [value]="selectedRide?.departureTime | date: 'yyyy-MM-dd'" [disabled]="!canEditRide(selectedRide)">
 
+            <input formControlName="departureTime" type="date" [value]="selectedRide?.departureTime | date: 'yyyy-MM-dd'" [disabled]="!canEditRide(selectedRide)">
             <input formControlName="departureTimeTwo" type="time" [value]="selectedRide?.departureTime | date: 'HH:mm'" [disabled]="!canEditRide(selectedRide)">
+
           </div>
 
           <p>Empty Seats: </p>
