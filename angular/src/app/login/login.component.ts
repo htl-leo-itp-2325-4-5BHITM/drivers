@@ -58,7 +58,7 @@ export class LoginComponent {
 
         sessionStorage.setItem('username', <string>this.username);
         sessionStorage.setItem('isloged', String(valid));
-
+        this.userService.getUserDetails(<string>this.username);
         this.router.navigate(['/rides']);
 
         this.loginError = false;
