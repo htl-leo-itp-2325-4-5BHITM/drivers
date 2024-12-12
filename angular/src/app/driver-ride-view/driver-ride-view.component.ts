@@ -45,10 +45,12 @@ export class DriverRideViewComponent implements OnInit {
 
   edit: FormGroup = new FormGroup({
     'placeOfDeparture': new FormControl(null, Validators.required),
+    'placeOfDepartureC': new FormControl(null),
     'placeOfArrival': new FormControl(null, Validators.required),
+    'placeOfArrivalC': new FormControl(null),
     'availableSeats': new FormControl(null, Validators.required),
-    'depatureTime': new FormControl(null, Validators.required),
-    'depatureTimeTwo': new FormControl(null, Validators.required)
+    'departureTime': new FormControl(null, Validators.required),
+    'departureTimeTwo': new FormControl(null, Validators.required)
   })
 
   toggleState() {
@@ -100,7 +102,8 @@ export class DriverRideViewComponent implements OnInit {
       //departureTime: this.selectedRide?.departureTime,
       //departureTimeTwo: this.selectedRide?.departureTime ? new Date(this.selectedRide?.departureTime).toISOString().slice(11, 16) : ''
       departureTime: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'yyyy-MM-dd', 'en') : ''],
-      departureTimeTwo: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'HH:mm', 'en') : '']
+     // departureTimeTwo: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'HH:mm', 'en') : '']
+     // departureTimeTwo: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'HH:mm', 'en') : '']
 
     });
 
@@ -328,7 +331,7 @@ export class DriverRideViewComponent implements OnInit {
     this.depatureTime=this.edit.get('depatureTime')?.value;
     this.depatureTimeTwo=this.edit.get('depatureTimeTwo')?.value;
     this.abfortC=this.edit.get('abfortC')?.value;
-    this.ankortC=this.edit.get('ankortC')?.value;
+    //this.ankortC=this.edit.get('ankortC')?.value;
 
     console.log(this.placeOfDeparture, this.placeOfArrival, this.availableSeats, this.depatureTime, this.depatureTimeTwo)
   }
