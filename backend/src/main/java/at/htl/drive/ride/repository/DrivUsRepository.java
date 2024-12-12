@@ -80,6 +80,7 @@ public class DrivUsRepository {
     }
 
 
+
     public int bookedSeatCheck(RegisterRideDto ruaDto) {
         String jpql = "SELECT COUNT(r) FROM RideRegister r WHERE r.rideId = :id and r.username = :username";
         TypedQuery<Long> query = em.createQuery(jpql, Long.class);

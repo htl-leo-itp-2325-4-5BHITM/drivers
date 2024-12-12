@@ -27,13 +27,10 @@
              <input formControlName="departureTimeTwo" type="time" [value]="selectedRide?.departureTime | date: 'HH:mm'" [disabled]="!canEditRide(selectedRide)">
               <input formControlName="departureTime" type="date" [value]="selectedRide?.departureTime | date: 'yyyy-MM-dd'">
             </div>
-
           </div>
 
           <p>Empty Seats: </p>
           <input formControlName="availableSeats" type="number" placeholder="{{ selectedRide?.availableSeats }}" [disabled]="!canEditRide(selectedRide)">
-
-
 
           <div *ngIf="selectedRide">
             <button *ngIf="canEditRide(selectedRide)" (click)="editButton()" class="exit">save changes</button>
