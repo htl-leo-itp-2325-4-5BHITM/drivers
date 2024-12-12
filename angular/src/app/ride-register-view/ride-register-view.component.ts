@@ -61,6 +61,7 @@ export class RideRegisterViewComponent {
     this.abfort=this.registerRide.get('abfort')?.value;
     this.abfortC=this.registerRide.get('abfortC')?.value;
     this.ankort=this.registerRide.get('ankort')?.value;
+    this.ankortC=this.registerRide.get('ankortC')?.value;
     this.datum=this.registerRide.get('datum')?.value;
     this.abfzeit=this.registerRide.get('abfzeit')?.value;
     this.fplatz=this.registerRide.get('fplatz')?.value;
@@ -78,6 +79,12 @@ export class RideRegisterViewComponent {
     }
     if (this.ankort != null) {
       newRide.placeOfArrival = this.ankort;
+    }
+    if (this.abfortC != null) {
+      newRide.placeOfDepartureCoordinate = this.abfortC;
+    }
+    if (this.ankortC != null) {
+      newRide.placeOfArrivalCoordinate = this.ankortC;
     }
     if (this.fplatz != null) {
       newRide.availableSeats = this.fplatz;
@@ -101,7 +108,10 @@ export class RideRegisterViewComponent {
         console.log(this.abfort,this.ankort, this.fplatz, this.datum, this.abfzeit)
 
         console.log('Saved')
+        //window.location.reload();
+        alert("saved ride")
         this.router.navigate(['/rides']);
+
       } else {
         //this.submitted = true
         console.log("submitted "+this.submitted)

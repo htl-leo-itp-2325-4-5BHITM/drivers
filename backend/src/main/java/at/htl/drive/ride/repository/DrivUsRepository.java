@@ -116,6 +116,10 @@ public class DrivUsRepository {
             RideRegister rideRegister = new RideRegister(ruaDto.rideId(), ruaDto.username());
             em.persist(rideRegister);
         }
+        /*else {
+            RideRegister rideRegister = new RideRegister(ruaDto.rideId(), ruaDto.username());
+            em.remove(rideRegister);
+        }*/
 
         return em.createQuery("select r from RideRegister r", RideRegister.class).getResultList();
 
@@ -305,8 +309,18 @@ public class DrivUsRepository {
                 "OR UPPER(CAST(r.departureTime AS String)) LIKE :departureTime ";
 
         TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
-        query.setParameter("placeOfArrival", filterText.placeOfArrival().toUpperCase());
-        query.setParameter("placeOfDeparture", filterText.placeOfDeparture().toUpperCase());
+        if(filterText.placeOfArrival()!=null) {
+            query.setParameter("placeOfArrival", filterText.placeOfArrival().toUpperCase());
+        }
+        else {
+            query.setParameter("placeOfArrival", "");
+        }
+        if(filterText.placeOfDeparture()!=null) {
+            query.setParameter("placeOfDeparture", filterText.placeOfDeparture().toUpperCase());
+        }
+        else {
+            query.setParameter("placeOfDeparture", "");
+        }
         query.setParameter("departureTime", filterText.departureTime());
         return query.getResultList();
     }

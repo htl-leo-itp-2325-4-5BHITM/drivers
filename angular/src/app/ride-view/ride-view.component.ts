@@ -140,9 +140,18 @@ export class RideViewComponent implements OnInit, OnDestroy {
 
   toggleState() {
     this.seeFilters=false;
+    //this.showFilter=false;
     this.stateChangeFilter.emit(this.seeFilters);
     this.seeRides=true
     this.router.navigate(['/rides'])
   }
 
+  clearFilters() {
+    this.filterOption.reset()
+    this.showFilter=false;
+    this.ridesSubscription = this.rideService.getRides().subscribe((rides) => {
+      this.rides = rides;
+      console.log('All Rides:', this.rides);
+    });
+  }
 }

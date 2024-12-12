@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 <div class="full-Page" [ngClass]="{'noScroll': showDriver}">
   <div class="filter-box">
-    <button (click)="showFilter=true" routerLink="/rides" class="filter-button"><img src="./img/icons/filter.png" alt=""> <p>Filter</p></button>
-    <form [formGroup]="filterOption" (ngSubmit)="filterFunction()">
+    <button (click)="showFilter=!this.showFilter" routerLink="/rides" class="filter-button"><img src="./img/icons/filter.png" alt=""> <p>Filter</p></button>
+    <form *ngIf="showFilter" [formGroup]="filterOption" (ngSubmit)="filterFunction()">
       <p class="filter-title">Filter Options:</p>
       <input placeholder="From" formControlName="from">
       <input placeholder="To" formControlName="to">
@@ -18,6 +18,7 @@
       </div>-->
       <div class="center-button">
         <button (click)="toggleState()">Apply Filter</button>
+        <button (click)="clearFilters()">Clear Filters</button>
       </div>
     </form>
     <div class="br"></div>

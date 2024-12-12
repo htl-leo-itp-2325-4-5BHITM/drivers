@@ -416,6 +416,7 @@ export class DriverRideViewComponent implements OnInit {
       next: (response) => {
         console.log('Ride updated successfully:', response);
         alert('Ride updated successfully!');
+        window.location.reload();
       },
       error: (err) => {
         console.error('Error updating ride:', err);
