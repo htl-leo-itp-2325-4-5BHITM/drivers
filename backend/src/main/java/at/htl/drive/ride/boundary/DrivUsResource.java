@@ -142,6 +142,8 @@ public class DrivUsResource {
     @Transactional
     @Path("rides/changeRide")
     public Response changeRide(RideDto rideDto) {
+        System.out.println("---------------------------");
+        System.out.println(rideDto);
         repository.changeRide(rideDto);
         return Response.ok().build();
     }

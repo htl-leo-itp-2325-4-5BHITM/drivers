@@ -49,14 +49,20 @@ public class DrivUsRepository {
     }
 
     public void changeRide(RideDto rideDto) {
+
         Long id = rideDto.id();
         Ride ride = em.find(Ride.class, id);
-        ride.setDepartureTime(rideDto.departureTime());
+
+        if (rideDto.departureTime() != null){
+            ride.setDepartureTime(rideDto.departureTime());
+        }
+
+        //ride.setDepartureTime(rideDto.departureTime());
         ride.setPlaceOfDeparture(rideDto.placeOfDeparture());
         ride.setPlaceOfArrival(rideDto.placeOfArrival());
         ride.setAvailableSeats(rideDto.availableSeats());
         ride.setDriver(rideDto.driver());
-        em.persist(ride);
+        em.merge(ride);
     }
 
     @Transactional
