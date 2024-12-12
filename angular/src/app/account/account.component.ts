@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Driver} from '../service/hardcode.service';
 
 @Component({
   selector: 'app-account',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './account.component.css'
 })
 export class AccountComponent {
+  driver!: Driver | undefined;
 
+  protected readonly localStorage = localStorage;
+  protected readonly sessionStorage = sessionStorage;
 }

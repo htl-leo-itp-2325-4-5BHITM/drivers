@@ -1,1 +1,6 @@
-<p>account works!</p>
+<div>
+  <p>Name: {{ sessionStorage.getItem('username')}} </p>
+  <p>Name: {{ sessionStorage.getItem('firstname')}} {{ sessionStorage.getItem('lastname') }}</p>
+  <p>Email: {{ sessionStorage.getItem('email') }}</p>
+  <p>Phone: {{ sessionStorage.getItem('phoneNr')}}</p>
+</div>
