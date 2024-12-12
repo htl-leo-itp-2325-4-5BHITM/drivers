@@ -82,7 +82,8 @@ public class DrivUsRepository {
         ride.setPlaceOfDeparture(rideDto.placeOfDeparture());
         ride.setAvailableSeats(rideDto.availableSeats());
         ride.setDepartureTime(rideDto.departureTime());
-
+        em.merge(ride);
+        
     }
 
 
