@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Driver} from '../service/hardcode.service';
 import {NavbarComponent} from '../navbar/navbar.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -16,4 +17,12 @@ export class AccountComponent {
 
   protected readonly localStorage = localStorage;
   protected readonly sessionStorage = sessionStorage;
+
+  constructor(private router: Router) {
+  }
+
+  LogUserOut() {
+    sessionStorage.setItem('loginValid','false');
+    this.router.navigate(['/']);
+  }
 }
