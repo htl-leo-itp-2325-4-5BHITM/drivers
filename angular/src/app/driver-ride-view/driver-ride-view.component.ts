@@ -57,6 +57,7 @@ export class DriverRideViewComponent implements OnInit {
   }
 
   constructor(private userService: UserService,private rideService: RideService, private hardData: HardcodeService) {
+    //this.isBooked = this.setIsBooked()
   }
 
   /*async getDriverInfos() {
@@ -103,6 +104,10 @@ export class DriverRideViewComponent implements OnInit {
         this.edit.get(controlName)?.disable();
       });
     }
+
+    //console.log(this.selectedRide.driver)
+
+
     //checkLoginStatus();
 
     /*if (this.selectedRide?.id && this.driver?.username) {
@@ -110,7 +115,25 @@ export class DriverRideViewComponent implements OnInit {
     }*/
   }
 
-
+  setIsBooked() {
+    let isBookedB = false;
+    let username = sessionStorage.getItem("username")
+    if(username === null) {
+      username = "false"
+    }
+    let id =1
+    console.log(this.selectedRide?.departureTime)
+    this.rideService.isSeatBooked(id, username).subscribe({
+      next: (isBooked) => {
+        console.log('Seat booking status before toggle:', isBooked);
+        isBookedB = isBooked === 1;
+      },
+      error: (error) => {
+        console.error('Error checking booking status:', error);
+      },
+    });
+    return isBookedB
+  }
 
 
   /*toggleBooking(ride: Ride) {
