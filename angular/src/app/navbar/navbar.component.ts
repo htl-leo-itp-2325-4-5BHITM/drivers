@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
-import {NgClass} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -8,15 +8,17 @@ import {NgClass} from '@angular/common';
   imports: [
     RouterLink,
     NgClass,
-    RouterLinkActive
+    RouterLinkActive,
+    NgIf
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit{
 
-  link:string="notconfigured"
-  LogedInText:string="nbhbj In";
+  link:string="login"
+  LogedInText:string="Loged In";
+  isLoggedIn:boolean=false;
 
   constructor(private router: Router) {
 
@@ -35,16 +37,32 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['/']);
   }
 
+/*
   logedButton() {
     if (sessionStorage.getItem('loginValid') == "true"){
       console.log("eingellogged")
       this.link="/account"
-      //this.router.navigate(['/account']);
 
     }else{
       this.link="/login"
-      //this.router.navigate(['/login'])
       console.log("noch nicht einglogged")
     }
   }
+*/
+
+  logedButton(event: Event) {
+    if(sessionStorage.getItem('loginValid')=="true"){
+      this.router.navigate(['account']);
+    } else{
+      this.router.navigate(['login']);
+    }
+    // Verhindert, dass der Klick sofort das Routing ausführt
+    /*event.preventDefault();
+    // Logik zur Aktualisierung des Links
+    this.link = this.isLoggedIn ? '/account' : '/login';
+    // Jetzt navigieren
+    this.router.navigate([this.link]);*/
+  }
+
+
 }

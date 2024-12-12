@@ -1,0 +1,80 @@
+.account-window {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../../public/img/background_option7.jpg");
+  background-size: cover;
+}
+
+.account-box{
+  border-radius: 2vw;
+  background: rgba(16, 22, 31, 0.9);
+  width:33vw;
+  color:var(--colorBright);
+}
+
+.account-form{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 10%;
+  position:relative;
+}
+
+.title-account{
+  margin:10% 0;
+  color: var(--colorBright);
+  font-size: calc(var(--mediumText) *1.5);
+  font-weight: bold;
+}
+
+button{
+  font-family: var(--fontDrivUs), sans-serif;
+  display: flex;
+  outline: none;
+  border-radius: 2vw;
+  border: var(--colorBright) solid 2px;
+  background:none;
+  color: var(--colorBright);
+  margin:10% 0 5%;
+  padding:1vw 5vw;
+  text-align: center;
+  transition: 250ms ease-out;
+}
+
+button:hover{
+  cursor: pointer;
+  background: var(--colorBright);
+  color: var(--colorDark);
+  box-shadow: var(--shadows);
+}
+
+.profile img{
+  width: 10vw;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3vw;
+}
+
+.detail{
+  font-size: var(--normalText);
+  transform: scale(1.2);
+  justify-content: center;
+}
+
+.row{
+  display: flex;
+  width: 100%;
+}
+
+.row *{
+  width: 100%;
+}
