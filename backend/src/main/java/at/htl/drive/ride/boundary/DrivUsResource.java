@@ -221,16 +221,10 @@ public class DrivUsResource {
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/users/postLogIn")
-    public Response postLogIn(LoginDto user) {
+    public Boolean postLogIn(LoginDto user) {
         System.out.println("bin im postLogIn");
-        try {
-            boolean valid = true;
-            valid = repository.postLogIn(user);
-            return Response.ok(valid).build();
-        }
-        catch (IllegalArgumentException ex) {
-            return Response.status(400, "User already exists").build();
-        }
+        boolean valid = repository.postLogIn(user);
+        return valid;
     }
 
     @Path("/getDriverOfNew")

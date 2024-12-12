@@ -129,18 +129,13 @@ export class UserService {
 
 
   loginValid(username: string | undefined, password: string | undefined): Observable<boolean> {
+    console.log(username)
     const body = { username, password };
-    console.log(this.http.post<boolean>(`${this.url}/users/postLogIn`, body),"asdfgh")
+    console.log(body)
+
     // Sende die Login-Daten an das Backend zur Überprüfung
-
-    if (typeof username === "string") {
-      sessionStorage.setItem('username', username)
-    }
-
-    sessionStorage.setItem('isloged','true');
-
-
-    return this.http.post<boolean>(`${this.url}/users/postLogIn`, body);
+    //console.log(this.http.post<boolean>(this.url + '/users/postLogIn', body))
+    return this.http.post<boolean>(this.url + '/users/postLogIn', body);
   }
 
   /*validateLogin(username?: string, password?: string ): boolean {
