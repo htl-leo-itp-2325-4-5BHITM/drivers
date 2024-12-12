@@ -131,6 +131,14 @@ public class DrivUsRepository {
         ride.setAvailableSeats(ride.availableSeats +1);
         em.persist(ride);
 
+        String jpql = "SELECT r.id FROM RideRegister r WHERE r.rideId = :id and r.username = :username";
+        TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+        query.setParameter("id", ruaDto.rideId());
+        query.setParameter("username", ruaDto.username());
+
+        RideRegister rideRegister = em.find(RideRegister.class, query.getSingleResult());
+        em.remove(rideRegister);
+
         /*String[] name = ruaDto.username().split(" ");
         String sql = "select d from DrivUser d " +
                 "where d.firstName = '" + name[0] + "' and d.lastName = '" + name[1] + "'";

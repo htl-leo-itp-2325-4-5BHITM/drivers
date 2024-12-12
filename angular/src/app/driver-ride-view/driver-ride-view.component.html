@@ -4,7 +4,6 @@
     <div class="ride-section">
       <div class="image">
         <app-map class="map" [ride]="selectedRide"></app-map>
-        <!--<img src="./img/placeholder.jpg" alt="">-->
       </div>
       <div class="ride-content">
 
@@ -12,24 +11,33 @@
           <p>From: </p>
           <input formControlName="placeOfDeparture" type="text" placeholder="{{ selectedRide?.placeOfDeparture }}" [disabled]="!canEditRide(selectedRide)">
 
+          <p>From coordinates: </p>
+          <input formControlName="placeOfDepartureC" type="text" placeholder="{{ selectedRide?.placeOfDepartureCoordinate }}" [disabled]="!canEditRide(selectedRide)">
+
           <p>To: </p>
           <input formControlName="placeOfArrival" type="text" placeholder="{{ selectedRide?.placeOfArrival }}" [disabled]="!canEditRide(selectedRide)">
 
+          <p>To coordinates: </p>
+          <input formControlName="placeOfArrivalC" type="text" placeholder="{{ selectedRide?.placeOfArrivalCoordinate}}" [disabled]="!canEditRide(selectedRide)">
+
+
           <div class="dateRow">
             <p>Date & Time: </p>
-
-            <input formControlName="departureTime" type="date" [value]="selectedRide?.departureTime | date: 'yyyy-MM-dd'" [disabled]="!canEditRide(selectedRide)">
-            <input formControlName="departureTimeTwo" type="time" [value]="selectedRide?.departureTime | date: 'HH:mm'" [disabled]="!canEditRide(selectedRide)">
+            <div>
+             <input formControlName="departureTimeTwo" type="time" [value]="selectedRide?.departureTime | date: 'HH:mm'" [disabled]="!canEditRide(selectedRide)">
+              <input formControlName="departureTime" type="date" [value]="selectedRide?.departureTime | date: 'yyyy-MM-dd'">
+              <!--<input formControlName="departureTimeTwo" type="time" [value]="selectedRide?.departureTime | date: 'HH:mm'">-->
+            </div>
 
           </div>
 
           <p>Empty Seats: </p>
           <input formControlName="availableSeats" type="number" placeholder="{{ selectedRide?.availableSeats }}" [disabled]="!canEditRide(selectedRide)">
 
-          <!--<button (click)="editButton()" class="edit">edit</button>-->
+
 
           <div *ngIf="selectedRide">
-            <button *ngIf="canEditRide(selectedRide)" (click)="editButton()" class="exit">edit</button>
+            <button *ngIf="canEditRide(selectedRide)" (click)="editButton()" class="exit">save changes</button>
           </div>
 
 

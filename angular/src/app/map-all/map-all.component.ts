@@ -28,12 +28,6 @@ export class MapAllComponent implements OnInit{
   setCenter() {
     if (this.ride.placeOfDepartureCoordinate != null && this.ride.placeOfArrivalCoordinate != null) {
 
-      /*let deplatlng = latLng(parseFloat((this.ride.placeOfDepartureCoordinate)[0]), parseFloat((this.ride.placeOfDepartureCoordinate)[1]));
-      let arrlatlng = latLng(parseFloat((this.ride.placeOfArrivalCoordinate)[0]), parseFloat((this.ride.placeOfArrivalCoordinate)[1]));
-
-      let center = latLng((deplatlng.lat + arrlatlng.lat) / 2, (deplatlng.lng + arrlatlng.lng) / 2)
-      return center.toString()*/
-
       const parseCoordinates = (coord: string): { x: number, y: number } => {
         const match = coord.match(/-?\d+(\.\d+)?/g); // Finde Zahlen mit optionalem Minus und Dezimalstellen
         if (!match || match.length < 2) {
@@ -79,14 +73,14 @@ export class MapAllComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log(this.ride.placeOfDepartureCoordinate)
+    //console.log(this.ride.placeOfDepartureCoordinate)
     this.center = this.setCenter()
-    console.log(this.center)
+    //console.log(this.center)
     if(this.ride.placeOfDepartureCoordinate != null && this.ride.placeOfArrivalCoordinate != null) {
       this.depC = this.swapCoordinates(this.ride.placeOfDepartureCoordinate);
       this.arrC = this.swapCoordinates(this.ride.placeOfArrivalCoordinate);
     }
-    console.log(this.arrC, this.depC)
+    //console.log(this.arrC, this.depC)
 
   }
 }

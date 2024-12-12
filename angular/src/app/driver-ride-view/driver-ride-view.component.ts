@@ -39,14 +39,18 @@ export class DriverRideViewComponent implements OnInit {
   availableSeats?: number;
   depatureTime?: Date;
   depatureTimeTwo?: Time;
+  abfortC?: string;
+  ankortC?: number;
 
 
   edit: FormGroup = new FormGroup({
     'placeOfDeparture': new FormControl(null, Validators.required),
+    'placeOfDepartureC': new FormControl(null),
     'placeOfArrival': new FormControl(null, Validators.required),
+    'placeOfArrivalC': new FormControl(null),
     'availableSeats': new FormControl(null, Validators.required),
-    'depatureTime': new FormControl(null, Validators.required),
-    'depatureTimeTwo': new FormControl(null, Validators.required)
+    'departureTime': new FormControl(null, Validators.required),
+    'departureTimeTwo': new FormControl(null, Validators.required)
   })
 
   toggleState() {
@@ -57,6 +61,7 @@ export class DriverRideViewComponent implements OnInit {
   }
 
   constructor(private userService: UserService,private rideService: RideService, private hardData: HardcodeService) {
+    //this.isBooked = this.setIsBooked()
   }
 
   /*async getDriverInfos() {
@@ -97,7 +102,8 @@ export class DriverRideViewComponent implements OnInit {
       //departureTime: this.selectedRide?.departureTime,
       //departureTimeTwo: this.selectedRide?.departureTime ? new Date(this.selectedRide?.departureTime).toISOString().slice(11, 16) : ''
       departureTime: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'yyyy-MM-dd', 'en') : ''],
-      departureTimeTwo: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'HH:mm', 'en') : '']
+     // departureTimeTwo: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'HH:mm', 'en') : '']
+     // departureTimeTwo: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'HH:mm', 'en') : '']
 
     });
 
@@ -109,11 +115,19 @@ export class DriverRideViewComponent implements OnInit {
       availableSeats: [this.selectedRide?.availableSeats || 0],
     });*/
 
+    this.edit.get('departureTime')?.disable();
+    if (this.canEditRide(this.selectedRide)) {
+      this.edit.get('departureTime')?.enable();
+    }
+
     if (!this.canEditRide(this.selectedRide)) {
       Object.keys(this.edit.controls).forEach(controlName => {
         this.edit.get(controlName)?.disable();
       });
     }
+
+    //console.log(this.selectedRide.driver)
+
 
 
     /*if (!canEdit) {
@@ -128,7 +142,25 @@ export class DriverRideViewComponent implements OnInit {
     }*/
   }
 
-
+  setIsBooked() {
+    let isBookedB = false;
+    let username = sessionStorage.getItem("username")
+    if(username === null) {
+      username = "false"
+    }
+    let id =1
+    console.log(this.selectedRide?.departureTime)
+    this.rideService.isSeatBooked(id, username).subscribe({
+      next: (isBooked) => {
+        console.log('Seat booking status before toggle:', isBooked);
+        isBookedB = isBooked === 1;
+      },
+      error: (error) => {
+        console.error('Error checking booking status:', error);
+      },
+    });
+    return isBookedB
+  }
 
 
   /*toggleBooking(ride: Ride) {
@@ -298,6 +330,8 @@ export class DriverRideViewComponent implements OnInit {
     this.availableSeats=this.edit.get('availableSeats')?.value;
     this.depatureTime=this.edit.get('depatureTime')?.value;
     this.depatureTimeTwo=this.edit.get('depatureTimeTwo')?.value;
+    this.abfortC=this.edit.get('abfortC')?.value;
+    //this.ankortC=this.edit.get('ankortC')?.value;
 
     console.log(this.placeOfDeparture, this.placeOfArrival, this.availableSeats, this.depatureTime, this.depatureTimeTwo)
   }
@@ -312,7 +346,9 @@ export class DriverRideViewComponent implements OnInit {
     const updatedRide = {
       id: this.selectedRide.id,
       placeOfDeparture: this.edit.get('placeOfDeparture')?.value,
+      abfortC: this.edit.get('abfortC')?.value,
       placeOfArrival: this.edit.get('placeOfArrival')?.value,
+      ankortC: this.edit.get('ankortC')?.value,
       availableSeats: this.edit.get('availableSeats')?.value,
       departureTime: this.mergeDateAndTime(
         this.edit.get('depatureTime')?.value,
@@ -322,15 +358,17 @@ export class DriverRideViewComponent implements OnInit {
 
     console.log("Updated Ride Data:", updatedRide);
 
+
+
     // Service-Funktion aufrufen, um die Daten an den Server zu senden
 
-    this.rideService.updateRide(updatedRide).subscribe({
+    /*this.rideService.updateRide(updatedRide).subscribe({
       next: response => alert('Ride updated successfully!'),
       error: err => {
         console.error('Error updating ride:', err);
         alert('Failed to update the ride. Please try again.');
       }
-    });
+    });*/
 
 
     /*this.rideService.updateRide(updatedRide).subscribe({
