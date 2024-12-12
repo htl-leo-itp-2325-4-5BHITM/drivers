@@ -342,7 +342,7 @@ export class DriverRideViewComponent implements OnInit {
     return `${date}T${time}:00`;
   }*/
 
-  editButton() {
+  /*editButton() {
     const updatedRide = {
       id: this.selectedRide.id,
       placeOfDeparture: this.edit.get('placeOfDeparture')?.value,
@@ -381,7 +381,42 @@ export class DriverRideViewComponent implements OnInit {
         alert('Failed to update the ride. Please try again.');
       }
     });*/
+  //}
+
+  editButton() {
+
+    /*if (this.edit.invalid) {
+      alert('Please fill out all required fields!');
+      return;
+    }*/
+
+    const updatedRide = {
+      id: this.selectedRide.id,
+      placeOfDeparture: this.edit.get('placeOfDeparture')?.value,
+      abfortC: this.edit.get('abfortC')?.value,
+      placeOfArrival: this.edit.get('placeOfArrival')?.value,
+      ankortC: this.edit.get('ankortC')?.value,
+      availableSeats: this.edit.get('availableSeats')?.value,
+      departureTime: this.mergeDateAndTime(
+        this.edit.get('depatureTime')?.value,
+        this.edit.get('depatureTimeTwo')?.value
+      ),
+    };
+
+    console.log("Updated Ride Data:", updatedRide);
+
+    this.rideService.updateRide(updatedRide).subscribe({
+      next: (response) => {
+        console.log('Ride updated successfully:', response);
+        alert('Ride updated successfully!');
+      },
+      error: (err) => {
+        console.error('Error updating ride:', err);
+        alert('Failed to update the ride. Please try again.');
+      },
+    });
   }
+
 
   checkLoginStatus() {
     const loggedInUsername = sessionStorage.getItem("username"); // Benutzername aus sessionStorage

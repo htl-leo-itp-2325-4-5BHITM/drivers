@@ -59,7 +59,7 @@ export class RideService {
       } else {
         console.error("newRegister is not defined or not an object.");
       }
-    } 
+    }
 
 
     console.log(newRegister)
@@ -79,10 +79,6 @@ export class RideService {
     if (ride.id != null) {
       newRegister.rideId = ride.id;
     }
-
-    //let user = sessionStorage.getItem("username");
-    //console.log(user)
-
     newRegister.username = "test";
 
     console.log(newRegister)
@@ -105,10 +101,13 @@ export class RideService {
     return this.http.post<number>(`http://localhost:8080/api/drivus/bookedSeatCheck`, payload);
   }
 
+  /*updateRide(ride: any) {
+    return this.http.put(`http://localhost:8080/api/drivus/rides/updateRide/${ride.id}`, ride);
+  }*/
+
   updateRide(ride: any) {
     return this.http.put(`http://localhost:8080/api/drivus/rides/updateRide/${ride.id}`, ride);
   }
-
 
 
 
