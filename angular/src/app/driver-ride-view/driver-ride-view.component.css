@@ -130,3 +130,35 @@
   box-shadow: none;
 }
 
+.row{
+  display: flex;
+  width: 50%;
+}
+
+.row *:last-child{
+  width: 5vw;
+}
+
+.row2{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.row2 *:last-child{
+  width: 5vw;
+}
+
+input{
+  font-family: var(--fontDrivUs), sans-serif;
+  color: var(--colorDark);
+  height: 3vh;
+  background: transparent;
+  outline: none;
+  padding-inline: 0;
+  padding-block: 0;
+  border: none;
+  border-bottom: var(--colorDark) solid 1px;
+  border-radius: 2px;
+}
