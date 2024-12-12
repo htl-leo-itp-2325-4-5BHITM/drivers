@@ -123,9 +123,9 @@ export class RideViewComponent implements OnInit, OnDestroy {
 
     this.rideService.filterRides(filter).subscribe((value) => {
       this.filteredRides = value;
-      console.log("eh des"+this.filteredRides);
+      //console.log("filtered rides "+this.filteredRides);
       this.rides = value;
-
+      console.log(this.rides)
     })
 
 

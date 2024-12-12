@@ -59,7 +59,7 @@ export class RideService {
       } else {
         console.error("newRegister is not defined or not an object.");
       }
-    } 
+    }
 
 
     console.log(newRegister)
