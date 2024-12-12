@@ -15,8 +15,8 @@ import {NgIf} from '@angular/common';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  usernameNew?: string;
-  passwordNew?: string;
+  username?: string;
+  password?: string;
   submitted = false;
 
   login: FormGroup = new FormGroup({
@@ -32,8 +32,8 @@ export class LoginComponent {
   loginFunction(){
     //this.submitted = true;
 
-    this.usernameNew=this.login.get('username')?.value;
-    this.passwordNew=this.login.get('password')?.value;
+    this.username=this.login.get('username')?.value;
+    this.password=this.login.get('password')?.value;
 
     //this.submitted = sessionStorage.getItem('loginValid') === 'true';
 
