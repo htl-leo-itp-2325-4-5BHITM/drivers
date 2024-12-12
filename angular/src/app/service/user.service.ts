@@ -112,10 +112,34 @@ export class UserService {
     return returnValidation;
   }*/
 
+  /*getUsernameAndPassword(password: string | undefined, username: string | undefined): {
+    username: string;
+    password: string
+  } | null {
+    const username = sessionStorage.getItem('username');
+    const password = sessionStorage.getItem('password'); // Angenommen, das Passwort wird hier gespeichert.
+
+    if (username && password) {
+      return { username, password };
+    } else {
+      console.warn('Username or password is missing in sessionStorage.');
+      return null;
+    }
+  }*/
+
+
   loginValid(username: string | undefined, password: string | undefined): Observable<boolean> {
     const body = { username, password };
-
+    console.log(this.http.post<boolean>(`${this.url}/users/postLogIn`, body),"asdfgh")
     // Sende die Login-Daten an das Backend zur Überprüfung
+
+    if (typeof username === "string") {
+      sessionStorage.setItem('username', username)
+    }
+
+    sessionStorage.setItem('isloged','true');
+
+
     return this.http.post<boolean>(`${this.url}/users/postLogIn`, body);
   }
 
