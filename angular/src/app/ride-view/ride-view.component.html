@@ -1,31 +1,42 @@
 <app-navbar></app-navbar>
+
 <div class="full-Page" [ngClass]="{'noScroll': showDriver}">
   <div class="filter-box">
-    <button (click)="showFilter=true" routerLink="/rides" class="filter-button"><img src="./img/icons/filter.png" alt=""> <p>Filter</p></button>
-    <app-filter *ngIf="showFilter" (stateChangeFilter)="onStateChangeFilter($event)"></app-filter>
-    <div class="br"></div>
+    <button (click)="showFilter=true" routerLink="/rides" class="filter-button">
+      <img src="./img/icons/filter.png" alt="">
+      <p>Filter</p>
+    </button>
+
+    <!-- Filter component -->
+    <app-filter *ngIf="showFilter"
+                (stateChangeFilter)="onStateChangeFilter($event)"
+                (filteredRidesEmitter)="onFilteredRidesReceived($event)">
+    </app-filter>
   </div>
 
-<div class="content">
-  <ul>
-    <li *ngFor="let ride of rides">
-      <div class="rideItemView" (click)="showDriver=true;driver=ride.driver; selectedRide=ride">
-        <app-map-all class="map" [ride]="ride"></app-map-all>
-        <img src="./img/{{ ride.placeOfDeparture}}.png" alt="map">
-        <!--<img src="./img/{{ ride.placeOfDeparture}}.png" alt="placeholder">-->
-        <div class="text">
-          <p>From: {{ ride.placeOfDeparture }}</p>
-          <p>To: {{ ride.placeOfArrival }}</p>
-          <div class="dateRow">
-            <p>{{ ride.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
-            <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
+  <div class="content">
+    <ul>
+      <li *ngFor="let ride of rides">
+        <div class="rideItemView" (click)="onRideClick(ride)"> <!-- Use onRideClick to set selectedRide -->
+          <app-map-all class="map" [ride]="ride"></app-map-all>
+          <img src="./img/{{ ride.placeOfDeparture }}.png" alt="map">
+          <div class="text">
+            <p>From: {{ ride.placeOfDeparture }}</p>
+            <p>To: {{ ride.placeOfArrival }}</p>
+            <div class="dateRow">
+              <p>{{ ride.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
+              <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
+            </div>
           </div>
         </div>
-      </div>
       </li>
     </ul>
   </div>
-  <app-driver-ride-view *ngIf="showDriver" (stateChangeDriver)="onStateChangeDriver($event)"
-                        [driverString]="driver" [selectedRide]="selectedRide"></app-driver-ride-view>
-</div>
 
+  <!-- Driver details shown only when a ride is selected -->
+  <app-driver-ride-view *ngIf="showDriver"
+                        (stateChangeDriver)="onStateChangeDriver($event)"
+                        [driverString]="driver"
+                        [selectedRide]="selectedRide">
+  </app-driver-ride-view>
+</div>
