@@ -9,6 +9,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {Timestamp} from 'rxjs';
 
 import {RouterLink} from '@angular/router';
+import {DateTime} from 'luxon';
 
 
 @Component({
@@ -44,13 +45,13 @@ export class DriverRideViewComponent implements OnInit {
 
 
   edit: FormGroup = new FormGroup({
-    'placeOfDeparture': new FormControl(null, Validators.required),
+    'placeOfDeparture': new FormControl(null),
     'placeOfDepartureC': new FormControl(null),
-    'placeOfArrival': new FormControl(null, Validators.required),
+    'placeOfArrival': new FormControl(null),
     'placeOfArrivalC': new FormControl(null),
-    'availableSeats': new FormControl(null, Validators.required),
-    'departureTime': new FormControl(null, Validators.required),
-    'departureTimeTwo': new FormControl(null, Validators.required)
+    'availableSeats': new FormControl(null),
+    'departureTime': new FormControl(null),
+    'departureTimeTwo': new FormControl(null)
   })
 
   toggleState() {
@@ -390,17 +391,23 @@ export class DriverRideViewComponent implements OnInit {
       return;
     }*/
 
+
+    const combinedDateTime = DateTime.fromFormat(
+      `${this.edit.get('departureTime')?.value} ${this.edit.get('departureTimeTwo')?.value}`,
+      'yyyy-MM-dd HH:mm'
+    );
+
+    console.log("date: ",this.edit.get('departureTimeTwo')?.value)
+
     const updatedRide = {
       id: this.selectedRide.id,
+      departureTime: combinedDateTime,
       placeOfDeparture: this.edit.get('placeOfDeparture')?.value,
-      abfortC: this.edit.get('abfortC')?.value,
       placeOfArrival: this.edit.get('placeOfArrival')?.value,
-      ankortC: this.edit.get('ankortC')?.value,
       availableSeats: this.edit.get('availableSeats')?.value,
-      departureTime: this.mergeDateAndTime(
-        this.edit.get('depatureTime')?.value,
-        this.edit.get('depatureTimeTwo')?.value
-      ),
+      driver: this.driver?.username,
+      abfortC: this.edit.get('abfortC')?.value,
+      ankortC: this.edit.get('ankortC')?.value,
     };
 
     console.log("Updated Ride Data:", updatedRide);
