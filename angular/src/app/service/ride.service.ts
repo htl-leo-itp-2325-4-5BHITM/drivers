@@ -106,7 +106,7 @@ export class RideService {
   }*/
 
   updateRide(ride: any) {
-    return this.http.put(`http://localhost:8080/api/drivus/rides/updateRide/${ride.id}`, ride);
+    return this.http.put(`http://localhost:8080/api/drivus/rides/changeRide`, ride);
   }
 
 
