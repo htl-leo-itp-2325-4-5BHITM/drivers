@@ -108,3 +108,92 @@ li:hover{
 .filter-button:hover{
   box-shadow: 5px 3px 15px #333;
 }
+form{
+  display: flex;
+  flex-direction: column;
+  width: 15vw;
+  background: var(--colorDark);
+  padding: .5vw 2vw;
+  border-radius: 5px;
+}
+
+
+.filter-title{
+  color: var(--colorBright);
+  font-size: var(--normalText);
+}
+input{
+  font-family: var(--fontDrivUs);
+  color: var(--colorBright);
+  height: 3vw;
+  background: transparent;
+  outline: none;
+  padding-inline: 0;
+  padding-block: 0;
+  border: none;
+  border-bottom: var(--colorBright) solid 1px;
+  border-radius: 2px;
+}
+
+input::placeholder {
+  color: var(--inactiveColorBright);
+}
+
+.date-box{
+  display: flex;
+  justify-content: space-between;
+}
+
+button{
+  font-family: var(--fontDrivUs), sans-serif;
+  display: flex;
+  outline: none;
+  border-radius: 2vw;
+  border: var(--inactiveColorBright) solid;
+  background:var(--colorDark);
+  color: var(--inactiveColorBright);
+  margin: 1.2vw 0;
+  padding:.6vw 1.2vw;
+  text-align: center;
+  transition: 250ms ease-out;
+  justify-self: center;
+  cursor: pointer;
+}
+
+button:hover{
+  background: var(--colorDark);
+  color: var(--colorBright);
+  box-shadow: none;
+}
+
+.center-button{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.date-box input{
+  width: 30%;
+}
+
+.check-box{
+  margin-top: 1vw;
+  display: flex;
+  align-items: center;
+  font-size: var(--smallText);
+  color: var(--colorBright);
+}
+
+.check-box input{
+  border-radius: 5px;
+  border:none;
+  outline: none;
+  background: red;
+  color:var(--colorDark);
+  font-weight: bold;
+}
+
+.check-box p{
+  margin-left: .3vw;
+}
