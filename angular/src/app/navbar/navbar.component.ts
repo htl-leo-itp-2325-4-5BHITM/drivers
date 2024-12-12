@@ -48,21 +48,16 @@ export class NavbarComponent implements OnInit{
       console.log("noch nicht einglogged")
     }
   }
-*/
 
+   /*/
   logedButton(event: Event) {
-    if(sessionStorage.getItem('loginValid')=="true"){
-      this.router.navigate(['account']);
-    } else{
-      this.router.navigate(['login']);
-    }
+    if(sessionStorage.getItem('loginValid')=="true") this.isLoggedIn=true
     // Verhindert, dass der Klick sofort das Routing ausführt
-    /*event.preventDefault();
+    event.preventDefault();
     // Logik zur Aktualisierung des Links
     this.link = this.isLoggedIn ? '/account' : '/login';
     // Jetzt navigieren
-    this.router.navigate([this.link]);*/
+    this.router.navigate([this.link]);
   }
-
 
 }

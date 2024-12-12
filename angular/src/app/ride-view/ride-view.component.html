@@ -2,7 +2,24 @@
 <div class="full-Page" [ngClass]="{'noScroll': showDriver}">
   <div class="filter-box">
     <button (click)="showFilter=true" routerLink="/rides" class="filter-button"><img src="./img/icons/filter.png" alt=""> <p>Filter</p></button>
-    <app-filter *ngIf="showFilter" (stateChangeFilter)="onStateChangeFilter($event)"></app-filter>
+    <form [formGroup]="filterOption" (ngSubmit)="filterFunction()">
+      <p class="filter-title">Filter Options:</p>
+      <input placeholder="From" formControlName="from">
+      <input placeholder="To" formControlName="to">
+      <div class="date-box">
+        <input placeholder="Date" onfocus="(this.type='date')"
+               onblur="(this.type='text')" formControlName="date">
+        <input placeholder="Time" onfocus="(this.type='time')"
+               onblur="(this.type='text')" formControlName="time">
+      </div>
+      <div class="check-box">
+        <input type="checkbox" formControlName="showOwnRides">
+        <p>Show my rides only</p>
+      </div>
+      <div class="center-button">
+        <button (click)="toggleState()">Apply Filter</button>
+      </div>
+    </form>
     <div class="br"></div>
   </div>
 
