@@ -24,4 +24,11 @@ export class NavbarComponent {
     this.router.navigate(['/']);
   }
 
+  logedButton() {
+    if (sessionStorage.getItem('loginValid') == "true"){
+      console.log("eingellogged")
+    }else{
+      console.log("noch nicht einglogged")
+    }
+  }
 }
