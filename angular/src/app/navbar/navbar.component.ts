@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit{
 
   ngOnInit() {
     console.log("im ng")
-    if (sessionStorage.getItem('loginValid') == 'true') {
+    if (sessionStorage.getItem('isloged') == 'true') {
       this.LogedInText = "Account Info";
     } else {
       this.LogedInText = "Log In"
@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit{
 
    /*/
   logedButton(event: Event) {
-    if(sessionStorage.getItem('loginValid')=="true") this.isLoggedIn=true
+    if(sessionStorage.getItem('isloged')=="true") this.isLoggedIn=true
     // Verhindert, dass der Klick sofort das Routing ausführt
     event.preventDefault();
     // Logik zur Aktualisierung des Links

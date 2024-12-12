@@ -22,7 +22,7 @@ export class AccountComponent {
   }
 
   LogUserOut() {
-    sessionStorage.setItem('loginValid','false');
+    sessionStorage.setItem('isloged','false');
     this.router.navigate(['/']);
   }
 }
