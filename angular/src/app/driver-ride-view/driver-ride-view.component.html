@@ -30,18 +30,18 @@
             </div>
 
           </div>
-          <!--
-                  <p>Empty Seats: </p>
-                  <input formControlName="availableSeats" type="number" placeholder="{{ selectedRide?.availableSeats }}" [disabled]="!canEditRide(selectedRide)">
+
+          <p>Empty Seats: </p>
+          <input formControlName="availableSeats" type="number" placeholder="{{ selectedRide?.availableSeats }}" [disabled]="!canEditRide(selectedRide)">
 
 
 
-                  <div *ngIf="selectedRide">
-                    <button *ngIf="canEditRide(selectedRide)" (click)="editButton()" class="exit">edit</button>
-                  </div>
+          <div *ngIf="selectedRide">
+            <button *ngIf="canEditRide(selectedRide)" (click)="editButton()" class="exit">save changes</button>
+          </div>
 
 
-        -->
+
         </form>
 
       </div>

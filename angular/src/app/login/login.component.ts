@@ -55,6 +55,10 @@ export class LoginComponent {
 
         console.log("submitted " + this.submitted)
 
+
+        sessionStorage.setItem('username', <string>this.username);
+        sessionStorage.setItem('isloged', String(valid));
+
         this.router.navigate(['/rides']);
 
         this.loginError = false;
