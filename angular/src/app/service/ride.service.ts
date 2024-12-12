@@ -99,6 +99,7 @@ export class RideService {
 
 
 
+
   filterRides(filteredText: Filter)  {
     return this.http.post<Ride[]>(this.url + '/getFilteredCount', filteredText);
   }

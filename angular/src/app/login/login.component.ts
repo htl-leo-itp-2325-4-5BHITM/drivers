@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, NgModule} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router, RouterLink} from "@angular/router";
 import {UserService} from '../service/user.service'
