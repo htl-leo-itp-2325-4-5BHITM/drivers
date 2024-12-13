@@ -12,10 +12,6 @@
         <input placeholder="Time" onfocus="(this.type='time')"
                onblur="(this.type='text')" formControlName="time">
       </div>
-      <!--<div class="check-box">
-        <input type="checkbox" formControlName="showOwnRides">
-        <p>Show my rides only</p>
-      </div>-->
       <div class="center-button">
         <button (click)="toggleState()">Apply Filter</button>
         <button (click)="clearFilters()">Clear Filters</button>
@@ -29,8 +25,6 @@
     <li *ngFor="let ride of rides">
       <div class="rideItemView" (click)="showDriver=true;driver=ride.driver; selectedRide=ride">
         <app-map-all class="map" [ride]="ride"></app-map-all>
-        <!--<img src="./img/{{ ride.placeOfDeparture}}.png" alt="map">-->
-        <!--<img src="./img/{{ ride.placeOfDeparture}}.png" alt="placeholder">-->
         <div class="text">
           <p>From: {{ ride.placeOfDeparture }}</p>
           <p>To: {{ ride.placeOfArrival }}</p>

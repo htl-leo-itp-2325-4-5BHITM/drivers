@@ -65,13 +65,6 @@ export class DriverRideViewComponent implements OnInit {
     //this.isBooked = this.setIsBooked()
   }
 
-  /*async getDriverInfos() {
-    console.log("im getDriverInfo")
-    let username: string = this.selectedRide.driver;
-    this.driver = await this.userService.getUserDetailsForRide(username);
-    console.log("DEEES DRIVER:", this.driver);
-  }*/
-
   async getDriverInfos() {
     console.log("im getDriverInfo");
     let username: string = this.selectedRide.driver;
@@ -83,12 +76,6 @@ export class DriverRideViewComponent implements OnInit {
     //this.cdr.detectChanges();
     console.log("Driver details:", this.driver);
   }
-
-  /*ngOnInit(): void {
-    this.driver = this.hardData.hardcodedDriver.find(d => {return d.username == this.driverString})
-    this.getDriverInfos();
-    //this.selectedRide = this.hardData.hardcodedRide.find(d => {return d.driver == this.driverString})
-  }*/
 
   async ngOnInit(): Promise<void> {
     this.driver = await this.userService.getUserDetailsForRide(this.driverString);
@@ -108,14 +95,6 @@ export class DriverRideViewComponent implements OnInit {
 
     });
 
-    /*this.edit = this.fb.group({
-      placeOfDeparture: [this.selectedRide?.placeOfDeparture || ''],
-      placeOfArrival: [this.selectedRide?.placeOfArrival || ''],
-      departureTime: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'yyyy-MM-dd', 'en') : ''],
-      departureTimeTwo: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'HH:mm', 'en') : ''],
-      availableSeats: [this.selectedRide?.availableSeats || 0],
-    });*/
-
     this.edit.get('departureTime')?.disable();
     if (this.canEditRide(this.selectedRide)) {
       this.edit.get('departureTime')?.enable();
@@ -126,21 +105,6 @@ export class DriverRideViewComponent implements OnInit {
         this.edit.get(controlName)?.disable();
       });
     }
-
-    //console.log(this.selectedRide.driver)
-
-
-
-    /*if (!canEdit) {
-      Object.keys(this.edit.controls).forEach((controlName) => {
-        this.edit.get(controlName)?.disable();
-      });
-    }*/
-    //checkLoginStatus();
-
-    /*if (this.selectedRide?.id && this.driver?.username) {
-      this.checkBookingStatus(this.driver.username); // Nur aufrufen, wenn der 'username' vorhanden ist
-    }*/
   }
 
   setIsBooked() {
@@ -162,34 +126,6 @@ export class DriverRideViewComponent implements OnInit {
     });
     return isBookedB
   }
-
-
-  /*toggleBooking(ride: Ride) {
-    const username = sessionStorage.getItem('username');
-    if (!username) {
-      alert('Please log in to reserve or cancel a ride!');
-      return;
-    }
-
-    /*this.rideService.isSeatBooked(ride.id, username).subscribe({
-      next: (data) => console.log('Response from server:', data),
-      error: (err) => console.error('API error:', err),
-    });*/
-
-    /*this.rideService.isSeatBooked(ride.id, username).subscribe({
-      next: (data) => {
-        console.log('Response from server:', data); // Gibt die Daten des Servers aus
-      },
-      error: (err) => {
-        console.error('API error:', err); // Gibt API-Fehler aus
-      },
-      complete: () => {
-        console.log('Request completed successfully.');
-      }
-    });
-
-
-  }*/
 
   toggleBooking(ride: Ride) {
     const username = sessionStorage.getItem('username');
@@ -257,18 +193,6 @@ export class DriverRideViewComponent implements OnInit {
     }
   }
 
-  /*getSeat(ride: Ride){
-
-    if(sessionStorage.getItem("isloged")){
-      this.rideService.getSeat(ride)
-      alert("ride reserve")
-    } else {
-      alert("Please log in to reserve a ride!")
-    }
-    window.location.reload();
-
-  }*/
-
   editRide(ride: Ride) {
     let username: string = this.selectedRide.driver;
     console.log(username + "... das ist der user")
@@ -285,38 +209,6 @@ export class DriverRideViewComponent implements OnInit {
       alert("You only can edit your rides!")
     }
   }
-
-  /*canEditRide(ride: Ride): boolean {
-    const loggedInUsername = sessionStorage.getItem("username");
-    console.log("Logged-in username:", loggedInUsername);
-    console.log("Ride driver:", ride.driver);
-
-    let isAuthorized = false
-
-    if (loggedInUsername == ride.driver){
-      isAuthorized = true
-    }
-
-    console.log("Authorization result:", isAuthorized);
-
-    return isAuthorized;
-  }*/
-
-  /*canEditRide(ride: Ride): boolean {
-    const loggedInUsername = sessionStorage.getItem("username");
-    //console.log("Logged-in username:", loggedInUsername);
-    //console.log("Ride driver:", ride.driver);
-
-    let isAuthorized = false;
-
-    if (loggedInUsername === ride.driver) {
-      isAuthorized = true;
-    }
-
-    //console.log("Authorization result:", isAuthorized);
-
-    return isAuthorized;
-  }*/
 
   canEditRide(ride: Ride): boolean {
     const loggedInUsername = sessionStorage.getItem("username");
@@ -337,60 +229,7 @@ export class DriverRideViewComponent implements OnInit {
     console.log(this.placeOfDeparture, this.placeOfArrival, this.availableSeats, this.depatureTime, this.depatureTimeTwo)
   }
 
-  //protected readonly sessionStorage = sessionStorage;
-
-  /*private mergeDateAndTime(date: string, time: string): string {
-    return `${date}T${time}:00`;
-  }*/
-
-  /*editButton() {
-    const updatedRide = {
-      id: this.selectedRide.id,
-      placeOfDeparture: this.edit.get('placeOfDeparture')?.value,
-      abfortC: this.edit.get('abfortC')?.value,
-      placeOfArrival: this.edit.get('placeOfArrival')?.value,
-      ankortC: this.edit.get('ankortC')?.value,
-      availableSeats: this.edit.get('availableSeats')?.value,
-      departureTime: this.mergeDateAndTime(
-        this.edit.get('depatureTime')?.value,
-        this.edit.get('depatureTimeTwo')?.value
-      ),
-    };
-
-    console.log("Updated Ride Data:", updatedRide);
-
-
-
-    // Service-Funktion aufrufen, um die Daten an den Server zu senden
-
-    /*this.rideService.updateRide(updatedRide).subscribe({
-      next: response => alert('Ride updated successfully!'),
-      error: err => {
-        console.error('Error updating ride:', err);
-        alert('Failed to update the ride. Please try again.');
-      }
-    });*/
-
-
-    /*this.rideService.updateRide(updatedRide).subscribe({
-      next: (response) => {
-        console.log('Ride updated successfully:', response);
-        alert('Ride updated successfully!');
-      },
-      error: (err) => {
-        console.error('Error updating ride:', err);
-        alert('Failed to update the ride. Please try again.');
-      }
-    });*/
-  //}
-
   editButton() {
-
-    /*if (this.edit.invalid) {
-      alert('Please fill out all required fields!');
-      return;
-    }*/
-
 
     const combinedDateTime = DateTime.fromFormat(
       `${this.edit.get('departureTime')?.value} ${this.edit.get('departureTimeTwo')?.value}`,
@@ -425,13 +264,4 @@ export class DriverRideViewComponent implements OnInit {
     });
   }
 
-
-  checkLoginStatus() {
-    const loggedInUsername = sessionStorage.getItem("username"); // Benutzername aus sessionStorage
-    /*if (loggedInUsername && this.driver?.username === loggedInUsername) {
-      this.isLoggedInAsDriver = true; // Wenn der Fahrer und der eingeloggte Benutzer übereinstimmen
-    } else {
-      this.isLoggedInAsDriver = false; // Wenn sie nicht übereinstimmen
-    }*/
-  }
 }
