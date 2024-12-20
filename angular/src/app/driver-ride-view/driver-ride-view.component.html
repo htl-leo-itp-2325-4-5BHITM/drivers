@@ -63,7 +63,7 @@
           <div *ngIf="selectedRide">
             <button *ngIf="canEditRide(selectedRide)" (click)="editButton()" class="exit">save changes</button>
           </div>
-          </div>
+            </div>
 
         </form>
 
@@ -77,23 +77,12 @@
       <p>Email: {{ driver?.emailAddress }}</p>
       <p>Phone: {{ driver?.phoneNr }}</p>
 
-      <!--<div class="centerButton" *ngIf="canEditRide(selectedRide)">
-        <button  (click)="editRide(selectedRide)" class="edit">Edit</button>
-      </div>-->
-
-      <!--<div class="centerButton" >
-        <button (click)="getSeat(selectedRide)" class="book">book</button>
-      </div>-->
-
       <div class="centerButton">
         <button (click)="toggleBooking(selectedRide)"  class="book">
           {{ isBooked ? 'unbook' : 'book' }}
         </button>
 
       </div>
-
-      <!--<button *ngIf="sessionStorage.getItem('isloged') === 'true'" (click)="toggleState()" class="exit">X</button>-->
-
 
       <button (click)="toggleState()" class="exit">X</button>
     </div>

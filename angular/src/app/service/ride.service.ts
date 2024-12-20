@@ -2,9 +2,6 @@ import {Injectable, model} from '@angular/core';
 import {BackendRide, RegisterRide, Ride} from '../model/ride.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
-import {User} from '../model/user.model';
-import {DriverRideViewComponent} from '../driver-ride-view/driver-ride-view.component';
-import {Driver} from './hardcode.service';
 import {Filter} from '../model/filter.model';
 
 @Injectable({
@@ -22,10 +19,6 @@ export class RideService {
   getRides(): Observable<Ride[]> {
     return this.http.get<Ride[]>(this.url);
   }
-
-  /*getRides2() : Observable<Ride[]>{
-    this.ridesSubject.next(this.getRides())
-  }*/
 
   createNewRide(ride: BackendRide) {
     console.log("in createRide")
@@ -45,12 +38,6 @@ export class RideService {
     if (ride.id != null) {
       newRegister.rideId = ride.id;
     }
-
-    //let user = sessionStorage.getItem("username");
-    //console.log(user)
-
-    //newRegister.username = "test";
-    //newRegister.username = user;
 
     let user = sessionStorage.getItem("username");
 
@@ -92,27 +79,18 @@ export class RideService {
     this.getRides()
   }
 
-  /*isSeatBooked(rideId: number, username: string): Observable<number> {
-    const payload = { rideId, username }; // Daten für die API
-    return this.http.post<number>(`${this.url}/bookedSeatCheck`, payload);
-  }*/
-
   isSeatBooked(rideId: number, username: string): Observable<number> {
     // Erstellung des Payload-Objekts für die API-Anfrage
     const payload = {rideId, username};
     return this.http.post<number>(`http://localhost:8080/api/drivus/bookedSeatCheck`, payload);
   }
 
-  /*updateRide(ride: any) {
-    return this.http.put(`http://localhost:8080/api/drivus/rides/updateRide/${ride.id}`, ride);
-  }*/
-
   updateRide(ride: any) {
     return this.http.post(`http://localhost:8080/api/drivus/rides/changeRide`, ride);
   }
 
 
-  filterRides(filteredText: Filter) {
+  filterRides(filteredText: Filter)  {
     return this.http.post<Ride[]>(this.url + '/getFilteredCount', filteredText);
   }
 
