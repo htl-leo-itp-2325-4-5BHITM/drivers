@@ -103,24 +103,11 @@ export class RideService {
     }
   }
 
-  async getCoordinates() {
-    let coordinates = await fetch("https://api.geoapify.com/v1/geocode/search?text=leonding&format=json&apiKey=079e1704b7364a71bf61544ad1928dcb")
+  async getCoordinates(city: string | undefined) {
+    let coordinates = await fetch("https://api.geoapify.com/v1/geocode/search?text="+city+"&format=json&apiKey=079e1704b7364a71bf61544ad1928dcb")
     let coordinatesJson = await coordinates.json();
-    console.log(coordinatesJson)
+    //console.log(coordinatesJson)
     return coordinatesJson;
-    /*let coordinates = await fetch("https://api.geoapify.com/v1/geocode/search?text=leonding&format=json&apiKey=079e1704b7364a71bf61544ad1928dcb")
-      .then((response) => {
-        response.json().then((data) => {
-          console.log(data);
-          return data;
-        }).catch((error) => {
-          console.log('error', error)
-        });
-      })
-    let coordinatesJson = await coordinates.json();
-    return hostEmailJson;
-    console.log(coordinates)
-    return coordinates;*/
   }
 }
 

@@ -57,14 +57,10 @@ export class RideRegisterViewComponent {
 
   async registerRideFunction() {
 
-    let coordinates: JSON = await this.rideService.getCoordinates()
-    console.log("coordinates in component ", coordinates)
-    //coordinates.
-
     this.abfort = this.registerRide.get('abfort')?.value;
-    this.abfortC = this.registerRide.get('abfortC')?.value;
+    //this.abfortC = this.registerRide.get('abfortC')?.value;
     this.ankort = this.registerRide.get('ankort')?.value;
-    this.ankortC = this.registerRide.get('ankortC')?.value;
+    //this.ankortC = this.registerRide.get('ankortC')?.value;
     this.datum = this.registerRide.get('datum')?.value;
     this.abfzeit = this.registerRide.get('abfzeit')?.value;
     this.fplatz = this.registerRide.get('fplatz')?.value;
@@ -77,18 +73,34 @@ export class RideRegisterViewComponent {
 
     console.log(this.abfort)
 
+    let coordinates1 = await this.rideService.getCoordinates(this.abfort)
+    //console.log("coordinates in component ", coordinates1)
+    let lat = coordinates1.results[0].lat;
+    let lon = coordinates1.results[0].lon;
+
+    const coordinatesFrom = `${lat},${lon}`;
+    console.log(coordinatesFrom);
+
+
+    let coordinates2 = await this.rideService.getCoordinates(this.ankort)
+    //console.log("coordinates in component ", coordinates2)
+    let lat2 = coordinates2.results[0].lat;
+    let lon2 = coordinates2.results[0].lon;
+
+    const coordinatesTo = `${lat2},${lon2}`;
+    console.log(coordinatesTo);
+
+
     if (this.abfort != null) {
       newRide.placeOfDeparture = this.abfort;
     }
     if (this.ankort != null) {
       newRide.placeOfArrival = this.ankort;
     }
-    if (this.abfortC != null) {
-      newRide.placeOfDepartureCoordinate = this.abfortC;
-    }
-    if (this.ankortC != null) {
-      newRide.placeOfArrivalCoordinate = this.ankortC;
-    }
+
+    newRide.placeOfDepartureCoordinate = coordinatesFrom;
+    newRide.placeOfArrivalCoordinate = coordinatesTo;
+
     if (this.fplatz != null) {
       newRide.availableSeats = this.fplatz;
     }

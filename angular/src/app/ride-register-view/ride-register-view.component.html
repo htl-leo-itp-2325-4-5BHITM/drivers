@@ -13,9 +13,9 @@
     <span *ngIf="!registerRide.get('abfort')?.valid && registerRide.get('abfort')?.touched"
           class="help-block">Departure point is required!</span>
 
-    <div class="grid-item">
+    <!--<div class="grid-item">
       <input type="text" id="abfortC" formControlName="abfortC" placeholder="Coordinates">
-    </div>
+    </div>-->
 
     <div class="grid-item">
       <input type="text" id="ankort" formControlName="ankort" placeholder="To">
@@ -23,9 +23,9 @@
     <span *ngIf="!registerRide.get('ankort')?.valid && registerRide.get('ankort')?.touched"
           class="help-block">Arrival location is required!</span>
 
-    <div class="grid-item">
+    <!--<div class="grid-item">
       <input type="text" id="ankortC" formControlName="ankortC" placeholder="Coordinates">
-    </div>
+    </div>-->
 
     <div class="grid-item">
       <input placeholder="Date"
