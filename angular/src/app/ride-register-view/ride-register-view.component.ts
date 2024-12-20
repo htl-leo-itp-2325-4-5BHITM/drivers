@@ -55,22 +55,25 @@ export class RideRegisterViewComponent {
     'fplatz': new FormControl(null, Validators.required)
   })
 
-  registerRideFunction() {
+  async registerRideFunction() {
 
+    let coordinates: JSON = await this.rideService.getCoordinates()
+    console.log("coordinates in component ", coordinates)
+    //coordinates.
 
-    this.abfort=this.registerRide.get('abfort')?.value;
-    this.abfortC=this.registerRide.get('abfortC')?.value;
-    this.ankort=this.registerRide.get('ankort')?.value;
-    this.ankortC=this.registerRide.get('ankortC')?.value;
-    this.datum=this.registerRide.get('datum')?.value;
-    this.abfzeit=this.registerRide.get('abfzeit')?.value;
-    this.fplatz=this.registerRide.get('fplatz')?.value;
+    this.abfort = this.registerRide.get('abfort')?.value;
+    this.abfortC = this.registerRide.get('abfortC')?.value;
+    this.ankort = this.registerRide.get('ankort')?.value;
+    this.ankortC = this.registerRide.get('ankortC')?.value;
+    this.datum = this.registerRide.get('datum')?.value;
+    this.abfzeit = this.registerRide.get('abfzeit')?.value;
+    this.fplatz = this.registerRide.get('fplatz')?.value;
 
     const combinedDateTime = DateTime.fromFormat(
       `${this.datum} ${this.abfzeit}`,
       'yyyy-MM-dd HH:mm'
     );
-    let newRide :BackendRide = <BackendRide>{};
+    let newRide: BackendRide = <BackendRide>{};
 
     console.log(this.abfort)
 
@@ -90,22 +93,22 @@ export class RideRegisterViewComponent {
       newRide.availableSeats = this.fplatz;
     }
     if (this.abfzeit != null && this.datum) {
-      newRide.departureTime =  combinedDateTime;
+      newRide.departureTime = combinedDateTime;
     }
 
-    if (sessionStorage.getItem('isloged')=='true'){
+    if (sessionStorage.getItem('isloged') == 'true') {
       newRide.driver = sessionStorage.getItem('username');
 
       this.submitted = true
 
-      if (this.registerRide.valid){
+      if (this.registerRide.valid) {
 
         this.submitted = false
         console.log('new ride valid.');
-        console.log("submitted"+this.submitted)
+        console.log("submitted" + this.submitted)
 
         this.rideService.createNewRide(newRide);
-        console.log(this.abfort,this.ankort, this.fplatz, this.datum, this.abfzeit)
+        console.log(this.abfort, this.ankort, this.fplatz, this.datum, this.abfzeit)
 
         console.log('Saved')
         //window.location.reload();
@@ -114,7 +117,7 @@ export class RideRegisterViewComponent {
 
       } else {
         //this.submitted = true
-        console.log("submitted "+this.submitted)
+        console.log("submitted " + this.submitted)
         console.log("please fill out correct")
       }
     } else {

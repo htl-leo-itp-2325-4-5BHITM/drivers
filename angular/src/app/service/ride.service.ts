@@ -13,11 +13,13 @@ import {Filter} from '../model/filter.model';
 export class RideService {
 
   private url = "http://localhost:8080/api/drivus/rides"
+
   //private ridesSubject: Subject<Ride> = new Subject<Ride>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getRides() : Observable<Ride[]>{
+  getRides(): Observable<Ride[]> {
     return this.http.get<Ride[]>(this.url);
   }
 
@@ -38,7 +40,7 @@ export class RideService {
   getSeat(ride: Ride) {
     console.log("in getSeat: ", ride)
 
-    let newRegister :RegisterRide = <RegisterRide>{};
+    let newRegister: RegisterRide = <RegisterRide>{};
 
     if (ride.id != null) {
       newRegister.rideId = ride.id;
@@ -74,7 +76,7 @@ export class RideService {
   unbookSeat(ride: Ride) {
     console.log("unbookseat this.seat: ", ride)
 
-    let newRegister :RegisterRide = <RegisterRide>{};
+    let newRegister: RegisterRide = <RegisterRide>{};
 
     if (ride.id != null) {
       newRegister.rideId = ride.id;
@@ -97,7 +99,7 @@ export class RideService {
 
   isSeatBooked(rideId: number, username: string): Observable<number> {
     // Erstellung des Payload-Objekts für die API-Anfrage
-    const payload = { rideId, username };
+    const payload = {rideId, username};
     return this.http.post<number>(`http://localhost:8080/api/drivus/bookedSeatCheck`, payload);
   }
 
@@ -110,27 +112,46 @@ export class RideService {
   }
 
 
-
-
-  filterRides(filteredText: Filter)  {
+  filterRides(filteredText: Filter) {
     return this.http.post<Ride[]>(this.url + '/getFilteredCount', filteredText);
   }
 
   getRides2(filteredText: Filter) {
     console.log(filteredText)
-    if(filteredText) {
+    if (filteredText) {
       return this.http.get<Ride[]>(this.url);
     } else {
       return this.http.post<Ride[]>(this.url + '/getFilteredCount', filteredText);
     }
   }
 
+  async getCoordinates() {
+    let coordinates = await fetch("https://api.geoapify.com/v1/geocode/search?text=leonding&format=json&apiKey=079e1704b7364a71bf61544ad1928dcb")
+    let coordinatesJson = await coordinates.json();
+    console.log(coordinatesJson)
+    return coordinatesJson;
+    /*let coordinates = await fetch("https://api.geoapify.com/v1/geocode/search?text=leonding&format=json&apiKey=079e1704b7364a71bf61544ad1928dcb")
+      .then((response) => {
+        response.json().then((data) => {
+          console.log(data);
+          return data;
+        }).catch((error) => {
+          console.log('error', error)
+        });
+      })
+    let coordinatesJson = await coordinates.json();
+    return hostEmailJson;
+    console.log(coordinates)
+    return coordinates;*/
+  }
 }
+
 
   export async function getSeat(ride: Ride) {
-  console.log(ride)
-  var url = "./api/drivus/rides/registerForRide"
-  var id = ride.id
-  console.log(id)
+    console.log(ride)
+    var url = "./api/drivus/rides/registerForRide"
+    var id = ride.id
+    console.log(id)
+  }
 
-}
+
