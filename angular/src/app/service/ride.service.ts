@@ -11,13 +11,11 @@ export class RideService {
 
   private url = "http://localhost:8080/api/drivus/rides"
 
-  //private ridesSubject: Subject<Ride> = new Subject<Ride>();
-
   constructor(private http: HttpClient) {
   }
 
-  getRides(): Observable<Ride[]> {
-    return this.http.get<Ride[]>(this.url);
+  getRides(category: string): Observable<Ride[]> {
+    return this.http.get<Ride[]>(this.url + "/" + category);
   }
 
   createNewRide(ride: BackendRide) {
@@ -50,14 +48,13 @@ export class RideService {
       }
     }
 
-
     console.log(newRegister)
 
     this.http.post(this.url + '/registerForRide', newRegister).subscribe(registerRide => {
       console.log('booked ride: ', registerRide);
     });
 
-    this.getRides()
+    this.getRides("available")
   }
 
   unbookSeat(ride: Ride) {
@@ -76,7 +73,7 @@ export class RideService {
       console.log('booked ride: ', registerRide);
     });
 
-    this.getRides()
+    this.getRides("available")
   }
 
   isSeatBooked(rideId: number, username: string): Observable<number> {
@@ -94,14 +91,14 @@ export class RideService {
     return this.http.post<Ride[]>(this.url + '/getFilteredCount', filteredText);
   }
 
-  getRides2(filteredText: Filter) {
+  /*getRides2(filteredText: Filter) {
     console.log(filteredText)
     if (filteredText) {
       return this.http.get<Ride[]>(this.url);
     } else {
       return this.http.post<Ride[]>(this.url + '/getFilteredCount', filteredText);
     }
-  }
+  }*/
 
   async getCoordinates(city: string | undefined) {
     let coordinates = await fetch("https://api.geoapify.com/v1/geocode/search?text="+city+"&format=json&apiKey=079e1704b7364a71bf61544ad1928dcb")

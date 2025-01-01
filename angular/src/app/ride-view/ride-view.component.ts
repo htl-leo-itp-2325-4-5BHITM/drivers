@@ -47,7 +47,7 @@ export class RideViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Initially load all rides
-    this.ridesSubscription = this.rideService.getRides().subscribe((rides) => {
+    this.ridesSubscription = this.rideService.getRides("available").subscribe((rides) => {
       this.rides = rides;
       console.log('All Rides:', this.rides);
     });
@@ -55,6 +55,13 @@ export class RideViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.ridesSubscription.unsubscribe();
+  }
+
+  getRidesPerButton(category :string){
+    this.ridesSubscription = this.rideService.getRides(category).subscribe((rides) => {
+      this.rides = rides;
+      console.log('All Rides:', this.rides);
+    });
   }
 
   // This method will be called when the filter is applied and filtered rides are emitted
@@ -145,7 +152,7 @@ export class RideViewComponent implements OnInit, OnDestroy {
   clearFilters() {
     this.filterOption.reset()
     this.showFilter=false;
-    this.ridesSubscription = this.rideService.getRides().subscribe((rides) => {
+    this.ridesSubscription = this.rideService.getRides("available").subscribe((rides) => {
       this.rides = rides;
       console.log('All Rides:', this.rides);
     });

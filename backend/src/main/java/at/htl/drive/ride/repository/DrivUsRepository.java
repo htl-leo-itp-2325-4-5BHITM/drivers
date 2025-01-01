@@ -10,7 +10,6 @@ import com.github.javafaker.Faker;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
@@ -27,20 +26,20 @@ public class DrivUsRepository {
     EntityManager em;
 
 
-    public List<Ride> all() {
-        return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
-    }
+    public List<Ride> all(String category) {
+        switch (category) {
+            case "availlable":
+                return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
+            case "offered":
+                return em.createQuery("select r from Ride r where r.driver = 'janine' order by r.departureTime", Ride.class).getResultList();
+            case "booked":
+                return em.createQuery("select r from Ride r where r.availableSeats = 3 order by r.departureTime", Ride.class).getResultList();
+            default:
+                return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
 
-    /*public List<Ride> pagination(int page, int ridesPerPage) {
-        String sql = "select r from Ride r order by r.id desc";
-        TypedQuery<Ride> query = em.createQuery(sql, Ride.class);
-        try {
-            return query.getResultList().subList((page-1)+(ridesPerPage-1)*(page-1), ((page-1)+(ridesPerPage-1)*(page-1))+ridesPerPage);
-        } catch (IndexOutOfBoundsException ex) {
-            return query.getResultList().subList((page-1)+(ridesPerPage-1)*(page-1), query.getResultList().size());
+            //return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
         }
-
-    }*/
+    }
 
     public Long getRidesCount() {
         String sql = "select count(r) from Ride r";
@@ -148,8 +147,14 @@ public class DrivUsRepository {
         query.setParameter("id", ruaDto.rideId());
         query.setParameter("username", ruaDto.username());
 
-        RideRegister rideRegister = em.find(RideRegister.class, query.getSingleResult());
-        em.remove(rideRegister);
+        if(query.getResultList().size() == 0) {
+            //registerForRide(ruaDto);
+        }
+        else {
+            RideRegister rideRegister = em.find(RideRegister.class, query.getSingleResult());
+            em.remove(rideRegister);
+        }
+
 
         /*String[] name = ruaDto.username().split(" ");
         String sql = "select d from DrivUser d " +

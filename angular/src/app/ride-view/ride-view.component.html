@@ -13,14 +13,21 @@
                onblur="(this.type='text')" formControlName="time">
       </div>
       <div class="center-button">
-        <button (click)="toggleState()">Apply Filter</button>
         <button (click)="clearFilters()">Clear Filters</button>
+        <button (click)="toggleState()">Apply Filter</button>
       </div>
     </form>
     <div class="br"></div>
   </div>
 
+  <div id="ridesCategory">
+    <button (click)="getRidesPerButton('available')">available rides</button>
+    <button (click)="getRidesPerButton('booked')">booked rides</button>
+    <button (click)="getRidesPerButton('offered')">my offered rides</button>
+  </div>
+
 <div class="content">
+
   <ul>
     <li *ngFor="let ride of rides">
       <div class="rideItemView" (click)="showDriver=true;driver=ride.driver; selectedRide=ride">
