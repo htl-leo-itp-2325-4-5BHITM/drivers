@@ -55,6 +55,9 @@ export class MapComponent implements AfterViewInit {
       marker(deplatlng, {icon: myIcon}).addTo(this.map);
       marker(arrlatlng, {icon: myIcon}).addTo(this.map);
       tiles.addTo(this.map);
+
+      const bounds = L.latLngBounds([deplatlng, arrlatlng]);
+      this.map.fitBounds(bounds, { padding: [50, 50] })
     }
   }
 }

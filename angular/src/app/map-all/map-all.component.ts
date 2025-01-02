@@ -19,6 +19,10 @@ export class MapAllComponent implements OnInit{
   center :string = ""
   depC :string = ""
   arrC :string = ""
+  minLat :string = ""
+  minLon :string = ""
+  maxLat :string = ""
+  maxLon :string = ""
 
 
   constructor() {
@@ -79,8 +83,28 @@ export class MapAllComponent implements OnInit{
     if(this.ride.placeOfDepartureCoordinate != null && this.ride.placeOfArrivalCoordinate != null) {
       this.depC = this.swapCoordinates(this.ride.placeOfDepartureCoordinate);
       this.arrC = this.swapCoordinates(this.ride.placeOfArrivalCoordinate);
+
+      this.getZoom(this.arrC,this.depC)
     }
     //console.log(this.arrC, this.depC)
+
+  }
+
+  private getZoom(arrC: string, depC: string) {
+    const coordinates = [
+      arrC,
+      depC
+    ];
+
+    const parsedCoords = coordinates.map(coord => {
+      const [lon, lat] = coord.split(',').map(Number);
+      return { lon, lat };
+    });
+
+    this.minLon = String(Math.min(...parsedCoords.map(coord => coord.lon)));
+    this.minLat = String(Math.min(...parsedCoords.map(coord => coord.lat)));
+    this.maxLon = String(Math.max(...parsedCoords.map(coord => coord.lon)));
+    this.maxLat = String(Math.max(...parsedCoords.map(coord => coord.lat)));
 
   }
 }
