@@ -82,18 +82,15 @@ export class DriverRideViewComponent implements OnInit {
     this.driver = await this.userService.getUserDetailsForRide(this.driverString);
 
     const canEdit = this.canEditRide(this.selectedRide);
-
     this.getDriverInfos();
+
+    const savedBookingStatus = sessionStorage.getItem("seatIsBooked");
+    this.seatIsBooked = savedBookingStatus === 'true'; // Status wiederherstellen
 
     this.edit.patchValue({
       placeOfDeparture: this.selectedRide?.placeOfDeparture,
       placeOfArrival: this.selectedRide?.placeOfArrival,
-      //departureTime: this.selectedRide?.departureTime,
-      //departureTimeTwo: this.selectedRide?.departureTime ? new Date(this.selectedRide?.departureTime).toISOString().slice(11, 16) : ''
       departureTime: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'yyyy-MM-dd', 'en') : ''],
-     // departureTimeTwo: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'HH:mm', 'en') : '']
-     // departureTimeTwo: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'HH:mm', 'en') : '']
-
     });
 
     this.edit.get('departureTime')?.disable();
@@ -148,58 +145,23 @@ export class DriverRideViewComponent implements OnInit {
         // Wenn der Sitz bereits gebucht ist, stornieren
         this.seatIsBooked = false;
         sessionStorage.setItem("seatIsBooked",String(this.seatIsBooked))
+        this.rideService.unbookSeat(ride);
         alert('Sitz wurde erfolgreich storniert.');
       } else {
         // Wenn der Sitz noch nicht gebucht ist, buchen
         this.seatIsBooked = true;
         sessionStorage.setItem("seatIsBooked",String(this.seatIsBooked))
+        this.rideService.getSeat(ride);
         alert('Sitz wurde erfolgreich gebucht.');
       }
     });
   }
 
-
-  /*toggleBooking(ride: Ride) {
-     const username = sessionStorage.getItem('username');
-     const checkIfIsLoggedIn: boolean = sessionStorage.getItem("isLoged") === "true";
-
-     if (checkIfIsLoggedIn == false) {
-       alert('Please log in to reserve or cancel a ride!');
-       return;
-     }
-
-     // Das Payload-Objekt wird hier erstellt
-     const payload = { rideId: ride.id, username: username };
-
-     // Debugging-Ausgabe, um sicherzustellen, dass die Daten korrekt sind
-     console.log('Payload:', payload);
-
-     this.rideService.isSeatBooked(ride.id, username).subscribe({
-       next: (isBooked) => {
-         console.log('Rückgabewert von isSeatBooked:', isBooked);
-         if (isBooked == 1) { // ggf. === verwenden
-           console.log("unbook seat...")
-           this.unbookSeat(ride); // Bereits gebucht, also stornieren
-         } else {
-           this.getSeat(ride); // Nicht gebucht, also buchen
-         }
-       },
-       error: (error) => {
-         console.error('Fehler beim Abrufen des Buchungsstatus:', error);
-       }
-     });
-
-   }*/
-
-  /*getSeat(ride: Ride) {
-    if (sessionStorage.getItem("isloged")) {
-      this.rideService.getSeat(ride);
-      alert("Ride reserved");
-      this.isBooked = true; // Zustand auf 'gebucht' setzen
-    } else {
-      alert("Please log in to reserve a ride!");
-    }
-  }*/
+  canBookRide(ride: Ride): boolean {
+    const loggedInUsername = sessionStorage.getItem("username");
+    const isLoggedIn = sessionStorage.getItem("isloged") === "true";
+    return isLoggedIn && loggedInUsername === ride.driver;
+  }
 
   checkBookingStatus(rideId: string | undefined) {
     if (!rideId) {
@@ -215,23 +177,6 @@ export class DriverRideViewComponent implements OnInit {
   private mergeDateAndTime(date: string, time: string): string {
     return `${date}T${time}:00.000Z`; // Falls UTC benötigt wird
   }
-
-
-  /*unbookSeat(ride: Ride) {
-    //console.log(sessionStorage.getItem("isloged"),"adfasdfasdf")
-    const checkIfIsLoggedIn: boolean = sessionStorage.getItem("isLoged") === "true";
-
-    console.log(checkIfIsLoggedIn,"adfasdfasdf")
-
-    if (checkIfIsLoggedIn) {
-      this.rideService.unbookSeat(ride); // Beispiel-Funktion zum Stornieren
-      alert("Ride cancelled");
-      //localStorage.setItem('isloged', String(false))
-      this.isBooked = false; // Zustand auf 'nicht gebucht' setzen
-    } /*else {
-      alert("Please log in to cancel a ride!");
-    }*/
-  //}
 
   editRide(ride: Ride) {
     let username: string = this.selectedRide.driver;

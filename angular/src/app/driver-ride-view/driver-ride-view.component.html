@@ -78,7 +78,7 @@
       <p>Phone: {{ driver?.phoneNr }}</p>
 
       <div class="centerButton">
-        <button (click)="toggleBooking(selectedRide)"  class="book">
+        <button *ngIf="!canBookRide(selectedRide)" (click)="toggleBooking(selectedRide)" class="book">
           {{ seatIsBooked ? 'unbook' : 'book' }}
         </button>
 
