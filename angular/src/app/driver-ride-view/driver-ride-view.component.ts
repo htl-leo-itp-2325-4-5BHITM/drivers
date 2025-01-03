@@ -34,6 +34,7 @@ export class DriverRideViewComponent implements OnInit {
   @Output() stateChangeDriver: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   isBooked: boolean = false;
+  seatIsBooked = false;
 
   placeOfDeparture?: string;
   placeOfArrival?: string;
@@ -131,27 +132,27 @@ export class DriverRideViewComponent implements OnInit {
     const isLogged = Boolean(sessionStorage.getItem('isloged') === 'true'); // Überprüfung der Anmeldung
 
     if (!isLogged) {
-      alert('Bitte melden Sie sich an, um eine Buchung vorzunehmen.');
+      alert('LogIn to book a seat!');
       return;
     }
 
     const username = sessionStorage.getItem('username'); // Username aus dem Local Storage
     if (!username) {
-      alert('Benutzername fehlt. Bitte erneut anmelden.');
+      alert('Username is missing');
       return;
     }
 
     // Überprüfen, ob der Sitz bereits gebucht ist
     this.rideService.isSeatBooked(ride.id, username).subscribe((bookedSeats) => {
-      if (bookedSeats > 0) {
+      if ( this.seatIsBooked) {
         // Wenn der Sitz bereits gebucht ist, stornieren
-        this.isBooked = false;
-        sessionStorage.setItem("isBooked",String(this.isBooked))
+        this.seatIsBooked = false;
+        sessionStorage.setItem("seatIsBooked",String(this.seatIsBooked))
         alert('Sitz wurde erfolgreich storniert.');
       } else {
         // Wenn der Sitz noch nicht gebucht ist, buchen
-        this.isBooked = true;
-        sessionStorage.setItem("isBooked",String(this.isBooked))
+        this.seatIsBooked = true;
+        sessionStorage.setItem("seatIsBooked",String(this.seatIsBooked))
         alert('Sitz wurde erfolgreich gebucht.');
       }
     });
