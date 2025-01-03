@@ -162,3 +162,48 @@ input{
   border-bottom: var(--colorDark) solid 1px;
   border-radius: 2px;
 }
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Abstand zwischen den Zeilen */
+  width: 100%;
+  max-width: 600px; /* Maximale Breite */
+}
+
+.form-row {
+  display: flex;
+  align-items: center; /* Zentriert die Labels vertikal */
+  justify-content: space-between; /* Platz zwischen Label und Input */
+  gap: 1rem; /* Abstand zwischen Label und Eingabefeld */
+}
+
+label {
+  width: 30%; /* Breite der Labels für Ausrichtung */
+  font-weight: bold;
+}
+
+input {
+  width: 70%; /* Breite der Eingabefelder */
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save {
+  padding: 0.7rem 1.5rem;
+  background-color: var(--colorDark);;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save:hover {
+  background-color: #263b67;
+}
