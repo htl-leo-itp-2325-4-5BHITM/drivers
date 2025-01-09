@@ -37,10 +37,10 @@
       <button (click)="getRidesPerButton('available')" class="filter-button"><img
         src="./img/icons/filter.png" alt="">
         <p>Available</p></button>
-      <button *ngIf="!sessionStorage.getItem('isloged')" (click)="getRidesPerButton('booked')" class="filter-button"><img
+      <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('booked')" class="filter-button"><img
         src="./img/icons/filter.png" alt="">
         <p>Booked</p></button>
-      <button *ngIf="!sessionStorage.getItem('isloged')" (click)="getRidesPerButton('offered')" class="filter-button"><img
+      <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('offered')" class="filter-button"><img
         src="./img/icons/filter.png" alt="">
         <p>My rides</p></button>
     </div>
@@ -63,7 +63,6 @@
   </div>
   <div class="content">
 
-<<<<<<< HEAD
     <ul>
       <li *ngFor="let ride of rides">
         <div class="rideItemView" (click)="showDriver=true;driver=ride.driver; selectedRide=ride">
@@ -75,26 +74,6 @@
               <p>{{ ride.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
               <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
             </div>
-=======
-  <div id="ridesCategory">
-    <button (click)="getRidesPerButton('available')">available rides</button>
-    <button *ngIf="!sessionStorage.getItem('isloged')" (click)="getRidesPerButton('booked')">booked rides</button>
-    <button *ngIf="!sessionStorage.getItem('isloged')" (click)="getRidesPerButton('offered')">my offered rides</button>
-  </div>
-
-<div class="content">
-
-  <ul>
-    <li *ngFor="let ride of rides">
-      <div class="rideItemView" (click)="showDriver=true;driver=ride.driver; selectedRide=ride">
-        <app-map-all class="map" [ride]="ride"></app-map-all>
-        <div class="text">
-          <p>From: {{ ride.placeOfDeparture }}</p>
-          <p>To: {{ ride.placeOfArrival }}</p>
-          <div class="dateRow">
-            <p>{{ ride.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
-            <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
->>>>>>> 68a15b7828be07d161d1b3fd3b62707a28d73c35
           </div>
         </div>
       </li>

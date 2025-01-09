@@ -42,7 +42,7 @@ export class RideViewComponent implements OnInit, OnDestroy {
   driver: string = '';  // To display the driver of the selected ride
 
   constructor(private rideService: RideService, private router: Router, private hardCoded: HardcodeService) {
-    this.rides=this.hardCoded.hardcodedRide;
+    this.rides = this.hardCoded.hardcodedRide;
   }
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class RideViewComponent implements OnInit, OnDestroy {
     this.ridesSubscription.unsubscribe();
   }
 
-  getRidesPerButton(category :string){
+  getRidesPerButton(category: string) {
     this.ridesSubscription = this.rideService.getRides(category).subscribe((rides) => {
       this.rides = rides;
       console.log('All Rides:', this.rides);
@@ -87,17 +87,17 @@ export class RideViewComponent implements OnInit, OnDestroy {
   }
 
   // FILTER TEIL:
-  seeFilters: boolean=false;
-  seeRides: boolean=false;
+  seeFilters: boolean = false;
+  seeRides: boolean = false;
   @Output() stateChangeFilter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  from:string=""
-  to:string=""
+  from: string = ""
+  to: string = ""
   date: Date = new Date();
   time: Date = new Date();
-  showOwnRides:boolean=false;
+  showOwnRides: boolean = false;
 
-  filteredRides :Ride[] = [];
+  filteredRides: Ride[] = [];
 
   filterOption: FormGroup = new FormGroup({
     'from': new FormControl(''),
@@ -108,10 +108,10 @@ export class RideViewComponent implements OnInit, OnDestroy {
   })
 
   filterFunction() {
-    this.from=this.filterOption.get('from')?.value;
-    this.to=this.filterOption.get('to')?.value;
-    this.date=this.filterOption.get('date')?.value;
-    this.time=this.filterOption.get('time')?.value;
+    this.from = this.filterOption.get('from')?.value;
+    this.to = this.filterOption.get('to')?.value;
+    this.date = this.filterOption.get('date')?.value;
+    this.time = this.filterOption.get('time')?.value;
 
     console.log(this.from, this.to, this.date, this.time)
 
@@ -120,7 +120,7 @@ export class RideViewComponent implements OnInit, OnDestroy {
       'yyyy-MM-dd HH:mm'
     );
 
-    let filter :Filter = <Filter>{};
+    let filter: Filter = <Filter>{};
 
     if (this.from != null) {
       filter.placeOfDeparture = this.from;
@@ -138,27 +138,26 @@ export class RideViewComponent implements OnInit, OnDestroy {
       console.log(this.rides)
     })
 
-    this.showOwnRides=this.filterOption.get('showOwnRides')?.value;
+    this.showOwnRides = this.filterOption.get('showOwnRides')?.value;
   }
 
   toggleState() {
-    this.seeFilters=false;
+    this.seeFilters = false;
     //this.showFilter=false;
     this.stateChangeFilter.emit(this.seeFilters);
-    this.seeRides=true
+    this.seeRides = true
     this.router.navigate(['/rides'])
   }
 
   clearFilters() {
     this.filterOption.reset()
-    this.showFilter=false;
+    this.showFilter = false;
     this.ridesSubscription = this.rideService.getRides("available").subscribe((rides) => {
       this.rides = rides;
       console.log('All Rides:', this.rides);
     });
   }
 
-    protected readonly sessionStorage = sessionStorage;
   protected readonly sessionStorage = sessionStorage;
-  protected readonly sessionStorage = sessionStorage;
+
 }
