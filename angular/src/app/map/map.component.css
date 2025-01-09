@@ -4,13 +4,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  margin: 30px;
-  width: 25vw;
-  height: 25vh;
+  width: 50%;
+  height: 40%;
 }
 
 .map-frame {
-  border: 2px solid black;
   height: 100%;
 }
 
