@@ -45,11 +45,11 @@ public class DrivUsResource {
     }
 
     @PermitAll
-    @Path("/rides/{category}")
+    @Path("/rides/{category}/{username}")
     @GET
-    public Response all(@PathParam("category") String category) {
+    public Response all(@PathParam("category") String category, @PathParam("username") String username) {
         System.out.println("bin im all");
-        var rides = repository.all(category);
+        var rides = repository.all(category, username);
         var dtos = rides.stream().map(rideMapper::toResource);
         return Response.ok(dtos).build();
     }

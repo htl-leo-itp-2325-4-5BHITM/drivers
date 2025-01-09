@@ -22,8 +22,8 @@
 
   <div id="ridesCategory">
     <button (click)="getRidesPerButton('available')">available rides</button>
-    <button (click)="getRidesPerButton('booked')">booked rides</button>
-    <button (click)="getRidesPerButton('offered')">my offered rides</button>
+    <button *ngIf="!sessionStorage.getItem('isloged')" (click)="getRidesPerButton('booked')">booked rides</button>
+    <button *ngIf="!sessionStorage.getItem('isloged')" (click)="getRidesPerButton('offered')">my offered rides</button>
   </div>
 
 <div class="content">

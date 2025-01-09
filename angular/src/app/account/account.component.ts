@@ -23,6 +23,7 @@ export class AccountComponent {
 
   LogUserOut() {
     sessionStorage.setItem('isloged','false');
+    sessionStorage.removeItem("username")
     this.router.navigate(['/']);
   }
 }

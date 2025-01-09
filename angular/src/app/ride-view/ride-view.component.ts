@@ -157,4 +157,6 @@ export class RideViewComponent implements OnInit, OnDestroy {
       console.log('All Rides:', this.rides);
     });
   }
+
+    protected readonly sessionStorage = sessionStorage;
 }

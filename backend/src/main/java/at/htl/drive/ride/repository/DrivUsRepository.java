@@ -10,6 +10,7 @@ import com.github.javafaker.Faker;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
@@ -26,14 +27,26 @@ public class DrivUsRepository {
     EntityManager em;
 
 
-    public List<Ride> all(String category) {
+    public List<Ride> all(String category, String username) {
+        if(username.equals("none")) {
+            return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
+        }
+
         switch (category) {
-            case "availlable":
-                return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
+            case "available":
+                Query query = em.createQuery("select r from Ride r where r.driver <> :username order by r.departureTime", Ride.class);
+                query.setParameter("username", username);
+                return query.getResultList();
             case "offered":
-                return em.createQuery("select r from Ride r where r.driver = 'janine' order by r.departureTime", Ride.class).getResultList();
+                Query query1 = em.createQuery("select r from Ride r where r.driver = :username order by r.departureTime", Ride.class);
+                query1.setParameter("username", username);
+                return query1.getResultList();
             case "booked":
-                return em.createQuery("select r from Ride r where r.availableSeats = 3 order by r.departureTime", Ride.class).getResultList();
+                Query query2 = em.createQuery("select r " +
+                        "from RideRegister rr join Ride r on rr.rideId = r.id " +
+                        "where rr.username = :username", Ride.class);
+                query2.setParameter("username", username);
+                return query2.getResultList();
             default:
                 return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
 
