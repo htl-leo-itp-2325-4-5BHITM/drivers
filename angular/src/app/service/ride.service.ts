@@ -15,7 +15,12 @@ export class RideService {
   }
 
   getRides(category: string): Observable<Ride[]> {
-    return this.http.get<Ride[]>(this.url + "/" + category);
+    let username = sessionStorage.getItem("username")
+    if(username == null) {
+      username = "none"
+    }
+    console.log("check username in getRides " + username)
+    return this.http.get<Ride[]>(this.url + "/" + category + "/" + username);
   }
 
   createNewRide(ride: BackendRide) {
