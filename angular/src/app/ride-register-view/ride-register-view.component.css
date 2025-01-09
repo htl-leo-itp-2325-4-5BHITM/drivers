@@ -1,5 +1,8 @@
 .content{
   background: var(--colorBeige);
+  overflow: hidden;
+  justify-content: center;
+  display: flex;
 }
 
 
@@ -12,14 +15,15 @@ form {
   box-shadow: 10px 10px 20px #111;
   border-radius: 15px;
   overflow: hidden;
+  width: 60vw;
+  height: 40vw;
 }
 
 .register-image {
   width: 50%;
   background-image: url("../../../public/img/background_option9.jpg");
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: 80% 0;
 }
 
 .register-content {
@@ -28,6 +32,7 @@ form {
   justify-content: space-around;
   align-items: center;
   width: 50%;
+  padding-top: 2vw;
 }
 
 .register-grid {
@@ -35,7 +40,6 @@ form {
   flex-direction: column;
   justify-content: space-evenly;
   margin: 0;
-  height: 80%;
   padding: 0;
 }
 
@@ -46,6 +50,10 @@ form {
 
 .grid-item::placeholder {
   color: var(--inactiveColorBright);
+}
+
+h2{
+  font-size: var(--mediumText);
 }
 
 .grid-item input{

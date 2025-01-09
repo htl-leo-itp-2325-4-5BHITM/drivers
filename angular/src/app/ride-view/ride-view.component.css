@@ -69,45 +69,6 @@ li:hover{
   scroll-snap-type: y mandatory;
 }
 
-.filter-box{
-  padding-top: 5vw;
-  margin-left: 7vw;
-}
-
-.br{
-  margin:1vw 0;
-  content: "";
-  height: 2px;
-  background: var(--colorDark);
-  width: 85vw;
-}
-
-.filter-button{
-  transform:scale(.8) translateX(-1vw);
-  height: 3vw;
-  background: var(--colorDark);
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  padding: 1vw;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-.filter-button p{
-  color: var(--colorBright);
-  font-size: var(--normalText);
-  font-family: var(--fontDrivUs);
-  margin-left: 2vw;
-}
-.filter-button img{
-  width: 2vw;
-  height: 2vw;
-  filter: invert(93%) sepia(5%) saturate(286%) hue-rotate(131deg) brightness(96%) contrast(94%);}
-
-.filter-button:hover{
-  box-shadow: 5px 3px 15px #333;
-}
 form{
   display: flex;
   flex-direction: column;
@@ -196,4 +157,47 @@ button:hover{
 
 .check-box p{
   margin-left: .3vw;
+}
+
+.menu-boxes{
+  display: flex;
+}
+.menu-box-main{
+  padding-top: 3vw;
+  margin-left: 7vw;
+}
+
+.br{
+  margin:1vw 0;
+  content: "";
+  height: 2px;
+  background: var(--colorDark);
+  width: 85vw;
+}
+
+.filter-button{
+  transform:scale(.8) translateX(-1vw);
+  height: 3vw;
+  background: var(--colorDark);
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 1vw;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.filter-button p{
+  color: var(--colorBright);
+  font-size: var(--normalText);
+  font-family: var(--fontDrivUs);
+  margin-left: 2vw;
+}
+.filter-button img{
+  width: 2vw;
+  height: 2vw;
+  filter: invert(93%) sepia(5%) saturate(286%) hue-rotate(131deg) brightness(96%) contrast(94%);}
+
+.filter-button:hover{
+  box-shadow: 5px 3px 15px #333;
 }

@@ -1,7 +1,49 @@
 <app-navbar></app-navbar>
 <div class="full-Page" [ngClass]="{'noScroll': showDriver}">
+  <!--
   <div class="filter-box">
-    <button (click)="showFilter=!this.showFilter" routerLink="/rides" class="filter-button"><img src="./img/icons/filter.png" alt=""> <p>Filter</p></button>
+    <button (click)="showFilter=!this.showFilter" routerLink="/rides" class="filter-button"><img
+      src="./img/icons/filter.png" alt="">
+      <p>Filter</p></button>
+    <form *ngIf="showFilter" [formGroup]="filterOption" (ngSubmit)="filterFunction()">
+      <p class="filter-title">Filter Options:</p>
+      <input placeholder="From" formControlName="from">
+      <input placeholder="To" formControlName="to">
+      <div class="date-box">
+        <input placeholder="Date" onfocus="(this.type='date')"
+               onblur="(this.type='text')" formControlName="date">
+        <input placeholder="Time" onfocus="(this.type='time')"
+               onblur="(this.type='text')" formControlName="time">
+      </div>
+      <div class="center-button">
+        <button (click)="clearFilters()">Clear Filters</button>
+        <button (click)="toggleState()">Apply Filter</button>
+      </div>
+    </form>
+
+  </div>
+  <div class="rides-category">
+    <button (click)="getRidesPerButton('available')" class="filter-button">available rides</button>
+    <button (click)="getRidesPerButton('booked')">booked rides</button>
+    <button (click)="getRidesPerButton('offered')">my offered rides</button>
+  </div>
+  <div class="br"></div>
+-->
+  <div class="menu-box-main">
+    <div class="menu-boxes">
+      <button (click)="showFilter=!this.showFilter" routerLink="/rides" class="filter-button"><img
+        src="./img/icons/filter.png" alt="">
+        <p>Filter</p></button>
+      <button (click)="getRidesPerButton('available')" class="filter-button"><img
+        src="./img/icons/filter.png" alt="">
+        <p>Available</p></button>
+      <button (click)="getRidesPerButton('booked')" class="filter-button"><img
+        src="./img/icons/filter.png" alt="">
+        <p>Booked</p></button>
+      <button (click)="getRidesPerButton('offered')" class="filter-button"><img
+        src="./img/icons/filter.png" alt="">
+        <p>My rides</p></button>
+    </div>
     <form *ngIf="showFilter" [formGroup]="filterOption" (ngSubmit)="filterFunction()">
       <p class="filter-title">Filter Options:</p>
       <input placeholder="From" formControlName="from">
@@ -19,28 +61,21 @@
     </form>
     <div class="br"></div>
   </div>
+  <div class="content">
 
-  <div id="ridesCategory">
-    <button (click)="getRidesPerButton('available')">available rides</button>
-    <button (click)="getRidesPerButton('booked')">booked rides</button>
-    <button (click)="getRidesPerButton('offered')">my offered rides</button>
-  </div>
-
-<div class="content">
-
-  <ul>
-    <li *ngFor="let ride of rides">
-      <div class="rideItemView" (click)="showDriver=true;driver=ride.driver; selectedRide=ride">
-        <app-map-all class="map" [ride]="ride"></app-map-all>
-        <div class="text">
-          <p>From: {{ ride.placeOfDeparture }}</p>
-          <p>To: {{ ride.placeOfArrival }}</p>
-          <div class="dateRow">
-            <p>{{ ride.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
-            <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
+    <ul>
+      <li *ngFor="let ride of rides">
+        <div class="rideItemView" (click)="showDriver=true;driver=ride.driver; selectedRide=ride">
+          <app-map-all class="map" [ride]="ride"></app-map-all>
+          <div class="text">
+            <p>From: {{ ride.placeOfDeparture }}</p>
+            <p>To: {{ ride.placeOfArrival }}</p>
+            <div class="dateRow">
+              <p>{{ ride.departureTime | date: 'EEE, dd.MM.yyyy' }}</p>
+              <p>{{ ride.departureTime | date: 'hh:mm' }}</p>
+            </div>
           </div>
         </div>
-      </div>
       </li>
     </ul>
   </div>
