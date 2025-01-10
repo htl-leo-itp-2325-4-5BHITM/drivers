@@ -1,74 +1,86 @@
-import {Component, NgModule} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router, RouterLink} from "@angular/router";
-import {UserService} from '../service/user.service'
-import {NgIf} from '@angular/common';
+import { Observable, startWith, map } from 'rxjs';
+import { UserService } from '../service/user.service';
+import { Router } from '@angular/router';
+
+export interface User {
+  username: string;
+  password: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  phoneNr: string;
+  emailAddress: string;
+}
+
 @Component({
   selector: 'app-login',
+  templateUrl: './login.component.html',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    RouterLink,
-    NgIf
+    ReactiveFormsModule
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  username?: string;
-  password?: string;
-  submitted = false;
+export class LoginComponent implements OnInit {
+  myControl = new FormControl<string | User>('');
+  options: User[] = [
+    { username: 'Mary', password: '', id: 1, firstName: '', lastName: '', phoneNr: '', emailAddress: '' },
+    { username: 'Shelley', password: '', id: 2, firstName: '', lastName: '', phoneNr: '', emailAddress: '' },
+    { username: 'Igor', password: '', id: 3, firstName: '', lastName: '', phoneNr: '', emailAddress: '' }
+  ];
+  filteredOptions: Observable<User[]>;
 
   login: FormGroup = new FormGroup({
-    'username': new FormControl(null, Validators.required),
-    'password': new FormControl(null, Validators.required)
-  })
+    username: this.myControl,
+    password: new FormControl(null, Validators.required)
+  });
+
   loginError: boolean = false;
+  showSuggestions: boolean = false;
 
+  constructor(private userService: UserService, private router: Router) {}
 
-  constructor(private userService: UserService,private router: Router) {
+  ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => {
+        const name = typeof value === 'string' ? value : value?.username;
+        return name ? this._filter(name as string) : this.options.slice();
+      }),
+    );
   }
 
-  loginFunction(){
+  displayFn(user: User): string {
+    return user && user.username ? user.username : '';
+  }
 
-    this.username=this.login.get('username')?.value;
-    this.password=this.login.get('password')?.value;
+  private _filter(name: string): User[] {
+    const filterValue = name.toLowerCase();
+    return this.options.filter(option => option.username.toLowerCase().includes(filterValue));
+  }
 
+  loginFunction() {
+    const username = this.login.get('username')?.value? || this.login.get('username')?.value;
+    const password = this.login.get('password')?.value;
 
-    console.log("getting valid or invalid "+ this.submitted)
+    if (username && password) {
+      this.userService.loginValid(username, password).subscribe(valid => {
+        if (valid) {
+          sessionStorage.setItem('username', username);
+          sessionStorage.setItem('isloged', 'true');
+          this.userService.getUserDetails(username);
+          this.router.navigate(['/rides']);
+          this.loginError = false;
+        } else {
+          this.loginError = true;
+        }
+      });
+    }
+  }
 
-
-    let isValid = this.userService.loginValid(this.username, this.password).subscribe(valid => {
-      if(valid) {
-        console.log('Login successful');
-        console.log("loginVR VOR SUBMITTED:",sessionStorage.getItem('loginValid'))
-        this.submitted = sessionStorage.getItem('loginValid') === 'true';
-        console.log("SUBMITTED:",this.submitted)
-
-        //if (this.submitted) {
-        console.log("submitted soida true sei " + this.submitted)
-
-        console.log('Login valid.');
-
-        console.log("submitted " + this.submitted)
-
-
-        sessionStorage.setItem('username', <string>this.username);
-        sessionStorage.setItem('isloged', String(valid));
-        this.userService.getUserDetails(<string>this.username);
-        this.router.navigate(['/rides']);
-
-        this.loginError = false;
-
-        //alert("richitg i guess")
-      }
-      else {
-        console.log('Invalid credentials');
-        console.error('Login not valid');
-        console.log("submitted " + this.submitted)
-        this.loginError = true
-      }
-    })
-
+  hideSuggestions(): void {
+    setTimeout(() => this.showSuggestions = false, 100);
   }
 }

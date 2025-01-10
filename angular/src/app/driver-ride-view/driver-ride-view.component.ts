@@ -35,6 +35,7 @@ export class DriverRideViewComponent implements OnInit {
 
   isBooked: boolean = false;
   seatIsBooked = false;
+  checkSeatFree: boolean = false;
 
   placeOfDeparture?: string;
   placeOfArrival?: string;
@@ -85,7 +86,7 @@ export class DriverRideViewComponent implements OnInit {
     this.getDriverInfos();
 
     const savedBookingStatus = sessionStorage.getItem("seatIsBooked");
-    this.seatIsBooked = savedBookingStatus === 'true'; // Status wiederherstellen
+    //this.seatIsBooked = savedBookingStatus === 'true'; // Status wiederherstellen
 
     this.edit.patchValue({
       placeOfDeparture: this.selectedRide?.placeOfDeparture,
@@ -103,6 +104,16 @@ export class DriverRideViewComponent implements OnInit {
         this.edit.get(controlName)?.disable();
       });
     }
+
+
+    /*this.checkSeatFree = this.canBookRide(this.selectedRide)
+    if(this.checkSeatFree){
+      this.seatIsBooked = true
+    }else{
+      this.seatIsBooked = false
+    }
+    console.log(this.seatIsBooked)*/
+
   }
 
   setIsBooked() {
@@ -142,18 +153,22 @@ export class DriverRideViewComponent implements OnInit {
     // Überprüfen, ob der Sitz bereits gebucht ist
     this.rideService.isSeatBooked(ride.id, username).subscribe((bookedSeats) => {
       if ( this.seatIsBooked) {
+      //if(bookedSeats == 0){
         // Wenn der Sitz bereits gebucht ist, stornieren
         this.seatIsBooked = false;
-        sessionStorage.setItem("seatIsBooked",String(this.seatIsBooked))
+        //sessionStorage.setItem("seatIsBooked",String(this.seatIsBooked))
         this.rideService.unbookSeat(ride);
+        console.log(this.seatIsBooked)
         alert('Sitz wurde erfolgreich storniert.');
       } else {
         // Wenn der Sitz noch nicht gebucht ist, buchen
         this.seatIsBooked = true;
-        sessionStorage.setItem("seatIsBooked",String(this.seatIsBooked))
+        //sessionStorage.setItem("seatIsBooked",String(this.seatIsBooked))
         this.rideService.getSeat(ride);
+        console.log(this.seatIsBooked)
         alert('Sitz wurde erfolgreich gebucht.');
       }
+      //console.log(bookedSeats)
     });
   }
 
