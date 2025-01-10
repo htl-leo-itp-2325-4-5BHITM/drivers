@@ -35,13 +35,13 @@
         src="./img/icons/filter.png" alt="">
         <p>Filter</p></button>
       <button (click)="getRidesPerButton('available')" class="filter-button"><img
-        src="./img/icons/filter.png" alt="">
+        src="./img/icons/no_filter.png" alt="">
         <p>Available</p></button>
       <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('booked')" class="filter-button"><img
-        src="./img/icons/filter.png" alt="">
+        src="./img/icons/favorites.png" alt="">
         <p>Booked</p></button>
       <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('offered')" class="filter-button"><img
-        src="./img/icons/filter.png" alt="">
+        src="./img/icons/own_rides.png" alt="">
         <p>My rides</p></button>
     </div>
     <form *ngIf="showFilter" [formGroup]="filterOption" (ngSubmit)="filterFunction()">

@@ -1,7 +1,7 @@
 
 INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableSeats, placeOfArrival, placeofdeparturecoordinates, placeofarrivalcoordinates) VALUES
-      ('2025-03-18 06:30:00', nextval('ride_id_seq'::regclass), 'natalie', 'Limesstrasse Parkplatz Schule', 2, 'Thening', '49.021056,11.270480', '48.259003,14.164950'),
-      ('2025-03-18 17:00:00', nextval('ride_id_seq'::regclass), 'janine', 'Hinterstoder Parkplatz', 2, 'Thening', '47.693900,14.158900', '48.259003,14.164950'),
+      ('2025-03-18 06:30:00', nextval('ride_id_seq'::regclass), 'natalie', 'Leonding', 2, 'Thening', '49.021056,11.270480', '48.259003,14.164950'),
+      ('2025-03-18 17:00:00', nextval('ride_id_seq'::regclass), 'janine', 'Hinterstoder', 2, 'Thening', '47.693900,14.158900', '48.259003,14.164950'),
       ('2025-03-17 17:00:00', nextval('ride_id_seq'::regclass), 'andrei', 'NMS Marchtrenk', 4, 'Linz', '48.184800,14.067800', '48.306900,14.285800'),
       ('2024-04-18 06:00:00', nextval('ride_id_seq'::regclass), 'natalie', 'Wien', 1, 'Thening', '48.208200,16.373800', '48.259003,14.164950'),
       ('2025-05-11 17:00:00', nextval('ride_id_seq'::regclass), 'natalie', 'Walding', 4, 'Traun', '48.351521,14.158076', '48.226176,14.240679'),
