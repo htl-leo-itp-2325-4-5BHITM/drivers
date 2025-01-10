@@ -123,4 +123,13 @@ span{
   margin-bottom: 4%;
 }
 
+#filterdUsernames{
+  color: var(--colorBright);
+  margin-left: 2vw;
+}
+
+.autocomplete-list li.highlighted {
+  background-color: #f0f0f0;
+  color: #111111;
+}
 

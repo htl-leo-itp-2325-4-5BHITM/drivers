@@ -5,9 +5,24 @@
       <p class="log-title">Log In</p>
 
       <div class="input-box">
-        <input placeholder="Username" formControlName="username">
+        <input
+          placeholder="Username"
+          formControlName="username"
+          (input)="onUsernameInput($event)"
+          (focus)="showSuggestions = true"
+          (blur)="hideSuggestions()">
         <img src="../img/icons/benutzer.png" alt="no image">
       </div>
+      <!--<ul *ngIf="showSuggestions && filteredSuggestions.length > 0" class="autocomplete-list">
+        <p *ngFor="let suggestion of filteredSuggestions; let i = index"
+           [class.highlighted]="i === highlightedIndex" id="filterdUsernames">-->
+          <!-- (click)="selectSuggestion(suggestion.username)" id="filterdUsernames">-->
+      <!-- {{ suggestion }}
+     </p>
+
+      </ul>-->
+
+
       <span *ngIf="!login.get('username')?.valid && login.get('username')?.touched"
             class="help-block">Username is required!</span>
 
