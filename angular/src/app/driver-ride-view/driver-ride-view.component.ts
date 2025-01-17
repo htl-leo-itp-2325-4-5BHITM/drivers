@@ -171,7 +171,9 @@ export class DriverRideViewComponent implements OnInit {
 
     // Überprüfen, ob der Sitz bereits gebucht ist
     this.rideService.isSeatBooked(ride.id, username).subscribe((bookedSeats) => {
+      console.log("this ride", ride)
       if ( this.seatIsBooked) {
+        console.log("seat booked ", ride)
       //if(bookedSeats == 0){
         // Wenn der Sitz bereits gebucht ist, stornieren
         this.seatIsBooked = false;
@@ -180,6 +182,7 @@ export class DriverRideViewComponent implements OnInit {
         console.log(this.seatIsBooked)
         alert('Sitz wurde erfolgreich storniert.');
       } else {
+        console.log("seat unbooked ", ride)
         // Wenn der Sitz noch nicht gebucht ist, buchen
         this.seatIsBooked = true;
         //sessionStorage.setItem("seatIsBooked",String(this.seatIsBooked))
