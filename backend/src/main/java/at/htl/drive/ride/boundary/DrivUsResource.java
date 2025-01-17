@@ -247,6 +247,12 @@ public class DrivUsResource {
         return repository.getUserByUsername(username);
     }
 
+    @Path("/getPassengers/{id}")
+    @GET
+    public List<DrivUser> getPassengers(@PathParam("id") Long id) {
+        return repository.getPassengers(id);
+    }
+
    /* @Path("/rides/getAllRides/javaFaker")
     @GET
     @Transactional

@@ -1,15 +1,16 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Driver, HardcodeService} from '../service/hardcode.service';
 import {Ride} from '../model/ride.model';
-import {DatePipe, formatDate, NgIf, Time} from '@angular/common';
+import {DatePipe, formatDate, NgForOf, NgIf, Time} from '@angular/common';
 import {getSeat, RideService} from '../service/ride.service';
 import {MapComponent} from '../map/map.component';
 import {UserService} from '../service/user.service';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Timestamp} from 'rxjs';
+import {Subscription, Timestamp} from 'rxjs';
 
 import {RouterLink} from '@angular/router';
 import {DateTime} from 'luxon';
+import {User} from '../model/user.model';
 
 
 @Component({
@@ -20,17 +21,20 @@ import {DateTime} from 'luxon';
     MapComponent,
     ReactiveFormsModule,
     NgIf,
-    RouterLink
+    RouterLink,
+    NgForOf
   ],
   templateUrl: './driver-ride-view.component.html',
   styleUrl: './driver-ride-view.component.css'
 })
 export class DriverRideViewComponent implements OnInit {
-
+  passengers: User[] = [];
+  passengerSubscription: Subscription = <Subscription>{};
   seeDriverDetail: boolean = false;
   driver!: Driver | undefined;
   @Input() selectedRide!: Ride;
   @Input() driverString!: string;
+  @Input() category!: string;
   @Output() stateChangeDriver: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   isBooked: boolean = false;
@@ -79,11 +83,26 @@ export class DriverRideViewComponent implements OnInit {
     console.log("Driver details:", this.driver);
   }
 
+  async getPassengers() {
+    let id = this.selectedRide.id;
+
+    // Asynchroner Aufruf
+    this.passengerSubscription = (await this.userService.getPassengers(id)).subscribe((passengers) => {
+      this.passengers = passengers;
+      console.log('passengers:', this.passengers);
+    });
+
+    // Sicherstellen, dass die Ansicht aktualisiert wird
+    //this.cdr.detectChanges();
+    console.log("Passengers", this.passengers);
+  }
+
   async ngOnInit(): Promise<void> {
     this.driver = await this.userService.getUserDetailsForRide(this.driverString);
 
     const canEdit = this.canEditRide(this.selectedRide);
     this.getDriverInfos();
+    this.getPassengers();
 
     const savedBookingStatus = sessionStorage.getItem("seatIsBooked");
     //this.seatIsBooked = savedBookingStatus === 'true'; // Status wiederherstellen

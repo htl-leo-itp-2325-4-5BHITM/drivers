@@ -44,9 +44,17 @@ public class DrivUsRepository {
             case "booked":
                 Query query2 = em.createQuery("select r " +
                         "from RideRegister rr join Ride r on rr.rideId = r.id " +
-                        "where rr.username = :username", Ride.class);
+                        "where rr.username = :username and r.departureTime > :currentDateTime", Ride.class);
                 query2.setParameter("username", username);
+                query2.setParameter("currentDateTime", LocalDateTime.now());
                 return query2.getResultList();
+            case "ranking":
+                Query query3 = em.createQuery("select r " +
+                        "from RideRegister rr join Ride r on rr.rideId = r.id " +
+                        "where rr.username = :username and r.departureTime < :currentDateTime", Ride.class);
+                query3.setParameter("username", username);
+                query3.setParameter("currentDateTime", LocalDateTime.now());
+                return query3.getResultList();
             default:
                 return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
 
@@ -389,5 +397,13 @@ public class DrivUsRepository {
 
 
         return em.createQuery("select r from Ride r order by r.id", Ride.class).getResultList();
+    }
+
+    public List<DrivUser> getPassengers(Long id) {
+        String sql = "select rr from RideRegister rr " +
+                "join DrivUser d on rr.username = d.username where rr.rideId = :id";
+        TypedQuery<DrivUser> query = em.createQuery(sql, DrivUser.class);
+        query.setParameter("id", id);
+        return query.getResultList();
     }
 }

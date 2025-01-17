@@ -14,27 +14,13 @@
                    placeholder="{{ selectedRide?.placeOfDeparture }}"
                    [disabled]="!canEditRide(selectedRide)">
           </div>
-          <!--
-          <div class="form-row">
-            <label>From coordinates:</label>
-            <input formControlName="placeOfDepartureC" type="text"
-                   placeholder="{{ selectedRide?.placeOfDepartureCoordinate }}"
-                   [disabled]="!canEditRide(selectedRide)">
-          </div>
-          -->
+
           <div class="form-row">
             <label>To:</label>
             <input formControlName="placeOfArrival" type="text"
                    placeholder="{{ selectedRide?.placeOfArrival }}"
                    [disabled]="!canEditRide(selectedRide)">
           </div>
-          <!--
-          <div class="form-row">
-            <label>To coordinates:</label>
-            <input formControlName="placeOfArrivalC" type="text"
-                   placeholder="{{ selectedRide?.placeOfArrivalCoordinate }}"
-                   [disabled]="!canEditRide(selectedRide)">
-          </div>-->
 
           <div class="form-row">
             <label>Date:</label>
@@ -65,10 +51,12 @@
       </div>
     </div>
     <div class="driver-section">
-      <div class="profile">
+      <div *ngIf="!canEditRide(selectedRide)" class="profile">
         <img src="./img/placeholder.jpg" alt="">
+        <br>
+        <!--<img src="./img/icons/favorites.png" alt="star" *ngFor="let i of [0,1,2,3,4]">-->
       </div>
-      <div class="driver-section-content">
+      <div *ngIf="!canEditRide(selectedRide)" class="driver-section-content">
         <p>Name: {{ driver?.firstName }} {{ driver?.lastName }}</p>
         <p>Email: {{ driver?.emailAddress }}</p>
         <p>Phone: {{ driver?.phoneNr }}</p>
@@ -78,6 +66,11 @@
             {{ seatIsBooked ? 'unbook' : 'book' }}
           </button>
         </div>
+      </div>
+      <div *ngIf="canEditRide(selectedRide)">
+        <h2>Passengers</h2>
+        <p *ngIf="passengers.length == 0">no passengers yet</p>
+        <p *ngFor="let passenger of passengers">{{ passenger.username }}</p>
       </div>
       <button (click)="toggleState()" class="exit">X</button>
     </div>

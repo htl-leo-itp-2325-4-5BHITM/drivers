@@ -4,6 +4,7 @@
   justify-content: center;
   background: var(--colorBeige);
   color: var(--colorDark);
+  min-height: 62.5vh;
 }
 
 ul {

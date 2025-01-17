@@ -1,34 +1,5 @@
 <app-navbar></app-navbar>
 <div class="full-Page" [ngClass]="{'noScroll': showDriver}">
-  <!--
-  <div class="filter-box">
-    <button (click)="showFilter=!this.showFilter" routerLink="/rides" class="filter-button"><img
-      src="./img/icons/filter.png" alt="">
-      <p>Filter</p></button>
-    <form *ngIf="showFilter" [formGroup]="filterOption" (ngSubmit)="filterFunction()">
-      <p class="filter-title">Filter Options:</p>
-      <input placeholder="From" formControlName="from">
-      <input placeholder="To" formControlName="to">
-      <div class="date-box">
-        <input placeholder="Date" onfocus="(this.type='date')"
-               onblur="(this.type='text')" formControlName="date">
-        <input placeholder="Time" onfocus="(this.type='time')"
-               onblur="(this.type='text')" formControlName="time">
-      </div>
-      <div class="center-button">
-        <button (click)="clearFilters()">Clear Filters</button>
-        <button (click)="toggleState()">Apply Filter</button>
-      </div>
-    </form>
-
-  </div>
-  <div class="rides-category">
-    <button (click)="getRidesPerButton('available')" class="filter-button">available rides</button>
-    <button (click)="getRidesPerButton('booked')">booked rides</button>
-    <button (click)="getRidesPerButton('offered')">my offered rides</button>
-  </div>
-  <div class="br"></div>
--->
   <div class="menu-box-main">
     <div class="menu-boxes">
       <button (click)="showFilter=!this.showFilter" routerLink="/rides" class="filter-button"><img
@@ -40,6 +11,9 @@
       <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('booked')" class="filter-button"><img
         src="./img/icons/favorites.png" alt="">
         <p>Booked</p></button>
+      <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('ranking')" class="filter-button"><img
+        src="./img/icons/own_rides.png" alt="">
+        <p>Ranking</p></button>
       <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('offered')" class="filter-button"><img
         src="./img/icons/own_rides.png" alt="">
         <p>My rides</p></button>
@@ -80,6 +54,6 @@
     </ul>
   </div>
   <app-driver-ride-view *ngIf="showDriver" (stateChangeDriver)="onStateChangeDriver($event)"
-                        [driverString]="driver" [selectedRide]="selectedRide"></app-driver-ride-view>
+                        [driverString]="driver" [selectedRide]="selectedRide" [category]="ridesCategory"></app-driver-ride-view>
 </div>
 

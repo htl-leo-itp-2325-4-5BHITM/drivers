@@ -86,4 +86,7 @@ export class UserService {
     console.log('Benutzerdaten erfolgreich gespeichert.');
   }
 
+  async getPassengers(id: number) {
+    return this.http.get<User[]>(this.url + "/getPassengers/" + id);
+  }
 }

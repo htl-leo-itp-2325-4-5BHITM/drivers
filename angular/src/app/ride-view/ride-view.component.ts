@@ -35,6 +35,7 @@ export class RideViewComponent implements OnInit, OnDestroy {
   ridesSubscription: Subscription = <Subscription>{};
   showDriver: boolean = false;
   showFilter: boolean = false;
+  ridesCategory :string = 'available'
 
   // Add selectedRide here to store the clicked ride
   selectedRide: Ride = <Ride>{};  // This will hold the currently selected ride
@@ -51,6 +52,9 @@ export class RideViewComponent implements OnInit, OnDestroy {
       this.rides = rides;
       console.log('All Rides:', this.rides);
     });
+    if(this.ridesCategory == 'offered') {
+      this.showDriver = false;
+    }
   }
 
   ngOnDestroy() {
@@ -58,6 +62,7 @@ export class RideViewComponent implements OnInit, OnDestroy {
   }
 
   getRidesPerButton(category: string) {
+    this.ridesCategory = category;
     this.ridesSubscription = this.rideService.getRides(category).subscribe((rides) => {
       this.rides = rides;
       console.log('All Rides:', this.rides);
