@@ -6,6 +6,11 @@
       <div class="profile">
         <img src="./img/placeholder.jpg" alt="">
       </div>
+      <form (submit)="changePicture()">
+        <input type="file" (change)="onFileSelected($event)">
+        <button type="submit">change profile picture</button>
+      </form>
+      <button></button>
       <div class="row">
         <p class="detail">Username: </p>
         <p class="detail">{{ sessionStorage.getItem('username') }} </p>
