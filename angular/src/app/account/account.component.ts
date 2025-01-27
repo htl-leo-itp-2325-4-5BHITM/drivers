@@ -42,6 +42,7 @@ export class AccountComponent {
     const reader = new FileReader();
     reader.readAsArrayBuffer(this.selectedFile);
     reader.onload = () => {
+      // @ts-ignore
       const blob = new Blob([reader.result], { type: this.selectedFile.type });
       this.uploadImage(blob);
     };
