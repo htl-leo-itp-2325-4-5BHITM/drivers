@@ -11,6 +11,7 @@ import {Subscription, Timestamp} from 'rxjs';
 import {RouterLink} from '@angular/router';
 import {DateTime} from 'luxon';
 import {User} from '../model/user.model';
+import {Passanger} from '../model/passanger.model';
 
 
 @Component({
@@ -28,7 +29,7 @@ import {User} from '../model/user.model';
   styleUrl: './driver-ride-view.component.css'
 })
 export class DriverRideViewComponent implements OnInit {
-  passengers: User[] = [];
+  passengers: Passanger[] = [];
   passengerSubscription: Subscription = <Subscription>{};
   seeDriverDetail: boolean = false;
   driver!: Driver | undefined;

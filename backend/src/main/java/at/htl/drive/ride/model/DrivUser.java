@@ -21,7 +21,10 @@ public class DrivUser {
     public String username;
     @Column(length = 100,nullable = false)
     public String password;
-    public String profilePicture;
+
+    @Column
+    @Lob
+    public byte[] profilePicture;
 
 
     @OneToMany(mappedBy = "user")
@@ -29,7 +32,7 @@ public class DrivUser {
     public DrivUser() {
     }
 
-    public DrivUser(String firstName, String lastName, String phoneNr, String emailAddress, String username, String password, String profilePicture) {
+    public DrivUser(String firstName, String lastName, String phoneNr, String emailAddress, String username, String password, byte[] profilePicture) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNr = phoneNr;
@@ -58,11 +61,11 @@ public class DrivUser {
         this.password = password;
     }
 
-    public String getProfilePicture() {
-        return profilePicture;
+    public byte[] getProfileImage() {
+        return this.profilePicture;
     }
 
-    public void setProfilePicture(String profilePicture) {
+    public void setProfileImage(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
 

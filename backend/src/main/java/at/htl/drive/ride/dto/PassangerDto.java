@@ -1,11 +1,11 @@
 package at.htl.drive.ride.dto;
 
-public record DrivUserDto(
+public record PassangerDto(
+        Long id,
         String firstName,
         String lastName,
         String phoneNr,
         String emailAddress,
-        String username,
-        String password)
-{
+        String username
+) {
 }

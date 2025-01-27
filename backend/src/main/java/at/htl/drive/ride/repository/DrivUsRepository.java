@@ -247,7 +247,7 @@ public class DrivUsRepository {
             throw new IllegalArgumentException();
         }
 
-        DrivUser newUser = new DrivUser(user.firstName(), user.lastName(), user.phoneNr(), user.emailAddress(), user.username(), user.password(), user.profilePicture());
+        DrivUser newUser = new DrivUser(user.firstName(), user.lastName(), user.phoneNr(), user.emailAddress(), user.username(), user.password());
         em.persist(newUser);
     }
 
@@ -400,7 +400,7 @@ public class DrivUsRepository {
     }
 
     public List<DrivUser> getPassengers(Long id) {
-        String sql = "select rr from RideRegister rr " +
+        String sql = "select d from RideRegister rr " +
                 "join DrivUser d on rr.username = d.username where rr.rideId = :id";
         TypedQuery<DrivUser> query = em.createQuery(sql, DrivUser.class);
         query.setParameter("id", id);

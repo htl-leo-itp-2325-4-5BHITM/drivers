@@ -4,6 +4,7 @@ import {Ride} from '../model/ride.model';
 import {User} from '../model/user.model';
 import {Driver} from './hardcode.service';
 import {async, Observable} from 'rxjs';
+import {Passanger} from '../model/passanger.model';
 
 @Injectable({
   providedIn: 'root'
@@ -87,6 +88,11 @@ export class UserService {
   }
 
   async getPassengers(id: number) {
-    return this.http.get<User[]>(this.url + "/getPassengers/" + id);
+    return this.http.get<Passanger[]>(this.url + "/getPassengers/" + id);
+  }
+
+  changeProfilePicture(formData: FormData) {
+    let user = sessionStorage.getItem(`username`);
+    this.http.post(this.url + `/users/${user}/upload-image`, formData)
   }
 }
