@@ -25,14 +25,14 @@
           <div class="form-row">
             <label>Date:</label>
             <input formControlName="departureTime" type="date"
-                   [value]="selectedRide?.departureTime | date: 'yyyy-MM-dd'"
+                   [value]="selectedRide?.departureTime | date: 'yyyy-M-dd'"
                    [disabled]="!canEditRide(selectedRide)">
           </div>
 
           <div class="form-row">
             <label>Time:</label>
             <input formControlName="departureTimeTwo" type="time"
-                   [value]="selectedRide?.departureTime | date: 'HH:mm'"
+                   [value]=" selectedRide.departureTime | date: 'hh:mm' "
                    [disabled]="!canEditRide(selectedRide)">
           </div>
 
@@ -46,6 +46,8 @@
           <div class="form-actions">
             <button *ngIf="canEditRide(selectedRide)" (click)="editButton()" class="save">Save Changes</button>
           </div>
+          <button *ngIf="canEditRide(selectedRide)" (click)="deleteRide(selectedRide)" class="save">delete Ride</button>
+
         </form>
 
       </div>

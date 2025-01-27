@@ -109,6 +109,17 @@ public class DrivUsResource {
             return Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build();
         }
     }
+    @POST
+    @Transactional
+    @Path("rides/deleteRide")
+    public Response deleteRide(Long id) {
+        try {
+            repository.removeRide(id);
+            return Response.ok("Fahrt erfolgreich aktualisiert.").build();
+        } catch (IllegalArgumentException ex) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build();
+        }
+    }
 
     @GET
     @Path("rides/getSortedRide/{sortedWay}/{column}")
