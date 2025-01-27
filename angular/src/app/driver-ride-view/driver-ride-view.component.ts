@@ -111,6 +111,7 @@ export class DriverRideViewComponent implements OnInit {
       placeOfDeparture: this.selectedRide?.placeOfDeparture,
       placeOfArrival: this.selectedRide?.placeOfArrival,
       departureTime: [this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'yyyy-MM-dd', 'en') : ''],
+      departureTimeTwo: this.selectedRide?.departureTime ? formatDate(this.selectedRide.departureTime, 'HH:mm', 'en') : ''
     });
 
     this.edit.get('departureTime')?.disable();
@@ -299,3 +300,8 @@ export class DriverRideViewComponent implements OnInit {
     });
   }
 }
+const getTimeFromDate = (date: Date): string => {
+  const hours = ('0' + date.getHours()).slice(-2);
+  const minutes = ('0' + date.getMinutes()).slice(-2);
+  return `${hours}:${minutes}`;
+};
