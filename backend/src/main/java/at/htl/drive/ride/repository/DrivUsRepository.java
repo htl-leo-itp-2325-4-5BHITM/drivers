@@ -193,8 +193,20 @@ public class DrivUsRepository {
     }
 
     public void removeRide(Long id) {
+        System.out.println("Versuche, Ride mit ID " + id + " zu entfernen.");
+
+        // Prüfen, ob ein Ride mit der gegebenen ID existiert
         Ride ride = em.find(Ride.class, id);
-        em.remove(ride);
+
+        if (ride != null) {
+            // Wenn das Ride existiert, entferne es
+            em.remove(ride);
+            System.out.println("Ride mit ID " + id + " erfolgreich entfernt.");
+        } else {
+            // Wenn das Ride nicht existiert, Ausgabe einer Fehlermeldung
+            System.out.println("Ride mit ID " + id + " wurde nicht gefunden.");
+            throw new IllegalArgumentException("Ride mit der ID " + id + " existiert nicht.");
+        }
     }
 
     public void postRide(RideDto rideDto) {

@@ -111,6 +111,11 @@ export class RideService {
     //console.log(coordinatesJson)
     return coordinatesJson;
   }
+
+  deleteRide(id: number) {
+    console.log("deleteRide in service")
+    return this.http.post(this.url + '/deleteRide',id);
+  }
 }
 
 

@@ -46,6 +46,8 @@
           <div class="form-actions">
             <button *ngIf="canEditRide(selectedRide)" (click)="editButton()" class="save">Save Changes</button>
           </div>
+          <button *ngIf="canEditRide(selectedRide)" (click)="deleteRide(selectedRide)" class="save">delete Ride</button>
+
         </form>
 
       </div>

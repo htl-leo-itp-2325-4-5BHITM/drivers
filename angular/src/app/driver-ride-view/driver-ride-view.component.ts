@@ -286,4 +286,16 @@ export class DriverRideViewComponent implements OnInit {
     });
   }
 
+  deleteRide(selectedRide: Ride) {
+    this.rideService.deleteRide(selectedRide.id).subscribe({
+      next: (response) => {
+        console.log('Ride deleted succ:', response);
+        window.location.reload();
+      },
+      error: (err) => {
+        console.error('Error updating ride:', err);
+        alert('Failed to delete the ride. Please try again.');
+      },
+    });
+  }
 }
