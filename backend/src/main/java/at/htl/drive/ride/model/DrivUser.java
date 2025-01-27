@@ -21,11 +21,22 @@ public class DrivUser {
     public String username;
     @Column(length = 100,nullable = false)
     public String password;
+    public String profilePicture;
 
 
     @OneToMany(mappedBy = "user")
     public List<Ride> rides;
     public DrivUser() {
+    }
+
+    public DrivUser(String firstName, String lastName, String phoneNr, String emailAddress, String username, String password, String profilePicture) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNr = phoneNr;
+        this.emailAddress = emailAddress;
+        this.username = username;
+        this.password = password;
+        this.profilePicture = profilePicture;
     }
 
     public DrivUser(Long id, String firstName, String lastName, String phoneNr, String emailAddress, String username, String password) {
@@ -45,6 +56,14 @@ public class DrivUser {
         this.emailAddress = emailAddress;
         this.username = username;
         this.password = password;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     public Long getId() {
