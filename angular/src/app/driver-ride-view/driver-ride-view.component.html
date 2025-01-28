@@ -44,9 +44,10 @@
           </div>
 
           <div class="form-actions">
-            <button *ngIf="canEditRide(selectedRide)" (click)="editButton()" class="save">Save Changes</button>
+            <button *ngIf="canEditRide(selectedRide)" (click)="editButton()" class="save">Save</button>
+            <button *ngIf="canEditRide(selectedRide)" (click)="deleteRide(selectedRide)" class="save">Delete</button>
           </div>
-          <button *ngIf="canEditRide(selectedRide)" (click)="deleteRide(selectedRide)" class="save">delete Ride</button>
+
 
         </form>
 
@@ -71,9 +72,24 @@
         </div>
       </div>
       <div *ngIf="canEditRide(selectedRide)">
-        <h2>Passengers</h2>
-        <p *ngIf="passengers.length == 0">no passengers yet</p>
-        <p *ngFor="let passenger of passengers">{{ passenger.username }}</p>
+        <p class="passenger-title">Passengers</p>
+        <p *ngIf="passengers.length == 0">No passengers yet</p>
+        <div *ngIf="passengers.length > 0">
+          <select class="passenger-select" [(ngModel)]="selectedPassenger">
+            <option [ngValue]="null" disabled selected>Select a passenger</option>
+            <option *ngFor="let passenger of passengers" [ngValue]="passenger">
+              {{ passenger.username}}
+            </option>
+          </select>
+        </div>
+
+        <div *ngIf="selectedPassenger">
+          <h3>Selected Passenger</h3>
+          <p>First Name: {{ selectedPassenger.firstName }}</p>
+          <p>Last Name: {{ selectedPassenger.lastName }}</p>
+          <p>Email: {{selectedPassenger.emailAddress}}</p>
+          <p>Phone: {{selectedPassenger.phoneNr}}</p>
+        </div>
       </div>
       <button (click)="toggleState()" class="exit">X</button>
     </div>

@@ -5,7 +5,7 @@ import {DatePipe, formatDate, NgForOf, NgIf, Time} from '@angular/common';
 import {getSeat, RideService} from '../service/ride.service';
 import {MapComponent} from '../map/map.component';
 import {UserService} from '../service/user.service';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Subscription, Timestamp} from 'rxjs';
 
 import {RouterLink} from '@angular/router';
@@ -23,7 +23,8 @@ import {Passanger} from '../model/passanger.model';
     ReactiveFormsModule,
     NgIf,
     RouterLink,
-    NgForOf
+    NgForOf,
+    FormsModule
   ],
   templateUrl: './driver-ride-view.component.html',
   styleUrl: './driver-ride-view.component.css'
@@ -50,6 +51,7 @@ export class DriverRideViewComponent implements OnInit {
   depatureTimeTwo?: Time;
   abfortC?: string;
   ankortC?: number;
+  selectedPassenger?: User;
 
 
   edit: FormGroup = new FormGroup({
