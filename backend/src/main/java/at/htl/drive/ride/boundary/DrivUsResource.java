@@ -264,6 +264,31 @@ public class DrivUsResource {
         return repository.getPassengers(id);
     }
 
+    /*@Path("/users/{username}/upload-image")
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Transactional
+    public Response changeProfilePicture(@PathParam("username") String username, @MultipartForm FileUploadForm form) {
+        return repository.getUserByUsername(username);
+    }*/
+
+    @Path("/users/newProfilePicture")
+    @POST
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response pickProfilePicture(ProfilePictureDto profilePicture) {
+
+        System.out.println("bin im newprofilepic " +profilePicture);
+        //System.out.println("test " +profilePicture);
+        try {
+            repository.pickProfilePicture(profilePicture);
+        }
+        catch (IllegalArgumentException ex) {
+            return Response.status(400, "error").build();
+        }
+        return Response.ok().build();
+    }
+
    /* @Path("/rides/getAllRides/javaFaker")
     @GET
     @Transactional

@@ -5,6 +5,8 @@ import {User} from '../model/user.model';
 import {Driver} from './hardcode.service';
 import {async, Observable} from 'rxjs';
 import {Passanger} from '../model/passanger.model';
+import {AbstractControl, ValidationErrors} from '@angular/forms';
+import {ProfilePicture} from '../model/profilePicture.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +38,7 @@ export class UserService {
         sessionStorage.setItem('username',user.username);
         sessionStorage.setItem('email',user.emailAddress);
         sessionStorage.setItem('phoneNr',user.phoneNr);
+        sessionStorage.setItem('img',user.img);
       },
       (error) => {
         console.error('Fehler bei der Login-Anfrage:', error);
@@ -56,7 +59,8 @@ export class UserService {
           phoneNr: parseInt(response.phoneNr),  // Wandelt die Telefonnummer in eine Zahl um
           emailAddress: response.emailAddress,
           username: response.username,
-          password: response.password
+          password: response.password,
+          img: response.img
         };
 
         return user; // Gebe den 'user' zurück, wenn alles OK ist
@@ -94,5 +98,25 @@ export class UserService {
   changeProfilePicture(formData: FormData) {
     let user = sessionStorage.getItem(`username`);
     this.http.post(this.url + `/users/${user}/upload-image`, formData)
+  }
+
+  pickProfilePicture(fruit: (string)) {
+    let img = fruit;
+    let user = sessionStorage.getItem(`username`);
+
+    let newPicture :ProfilePicture = <ProfilePicture>{};
+
+    if (user != null) {
+      newPicture.username = user;
+    }
+    if (img != null) {
+      newPicture.img = img;
+    }
+
+    console.log(newPicture)
+
+    this.http.post<ProfilePicture>(this.url + '/users/newProfilePicture', newPicture).subscribe(profilePicture => {
+      console.log('Updated img:', profilePicture);
+    });
   }
 }

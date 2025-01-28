@@ -54,7 +54,8 @@
     </div>
     <div class="driver-section">
       <div *ngIf="!canEditRide(selectedRide)" class="profile">
-        <img src="./img/placeholder.jpg" alt="">
+        <img *ngIf="driver?.img == null" src="./img/placeholder.jpg" alt="">
+        <img *ngIf="driver?.img != null" src="./img/profilePicture/{{ driver?.img }}.png" alt="">
         <br>
         <!--<img src="./img/icons/favorites.png" alt="star" *ngFor="let i of [0,1,2,3,4]">-->
       </div>

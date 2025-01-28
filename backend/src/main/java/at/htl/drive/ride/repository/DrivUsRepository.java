@@ -13,6 +13,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -417,5 +418,17 @@ public class DrivUsRepository {
         TypedQuery<DrivUser> query = em.createQuery(sql, DrivUser.class);
         query.setParameter("id", id);
         return query.getResultList();
+    }
+
+    public void pickProfilePicture(ProfilePictureDto profilePicture) {
+        String sql = "select d from DrivUser d " +
+                "where d.username = :username";
+        TypedQuery<DrivUser> query = em.createQuery(sql, DrivUser.class);
+        query.setParameter("username", profilePicture.username());
+        DrivUser actUser = query.getSingleResult();
+        System.out.println(actUser.lastName);
+        System.out.println("img: " + profilePicture.img());
+        actUser.setImg(profilePicture.img());
+        em.merge(actUser);
     }
 }

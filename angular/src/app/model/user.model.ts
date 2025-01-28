@@ -6,4 +6,5 @@ export interface User {
   phoneNr: string,
   emailAddress: string
   username: string
+  img: string
 }

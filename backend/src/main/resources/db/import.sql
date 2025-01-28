@@ -23,6 +23,7 @@ INSERT INTO public.drivuser (password,id, firstname, lastname, phonenr, emailadd
     ('janine1234',nextval('drivuser_id_seq'::regclass), 'Janine', 'Wenninger', '068181735180', 'j.wenninger@students.htl-leonding.ac.at', 'janine');
 
 
+
 /*INSERT INTO public.rideuserassociation (isdriver, rideid, userid) VALUES
     (true, 1, 1),
     (true, 2, 5),

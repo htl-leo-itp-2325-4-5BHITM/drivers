@@ -6,6 +6,7 @@ public record DrivUserDto(
         String phoneNr,
         String emailAddress,
         String username,
-        String password)
+        String password,
+        String img)
 {
 }

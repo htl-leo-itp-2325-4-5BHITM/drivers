@@ -21,6 +21,8 @@ public class DrivUser {
     public String username;
     @Column(length = 100,nullable = false)
     public String password;
+    @Column
+    public String img;
 
     @Column
     @Lob
@@ -123,5 +125,13 @@ public class DrivUser {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

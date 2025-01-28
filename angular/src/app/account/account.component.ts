@@ -3,8 +3,8 @@ import {Driver} from '../service/hardcode.service';
 import {NavbarComponent} from '../navbar/navbar.component';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
-import {NgIf} from '@angular/common';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {NgForOf, NgIf} from '@angular/common';
 import {UserService} from '../service/user.service';
 
 @Component({
@@ -13,7 +13,9 @@ import {UserService} from '../service/user.service';
   imports: [
     NavbarComponent,
     FormsModule,
-    NgIf
+    NgIf,
+    NgForOf,
+    ReactiveFormsModule
   ],
   templateUrl: './account.component.html',
   styleUrl: './account.component.css'
@@ -25,7 +27,13 @@ export class AccountComponent {
   protected readonly sessionStorage = sessionStorage;
   private selectedFile: File | undefined;
 
-  constructor(private router: Router, private userService :UserService) {
+  fruitForm: FormGroup;
+  setPicture = sessionStorage.getItem("img") != null
+
+  constructor(private router: Router, private userService :UserService, private fb: FormBuilder) {
+    this.fruitForm = this.fb.group({
+      fruit: ['', Validators.required]
+    });
   }
 
   LogUserOut() {
@@ -33,6 +41,7 @@ export class AccountComponent {
     sessionStorage.removeItem("username")
     this.router.navigate(['/']);
   }
+
 
 
   //profile picture
@@ -137,10 +146,8 @@ export class AccountComponent {
         reader.readAsDataURL(blob);
       });
   }
+*/
 
-  ngOnInit() {
-    this.fetchImage(); // Lade das Bild beim Initialisieren
-  }*/
   profileImage: any;
   uploadImage() {
     if (!this.selectedFile) {
@@ -198,5 +205,14 @@ export class AccountComponent {
         console.error('No file selected');
       }
     }
+  }
+  numbers: number[] = Array.from({ length: 9 }, (_, i) => i + 1); // [1, 2, 3, ..., 9]
+  img: string = ""
+  onSubmit() {
+    console.log('Ausgewählte Frucht:', this.fruitForm.value.fruit);
+    this.img = this.fruitForm.value.fruit;
+    sessionStorage.setItem("img", this.img)
+    this.setPicture = true
+    this.userService.pickProfilePicture(this.img)
   }
 }

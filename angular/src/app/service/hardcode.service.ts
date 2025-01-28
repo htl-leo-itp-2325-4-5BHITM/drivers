@@ -55,7 +55,8 @@ export class HardcodeService {
       "phoneNr": 1234567890,
       "emailAddress": "john.doe@example.com",
       "username": "johndoe",
-      "password": "password123"
+      "password": "password123",
+      "img": "1"
     },
     {
       "id": 2,
@@ -64,7 +65,8 @@ export class HardcodeService {
       "phoneNr": 2345678901,
       "emailAddress": "jane.smith@example.com",
       "username": "janesmith",
-      "password": "mypassword456"
+      "password": "mypassword456",
+      "img": "1"
     },
     {
       "id": 3,
@@ -73,7 +75,8 @@ export class HardcodeService {
       "phoneNr": 3456789012,
       "emailAddress": "alice.johnson@example.com",
       "username": "alicej",
-      "password": "alicepass789"
+      "password": "alicepass789",
+      "img": "1"
     },
     {
       "id": 4,
@@ -82,7 +85,8 @@ export class HardcodeService {
       "phoneNr": 4567890123,
       "emailAddress": "bob.brown@example.com",
       "username": "bobbrown",
-      "password": "bobsecure123"
+      "password": "bobsecure123",
+      "img": "1"
     },
     {
       "id": 5,
@@ -91,7 +95,8 @@ export class HardcodeService {
       "phoneNr": 5678901234,
       "emailAddress": "charlie.davis@example.com",
       "username": "charlied",
-      "password": "charliepass321"
+      "password": "charliepass321",
+      "img": "1"
     }
   ]
 
@@ -116,6 +121,7 @@ export interface Driver {
   emailAddress: string;
   username: string;
   password: string;
+  img: string;
 }
 
 

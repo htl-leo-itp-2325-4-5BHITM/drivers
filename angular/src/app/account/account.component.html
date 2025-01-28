@@ -4,21 +4,33 @@
     <div class="account-form">
       <p class="title-account">Account</p>
       <div class="profile">
-        <img src="./img/placeholder.jpg" alt="">
+        <img *ngIf="!setPicture" src="./img/placeholder.jpg" alt="">
+        <img *ngIf="setPicture" src="./img/profilePicture/{{ sessionStorage.getItem('img') }}.png" alt="">
       </div>
       <!--<form (submit)="changePicture()">
         <input type="file" (change)="onFileSelected($event)">
         <button type="submit">change profile picture</button>
       </form>
       <button></button>-->
-      <form (ngSubmit)="uploadImage()" enctype="multipart/form-data">
+      <!--<form (ngSubmit)="uploadImage()" enctype="multipart/form-data">
         <input type="file" (change)="onFileSelected($event)" accept="image/*" />
         <button type="submit">Upload</button>
       </form>
 
-      <img *ngIf="profileImage" [src]="profileImage" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;" />
+      <img *ngIf="profileImage" [src]="profileImage" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;" />-->
 
 
+      <form [formGroup]="fruitForm" (ngSubmit)="onSubmit()">
+        <label for="fruit">Choose a profile picture:</label>
+        <select id="fruit" formControlName="fruit">
+          <option *ngFor="let number of numbers" [value]="number">{{number}}</option>
+        </select>
+
+        <button type="submit" [disabled]="fruitForm.invalid">Speichern</button>
+      </form>
+
+
+      <!--<img src="./img/profilePicture/1.png">-->
 
       <div class="row">
         <p class="detail">Username: </p>

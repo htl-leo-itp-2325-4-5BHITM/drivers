@@ -9,3 +9,13 @@ Content-Type: application/json
   "phoneNr": "1133676",
   "username": "maxii"
 }
+
+###
+
+POST http://localhost:8080/api/drivus/users/newProfilePicture
+Content-Type: application/json
+
+{
+"username": "janine",
+"img": "2"
+}

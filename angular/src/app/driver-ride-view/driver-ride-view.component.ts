@@ -42,6 +42,7 @@ export class DriverRideViewComponent implements OnInit {
   seatIsBooked = false;
   checkSeatFree: boolean = false;
 
+
   placeOfDeparture?: string;
   placeOfArrival?: string;
   availableSeats?: number;
