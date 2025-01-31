@@ -49,13 +49,13 @@ public class DrivUsRepository {
                 query2.setParameter("username", username);
                 //query2.setParameter("currentDateTime", LocalDateTime.now());
                 return query2.getResultList();
-            /*case "ranking":
+            case "ranking":
                 Query query3 = em.createQuery("select r " +
                         "from RideRegister rr join Ride r on rr.rideId = r.id " +
                         "where rr.username = :username and r.departureTime < :currentDateTime", Ride.class);
                 query3.setParameter("username", username);
                 query3.setParameter("currentDateTime", LocalDateTime.now());
-                return query3.getResultList();*/
+                return query3.getResultList();
             default:
                 return em.createQuery("select r from Ride r order by r.departureTime", Ride.class).getResultList();
 

@@ -11,9 +11,9 @@
       <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('booked')" class="filter-button"><img
         src="./img/icons/favorites.png" alt="">
         <p>Booked</p></button>
-      <!--<button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('ranking')" class="filter-button"><img
+      <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('ranking')" class="filter-button"><img
         src="./img/icons/own_rides.png" alt="">
-        <p>Ranking</p></button>-->
+        <p>Ranking</p></button>
       <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('offered')" class="filter-button"><img
         src="./img/icons/own_rides.png" alt="">
         <p>My rides</p></button>
