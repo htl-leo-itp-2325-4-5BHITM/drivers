@@ -299,7 +299,8 @@ export class DriverRideViewComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error updating ride:', err);
-        alert('Failed to delete the ride. Please try again.');
+        //alert('Failed to delete the ride. Please try again.');
+        window.location.reload();
       },
     });
   }
