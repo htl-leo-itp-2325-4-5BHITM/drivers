@@ -99,7 +99,7 @@ public class DrivUsRepository {
             String body = String.format(
                     "Dear Driver %s %s,\n\n" +
                             "Your ride from %s to %s " +
-                            "Date and Time: %s." +
+                            "Date and Time: %s.\n" +
                             "Your ride has been booked from %s.\n",
                     driver.getFirstName(),
                     driver.getLastName(),
@@ -146,7 +146,7 @@ public class DrivUsRepository {
             String body = String.format(
                     "Dear Driver %s %s,\n\n" +
                             "Your ride from %s to %s " +
-                            "Date and Time: %s." +
+                            "Date and Time: %s. \n" +
                             "Your ride has been unbooked from %s.\n",
                     driver.getFirstName(),
                     driver.getLastName(),
@@ -310,15 +310,17 @@ public class DrivUsRepository {
         query.setParameter("id", ruaDto.rideId());
         query.setParameter("username", ruaDto.username());
 
+        Ride rideForEmail = ride;
+
         if(query.getResultList().size() == 0) {
             //registerForRide(ruaDto);
         }
         else {
             RideRegister rideRegister = em.find(RideRegister.class, query.getSingleResult());
             em.remove(rideRegister);
-            sendEmailByUnBook(ruaDto);
-        }
 
+        }
+        sendEmailByUnBook(ruaDto);
 
         /*String[] name = ruaDto.username().split(" ");
         String sql = "select d from DrivUser d " +
