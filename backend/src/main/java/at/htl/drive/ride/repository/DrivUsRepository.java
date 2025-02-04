@@ -73,9 +73,99 @@ public class DrivUsRepository {
         }
     }
 
-    public void sendEmailByBook(RegisterRideDto ride) {}
+    public void sendEmailByBook(RegisterRideDto rideBooked) {
+        long rideId = rideBooked.rideId();
+        Ride ride = em.find(Ride.class, rideId);
 
-    public void sendEmailByUnBook(RegisterRideDto ride) {}
+        if (ride == null) {
+            System.out.println("Fahrt nicht gefunden.");
+            return;
+        }
+
+        TypedQuery<DrivUser> query = em.createQuery("SELECT d FROM DrivUser d WHERE d.username = :username", DrivUser.class);
+        query.setParameter("username", ride.getDriver());
+        List<DrivUser> drivers = query.getResultList();
+
+        if (drivers.isEmpty()) {
+            System.out.println("Driver nicht gefunden.");
+            return;
+        }
+
+        DrivUser driver = drivers.get(0);
+
+        String email = driver.getEmailAddress();
+        if (email != null && !email.isEmpty()) {
+            String subject = "Your ride got booked";
+            String body = String.format(
+                    "Dear Driver %s %s,\n\n" +
+                            "Your ride from %s to %s " +
+                            "Date and Time: %s." +
+                            "Your ride has been booked from %s.\n",
+                    driver.getFirstName(),
+                    driver.getLastName(),
+                    ride.getPlaceOfDeparture(),
+                    ride.getPlaceOfArrival(),
+                    ride.getDepartureTime(),
+                    rideBooked.username()
+            );
+
+            try {
+                mailer.send(Mail.withText(email, subject, body)
+                        .setFrom("drivus.carpool@gmail.com"));
+            } catch (Exception e) {
+                System.out.println("Fehler beim Senden der E-Mail an: " + email);
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void sendEmailByUnBook(RegisterRideDto rideUnbooked) {
+        long rideId = rideUnbooked.rideId();
+        Ride ride = em.find(Ride.class, rideId);
+
+        if (ride == null) {
+            System.out.println("Fahrt nicht gefunden.");
+            return;
+        }
+
+        TypedQuery<DrivUser> query = em.createQuery("SELECT d FROM DrivUser d WHERE d.username = :username", DrivUser.class);
+        query.setParameter("username", ride.getDriver());
+        List<DrivUser> drivers = query.getResultList();
+
+        if (drivers.isEmpty()) {
+            System.out.println("Driver nicht gefunden.");
+            return;
+        }
+
+        DrivUser driver = drivers.get(0);
+
+        String email = driver.getEmailAddress();
+        if (email != null && !email.isEmpty()) {
+            String subject = "Your ride got unbooked";
+            String body = String.format(
+                    "Dear Driver %s %s,\n\n" +
+                            "Your ride from %s to %s " +
+                            "Date and Time: %s." +
+                            "Your ride has been unbooked from %s.\n",
+                    driver.getFirstName(),
+                    driver.getLastName(),
+                    ride.getPlaceOfDeparture(),
+                    ride.getPlaceOfArrival(),
+                    ride.getDepartureTime(),
+                    rideUnbooked.username()
+            );
+
+            try {
+                mailer.send(Mail.withText(email, subject, body)
+                        .setFrom("drivus.carpool@gmail.com"));
+            } catch (Exception e) {
+                System.out.println("Fehler beim Senden der E-Mail an: " + email);
+                e.printStackTrace();
+            }
+        }
+
+    }
 
 
     public List<Ride> all(String category, String username) {
@@ -166,7 +256,6 @@ public class DrivUsRepository {
         query.setParameter("username", ruaDto.username());
 
         Long count = query.getSingleResult(); // Holt das Ergebnis der COUNT-Abfrage
-        sendEmailByBook(ruaDto);
         return count.intValue(); // Konvertiert Long in int und gibt es zurück
     }
 
@@ -187,6 +276,7 @@ public class DrivUsRepository {
 
             RideRegister rideRegister = new RideRegister(ruaDto.rideId(), ruaDto.username());
             em.persist(rideRegister);
+            sendEmailByBook(ruaDto);
         }
         /*else {
             RideRegister rideRegister = new RideRegister(ruaDto.rideId(), ruaDto.username());
@@ -226,6 +316,7 @@ public class DrivUsRepository {
         else {
             RideRegister rideRegister = em.find(RideRegister.class, query.getSingleResult());
             em.remove(rideRegister);
+            sendEmailByUnBook(ruaDto);
         }
 
 
