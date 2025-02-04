@@ -7,6 +7,10 @@ import at.htl.drive.ride.model.Ride;
 //import at.htl.drive.ride.model.RideUserAssociationId;
 import at.htl.drive.ride.model.RideRegister;
 import com.github.javafaker.Faker;
+import io.quarkus.mailer.Mail;
+import io.quarkus.mailer.Mailer;
+import io.quarkus.mailer.reactive.ReactiveMailer;
+import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -26,6 +30,52 @@ import static io.quarkus.hibernate.orm.panache.PanacheEntityBase.findById;
 public class DrivUsRepository {
     @Inject
     EntityManager em;
+
+    @Inject
+    Mailer mailer;
+
+    @Inject
+    ReactiveMailer reactiveMailer;
+
+    public void sendEmailByDelete(Ride ride) {
+        List<DrivUser> passengers = getPassengers(ride.id);
+
+        if (ride == null ) {
+            System.out.println("Fahrt nicht gefunden.");
+
+        }
+        if (passengers == null && passengers.isEmpty()) {
+            System.out.println("Passagiere nicht gefunden ist empty.");
+
+        }
+
+        for (DrivUser passenger : passengers) {
+            String email = passenger.getEmailAddress();
+            if (email != null && !email.isEmpty()) {
+                String subject = "Ride cancelled";
+                String body = String.format(
+                        "Dear Passenger,\n\n" +
+                                "Your ride from %s to %s has been deleted.\n" +
+                                "Date and Time: %s\n\n",
+                        ride.getPlaceOfDeparture(), // Startort der Fahrt
+                        ride.getPlaceOfArrival(),   // Zielort der Fahrt
+                        ride.getDepartureTime()     // Datum und Uhrzeit der Fahrt
+                );
+
+                try {
+                    mailer.send(Mail.withText(email, subject, body)
+                            .setFrom("drivus.carpool@gmail.com"));
+                } catch (Exception e) {
+                    System.out.println("Fehler beim Senden der E-Mail an: " + email);
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void sendEmailByBook(RegisterRideDto ride) {}
+
+    public void sendEmailByUnBook(RegisterRideDto ride) {}
 
 
     public List<Ride> all(String category, String username) {
@@ -116,6 +166,7 @@ public class DrivUsRepository {
         query.setParameter("username", ruaDto.username());
 
         Long count = query.getSingleResult(); // Holt das Ergebnis der COUNT-Abfrage
+        sendEmailByBook(ruaDto);
         return count.intValue(); // Konvertiert Long in int und gibt es zurück
     }
 
@@ -193,15 +244,18 @@ public class DrivUsRepository {
         //em.remove(rua);
     }
 
+    @Transactional
     public void removeRide(Long id) {
         System.out.println("Versuche, Ride mit ID " + id + " zu entfernen.");
 
         // Prüfen, ob ein Ride mit der gegebenen ID existiert
         Ride ride = em.find(Ride.class, id);
+        Ride rideForEmail = ride;
 
         if (ride != null) {
             // Wenn das Ride existiert, entferne es
             em.remove(ride);
+            sendEmailByDelete(rideForEmail);
             System.out.println("Ride mit ID " + id + " erfolgreich entfernt.");
         } else {
             // Wenn das Ride nicht existiert, Ausgabe einer Fehlermeldung
@@ -431,4 +485,6 @@ public class DrivUsRepository {
         actUser.setImg(profilePicture.img());
         em.merge(actUser);
     }
+
+
 }

@@ -115,6 +115,7 @@ public class DrivUsResource {
     public Response deleteRide(Long id) {
         try {
             repository.removeRide(id);
+            //repository.sendEmailByDelete(id);
             return Response.ok("Fahrt erfolgreich aktualisiert.").build();
         } catch (IllegalArgumentException ex) {
             return Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build();
