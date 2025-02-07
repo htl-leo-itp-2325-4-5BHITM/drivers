@@ -11,9 +11,6 @@
       <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('booked')" class="filter-button"><img
         src="./img/icons/favorites.png" alt="">
         <p>Booked</p></button>
-      <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('ranking')" class="filter-button"><img
-        src="./img/icons/own_rides.png" alt="">
-        <p>Ranking</p></button>
       <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('offered')" class="filter-button"><img
         src="./img/icons/own_rides.png" alt="">
         <p>My rides</p></button>
@@ -36,7 +33,9 @@
     <div class="br"></div>
   </div>
   <div class="content">
-
+    <div>
+      <button *ngIf="ridesCategory=='booked'||ridesCategory=='ranking'" (click)="changeBookedRides()">{{ showPastRidesText }}</button>
+    </div>
     <ul>
       <li *ngFor="let ride of rides">
         <div class="rideItemView" (click)="showDriver=true;driver=ride.driver; selectedRide=ride">

@@ -304,6 +304,31 @@ export class DriverRideViewComponent implements OnInit {
       },
     });
   }
+
+  rateRide(selectedRide: Ride) {
+
+  }
+
+  stars = 0
+  unbookBool = true;
+
+  clickRate(i: number) {
+    this.stars = i+1;
+  }
+
+  unbook(selectedRide: Ride) {
+    if(this.unbookBool) {
+      this.rideService.unbookSeat(selectedRide);
+      this.unbookBool = false;
+      alert('Sitz wurde erfolgreich storniert.');
+      window.location.reload();
+    }
+    else {
+      this.rideService.getSeat(selectedRide);
+      this.unbookBool = true;
+      alert('Sitz wurde erfolgreich gebucht.');
+    }
+  }
 }
 const getTimeFromDate = (date: Date): string => {
   const hours = ('0' + date.getHours()).slice(-2);

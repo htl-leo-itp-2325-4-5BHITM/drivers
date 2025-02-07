@@ -70,8 +70,13 @@ export class RideService {
     if (ride.id != null) {
       newRegister.rideId = ride.id;
     }
-    //newRegister.username = "test";
+    let user  = sessionStorage.getItem("username");
 
+    if (user == null) {
+      user = "";
+    }
+
+    newRegister.username = user;
     console.log(newRegister," newRegister")
 
     this.http.post(this.url + '/unregisterForRide', newRegister).subscribe(registerRide => {
