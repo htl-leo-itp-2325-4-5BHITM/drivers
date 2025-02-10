@@ -10,14 +10,12 @@ import com.github.javafaker.Faker;
 import io.quarkus.mailer.Mail;
 import io.quarkus.mailer.Mailer;
 import io.quarkus.mailer.reactive.ReactiveMailer;
-import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.core.Response;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -580,4 +578,12 @@ public class DrivUsRepository {
     }
 
 
+    public void rateRide(RateRideDto rateRide) {
+        Ride selectedRide = em.find(Ride.class, rateRide.id());
+        selectedRide.setStars(rateRide.stars());
+
+        UsernameDto username = new UsernameDto(selectedRide.driver);
+        DrivUser driver = getUserByUsername(username);
+        driver.setStars(selectedRide.stars);
+    }
 }

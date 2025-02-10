@@ -17,9 +17,7 @@ import org.eclipse.microprofile.jwt.Claims;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.Logger;
 import org.jose4j.json.internal.json_simple.JSONObject;
-import org.keycloak.authorization.client.AuthzClient;
 
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -290,19 +288,17 @@ public class DrivUsResource {
         return Response.ok().build();
     }
 
-   /* @Path("/rides/getAllRides/javaFaker")
-    @GET
+    @Path("/rides/rating")
+    @POST
     @Transactional
-    public List<Ride> dataLoaderToDatabase() {
-        return repository.getAllRidesLoader();
-    }*/
-    /*
-    @Path("/rides")
-    @GET
-    public Response all() {
-        System.out.println("bin im all");
-        var rides = repository.all();
-        var dtos = rides.stream().map(rideMapper::toResource);
-        return Response.ok(dtos).build();
-    }*/
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response rateRide(RateRideDto rateRide) {
+        try {
+            repository.rateRide(rateRide);
+        }
+        catch (IllegalArgumentException ex) {
+            return Response.status(400, "error").build();
+        }
+        return Response.ok().build();
+    }
 }

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Driver, HardcodeService} from '../service/hardcode.service';
-import {Ride} from '../model/ride.model';
+import {Ride, RateRide} from '../model/ride.model';
 import {DatePipe, formatDate, NgForOf, NgIf, Time} from '@angular/common';
 import {getSeat, RideService} from '../service/ride.service';
 import {MapComponent} from '../map/map.component';
@@ -306,7 +306,20 @@ export class DriverRideViewComponent implements OnInit {
   }
 
   rateRide(selectedRide: Ride) {
-
+    let newRating :RateRide = <RateRide>{}
+    newRating.id = selectedRide.id;
+    newRating.stars = this.stars;
+    this.rideService.rateRide(newRating).subscribe({
+      next: (response) => {
+        console.log('Rating successfully');
+        this.stars = 0;
+        alert('Ride has been rated!');
+      },
+      error: (err) => {
+        console.error('Error rating ride:', err);
+        alert('Failed to rate ride. Please try again.');
+      },
+    });
   }
 
   stars = 0

@@ -7,4 +7,6 @@ export interface User {
   emailAddress: string
   username: string
   img: string
+  stars: number
+  ratingCount: number
 }

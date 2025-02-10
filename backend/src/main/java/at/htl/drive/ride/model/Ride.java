@@ -39,7 +39,14 @@ public class Ride {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
     public DrivUser user;
-    
+
+    // RATING
+    @Column(length = 1)
+    public Long stars;
+
+    @Column()
+    public Long ratingCount;
+
     /*@OneToMany
     public List<Swipe> swipes;
     //</editor-fold>*/
@@ -95,6 +102,28 @@ public class Ride {
 
     public String getPlaceOfDepartureCoordinates() {
         return placeOfDepartureCoordinates;
+    }
+
+    public Long getStars() {
+        return stars;
+    }
+
+    public void setStars(Long stars) {
+        if(this.stars == null) {
+            this.ratingCount = Long.valueOf(0);
+            this.stars = Long.valueOf(0);
+        }
+        this.ratingCount++;
+        this.stars += stars;
+        this.stars = this.stars/this.ratingCount;
+    }
+
+    public Long getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(Long ratingCount) {
+        this.ratingCount = ratingCount;
     }
 
     public void setPlaceOfDepartureCoordinates(String placeOfDepartureCoordinates) {

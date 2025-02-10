@@ -28,6 +28,10 @@ public class DrivUser {
     @Lob
     public byte[] profilePicture;
 
+    @Column
+    public Long stars;
+    @Column
+    public Long ratingCount;
 
     @OneToMany(mappedBy = "user")
     public List<Ride> rides;
@@ -133,5 +137,27 @@ public class DrivUser {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public Long getStars() {
+        return stars;
+    }
+
+    public void setStars(Long stars) {
+        if(this.stars == null) {
+            this.ratingCount = Long.valueOf(0);
+            this.stars = Long.valueOf(0);
+        }
+        this.ratingCount++;
+        this.stars += stars;
+        this.stars = this.stars/this.ratingCount;
+    }
+
+    public Long getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(Long ratingCount) {
+        this.ratingCount = ratingCount;
     }
 }

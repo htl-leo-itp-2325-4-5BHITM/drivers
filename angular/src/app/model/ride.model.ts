@@ -27,3 +27,8 @@ export interface RegisterRide {
   rideId: number,
   username: string
 }
+
+export interface RateRide {
+  id: number,
+  stars: number
+}

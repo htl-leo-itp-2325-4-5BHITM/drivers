@@ -60,7 +60,9 @@ export class UserService {
           emailAddress: response.emailAddress,
           username: response.username,
           password: response.password,
-          img: response.img
+          img: response.img,
+          stars: response.stars,
+          ratingCount: response.ratingCount
         };
 
         return user; // Gebe den 'user' zurück, wenn alles OK ist

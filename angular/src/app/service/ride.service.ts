@@ -1,5 +1,5 @@
 import {Injectable, model} from '@angular/core';
-import {BackendRide, RegisterRide, Ride} from '../model/ride.model';
+import {BackendRide, RateRide, RegisterRide, Ride} from '../model/ride.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Filter} from '../model/filter.model';
@@ -120,6 +120,11 @@ export class RideService {
   deleteRide(id: number) {
     console.log("deleteRide in service")
     return this.http.post(this.url + '/deleteRide',id);
+  }
+
+  rateRide(newRating: RateRide) {
+    console.log("rateRide: " + newRating.id + newRating.stars)
+    return this.http.post(this.url + '/rating', newRating);
   }
 }
 

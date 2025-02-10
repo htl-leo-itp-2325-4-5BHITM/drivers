@@ -19,3 +19,13 @@ Content-Type: application/json
 "username": "janine",
 "img": "2"
 }
+
+###
+
+POST http://localhost:8080/api/drivus/rides/rating
+Content-Type: application/json
+
+{
+"id": 4,
+"stars": 5
+}

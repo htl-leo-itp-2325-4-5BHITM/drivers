@@ -122,6 +122,8 @@ export interface Driver {
   username: string;
   password: string;
   img: string;
+  stars?: number;
+  ratingCount?: number;
 }
 
 

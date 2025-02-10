@@ -62,6 +62,8 @@
       </div>
       <div *ngIf="!canEditRide(selectedRide)" class="driver-section-content">
         <p>Name: {{ driver?.firstName }} {{ driver?.lastName }}</p>
+        <p *ngIf="driver?.ratingCount != undefined">{{ driver?.stars}} star(s) from {{ driver?.ratingCount }} ratings</p>
+        <p *ngIf="driver?.ratingCount == undefined">no rating yet</p>
         <p>Email: {{ driver?.emailAddress }}</p>
         <p>Phone: {{ driver?.phoneNr }}</p>
         <div *ngIf="category=='ranking'" class="rating-box">
