@@ -95,10 +95,10 @@ public class DrivUsRepository {
         if (email != null && !email.isEmpty()) {
             String subject = "Your ride got booked";
             String body = String.format(
-                    "Dear Driver %s %s,\n\n" +
+                    "Dear %s %s,\n\n" +
                             "Your ride from %s to %s " +
-                            "Date and Time: %s.\n" +
-                            "Your ride has been booked from %s.\n",
+                            "on the %s. \n" +
+                            "has been booked by %s.\n",
                     driver.getFirstName(),
                     driver.getLastName(),
                     ride.getPlaceOfDeparture(),
@@ -142,10 +142,10 @@ public class DrivUsRepository {
         if (email != null && !email.isEmpty()) {
             String subject = "Your ride got unbooked";
             String body = String.format(
-                    "Dear Driver %s %s,\n\n" +
+                    "Dear %s %s,\n\n" +
                             "Your ride from %s to %s " +
-                            "Date and Time: %s. \n" +
-                            "Your ride has been unbooked from %s.\n",
+                            "on the %s. \n" +
+                            "has been unbooked by %s.\n",
                     driver.getFirstName(),
                     driver.getLastName(),
                     ride.getPlaceOfDeparture(),
