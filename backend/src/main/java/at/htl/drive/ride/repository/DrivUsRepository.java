@@ -95,10 +95,10 @@ public class DrivUsRepository {
         if (email != null && !email.isEmpty()) {
             String subject = "Your ride got booked";
             String body = String.format(
-                    "Dear Driver %s %s,\n\n" +
+                    "Dear %s %s,\n\n" +
                             "Your ride from %s to %s " +
-                            "Date and Time: %s.\n" +
-                            "Your ride has been booked from %s.\n",
+                            "on the %s. \n" +
+                            "has been booked by %s.\n",
                     driver.getFirstName(),
                     driver.getLastName(),
                     ride.getPlaceOfDeparture(),
@@ -142,10 +142,10 @@ public class DrivUsRepository {
         if (email != null && !email.isEmpty()) {
             String subject = "Your ride got unbooked";
             String body = String.format(
-                    "Dear Driver %s %s,\n\n" +
+                    "Dear %s %s,\n\n" +
                             "Your ride from %s to %s " +
-                            "Date and Time: %s. \n" +
-                            "Your ride has been unbooked from %s.\n",
+                            "on the %s. \n" +
+                            "has been unbooked by %s.\n",
                     driver.getFirstName(),
                     driver.getLastName(),
                     ride.getPlaceOfDeparture(),
@@ -173,8 +173,15 @@ public class DrivUsRepository {
 
         switch (category) {
             case "available":
-                Query query = em.createQuery("select r from Ride r where r.driver <> :username order by r.departureTime", Ride.class);
+                Query query = em.createQuery("SELECT r FROM Ride r " +
+                        "WHERE r.driver <> :username and r.departureTime > :currentDateTime " +
+                                "AND r.id NOT IN (" +
+                                "    SELECT rr.rideId FROM RideRegister rr WHERE rr.username = :username" +
+                                ") " +
+                                "ORDER BY r.departureTime",
+                        Ride.class);
                 query.setParameter("username", username);
+                query.setParameter("currentDateTime", LocalDateTime.now());
                 return query.getResultList();
             case "offered":
                 Query query1 = em.createQuery("select r from Ride r where r.driver = :username order by r.departureTime", Ride.class);

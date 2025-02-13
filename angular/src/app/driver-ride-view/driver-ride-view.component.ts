@@ -195,6 +195,7 @@ export class DriverRideViewComponent implements OnInit {
         console.log(this.seatIsBooked)
         alert('Sitz wurde erfolgreich gebucht.');
       }
+      window.location.reload();
       //console.log(bookedSeats)
     });
   }
@@ -314,6 +315,7 @@ export class DriverRideViewComponent implements OnInit {
         console.log('Rating successfully');
         this.stars = 0;
         alert('Ride has been rated!');
+        window.location.reload()
       },
       error: (err) => {
         console.error('Error rating ride:', err);
@@ -341,6 +343,7 @@ export class DriverRideViewComponent implements OnInit {
       this.unbookBool = true;
       alert('Sitz wurde erfolgreich gebucht.');
     }
+    window.location.reload()
   }
 }
 const getTimeFromDate = (date: Date): string => {

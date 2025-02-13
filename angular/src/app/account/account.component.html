@@ -4,21 +4,9 @@
     <div class="account-form">
       <p class="title-account">Account</p>
       <div class="profile">
-        <img *ngIf="!setPicture" src="./img/placeholder.jpg" alt="">
-        <img *ngIf="setPicture" src="./img/profilePicture/{{ sessionStorage.getItem('img') }}.png" alt="">
+        <img *ngIf="sessionStorage.getItem('img') == null" src="./img/placeholder.jpg" alt="">
+        <img *ngIf="sessionStorage.getItem('img') != null" src="./img/profilePicture/{{ sessionStorage.getItem('img') }}.png" alt="">
       </div>
-      <!--<form (submit)="changePicture()">
-        <input type="file" (change)="onFileSelected($event)">
-        <button type="submit">change profile picture</button>
-      </form>
-      <button></button>-->
-      <!--<form (ngSubmit)="uploadImage()" enctype="multipart/form-data">
-        <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-        <button type="submit">Upload</button>
-      </form>
-
-      <img *ngIf="profileImage" [src]="profileImage" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%;" />-->
-
 
       <form [formGroup]="fruitForm" (ngSubmit)="onSubmit()">
         <label for="fruit">Choose a profile picture:</label>
