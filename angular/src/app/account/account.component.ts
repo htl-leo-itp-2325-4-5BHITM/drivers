@@ -42,7 +42,9 @@ export class AccountComponent {
     this.router.navigate(['/']);
   }
 
-
+  ShowStatistiks() {
+    this.router.navigate(['/statistiks']);
+  }
 
   //profile picture
 

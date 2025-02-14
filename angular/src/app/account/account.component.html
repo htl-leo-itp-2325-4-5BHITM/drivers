@@ -3,40 +3,48 @@
   <div class="account-box">
     <div class="account-form">
       <p class="title-account">Account</p>
-      <div class="profile">
-        <img *ngIf="sessionStorage.getItem('img') == null" src="./img/placeholder.jpg" alt="">
-        <img *ngIf="sessionStorage.getItem('img') != null" src="./img/profilePicture/{{ sessionStorage.getItem('img') }}.png" alt="">
-      </div>
+      <div class="account-form-sections">
+        <div class="account-form-section1">
 
-      <form [formGroup]="fruitForm" (ngSubmit)="onSubmit()">
-        <label for="fruit">Choose a profile picture:</label>
-        <select id="fruit" formControlName="fruit">
-          <option *ngFor="let number of numbers" [value]="number">{{number}}</option>
-        </select>
+          <div class="profile">
+            <img *ngIf="sessionStorage.getItem('img') == null" src="./img/placeholder.jpg" alt="">
+            <img *ngIf="sessionStorage.getItem('img') != null"
+                 src="./img/profilePicture/{{ sessionStorage.getItem('img') }}.png" alt="">
+          </div>
 
-        <button type="submit" [disabled]="fruitForm.invalid">Speichern</button>
-      </form>
-
-
-      <!--<img src="./img/profilePicture/1.png">-->
-
-      <div class="row">
-        <p class="detail">Username: </p>
-        <p class="detail">{{ sessionStorage.getItem('username') }} </p>
+          <form [formGroup]="fruitForm" (ngSubmit)="onSubmit()">
+            <div>
+              <label>Choose a profile picture:</label>
+              <select id="fruit" formControlName="fruit">
+                <option *ngFor="let number of numbers" [value]="number">{{number}}</option>
+              </select>
+            </div>
+            <button type="submit" [disabled]="fruitForm.invalid">Save</button>
+          </form>
+        </div>
+        <div class="account-form-section2">
+          <div class="row">
+            <p class="detail">Username: </p>
+            <p class="detail">{{ sessionStorage.getItem('username') }} </p>
+          </div>
+          <div class="row">
+            <p class="detail">Name:</p>
+            <p class="detail"> {{ sessionStorage.getItem('firstname') }} {{ sessionStorage.getItem('lastname') }}</p>
+          </div>
+          <div class="row">
+            <p class="detail">Email:</p>
+            <p class="detail">{{ sessionStorage.getItem('email') }}</p>
+          </div>
+          <div class="row">
+            <p class="detail">Phone: </p>
+            <p class="detail">{{ sessionStorage.getItem('phoneNr') }}</p>
+          </div>
+          <div class="account-buttons">
+            <button class="statistics-button" (click)="ShowStatistiks()">Statistics</button>
+            <button class="logout-button" (click)="LogUserOut()">Log out</button>
+          </div>
+        </div>
       </div>
-      <div class="row">
-        <p class="detail">Name:</p>
-        <p class="detail"> {{ sessionStorage.getItem('firstname') }} {{ sessionStorage.getItem('lastname') }}</p>
-      </div>
-      <div class="row">
-        <p class="detail">Email:</p>
-        <p class="detail">{{ sessionStorage.getItem('email') }}</p>
-      </div>
-      <div class="row">
-        <p class="detail">Phone: </p>
-        <p class="detail">{{ sessionStorage.getItem('phoneNr') }}</p>
-      </div>
-      <button class="logout-button" (click)="LogUserOut()">Log out</button>
     </div>
   </div>
 </div>
