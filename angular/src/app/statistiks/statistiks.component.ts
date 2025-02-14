@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 import {HardcodeService} from '../service/hardcode.service';
 import {Subscription} from 'rxjs';
 import {NavbarComponent} from '../navbar/navbar.component';
-import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-statistiks',
@@ -87,7 +86,7 @@ export class StatistiksComponent {
         this.othersRides = data;
 
         // Erst nachdem die Daten empfangen wurden, den Chart erstellen
-        this.createChart(data);
+        //this.createChart(data);
       })
       .catch(error => {
         // Fehlerbehandlung
@@ -95,31 +94,5 @@ export class StatistiksComponent {
       });
   }
 
-  createChart(data: any) {
-    new Chart(
-      document.getElementById('acquisitions'),
-      {
-        type: 'bar',
-        options: {
-          animation: false,
-          plugins: {
-            legend: {
-              display: false
-            },
-            tooltip: {
-              enabled: false
-            }
-          }
-        },
-        data: {
-          labels: data.map((row: any) => row.year), // Passe die Datenstruktur an
-          datasets: [
-            {
-              label: 'Acquisitions by year',
-              data: data.map((row: any) => row.count) // Passe die Datenstruktur an
-            }
-          ]
-        }
-      }
-    );
-  }
+
+}
