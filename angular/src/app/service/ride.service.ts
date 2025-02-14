@@ -126,6 +126,12 @@ export class RideService {
     console.log("rateRide: " + newRating.id + newRating.stars)
     return this.http.post(this.url + '/rating', newRating);
   }
+
+  getRidesOffered(username: string|null) {
+    let data = {"username": username};
+    const jsonData = JSON.stringify(data);
+    return this.http.post<number>(this.url + '/getRidesOffered', jsonData);
+  }
 }
 
 

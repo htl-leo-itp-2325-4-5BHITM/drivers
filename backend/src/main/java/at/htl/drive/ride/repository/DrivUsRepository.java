@@ -593,4 +593,28 @@ public class DrivUsRepository {
         DrivUser driver = getUserByUsername(username);
         driver.setStars(selectedRide.stars);
     }
+
+    public Long getRidesOffered(UsernameDto username) {
+
+            // JPQL-Query, um die Anzahl der Fahrten zu ermitteln, die von einem bestimmten Fahrer angeboten wurden
+            String jpql = "SELECT COUNT(r) FROM Ride r WHERE r.driver = :username";
+            TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+            query.setParameter("username", username.username());
+
+            Long count = query.getSingleResult(); // Ergebnis der COUNT-Abfrage
+            return count; // Long in int umwandeln und zurückgeben
+
+    }
+
+    public Long getOthersRides(UsernameDto username) {
+
+        // JPQL-Query, um die Anzahl der Fahrten zu ermitteln, die von einem bestimmten Fahrer angeboten wurden
+        String jpql = "SELECT COUNT(r) FROM RideRegister r WHERE r.username = :username";
+        TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+        query.setParameter("username", username.username());
+
+        Long count = query.getSingleResult(); // Ergebnis der COUNT-Abfrage
+        return count; // Long in int umwandeln und zurückgeben
+
+    }
 }
