@@ -165,16 +165,16 @@ export class RideViewComponent implements OnInit, OnDestroy {
 
   protected readonly sessionStorage = sessionStorage;
   showPastRides = false;
-  showPastRidesText = "History"
+  showPastRidesText = "Show History"
 
   changeBookedRides() {
     this.showPastRides = !this.showPastRides;
     if(this.showPastRides) {
-      this.showPastRidesText = "Upcoming"
+      this.showPastRidesText = "Show Upcoming"
       this.getRidesPerButton("ranking")
     }
     else {
-      this.showPastRidesText = "History"
+      this.showPastRidesText = "Show History"
       this.getRidesPerButton("booked")
     }
   }

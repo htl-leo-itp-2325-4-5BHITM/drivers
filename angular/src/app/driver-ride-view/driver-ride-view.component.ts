@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Driver, HardcodeService} from '../service/hardcode.service';
 import {Ride, RateRide} from '../model/ride.model';
-import {DatePipe, formatDate, NgForOf, NgIf, Time} from '@angular/common';
+import {DatePipe, formatDate, NgForOf, NgIf, NgStyle, Time} from '@angular/common';
 import {getSeat, RideService} from '../service/ride.service';
 import {MapComponent} from '../map/map.component';
 import {UserService} from '../service/user.service';
@@ -24,7 +24,8 @@ import {Passanger} from '../model/passanger.model';
     NgIf,
     RouterLink,
     NgForOf,
-    FormsModule
+    FormsModule,
+    NgStyle
   ],
   templateUrl: './driver-ride-view.component.html',
   styleUrl: './driver-ride-view.component.css'
@@ -327,8 +328,10 @@ export class DriverRideViewComponent implements OnInit {
   stars = 0
   unbookBool = true;
 
-  clickRate(i: number) {
-    this.stars = i+1;
+  selectedRating: number = -1; // Initialisiert auf -1, sodass keine Sterne standardmäßig gelb sind.
+
+  clickRate(i: number): void {
+    this.selectedRating = i; // Setzt die ausgewählte Bewertung auf den geklickten Stern.
   }
 
   unbook(selectedRide: Ride) {

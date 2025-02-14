@@ -66,10 +66,17 @@
         <p *ngIf="driver?.ratingCount == undefined">no rating yet</p>
         <p>Email: {{ driver?.emailAddress }}</p>
         <p>Phone: {{ driver?.phoneNr }}</p>
+        <p>Rate now:</p>
         <div *ngIf="category=='ranking'" class="rating-box">
-          <p>Rate now:</p>
-          <img (click)="clickRate(i)" class="rating-img" src="./img/icons/favorites.png" alt="star" *ngFor="let i of [0,1,2,3,4]">
+          <img
+            (click)="clickRate(i)"
+            class="rating-img"
+            [ngStyle]="i <= selectedRating ? { 'filter': 'invert(91%) sepia(50%) saturate(4057%) hue-rotate(338deg) brightness(98%) contrast(93%)' } : {}"
+            src="./img/icons/favorites.png"
+            alt="star"
+            *ngFor="let i of [0, 1, 2, 3, 4]">
         </div>
+
         <div class="centerButton">
           <button *ngIf="category=='available'" (click)="toggleBooking(selectedRide)" class="book">
             {{ seatIsBooked ? 'unbook' : 'book' }}

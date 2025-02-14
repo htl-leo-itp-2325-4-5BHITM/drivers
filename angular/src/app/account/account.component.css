@@ -23,6 +23,8 @@
   align-items: center;
   flex-direction: column;
   position:relative;
+  width: 100%;
+  height: 100%;
 }
 
 .account-form-sections{
@@ -30,6 +32,8 @@
   width: 100%;
   flex-direction: row;
   position: relative;
+  align-items: center;
+  height: 100%;
 }
 
 .account-form-section1, .account-form-section2{
