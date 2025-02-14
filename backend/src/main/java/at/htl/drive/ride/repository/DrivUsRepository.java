@@ -52,7 +52,7 @@ public class DrivUsRepository {
             if (email != null && !email.isEmpty()) {
                 String subject = "Ride cancelled";
                 String body = String.format(
-                        "Dear Passenger,\n\n" +
+                        "Dear \n\n" +
                                 "Your ride from %s to %s has been deleted.\n" +
                                 "Date and Time: %s\n\n",
                         ride.getPlaceOfDeparture(), // Startort der Fahrt
