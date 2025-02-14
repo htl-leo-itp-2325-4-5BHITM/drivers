@@ -32,10 +32,11 @@ import {HardcodeService} from '../service/hardcode.service';
 })
 export class RideViewComponent implements OnInit, OnDestroy {
   rides: Ride[] = [];  // This will now store either all rides or the filtered rides
-  ridesSubscription: Subscription = <Subscription>{};
   showDriver: boolean = false;
   showFilter: boolean = false;
-  ridesCategory :string = 'available'
+  ridesCategory :string = 'available';
+  ridesSubscription: Subscription = <Subscription>{};
+
 
   // Add selectedRide here to store the clicked ride
   selectedRide: Ride = <Ride>{};  // This will hold the currently selected ride
