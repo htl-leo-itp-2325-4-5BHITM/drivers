@@ -31,7 +31,7 @@
       </div>
     </form>
     <div class="booked-button">
-      <button *ngIf="ridesCategory=='booked'||ridesCategory=='ranking'" (click)="changeBookedRides()">{{ showPastRidesText }}</button>
+      <button [title]="{showPastRidesTitle}" *ngIf="ridesCategory=='booked'||ridesCategory=='ranking'" (click)="changeBookedRides()">{{ showPastRidesText }}</button>
     </div>
     <div class="br"></div>
   </div>

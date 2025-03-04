@@ -102,6 +102,7 @@ export class RideViewComponent implements OnInit, OnDestroy {
   date: Date = new Date();
   time: Date = new Date();
   showOwnRides: boolean = false;
+  showPastRidesTitle: string="Currently showing upcoming";
 
   filteredRides: Ride[] = [];
 
@@ -172,10 +173,12 @@ export class RideViewComponent implements OnInit, OnDestroy {
     this.showPastRides = !this.showPastRides;
     if(this.showPastRides) {
       this.showPastRidesText = "Show Upcoming"
+      this.showPastRidesTitle="Currently showing history"
       this.getRidesPerButton("ranking")
     }
     else {
       this.showPastRidesText = "Show History"
+      this.showPastRidesTitle="Currently showing upcoming"
       this.getRidesPerButton("booked")
     }
   }
