@@ -332,6 +332,7 @@ export class DriverRideViewComponent implements OnInit {
 
   clickRate(i: number): void {
     this.selectedRating = i; // Setzt die ausgewählte Bewertung auf den geklickten Stern.
+    this.stars = i+1;
   }
 
   unbook(selectedRide: Ride) {

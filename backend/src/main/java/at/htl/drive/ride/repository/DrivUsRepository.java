@@ -2,6 +2,7 @@ package at.htl.drive.ride.repository;
 
 import at.htl.drive.ride.dto.*;
 import at.htl.drive.ride.model.DrivUser;
+import at.htl.drive.ride.model.Rate;
 import at.htl.drive.ride.model.Ride;
 //import at.htl.drive.ride.model.RideUserAssociation;
 //import at.htl.drive.ride.model.RideUserAssociationId;
@@ -174,14 +175,21 @@ public class DrivUsRepository {
         switch (category) {
             case "available":
                 Query query = em.createQuery("SELECT r FROM Ride r " +
-                        "WHERE r.driver <> :username and r.departureTime > :currentDateTime " +
+                                "WHERE r.driver <> :username " +
                                 "AND r.id NOT IN (" +
                                 "    SELECT rr.rideId FROM RideRegister rr WHERE rr.username = :username" +
                                 ") " +
                                 "ORDER BY r.departureTime",
                         Ride.class);
+                /*Query query = em.createQuery("SELECT r FROM Ride r " +
+                        "WHERE r.driver <> :username and r.departureTime > :currentDateTime " +
+                                "AND r.id NOT IN (" +
+                                "    SELECT rr.rideId FROM RideRegister rr WHERE rr.username = :username" +
+                                ") " +
+                                "ORDER BY r.departureTime",
+                        Ride.class);*/
                 query.setParameter("username", username);
-                query.setParameter("currentDateTime", LocalDateTime.now());
+                //query.setParameter("currentDateTime", LocalDateTime.now());
                 return query.getResultList();
             case "offered":
                 Query query1 = em.createQuery("select r from Ride r where r.driver = :username order by r.departureTime", Ride.class);
@@ -592,6 +600,9 @@ public class DrivUsRepository {
         UsernameDto username = new UsernameDto(selectedRide.driver);
         DrivUser driver = getUserByUsername(username);
         driver.setStars(selectedRide.stars);
+
+        Rate rate = new Rate(selectedRide.id, rateRide.stars());
+        em.persist(rate);
     }
 
     public Long getRidesOffered(UsernameDto username) {

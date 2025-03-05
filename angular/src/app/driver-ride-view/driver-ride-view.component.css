@@ -25,6 +25,8 @@
   border-radius: 25px;
   box-shadow: 3px 3px 15px #333;
   font-size: calc(var(--normalText));
+
+  transform: scale(.9);
 }
 .ride-section, .driver-section{
   width: 25vw;
@@ -35,7 +37,7 @@
 
 .ride-content{
   padding-left: 2vw;
-  margin-top: 20vw;
+  margin-top: 21vw;
   width:110%;
 }
 
