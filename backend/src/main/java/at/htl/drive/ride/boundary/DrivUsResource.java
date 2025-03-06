@@ -143,9 +143,11 @@ public class DrivUsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     @Path("rides/getFilteredCount")
-    public List<Ride> getFilteredCount(FilterDto filterText) {
+    public List<RideDto> getFilteredCount(FilterDto filterText) {
         System.out.println("bin im getFilteredRide");
-        return repository.getFilteredCount(filterText);
+        var rides = repository.getFilteredCount(filterText);
+        var dtos = rides.stream().map(rideMapper::toResource).toList();
+        return dtos;
     }
 
     @POST
