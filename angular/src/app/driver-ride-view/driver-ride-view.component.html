@@ -65,7 +65,7 @@
         <p *ngIf="driver?.ratingCount != undefined">{{ driver?.stars}} star(s) from {{ driver?.ratingCount }} ratings</p>
         <p *ngIf="driver?.ratingCount == undefined">no rating yet</p>
         <p>Email: {{ driver?.emailAddress }}</p>
-        <p>Phone: {{ driver?.phoneNr }}</p>
+        <p>Phone: 0{{ driver?.phoneNr }}</p>
         <p *ngIf="category=='ranking'">Rate now:</p>
         <div *ngIf="category=='ranking'" class="rating-box">
           <img

@@ -14,7 +14,7 @@
 
           <form [formGroup]="fruitForm" (ngSubmit)="onSubmit()">
             <div>
-              <label>Choose a profile picture:</label>
+              <label>Choose an avatar:</label>
               <select id="fruit" formControlName="fruit">
                 <option *ngFor="let number of numbers" [value]="number">{{number}}</option>
               </select>
