@@ -1,8 +1,14 @@
 <app-navbar></app-navbar>
 <h1>Statistics</h1>
 
-<!--<p>You have been on {{getRidesOffered()}} Rides </p>-->
 <p style="color: white">You have been on {{ridesCountBeenOn}} Rides </p>
 <p style="color: white">You have offered {{ridesCount}} Rides </p>
 
 <p style="color: white">avg rating of your Rides</p>
+
+<div class="row">
+  <div class="col-lg-4">
+    <h2 style="color: white">Bar Chart</h2>
+    <canvas id="barchart" ></canvas>
+  </div>
+</div>

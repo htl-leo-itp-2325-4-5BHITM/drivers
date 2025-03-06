@@ -90,12 +90,17 @@
         </div>
       </div>
       <div *ngIf="canEditRide(selectedRide)">
+
+
         <p class="passenger-title">Passengers</p>
         <p *ngIf="passengers.length == 0">No passengers yet</p>
         <div *ngIf="passengers.length > 0">
-          <select class="passenger-select" [(ngModel)]="selectedPassenger">
+          <p class="unethical" *ngIf="!hasPassengerSelected" >Select a passenger</p>
+          <select class="passenger-select" [(ngModel)]="selectedPassenger" (click)="hasPassengerSelected=true">
+
             <option [ngValue]="null" disabled selected>Select a passenger</option>
             <option *ngFor="let passenger of passengers" [ngValue]="passenger">
+
               {{ passenger.username}}
             </option>
           </select>

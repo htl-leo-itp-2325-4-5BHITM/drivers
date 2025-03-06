@@ -265,6 +265,13 @@ public class DrivUsResource {
         return repository.getRidesOffered(username);
     }
 
+    @Path("/rides/getStarsChart/{username}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<StarsChartDto> getStarsChart(@PathParam("username") String username) {
+        return repository.getStarsChart(username);
+    }
+
     @Path("/rides/getOthersRides/{username}")
     @POST
     public Long getOthersRides(@PathParam("username") String username) {
