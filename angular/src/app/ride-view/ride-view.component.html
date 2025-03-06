@@ -1,20 +1,37 @@
 <app-navbar></app-navbar>
 <div class="full-Page" [ngClass]="{'noScroll': showDriver}">
+
   <div class="menu-box-main">
     <div class="menu-boxes">
-      <button (click)="showFilter=!this.showFilter" routerLink="/rides" class="filter-button"><img
-        src="./img/icons/filter.png" alt="">
-        <p>Filter</p></button>
-      <button (click)="getRidesPerButton('available'); showFilter=false" class="filter-button"><img
-        src="./img/icons/no_filter.png" alt="">
-        <p>Available</p></button>
-      <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('booked'); showFilter=false" class="filter-button"><img
-        src="./img/icons/favorites.png" alt="">
-        <p>Booked</p></button>
-      <button *ngIf="sessionStorage.getItem('isloged') == 'true'" (click)="getRidesPerButton('offered'); showFilter=false" class="filter-button"><img
-        src="./img/icons/own_rides.png" alt="">
-        <p>My rides</p></button>
+
+      <button (click)="showFilter = !showFilter; ridesCategory = 'filter'" routerLink="/rides"
+              class="filter-button" [ngClass]="{'active': ridesCategory === 'filter'}">
+        <img src="./img/icons/filter.png" alt="">
+        <p>Filter</p>
+      </button>
+
+
+      <button (click)="getRidesPerButton('available'); showFilter=false"
+              class="filter-button" [ngClass]="{'active': ridesCategory === 'available'}">
+        <img src="./img/icons/no_filter.png" alt="">
+        <p>Available</p>
+      </button>
+
+      <button *ngIf="sessionStorage.getItem('isloged') == 'true'"
+              (click)="getRidesPerButton('booked'); showFilter=false"
+              class="filter-button" [ngClass]="{'active': ridesCategory === 'booked'}">
+        <img src="./img/icons/favorites.png" alt="">
+        <p>Booked</p>
+      </button>
+
+      <button *ngIf="sessionStorage.getItem('isloged') == 'true'"
+              (click)="getRidesPerButton('offered'); showFilter=false"
+              class="filter-button" [ngClass]="{'active': ridesCategory === 'offered'}">
+        <img src="./img/icons/own_rides.png" alt="">
+        <p>My rides</p>
+      </button>
     </div>
+
     <form *ngIf="showFilter" [formGroup]="filterOption" (ngSubmit)="filterFunction()">
       <p class="filter-title">Filter Options:</p>
       <input placeholder="From" formControlName="from">

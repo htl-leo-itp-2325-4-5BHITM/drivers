@@ -20,6 +20,7 @@ ul {
 li {
   background-color: var(--colorBright);
   width: 20vw;
+  height: 41vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -188,6 +189,7 @@ button:hover{
   display: flex;
   align-items: center;
 }
+
 .filter-button p{
   color: var(--colorBright);
   font-size: var(--normalText);
@@ -217,3 +219,17 @@ button:hover{
   align-items: center;
   border-radius: 5px;
 }
+
+.filter-button.active {
+  background-color: var(--colorBright);
+}
+
+.filter-button.active p{
+  color: var(--colorDark);
+}
+
+.filter-button.active img{
+  filter: invert(5%) sepia(6%) saturate(6031%) hue-rotate(177deg) brightness(95%) contrast(92%);
+}
+
+

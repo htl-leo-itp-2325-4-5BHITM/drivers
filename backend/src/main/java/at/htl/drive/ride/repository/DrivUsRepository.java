@@ -20,6 +20,7 @@ import jakarta.transaction.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -603,7 +604,7 @@ public class DrivUsRepository {
         DrivUser driver = getUserByUsername(username);
         driver.setStars(selectedRide.stars);
 
-        Rate rate = new Rate(selectedRide.id, rateRide.stars());
+        Rate rate = new Rate(selectedRide.id, rateRide.stars(),selectedRide.driver);
         em.persist(rate);
     }
 
@@ -629,5 +630,72 @@ public class DrivUsRepository {
         Long count = query.getSingleResult(); // Ergebnis der COUNT-Abfrage
         return count; // Long in int umwandeln und zurückgeben
 
+    }
+
+    public List<StarsChartDto> getStarsChart(String username) {
+        // JPQL-Query, um die Sternebewertungen eines Benutzers zu holen
+        String jpql = "SELECT r.stars, COUNT(r.stars) FROM Rate r WHERE r.username = :username GROUP BY r.stars";
+
+        TypedQuery<Object[]> query = em.createQuery(jpql, Object[].class);
+        query.setParameter("username", username);
+
+        List<Object[]> results = query.getResultList();
+
+        // Standardwerte für 1 bis 5 Sterne setzen (mit 0 als Default) und als veränderliche Liste initialisieren
+        List<StarsChartDto> starsChart = new ArrayList<>(List.of(
+                new StarsChartDto(1L, 0L, getColorCode(1L)),
+                new StarsChartDto(2L, 0L, getColorCode(2L)),
+                new StarsChartDto(3L, 0L, getColorCode(3L)),
+                new StarsChartDto(4L, 0L, getColorCode(4L)),
+                new StarsChartDto(5L, 0L, getColorCode(5L))
+        ));
+
+        // Verarbeite die Abfrageergebnisse
+        if (results != null && !results.isEmpty()) {
+            results.forEach(result -> {
+                if (result[0] != null && result[1] != null) {
+                    try {
+                        // Überprüfe, ob die Sterne und die Anzahl valide sind
+                        Long stars = (Long) result[0];
+                        Long count = (Long) result[1];
+
+                        // Verarbeite nur Sterne im Bereich von 1 bis 5
+                        if (stars >= 1 && stars <= 5) {
+                            starsChart.stream()
+                                    .filter(dto -> dto.stars().equals(stars))
+                                    .findFirst()
+                                    .ifPresent(dto -> {
+                                        // Update den Sterneneintrag mit dem korrekten Count
+                                        starsChart.set(stars.intValue() - 1, new StarsChartDto(stars, count, getColorCode(stars)));
+                                    });
+                        }
+                    } catch (ClassCastException e) {
+                        // Logge den Fehler, falls ein Casting-Problem auftritt
+                        System.err.println("Fehler beim Verarbeiten der Sternebewertung: " + e.getMessage());
+                    }
+                }
+            });
+        }
+
+        return starsChart;
+    }
+
+
+
+    private String getColorCode(Long stars) {
+        switch (stars.intValue()) {
+            case 1:
+                return "#FF0000"; // Rot für 1 Stern
+            case 2:
+                return "#FF9900"; // Orange für 2 Sterne
+            case 3:
+                return "#FFFF00"; // Gelb für 3 Sterne
+            case 4:
+                return "#99FF00"; // Hellgrün für 4 Sterne
+            case 5:
+                return "#00FF00"; // Grün für 5 Sterne
+            default:
+                return "#000000"; // Standardfarbe
+        }
     }
 }

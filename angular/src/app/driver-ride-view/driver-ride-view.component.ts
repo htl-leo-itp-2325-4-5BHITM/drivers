@@ -53,6 +53,7 @@ export class DriverRideViewComponent implements OnInit {
   abfortC?: string;
   ankortC?: number;
   selectedPassenger?: User;
+  hasPassengerSelected=false;
 
 
   edit: FormGroup = new FormGroup({

@@ -262,3 +262,11 @@ input {
   justify-content: space-evenly;
 }
 
+.unethical{
+  color:var(--colorBright);
+  font-size: var(--normalText);
+  position: absolute;
+  margin-top: .5vw;
+  margin-left: .3vw;
+}
+

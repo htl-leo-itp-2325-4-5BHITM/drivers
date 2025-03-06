@@ -3,6 +3,7 @@ import {BackendRide, RateRide, RegisterRide, Ride} from '../model/ride.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Filter} from '../model/filter.model';
+import {StarsData} from '../model/starsData';
 
 @Injectable({
   providedIn: 'root'
@@ -131,6 +132,12 @@ export class RideService {
     //let data = {"username": username};
     //const jsonData = JSON.stringify(data);
     return this.http.post(this.url + '/getRidesOffered/' + username, {});
+  }
+
+  getStarsData(username: string|null) {
+    //let data = {"username": username};
+    //const jsonData = JSON.stringify(data);
+    return this.http.get<StarsData[]>(`${this.url}/getStarsChart/${username}`);
   }
 
   getRidesBeenOn(username: string|null) {
