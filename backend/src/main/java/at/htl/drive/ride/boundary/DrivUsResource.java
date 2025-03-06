@@ -257,15 +257,15 @@ public class DrivUsResource {
         return repository.getUserByUsername(username);
     }
 
-    @Path("/rides/getRidesOffered")
+    @Path("/rides/getRidesOffered/{username}")
     @POST
-    public Long getRidesOffered(UsernameDto username) {
+    public Long getRidesOffered(@PathParam("username") String username) {
         return repository.getRidesOffered(username);
     }
 
-    @Path("/rides/getOthersRides")
+    @Path("/rides/getOthersRides/{username}")
     @POST
-    public Long getOthersRides(UsernameDto username) {
+    public Long getOthersRides(@PathParam("username") String username) {
         return repository.getOthersRides(username);
     }
 

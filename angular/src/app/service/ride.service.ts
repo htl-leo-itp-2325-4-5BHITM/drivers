@@ -128,9 +128,15 @@ export class RideService {
   }
 
   getRidesOffered(username: string|null) {
-    let data = {"username": username};
-    const jsonData = JSON.stringify(data);
-    return this.http.post<number>(this.url + '/getRidesOffered', jsonData);
+    //let data = {"username": username};
+    //const jsonData = JSON.stringify(data);
+    return this.http.post(this.url + '/getRidesOffered/' + username, {});
+  }
+
+  getRidesBeenOn(username: string|null) {
+    //let data = {"username": username};
+    //const jsonData = JSON.stringify(data);
+    return this.http.post(this.url + '/getOthersRides/' + username, {});
   }
 }
 
