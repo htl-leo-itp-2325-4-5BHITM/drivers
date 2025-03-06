@@ -80,11 +80,17 @@ export class MapAllComponent implements OnInit{
     //console.log(this.ride.placeOfDepartureCoordinate)
     this.center = this.setCenter()
     //console.log(this.center)
-    if(this.ride.placeOfDepartureCoordinate != null && this.ride.placeOfArrivalCoordinate != null) {
+    //console.log("ng oninit ", this.ride.placeOfDepartureCoordinate, this)
+    if(this.ride.placeOfDepartureCoordinate && this.ride.placeOfArrivalCoordinate) {
       this.depC = this.swapCoordinates(this.ride.placeOfDepartureCoordinate);
       this.arrC = this.swapCoordinates(this.ride.placeOfArrivalCoordinate);
 
+
       this.getZoom(this.arrC,this.depC)
+    }
+    else {
+      //debugger
+      console.log("no departure", this.ride)
     }
     //console.log(this.arrC, this.depC)
 
