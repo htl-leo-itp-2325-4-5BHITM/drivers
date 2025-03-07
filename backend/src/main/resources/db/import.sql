@@ -49,13 +49,13 @@ insert into rideregister (rideid, username) VALUES (24,'romana');
 insert into rideregister (rideid, username) VALUES (9,'andrei');
 insert into rideregister (rideid, username) VALUES (17,'andrei');
 
-/*
+
 INSERT INTO public.rate (id,rideid,stars,username) VALUES
     (nextval('drivuser_id_seq'::regclass),7,3,'romana'),
     (nextval('drivuser_id_seq'::regclass),7,2,'romana'),
     (nextval('drivuser_id_seq'::regclass),7,3,'romana'),
     (nextval('drivuser_id_seq'::regclass),7,5,'romana');
-*/
+
 
 /*INSERT INTO public.rideuserassociation (isdriver, rideid, userid) VALUES
     (true, 1, 1),

@@ -53,19 +53,18 @@ export class StatistiksComponent implements OnInit {
   }
 
   loadChartData(): void {
-    console.log("bin daaaaaa")
+    console.log("bin daaaaaa");
     const user = sessionStorage.getItem("username");
-    if(user) {
+    if (user) {
       this.rideService.getStarsData(user).subscribe({
         next: (value) => {
           this.chartdata = value;
-          // Arrays vor der Befüllung leeren
           this.labeldata = [];
           this.realdata = [];
           this.colordata = [];
 
           if (this.chartdata != null) {
-            console.log("chartdata is nd null: ", this.chartdata)
+            console.log("chartdata is not null: ", this.chartdata);
             this.chartdata.forEach(o => {
               this.labeldata.push(o.stars);
               this.realdata.push(o.amount);
@@ -80,6 +79,7 @@ export class StatistiksComponent implements OnInit {
       });
     }
   }
+
 
   renderChart(): void {
     // Stelle sicher, dass das Canvas-Element existiert

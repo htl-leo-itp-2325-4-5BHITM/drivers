@@ -1,14 +1,13 @@
 <app-navbar></app-navbar>
-<h1>Statistics</h1>
+<h1 style="color: white" >Statistics</h1>
 
-<p style="color: white">You have been on {{ridesCountBeenOn}} Rides </p>
-<p style="color: white">You have offered {{ridesCount}} Rides </p>
-
-<p style="color: white">avg rating of your Rides</p>
-
+<h2 style="color: white;margin-left: auto;margin-right: auto;text-align: center">You have been on {{ridesCountBeenOn}} Rides </h2>
+<h2 style="color: white;margin-left: auto;margin-right: auto;text-align: center">You have offered {{ridesCount}} Rides </h2>
+<hr>
 <div class="row">
-  <div class="col-lg-4">
-    <h2 style="color: white">Bar Chart</h2>
-    <canvas id="barchart" ></canvas>
+  <div class="col-lg-4" style="width: 300px; height: 20vw;margin-left: auto;margin-right: auto">
+    <h2 style="color: white">Your average STARS Ranking</h2>
+    <canvas id="barchart" style="width: 300px; height: 1vw;"></canvas>
   </div>
 </div>
+
