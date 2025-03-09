@@ -96,6 +96,7 @@ export class StatistiksComponent implements OnInit {
         data: {
           labels: this.labeldata,
           datasets: [{
+            label:'stars',
             data: this.realdata,
             backgroundColor: this.colordata
           }]
