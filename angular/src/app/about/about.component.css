@@ -1,6 +1,6 @@
 .reason {
   width: 100vw;
-  height: 120vh;
+  height: 90vh;
   background: var(--colorBeige);
   display: flex;
   align-items: center;
@@ -8,8 +8,8 @@
 }
 
 .reason-image {
-  width: 33%;
-  height: 90vh;
+  width: 30vw;
+  height: 40vw;
   overflow: hidden;
   background-image: url('../../../public/img/background_option2.jpg');
   background-size: cover;
@@ -22,7 +22,7 @@
   color: var(--colorDark);
   font-size: 1.8rem;
   width: 33%;
-  height: 90vh;
+  height: 50vh;
   display: flex;
   align-items: flex-end;
   flex-wrap: wrap;
@@ -31,5 +31,6 @@
 .reason-content h3 {
   padding: 0;
   margin: 0;
-  font-size: var(--mediumText);
+  font-size: 5rem;
 }
+
