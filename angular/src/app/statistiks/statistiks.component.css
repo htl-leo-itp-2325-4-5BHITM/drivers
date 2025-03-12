@@ -1,22 +1,121 @@
-.row div{
-  width: 80vw;
+.row {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
   height: 40vw;
+  align-content: center;
+}
+
+.ride-chart {
+  width: 30vw;
+}
+
+.row .star-chart {
+  width: 60vw;
+  height: 30vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid pink  ;
+  background: var(--colorBright);
+  box-shadow: 15px 15px 15px #333;
 }
 
-.title{
-  color:var(--colorDark);
- font-size: 3rem;
-
+.title {
+  color: var(--colorDark);
+  font-size: 3rem;
 }
 
-.content{
+.content {
   background: var(--colorBeige);
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.rides-bar-container {
+  display: flex;
+  height: 3vw;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative; /* Ensure that the percentage labels are positioned correctly */
+  box-shadow: 10px 10px 10px #333;
+}
+
+.rides-bar, .rides-bar-offered {
+  position: relative; /* Ensure that the percentage labels are positioned relative to the bars */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rides-bar {
+  background-color: var(--colorBright);
+}
+
+.rides-bar-offered {
+  background-color: var(--colorDark);
+}
+
+.percentage-label {
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem; /* Adjust the font size as needed */
+  z-index: 1; /* Ensure that the percentage text is above the bar */
+}
+
+.rides-labels {
+  margin-top: 10vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.span-row{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-content: center;
+}
+
+.span-row p{
+  height: 100%;
+  margin-left: 1vw;
+  margin-top: -0vw;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+
+.legend-rides{
+  background: var(--colorDark);
+  border: black solid 2px;
+  width: 2vw;
+  height: 2vw;
+}
+
+.legend-beenOn{
+  background: var(--colorBright);
+  border: black solid 2px;
+  width: 2vw;
+  height: 2vw;
+}
+
+.legend-total{
+  width: 2vw;
+  height: 2vw;
+  display: flex;
+  border: black solid 2px;
+}
+
+.legend-total div{
+  width: 1vw;
+  height: 2vw;
+  border:none;
+}
+
+.white-label{
+  color:var(--colorDark)
 }

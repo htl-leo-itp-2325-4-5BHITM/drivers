@@ -7,9 +7,67 @@
 <h2 style="color: white;margin-left: auto;margin-right: auto;text-align: center">You have offered {{ridesCount}} Rides </h2>
 <hr>-->
 <div class="row">
-  <div  style="margin-left: auto;margin-right: auto">
-    <canvas id="barchart" ></canvas>
+  <div class="">
+    <h1>Stars rating</h1>
+    <div class="star-chart">
+      <canvas id="barchart" ></canvas>
+    </div>
+  </div>
+
+
+  <div class="">
+    <h1>Rides</h1>
+    <div class="ride-chart">
+      <div class="rides-bar-container">
+        <div class="rides-bar" [style.width.%]="ridesPercentageBeenOn">
+          <!-- Display percentage on the "been on" bar -->
+          <span class="percentage-label; white-label">{{ ridesPercentageBeenOn }}%</span>
+        </div>
+        <div class="rides-bar-offered" [style.width.%]="ridesPercentageOffered">
+          <!-- Display percentage on the "offered" bar -->
+          <span class="percentage-label">{{ ridesPercentageOffered }}%</span>
+        </div>
+      </div>
+
+      <div class="rides-labels">
+        <div class="span-row">
+          <div class="legend-total">
+            <div class="legend-beenOn"></div>
+            <div class="legend-rides"></div>
+          </div>
+          <p>Total Rides: {{totalRides}}</p>
+        </div>
+        <div class="span-row">
+          <div class="legend-beenOn"></div>
+          <p>Rides been on: {{ ridesCountBeenOn }}</p>
+        </div>
+        <div class="span-row">
+          <div class="legend-rides"></div>
+          <p>Rides offered: {{ ridesCount }}</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!--
+    <div class="ride-chart">
+      <div class="rides-bar-container">
+        <div class="rides-bar" [style.width.%]="ridesPercentageBeenOn"></div>
+        <div class="rides-bar-offered" [style.width.%]="ridesPercentageOffered"></div>
+      </div>
+
+      <div class="rides-labels">
+        <span>Rides been on: {{ ridesCountBeenOn }}</span>
+        <span>Rides offered: {{ ridesCount }}</span>
+      </div>
+    </div>-->
   </div>
 </div>
+
+
+
 </div>
+
+
+
 

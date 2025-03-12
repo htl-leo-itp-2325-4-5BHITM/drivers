@@ -115,8 +115,8 @@ public class Ride {
         }
         this.ratingCount++;
         this.stars += stars;
-        //this.stars = this.stars/this.ratingCount;
-        this.stars = Math.round((double) this.stars / this.ratingCount);
+        this.stars = this.stars/this.ratingCount;
+        //this.stars = Math.round((double) this.stars / this.ratingCount);
     }
 
     public Long getRatingCount() {

@@ -5,6 +5,7 @@ import { HardcodeService } from '../service/hardcode.service';
 import { Chart, registerables } from 'chart.js';
 import { StarsData } from '../model/starsData';
 import {NavbarComponent} from '../navbar/navbar.component';
+import {NgStyle} from '@angular/common';
 
 Chart.register(...registerables);
 
@@ -12,25 +13,28 @@ Chart.register(...registerables);
   selector: 'app-statistiks',
   standalone: true,
   imports: [
-    NavbarComponent
+    NavbarComponent,
+    NgStyle
   ],
   templateUrl: './statistiks.component.html',
   styleUrls: ['./statistiks.component.css']
 })
 export class StatistiksComponent implements OnInit {
-  ridesCount: number | undefined;
-  ridesCountBeenOn: number | undefined;
+  ridesCount: number = 0;
+  ridesCountBeenOn: number = 0;
   chartdata: StarsData[] = [];
   labeldata: number[] = [];
   realdata: number[] = [];
   colordata: any[] = [];
   chart: Chart | undefined; // Falls du das Chart später referenzieren möchtest
+  totalRides: number | undefined;
 
   constructor(private rideService: RideService, private router: Router, private hardCoded: HardcodeService) { }
 
   ngOnInit(): void {
     this.getRidesOthers();
     this.getRidesBeenOn();
+    //this.getTotalRides();
     this.loadChartData();
   }
 
@@ -39,8 +43,10 @@ export class StatistiksComponent implements OnInit {
     if(user) {
       this.rideService.getRidesBeenOn(user).subscribe((value) => {
         this.ridesCountBeenOn = Number(value);
+        this.getTotalRides();
       });
     }
+
   }
 
   getRidesOthers(): void {
@@ -48,8 +54,24 @@ export class StatistiksComponent implements OnInit {
     if(user) {
       this.rideService.getRidesOffered(user).subscribe((value) => {
         this.ridesCount = Number(value);
+        this.getTotalRides();
       });
     }
+  }
+
+  getTotalRides(): void{
+    const user = sessionStorage.getItem("username");
+    let temp:number;
+    let temp2: number;
+    if(user) {
+      this.rideService.getRidesOffered(user).subscribe((value) => {
+        temp = Number(value);
+      });
+      this.rideService.getRidesBeenOn(user).subscribe((value) => {
+        temp2 = Number(value)
+      })
+    }
+    this.totalRides=this.ridesCountBeenOn+this.ridesCount;
   }
 
   loadChartData(): void {
@@ -81,9 +103,10 @@ export class StatistiksComponent implements OnInit {
   }
 
 
+
   renderChart(): void {
     // Stelle sicher, dass das Canvas-Element existiert
-    console.log("bin daaaaaa:",this.realdata," aaaand ",this.labeldata," aaaand ",this.colordata)
+    console.log("bin daaaaaa:", this.realdata, " aaaand ", this.labeldata, " aaaand ", this.colordata);
 
     const canvas = document.getElementById('barchart') as HTMLCanvasElement;
     if (canvas) {
@@ -96,7 +119,7 @@ export class StatistiksComponent implements OnInit {
         data: {
           labels: this.labeldata,
           datasets: [{
-            label:'stars',
+            label: 'stars',
             data: this.realdata,
             backgroundColor: this.colordata
           }]
@@ -104,20 +127,23 @@ export class StatistiksComponent implements OnInit {
         options: {
           indexAxis: "x",
           plugins: {
-              legend: {
-                display: false
-              }
+            legend: {
+              display: false
+            }
           },
           responsive: true,
           maintainAspectRatio: false,
-          scales:{
+          scales: {
             x: {
               title: {
                 display: true,   // Zeige den Titel der x-Achse
                 text: 'Sterne'   // Beschriftung für die x-Achse
+              },
+              grid: {
+                display: false  // Remove grid lines on the x-axis
               }
             },
-            y:{
+            y: {
               beginAtZero: true, // Falls du willst, dass die y-Achse bei 0 beginnt
               title: {
                 display: true,   // Zeige den Titel der y-Achse
@@ -125,6 +151,9 @@ export class StatistiksComponent implements OnInit {
               },
               ticks: {
                 stepSize: 1, // Nur ganze Zahlen
+              },
+              grid: {
+                display: false  // Remove grid lines on the y-axis
               }
             }
           }
@@ -133,5 +162,27 @@ export class StatistiksComponent implements OnInit {
     } else {
       console.error("Canvas element with id 'barchart' not found");
     }
+  }
+
+
+
+
+  get ridesPercentageBeenOn(): string {
+
+    let number= this.ridesCount && this.ridesCountBeenOn
+      ? ((this.ridesCountBeenOn/ (this.ridesCountBeenOn  + this.ridesCount) ) * 100).toFixed(2)
+      : '0';
+
+    console.log("this is number: " + number)
+    return number;
+  }
+
+  get ridesPercentageOffered(): string {
+    let number= this.ridesCount && this.ridesCountBeenOn
+      ? ((this.ridesCount/ (this.ridesCountBeenOn  + this.ridesCount) ) * 100).toFixed(2)
+      : '0';
+
+    console.log("this is number: " + number)
+    return number;
   }
 }
