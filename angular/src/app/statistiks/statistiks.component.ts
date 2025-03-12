@@ -102,8 +102,32 @@ export class StatistiksComponent implements OnInit {
           }]
         },
         options: {
+          indexAxis: "x",
+          plugins: {
+              legend: {
+                display: false
+              }
+          },
           responsive: true,
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+          scales:{
+            x: {
+              title: {
+                display: true,   // Zeige den Titel der x-Achse
+                text: 'Sterne'   // Beschriftung für die x-Achse
+              }
+            },
+            y:{
+              beginAtZero: true, // Falls du willst, dass die y-Achse bei 0 beginnt
+              title: {
+                display: true,   // Zeige den Titel der y-Achse
+                text: 'Erhaltene Sterne'  // Beschriftung für die y-Achse
+              },
+              ticks: {
+                stepSize: 1, // Nur ganze Zahlen
+              }
+            }
+          }
         }
       });
     } else {

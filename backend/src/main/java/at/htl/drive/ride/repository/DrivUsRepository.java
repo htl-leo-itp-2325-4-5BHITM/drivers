@@ -685,17 +685,17 @@ public class DrivUsRepository {
     private String getColorCode(Long stars) {
         switch (stars.intValue()) {
             case 1:
-                return "#FF0000"; // Rot für 1 Stern
+                return "#10161f"; // Rot für 1 Stern
             case 2:
-                return "#FF9900"; // Orange für 2 Sterne
+                return "#10161f"; // Orange für 2 Sterne
             case 3:
-                return "#FFFF00"; // Gelb für 3 Sterne
+                return "#10161f"; // Gelb für 3 Sterne
             case 4:
-                return "#99FF00"; // Hellgrün für 4 Sterne
+                return "#10161f"; // Hellgrün für 4 Sterne
             case 5:
-                return "#00FF00"; // Grün für 5 Sterne
+                return "#10161f"; // Grün für 5 Sterne
             default:
-                return "#000000"; // Standardfarbe
+                return "#10161f"; // Standardfarbe
         }
     }
 }
