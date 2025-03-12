@@ -12,10 +12,10 @@ INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableS
       ('2025-07-19 16:30:00', nextval('ride_id_seq'::regclass), 'natalie', 'Graz', 1, 'Thening', '47.070700,15.439500', '48.259003,14.164950'),
       ('2025-04-18 17:00:00', nextval('ride_id_seq'::regclass), 'andrei', 'München', 2, 'Thening', '48.135100,11.582000', '48.259003,14.164950'),
       ('2025-07-31 10:00:00', nextval('ride_id_seq'::regclass), 'andrei', 'Leonding', 4, 'Neumarkt', '48.270500,14.242800', '48.194722,14.205833'),
-      ('2023-05-05 08:30:00', nextval('ride_id_seq'::regclass), 'andrei', 'Ungenach', 2, 'Regau', '48.015600,13.648100', '48.009100,13.650300'),
-      ('2023-05-05 08:30:00', nextval('ride_id_seq'::regclass), 'andrei', 'Ungenach', 2, 'Regau', '48.015600,13.648100', '48.009100,13.650300'),
-      ('2023-02-05 08:30:00', nextval('ride_id_seq'::regclass), 'natalie', 'Ungenach', 2, 'Regau', '48.015600,13.648100', '48.009100,13.650300'),
-      ('2023-02-05 08:30:00', nextval('ride_id_seq'::regclass), 'janine', 'Ungenach', 2, 'Regau', '48.015600,13.648100', '48.009100,13.650300'),
+      ('2023-05-05 08:30:00', nextval('ride_id_seq'::regclass), 'andrei', 'Wels', 2, 'Regau', '48.015600,13.648100', '48.009100,13.650300'),
+      ('2023-05-05 08:30:00', nextval('ride_id_seq'::regclass), 'andrei', 'Steyr', 2, 'Rohrbach', '48.015600,13.648100', '48.009100,13.650300'),
+      ('2023-02-05 08:30:00', nextval('ride_id_seq'::regclass), 'natalie', 'Freistadt', 2, 'Gmunden', '48.015600,13.648100', '48.009100,13.650300'),
+      ('2025-04-04 08:30:00', nextval('ride_id_seq'::regclass), 'janine', 'Ungenach', 2, 'Vöcklabruck', '48.015600,13.648100', '48.009100,13.650300'),
       ('2025-03-26 14:50:00', nextval('ride_id_seq'::regclass), 'romana', 'Puchenau', 3, 'Walding', '48.312500,14.255000', '48.351521,14.158076');
 
 INSERT INTO public.ride (departuretime, id, driver, placeofdeparture, availableSeats, placeOfArrival, placeofdeparturecoordinates, placeofarrivalcoordinates) VALUES
